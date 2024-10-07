@@ -1,26 +1,11 @@
 #include <SFML/Graphics.hpp>
+#include "Program\Game.h"
 
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "Rocky Way");
-
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-
-
-		window.clear(sf::Color::Black);
-		window.display();
-
-
-	}
-	
+	Game game;
+	game.Run();
 
 	return 0;
 }
