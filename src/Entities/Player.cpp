@@ -1,6 +1,6 @@
 #include <iostream> // for Debug logs currently
-
 #include "Player.h"
+#include "../Utilities/WrappingScreenUtility.h"
 
 Player::Player()
 {
@@ -23,7 +23,8 @@ void Player::LoadPlayerTexture()
 
 void Player::SetInitialPosition()
 {
-	playerSprite.setPosition(1280 * 0.5f, 720 * 0.5f);
+	//TODO: Is there a way to get these values from Game withouth loading all Game class? 
+	playerSprite.setPosition(WIDTH * 0.5f, HEIGHT * 0.5f);
 }
 
 void Player::Movement()
@@ -45,6 +46,10 @@ void Player::Movement()
 void Player::Update()
 {
 	Movement();
+	posX = playerSprite.getPosition().x;
+	posY = playerSprite.getPosition().y;
+	WrapAroundScreen(posX, posY, WIDTH, HEIGHT);
+	playerSprite.setPosition(posX, posY);
 }
 
 void Player::Draw(sf::RenderWindow& window)
