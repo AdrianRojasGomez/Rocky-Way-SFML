@@ -23,11 +23,13 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Program\Game.cpp" />
     <ClCompile Include="src\Program\Gameplay.cpp" />
+    <ClCompile Include="src\Utilities\WrappingScreenUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Entities\Player.h" />
     <ClInclude Include="src\Program\Game.h" />
     <ClInclude Include="src\Program\Gameplay.h" />
+    <ClInclude Include="src\Utilities\WrappingScreenUtility.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
