@@ -3,9 +3,7 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "Rocky Way");
 
 	while (window.isOpen())
 	{
@@ -16,10 +14,13 @@ int main()
 				window.close();
 		}
 
-		window.clear();
-		window.draw(shape);
+
+		window.clear(sf::Color::Black);
 		window.display();
+
+
 	}
+	
 
 	return 0;
 }
