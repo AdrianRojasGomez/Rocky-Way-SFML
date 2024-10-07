@@ -108,8 +108,7 @@
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>MKDIR "$(TargetDir)res\"
-XCOPY "$(ProjectDir)res\" "$(TargetDir)res\" /e /h /y /s</Command>
+      <Command>XCOPY "$(ProjectDir)res\dll\*.dll" "$(TargetDir)"  /h /y </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -131,8 +130,7 @@ XCOPY "$(ProjectDir)res\" "$(TargetDir)res\" /e /h /y /s</Command>
       <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>MKDIR "$(TargetDir)res\"
-XCOPY "$(ProjectDir)res\" "$(TargetDir)res\" /e /h /y /s</Command>
+      <Command>XCOPY "$(ProjectDir)res\dll\*.dll" "$(TargetDir)"  /h /y </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -150,8 +148,7 @@ XCOPY "$(ProjectDir)res\" "$(TargetDir)res\" /e /h /y /s</Command>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>MKDIR "$(TargetDir)res\"
-XCOPY "$(ProjectDir)res\" "$(TargetDir)res\" /e /h /y /s</Command>
+      <Command>XCOPY "$(ProjectDir)res\dll\*.dll" "$(TargetDir)"  /h /y </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -173,8 +170,7 @@ XCOPY "$(ProjectDir)res\" "$(TargetDir)res\" /e /h /y /s</Command>
       <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>MKDIR "$(TargetDir)res\"
-XCOPY "$(ProjectDir)res\" "$(TargetDir)res\" /e /h /y /s</Command>
+      <Command>XCOPY "$(ProjectDir)res\dll\*.dll" "$(TargetDir)"  /h /y </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
