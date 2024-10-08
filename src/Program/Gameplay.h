@@ -17,4 +17,6 @@ private:
 
 	Player player;
 
+
+	///How can I prevent the instantiation of this class?
 };
