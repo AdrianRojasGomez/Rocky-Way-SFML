@@ -1,9 +1,11 @@
 #include "FramerateUtility.h"
 
+
+
 Framerate::Framerate()
 {
-	float fps = 0.0f;
-	float deltaTime = 0.0f;
+	fps = 0.0f;
+	deltaTime = 0.0f;
 	beforeTime = clock.getElapsedTime();
 }
 
