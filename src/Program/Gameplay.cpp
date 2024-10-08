@@ -15,5 +15,6 @@ void Gameplay::Update()
 
 void Gameplay::Draw(sf::RenderWindow& window)
 {
+	background.Draw(window);
 	player.Draw(window);
 }

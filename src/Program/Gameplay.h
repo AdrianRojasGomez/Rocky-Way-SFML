@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "../Entities/Player.h"
+#include "Background.h"
 
 class Gameplay
 {
@@ -14,7 +15,8 @@ public:
 
 private:
 	Gameplay(){}
-
+	Background background;
 	Player player;
+	
 
 };
