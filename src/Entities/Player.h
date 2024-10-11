@@ -16,8 +16,8 @@ private:
 	const float SCALE_Y = 0.5f;
 	const float ROTATION_SPEED = .05f;
 	const float MOVE_SPEED = .05f;
-	const int WIDTH = 1280;
-	const int HEIGHT = 720;
+	const int SCREEN_WIDTH = 1280;
+	const int SCREEN_HEIGHT = 720;
 
 	float posX = 0;
 	float posY = 0;
@@ -25,5 +25,6 @@ private:
 	void LoadPlayerTexture();
 	void SetInitialPosition();
 	void Movement();
+	void CreateBullets();
 	
 };

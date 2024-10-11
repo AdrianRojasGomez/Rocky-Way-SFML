@@ -1,6 +1,7 @@
 #include <iostream> // for Debug logs currently
 #include "Player.h"
 #include "../Utilities/WrappingScreenUtility.h"
+#include "Bullet.h"
 
 Player::Player()
 {
@@ -24,7 +25,7 @@ void Player::LoadPlayerTexture()
 void Player::SetInitialPosition()
 {
 	//TODO: Is there a way to get these values from Game withouth loading all Game class? 
-	playerSprite.setPosition(WIDTH * 0.5f, HEIGHT * 0.5f);
+	playerSprite.setPosition(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
 }
 
 void Player::Movement()
@@ -41,15 +42,24 @@ void Player::Movement()
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		playerSprite.rotate(ROTATION_SPEED);
 
+	this->posX = playerSprite.getPosition().x;
+	this->posY = playerSprite.getPosition().y;
+
+}
+
+
+
+void Player::CreateBullets()
+{
+
 }
 
 void Player::Update()
 {
 	Movement();
-	posX = playerSprite.getPosition().x;
-	posY = playerSprite.getPosition().y;
-	WrapAroundScreen(posX, posY, WIDTH, HEIGHT);
+	WrapAroundScreen(posX, posY, SCREEN_WIDTH, SCREEN_HEIGHT);
 	playerSprite.setPosition(posX, posY);
+
 }
 
 void Player::Draw(sf::RenderWindow& window)
