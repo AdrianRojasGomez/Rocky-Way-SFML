@@ -47,7 +47,7 @@ void Player::Movement()
 
 	this->posX = playerSprite.getPosition().x;
 	this->posY = playerSprite.getPosition().y;
-	
+
 
 }
 
@@ -72,22 +72,26 @@ void Player::CreateBullets()
 
 void Player::Fire()
 {
-	if (cooldownClock.getElapsedTime().asSeconds() >= COOLDOWN_RATE)
+	if (cooldownClock.getElapsedTime().asSeconds() >= COOLDOWN_RATE )
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		isFiring = false;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && isFiring == false)
 		{
 			for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 			{
-				Bullet* bulletSelected = *iterator;
-				if (bulletSelected->getIsActive() == false)
+				if ((*iterator)->getIsActive() == false)
 				{
-					//bulletSelected->Fire(playerPosition2f, rotation, directionX, directionY);
+					(*iterator)->Fire(posX, posY, directionX, directionY);
+					std::cout << "Fired! \n";
+					isFiring = true;
+					cooldownClock.restart();
+					std::cout << "bullets list size: " << bullets.size() << "\n";
 				}
 			}
 		}
-		cooldownClock.restart();
 
 	}
+
 
 }
 

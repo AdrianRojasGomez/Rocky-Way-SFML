@@ -22,11 +22,11 @@ void Bullet::LoadBulletTexture()
 		std::cout << "DEBUG: Error!!!!!!!! LOADING BULLET TEXTURE" << std::endl;
 }
 
-void Bullet::Fire(sf::Vector2f shooterPosition, float rotation, float dirX, float dirY)
+void Bullet::Fire(float posX, float posY, float dirX, float dirY)
 {
 
-	this->shooterPosition = shooterPosition;
-	this->shooterRotation = rotation;
+	this->posX = posX;
+	this->posY = posY;
 	this->shooterDirX = dirX;
 	this->shooterDirY = dirY;
 	this->isActive = true;
@@ -35,17 +35,19 @@ void Bullet::Fire(sf::Vector2f shooterPosition, float rotation, float dirX, floa
 	SetRotation();
 	BulletTimer();
 
-	std::cout << "Fire from Bullet\n";
 }
 
 void Bullet::SetRotation()
 {
-	bulletSprite.setRotation(shooterRotation);
+	float angleInRadians = std::atan2(shooterDirY, shooterDirX);
+	float angleDregrees = angleInRadians * 180 / 3.14159265f;
+	bulletSprite.setRotation(angleDregrees + 90);
 }
 
 void Bullet::SetPosition()
 {
-	bulletSprite.setPosition(shooterPosition);
+
+	bulletSprite.setPosition(posX,posY);
 }
 
 void Bullet::BulletMovement()
@@ -70,7 +72,6 @@ void Bullet::Update()
 	BulletMovement();
 	BulletTimer();
 	WrapAroundScreen(posX, posY, 1280, 720);
-	bulletSprite.setPosition(posX, posY);
 
 
 }
