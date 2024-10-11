@@ -7,7 +7,7 @@
 
 int main()
 {
-/*
+	/*
 	std::list<Bullet*> bullets;
 
 
@@ -32,8 +32,8 @@ int main()
 			(*iterator) = nullptr;
 		}
 	}
+	*/
 
-*/
 	Game game;
 	game.Run();
 	return 0;

@@ -1,12 +1,13 @@
-#include <iostream> // for Debug logs currently
 #include "Player.h"
-#include "../Utilities/WrappingScreenUtility.h"
-#include "Bullet.h"
+
+
 
 Player::Player()
 {
+	cooldownClock.restart();
 	LoadPlayerTexture();
 	SetInitialPosition();
+	CreateBullets();
 }
 
 void Player::LoadPlayerTexture()
@@ -30,12 +31,14 @@ void Player::SetInitialPosition()
 
 void Player::Movement()
 {
-	float rotation = playerSprite.getRotation() - 90.0f;
-	float directionX = std::cos(rotation * 3.14159265f / 180.0f);
-	float directionY = std::sin(rotation * 3.14159265f / 180.0f);
+	this->rotation = playerSprite.getRotation() - 90.0f;
+	this->directionX = std::cos(rotation * 3.14159265f / 180.0f);
+	this->directionY = std::sin(rotation * 3.14159265f / 180.0f);
+
+	Fire();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		playerSprite.move(directionX * MOVE_SPEED , directionY * MOVE_SPEED);
+		playerSprite.move(directionX * MOVE_SPEED, directionY * MOVE_SPEED);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		playerSprite.rotate(-ROTATION_SPEED);
@@ -44,6 +47,7 @@ void Player::Movement()
 
 	this->posX = playerSprite.getPosition().x;
 	this->posY = playerSprite.getPosition().y;
+	
 
 }
 
@@ -52,6 +56,39 @@ void Player::Movement()
 void Player::CreateBullets()
 {
 
+	for (int i = 0; i < BULLET_CAPACITY; i++)
+	{
+		Bullet* bullet = new Bullet();
+		bullets.push_back(bullet);
+	}
+
+
+	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
+	{
+		std::cout << "Bullet daño: " << (*iterator)->getDamage() << std::endl;
+	}
+
+}
+
+void Player::Fire()
+{
+	if (cooldownClock.getElapsedTime().asSeconds() >= COOLDOWN_RATE)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		{
+			for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
+			{
+				Bullet* bulletSelected = *iterator;
+				if (bulletSelected->getIsActive() == false)
+				{
+					//bulletSelected->Fire(playerPosition2f, rotation, directionX, directionY);
+				}
+			}
+		}
+		cooldownClock.restart();
+
+	}
+
 }
 
 void Player::Update()
@@ -59,11 +96,27 @@ void Player::Update()
 	Movement();
 	WrapAroundScreen(posX, posY, SCREEN_WIDTH, SCREEN_HEIGHT);
 	playerSprite.setPosition(posX, posY);
-
+	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
+	{
+		Bullet* bulletToDraw = *iterator;
+		if (bulletToDraw->getIsActive())
+		{
+			bulletToDraw->Update();
+		}
+	}
 }
 
 void Player::Draw(sf::RenderWindow& window)
 {
 	window.draw(playerSprite);
+
+	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
+	{
+		Bullet* bulletToDraw = *iterator;
+		if (bulletToDraw->getIsActive())
+		{
+			bulletToDraw->Draw(window);
+		}
+	}
 }
 

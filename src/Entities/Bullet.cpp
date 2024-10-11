@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Bullet.h"
+#include "../Utilities/WrappingScreenUtility.h"
 
 
 Bullet::Bullet()
@@ -10,43 +11,52 @@ Bullet::Bullet()
 
 void Bullet::LoadBulletTexture()
 {
-	if (bulletTexture.loadFromFile("res/assets/Traces/BasicShoot.png"))
+	if (bulletTexture.loadFromFile("res/assets/Traces/BasicShot.png"))
 	{
 		bulletSprite.setTexture(bulletTexture);
 		bulletSprite.setScale(scaleX, scaleY);
-
+		sf::FloatRect bounds = bulletSprite.getLocalBounds();
+		bulletSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
 	}
 	else
 		std::cout << "DEBUG: Error!!!!!!!! LOADING BULLET TEXTURE" << std::endl;
 }
 
-void Bullet::Fire(float initPosX, float initPosY, float initDirX, float initDirY)
+void Bullet::Fire(sf::Vector2f shooterPosition, float rotation, float dirX, float dirY)
 {
-	this->posX = initPosX;
-	this->posY = initPosX;
-	this->shooterDirX = initPosX;
-	this->shooterDirY = initPosX;
+
+	this->shooterPosition = shooterPosition;
+	this->shooterRotation = rotation;
+	this->shooterDirX = dirX;
+	this->shooterDirY = dirY;
 	this->isActive = true;
-	CalculateRotation();
+	timer.restart();
+	SetPosition();
+	SetRotation();
 	BulletTimer();
+
+	std::cout << "Fire from Bullet\n";
 }
 
-void Bullet::CalculateRotation()
+void Bullet::SetRotation()
 {
-	this->angleRotation = std::atan2f(shooterDirY, shooterDirX);
-	bulletSprite.setRotation(angleRotation);
+	bulletSprite.setRotation(shooterRotation);
+}
+
+void Bullet::SetPosition()
+{
+	bulletSprite.setPosition(shooterPosition);
 }
 
 void Bullet::BulletMovement()
 {
 	bulletSprite.move(shooterDirX * BULLET_SPEED, shooterDirY * BULLET_SPEED);
-	posX = bulletSprite.getPosition().x;
-	posY = bulletSprite.getPosition().y;
+	this->posX = bulletSprite.getPosition().x;
+	this->posY = bulletSprite.getPosition().y;
 }
 
 void Bullet::BulletTimer()
 {
-	timer.restart();
 	if (timer.getElapsedTime().asSeconds() > BULLET_LIFETIME)
 	{
 		this->isActive = false;
@@ -58,7 +68,8 @@ void Bullet::Update()
 	if (!isActive)
 		return;
 	BulletMovement();
-	WrapAroundScreen(posX, posY, SCREEN_WIDTH, SCREEN_HEIGHT);
+	BulletTimer();
+	WrapAroundScreen(posX, posY, 1280, 720);
 	bulletSprite.setPosition(posX, posY);
 
 
@@ -66,6 +77,8 @@ void Bullet::Update()
 
 void Bullet::Draw(sf::RenderWindow& window)
 {
+	if (!isActive)
+		return;
 	window.draw(bulletSprite);
 }
 
