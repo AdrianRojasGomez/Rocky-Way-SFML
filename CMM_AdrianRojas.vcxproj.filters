@@ -36,6 +36,9 @@
     <ClCompile Include="src\Entities\Bullet.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\Utilities\Framerate.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Program\Game.h">
@@ -54,6 +57,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\Entities\Bullet.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utilities\Framerate.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

@@ -38,16 +38,15 @@ void Player::Movement()
 	Fire();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		playerSprite.move(directionX * MOVE_SPEED, directionY * MOVE_SPEED);
+		playerSprite.move(directionX * MOVE_SPEED * Framerate::getDeltaTime(), directionY * MOVE_SPEED * Framerate::getDeltaTime());
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		playerSprite.rotate(-ROTATION_SPEED);
+		playerSprite.rotate(-ROTATION_SPEED * Framerate::getDeltaTime());
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		playerSprite.rotate(ROTATION_SPEED);
+		playerSprite.rotate(ROTATION_SPEED * Framerate::getDeltaTime());
 
 	this->posX = playerSprite.getPosition().x;
 	this->posY = playerSprite.getPosition().y;
-
 
 }
 
@@ -60,12 +59,6 @@ void Player::CreateBullets()
 	{
 		Bullet* bullet = new Bullet();
 		bullets.push_back(bullet);
-	}
-
-
-	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
-	{
-		std::cout << "Bullet daño: " << (*iterator)->getDamage() << std::endl;
 	}
 
 }
@@ -82,10 +75,8 @@ void Player::Fire()
 				if ((*iterator)->getIsActive() == false)
 				{
 					(*iterator)->Fire(posX, posY, directionX, directionY);
-					std::cout << "Fired! \n";
 					isFiring = true;
 					cooldownClock.restart();
-					std::cout << "bullets list size: " << bullets.size() << "\n";
 					break;
 				}
 			}
