@@ -14,6 +14,8 @@ void Game::Run()
 		ProcessEvents();
 		Update();
 		Draw();
+
+		Framerate::OnFrameEnd();
 	}
 }
 

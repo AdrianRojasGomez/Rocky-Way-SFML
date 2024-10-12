@@ -25,6 +25,7 @@
     <ClCompile Include="src\Program\Background.cpp" />
     <ClCompile Include="src\Program\Game.cpp" />
     <ClCompile Include="src\Program\Gameplay.cpp" />
+    <ClCompile Include="src\Utilities\Framerate.cpp" />
     <ClCompile Include="src\Utilities\WrappingScreenUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +34,7 @@
     <ClInclude Include="src\Program\Background.h" />
     <ClInclude Include="src\Program\Game.h" />
     <ClInclude Include="src\Program\Gameplay.h" />
+    <ClInclude Include="src\Utilities\Framerate.h" />
     <ClInclude Include="src\Utilities\WrappingScreenUtility.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

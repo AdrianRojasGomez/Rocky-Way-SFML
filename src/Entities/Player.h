@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Bullet.h"
 #include "../Utilities/WrappingScreenUtility.h"
+#include "../Utilities/Framerate.h"
 
 class Player
 {
@@ -16,12 +17,13 @@ private:
 	sf::Texture playerTexture;
 	sf::Sprite playerSprite;
 	sf::Clock cooldownClock;
+	
 
 	const float COOLDOWN_RATE = 0.25f;
 	const float SCALE_X = 0.5f;
 	const float SCALE_Y = 0.5f;
-	const float ROTATION_SPEED = .05f;
-	const float MOVE_SPEED = .1f;
+	const float ROTATION_SPEED = 200.0f;
+	const float MOVE_SPEED = 400.0f;
 	const int SCREEN_WIDTH = 1280;
 	const int SCREEN_HEIGHT = 720;
 	const int BULLET_CAPACITY = 5;
