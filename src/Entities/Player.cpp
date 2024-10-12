@@ -86,6 +86,7 @@ void Player::Fire()
 					isFiring = true;
 					cooldownClock.restart();
 					std::cout << "bullets list size: " << bullets.size() << "\n";
+					break;
 				}
 			}
 		}
