@@ -8,7 +8,7 @@ public:
 
 
 private:
-	const std::string spritePath = "res/assets/Enemies/MeteorSmall.png";
+	//const std::string spritePath = "res/assets/Enemies/MeteorSmall.png";
 
 
 

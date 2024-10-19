@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "../Utilities/Framerate.h"
+#include "../Utilities/WrappingScreenUtility.h"
 
 
 

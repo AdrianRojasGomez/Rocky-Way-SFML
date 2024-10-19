@@ -1,11 +1,8 @@
 #pragma once
 #include <iostream>
 #include <list>
-#include <SFML/Graphics.hpp>
-
 #include "Bullet.h"
-#include "../Utilities/WrappingScreenUtility.h"
-#include "../Utilities/Framerate.h"
+
 
 class Player
 {
@@ -14,6 +11,7 @@ public:
 	void Update();
 	void Draw(sf::RenderWindow& window);
 	sf::FloatRect GetPlayerArea() { return playerArea.getGlobalBounds(); }
+	std::list<Bullet*> GetBullets() { return bullets; }
 
 
 private:

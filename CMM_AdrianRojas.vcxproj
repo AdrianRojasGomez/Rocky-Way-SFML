@@ -26,19 +26,23 @@
     <ClCompile Include="src\Entities\SmallAsteroid.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Program\Background.cpp" />
+    <ClCompile Include="src\Program\CollisionManager.cpp" />
     <ClCompile Include="src\Program\Game.cpp" />
     <ClCompile Include="src\Program\Gameplay.cpp" />
     <ClCompile Include="src\Program\Wave.cpp" />
     <ClCompile Include="src\Utilities\Framerate.cpp" />
+    <ClCompile Include="src\Utilities\ResourceManager.cpp" />
     <ClCompile Include="src\Utilities\WrappingScreenUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Utilities\ResourceManager.h" />
     <ClInclude Include="src\Entities\Asteroid.h" />
     <ClInclude Include="src\Entities\Bullet.h" />
     <ClInclude Include="src\Entities\LargeAsteroid.h" />
     <ClInclude Include="src\Entities\Player.h" />
     <ClInclude Include="src\Entities\SmallAsteroid.h" />
     <ClInclude Include="src\Program\Background.h" />
+    <ClInclude Include="src\Program\CollisionManager.h" />
     <ClInclude Include="src\Program\Game.h" />
     <ClInclude Include="src\Program\Gameplay.h" />
     <ClInclude Include="src\Program\Wave.h" />
@@ -125,7 +129,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)\libs\SFML-2.6.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(ProjectDir)res\dll\*.dll" "$(TargetDir)"  /h /y </Command>
@@ -147,7 +151,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)\libs\SFML-2.6.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(ProjectDir)res\dll\*.dll" "$(TargetDir)"  /h /y </Command>
@@ -165,7 +169,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)\libs\SFML-2.6.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(ProjectDir)res\dll\*.dll" "$(TargetDir)"  /h /y </Command>
@@ -187,7 +191,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)\libs\SFML-2.6.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(ProjectDir)res\dll\*.dll" "$(TargetDir)"  /h /y </Command>

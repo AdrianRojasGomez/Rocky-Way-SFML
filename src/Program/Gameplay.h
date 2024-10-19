@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../Entities/Player.h"
 #include "Background.h"
 #include "Wave.h"
 
