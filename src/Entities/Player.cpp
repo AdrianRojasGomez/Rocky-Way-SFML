@@ -18,9 +18,24 @@ void Player::LoadPlayerTexture()
 		playerSprite.setScale(SCALE_X, SCALE_Y);
 		sf::FloatRect bounds = playerSprite.getLocalBounds();
 		playerSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
+		this->posX = playerSprite.getPosition().x;
+		this->posY = playerSprite.getPosition().y;
+		CreatePlayerArea(posX, posY);
+
 	}
 	else
 		std::cout << "DEBUG: Error!!!!!!!! LOADING PLAYER TEXTURE" << std::endl;
+}
+
+void Player::CreatePlayerArea(float posX, float posY)
+{
+	playerArea.setSize(sf::Vector2f(200.0f, 200.0f));
+	playerArea.setOutlineColor(sf::Color::Red);
+	playerArea.setFillColor(sf::Color::Transparent);
+	playerArea.setOutlineThickness(3);
+	sf::FloatRect areaBounds = playerArea.getLocalBounds();
+	playerArea.setOrigin(areaBounds.width / 2.0f, areaBounds.height / 2.0f);
+	playerArea.setPosition(posX, posY);
 }
 
 void Player::SetInitialPosition()
@@ -47,6 +62,7 @@ void Player::Movement()
 
 	this->posX = playerSprite.getPosition().x;
 	this->posY = playerSprite.getPosition().y;
+	this->playerArea.setPosition(posX, posY);
 
 }
 
@@ -104,6 +120,7 @@ void Player::Update()
 
 void Player::Draw(sf::RenderWindow& window)
 {
+	window.draw(playerArea);
 	window.draw(playerSprite);
 
 	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)

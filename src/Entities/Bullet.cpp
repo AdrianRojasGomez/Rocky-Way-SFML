@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Bullet.h"
 #include "../Utilities/WrappingScreenUtility.h"
+#include "../Utilities/Framerate.h"
 
 
 Bullet::Bullet()
@@ -52,7 +53,7 @@ void Bullet::SetPosition()
 
 void Bullet::BulletMovement()
 {
-	bulletSprite.move(shooterDirX * BULLET_SPEED, shooterDirY * BULLET_SPEED);
+	bulletSprite.move(shooterDirX * BULLET_SPEED * Framerate::getDeltaTime(), shooterDirY * BULLET_SPEED * Framerate::getDeltaTime());
 	this->posX = bulletSprite.getPosition().x;
 	this->posY = bulletSprite.getPosition().y;
 }
@@ -72,6 +73,7 @@ void Bullet::Update()
 	BulletMovement();
 	BulletTimer();
 	WrapAroundScreen(posX, posY, 1280, 720);
+	bulletSprite.setPosition(posX, posY);
 
 
 }
