@@ -14,7 +14,7 @@ public:
 	void Fire(float posX, float posY, float dirX, float dirY);
 	int getDamage() { return damage; }
 	bool getIsActive() { return isActive; }
-	sf::Sprite getSprite() { return bulletSprite; }
+	sf::Sprite getBulletSprite() { return bulletSprite; }
 
 private:
 	sf::Texture bulletTexture;
@@ -22,8 +22,8 @@ private:
 	sf::Clock timer;
 	
 
-	const float BULLET_SPEED = .5f;
-	const float BULLET_LIFETIME = 1.2f;
+	const float BULLET_SPEED = 650.0f;
+	const float BULLET_LIFETIME = 0.7f;
 
 	bool isActive = false;
 	int damage = 10;

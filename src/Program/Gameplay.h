@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "../Entities/Player.h"
 #include "Background.h"
+#include "Wave.h"
 
 class Gameplay
 {
@@ -17,6 +18,8 @@ private:
 	Gameplay(){}
 	Background background;
 	Player player;
+	Wave wave;
+	
 	
 
 };

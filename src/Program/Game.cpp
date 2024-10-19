@@ -1,8 +1,10 @@
+#include <ctime>
 #include "Game.h"
 
 
 Game::Game()
 {
+	srand(time(0));
 	videoMode = sf::VideoMode(WIDTH, HEIGHT);
 	window.create(videoMode, "Rocky Way");
 }
