@@ -7,11 +7,6 @@ sf::Time Framerate::currentTime;
 float Framerate::fps = 0.0f;
 float Framerate::deltaTime = 0.0f;
 
-Framerate::Framerate()
-{
-	beforeTime = clock.getElapsedTime();
-}
-
 void Framerate::OnFrameEnd()
 {
 	currentTime = clock.getElapsedTime();

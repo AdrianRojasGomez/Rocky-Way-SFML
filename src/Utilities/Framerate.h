@@ -4,9 +4,8 @@
 class Framerate
 {
 public:
-
 	static float getCurrentFPS() { return fps; }
-	static float getDeltaTime() { return deltaTime; }
+	static float getDeltaTime()  { return deltaTime; }
 	static void OnFrameEnd();
 
 private:
@@ -17,5 +16,4 @@ private:
 	static float deltaTime;
 
 	Framerate();
-
 };

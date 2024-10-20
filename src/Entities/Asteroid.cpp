@@ -1,12 +1,11 @@
 #include "Asteroid.h"
 #include "../Utilities/ResourceManager.h"
-
+#include "../Utilities/Framerate.h"
 
 Asteroid::Asteroid()
 {
 	InitDir();
 }
-
 
 void Asteroid::LoadTexture()
 {
@@ -21,7 +20,6 @@ void Asteroid::LoadTexture()
 	}
 	else
 		std::cout << "DEBUG: Error!!!!!!!! NULL TEXTURE" << std::endl;
-
 }
 
 void Asteroid::InitDir()
@@ -30,10 +28,9 @@ void Asteroid::InitDir()
 	do
 	{
 		this->rotation = RandomizeIntValues(360, 1);
-		this->dirX = std::cos(rotation * 3.14159265f / 180.0f);
+		this->dirX = std::cos(rotation * NUM_PI / 180.0f);
 		this->rotation = RandomizeIntValues(360, 1);
-		this->dirY = std::sin(rotation * 3.14159265f / 180.0f);
-		std::cout << "DirX :" << dirX << "  DirY: " << dirY << std::endl;
+		this->dirY = std::sin(rotation * NUM_PI / 180.0f);
 
 		if (dirX != 0 && dirY != 0)
 			isAssigned = true;
@@ -52,26 +49,18 @@ float Asteroid::RandomizeFloatValues(float max, float min)
 	return min + randomValue * (max - min);
 }
 
-
-
 void Asteroid::Move()
 {
 	asteroidSprite.rotate(-rotationSpeed * sizeMultiplierRotation * Framerate::getDeltaTime());
 	asteroidSprite.move(dirX * speed * sizeMultiplierSpeed * Framerate::getDeltaTime(), dirY * speed * sizeMultiplierSpeed * Framerate::getDeltaTime());
 	this->posX = asteroidSprite.getPosition().x;
 	this->posY = asteroidSprite.getPosition().y;
-
-}
-
-void Asteroid::Deactivate()
-{
-	//if()
 }
 
 void Asteroid::Update()
 {
 	Move();
-	WrapAroundScreen(posX, posY, 1280, 720);
+	WrapAroundScreen(posX, posY, 1280, 720, 35.0f);
 	asteroidSprite.setPosition(posX, posY);
 }
 

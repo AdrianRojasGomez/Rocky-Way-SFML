@@ -12,10 +12,8 @@ class CollisionManager
 public:
 	CollisionManager();
 	void Update(Player& player, std::list<Bullet*> bullets, std::list<LargeAsteroid*> largeAsteroids, std::list<SmallAsteroid*> smallAsteroids);
-	static bool PlayerVsLargeAsteroidCollision(Player& player, LargeAsteroid& asteroid);
-	static bool PlayerVsSmallAsteroidCollision(Player& player, SmallAsteroid& asteroid);
-	static bool BulletVsLargeAsteroidCollision(Bullet& bullet, LargeAsteroid& asteroid);
-	static bool BulletVsSmallAsteroidCollision(Bullet& bullet, SmallAsteroid& asteroid);
-
-
+	bool PlayerVsLargeAsteroidCollision(Player& player, LargeAsteroid& asteroid);
+	bool PlayerVsSmallAsteroidCollision(Player& player, SmallAsteroid& asteroid);
+	bool BulletVsLargeAsteroidCollision(Bullet& bullet, LargeAsteroid& asteroid);
+	bool BulletVsSmallAsteroidCollision(Bullet& bullet, SmallAsteroid& asteroid);
 };

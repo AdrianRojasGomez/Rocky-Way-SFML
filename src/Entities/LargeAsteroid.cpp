@@ -4,8 +4,8 @@
 LargeAsteroid::LargeAsteroid()
 {
 	this->asteroidTexture = ResourceManager::GetLargeAsteroidTexture();
-	this->sizeMultiplierSpeed = RandomizeFloatValues(0.2f, 0.7f);
-	this->sizeMultiplierRotation = RandomizeIntValues(4, 1);
+	this->sizeMultiplierSpeed = RandomizeFloatValues(minSpeed, maxspeed);
+	this->sizeMultiplierRotation = RandomizeIntValues(maxRotation, minRotation);
 	LoadTexture();
 	this->isActive = true;
 }

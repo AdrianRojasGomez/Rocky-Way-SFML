@@ -9,13 +9,12 @@ Player::Player()
 {
 	cooldownClock.restart();
 	this->playerTexture = ResourceManager::GetPlayerTexture();
-	LoadPlayerTexture();
-	//CreatePlayerArea(posX, posY);
+	SetTextureValues();
 	SetInitialPosition();
 	CreateBullets();
 }
 
-void Player::LoadPlayerTexture()
+void Player::SetTextureValues()
 {
 	if (playerTexture != nullptr)
 	{
@@ -31,27 +30,15 @@ void Player::LoadPlayerTexture()
 		std::cout << "DEBUG: Error!!!!!!!! LOADING PLAYER TEXTURE" << std::endl;
 }
 
-void Player::CreatePlayerArea(float posX, float posY)
-{
-	playerArea.setSize(sf::Vector2f(200.0f, 200.0f));
-	playerArea.setOutlineColor(sf::Color::Red);
-	playerArea.setFillColor(sf::Color::Transparent);
-	playerArea.setOutlineThickness(3);
-	sf::FloatRect areaBounds = playerArea.getLocalBounds();
-	playerArea.setOrigin(areaBounds.width / 2.0f, areaBounds.height / 2.0f);
-	playerArea.setPosition(posX, posY);
-}
-
 void Player::SetInitialPosition()
 {
-	//TODO: Is there a way to get these values from Game withouth loading all Game class? 
 	playerSprite.setPosition(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
 }
 
 void Player::Movement()
 {
-	this->rotation = playerSprite.getRotation() - 90.0f;
-	this->directionX = std::cos(rotation * 3.14159265f / 180.0f);
+	this->rotation = playerSprite.getRotation() - FIXED_DEGREES;
+	this->directionX = std::cos(rotation * NUM_PI / 180.0f);
 	this->directionY = std::sin(rotation * 3.14159265f / 180.0f);
 
 	Fire();
@@ -74,18 +61,16 @@ void Player::Movement()
 
 void Player::CreateBullets()
 {
-
 	for (int i = 0; i < BULLET_CAPACITY; i++)
 	{
 		Bullet* bullet = new Bullet();
 		bullets.push_back(bullet);
 	}
-
 }
 
 void Player::Fire()
 {
-	if (cooldownClock.getElapsedTime().asSeconds() >= COOLDOWN_RATE )
+	if (cooldownClock.getElapsedTime().asSeconds() >= COOLDOWN_RATE)
 	{
 		isFiring = false;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && isFiring == false)
@@ -110,7 +95,7 @@ void Player::Fire()
 void Player::Update()
 {
 	Movement();
-	WrapAroundScreen(posX, posY, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WrapAroundScreen(posX, posY, SCREEN_WIDTH, SCREEN_HEIGHT, 15.0f);
 	playerSprite.setPosition(posX, posY);
 	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 	{

@@ -12,15 +12,13 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 		LargeAsteroid* currentAsteroid = *it;
 		if (currentAsteroid != nullptr && !currentAsteroid->GetIsActive())
 		{
-			//std::cout << "Is inactive" << std::endl;
 			continue;
 		}
 
 		if (PlayerVsLargeAsteroidCollision(player, *currentAsteroid))
 		{
-			//std::cout << "colision de Player vs Large Asteroid!!! " << std::endl;
+			//TODO: Behavior Player vs Large Asteroid
 		}
-
 	}
 
 	for (std::list<SmallAsteroid*>::iterator it = smallAsteroids.begin(); it != smallAsteroids.end(); it++)
@@ -28,16 +26,13 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 		SmallAsteroid* currentAsteroid = *it;
 		if (currentAsteroid != nullptr && !currentAsteroid->GetIsActive())
 		{
-			//std::cout << "Is inactive" << std::endl;
 			continue;
 		}
 
 		if (PlayerVsSmallAsteroidCollision(player, *currentAsteroid))
 		{
-			//std::cout << "colision de Player vs Small Asteroid!!! " << std::endl;
+			//TODO: Behavior Player vs Small Asteroid
 		}
-
-
 	}
 
 	for (std::list<Bullet*>::iterator bulletIterator = bullets.begin(); bulletIterator != bullets.end(); bulletIterator++)
@@ -45,7 +40,6 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 		Bullet* currentBullet = *bulletIterator;
 		if (currentBullet != nullptr && !currentBullet->GetIsActive())
 		{
-			//std::cout << "Is inactive" << std::endl;
 			continue;
 		}
 
@@ -54,7 +48,7 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 			LargeAsteroid* currentLargeAsteroid = *largeAsteroidIterator;
 			if (BulletVsLargeAsteroidCollision(*currentBullet, *currentLargeAsteroid))
 			{
-				std::cout << "colision de Bullet vs large Asteroid!!! " << std::endl;
+				//TODO: Behavior Bullet vs Large Asteroid
 
 			}
 		}
@@ -64,20 +58,11 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 			SmallAsteroid* currentSmallAsteroid = *smallAsteroidIterator;
 			if (BulletVsSmallAsteroidCollision(*currentBullet, *currentSmallAsteroid))
 			{
-				std::cout << "colision de Bullet vs Small Asteroid!!! " << std::endl;
+				//TODO: Behavior Player vs Small Asteroid
 
 			}
 		}
-
-
 	}
-
-
-
-
-	
-
-
 }
 
 bool CollisionManager::PlayerVsLargeAsteroidCollision(Player& player, LargeAsteroid& largeAsteroid)
