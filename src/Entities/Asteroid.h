@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "../Utilities/Framerate.h"
 #include "../Utilities/WrappingScreenUtility.h"
-#include "Bullet.h"
+
 
 class Asteroid
 {
@@ -12,11 +12,12 @@ public:
 	virtual void Update();
 	virtual void Draw(sf::RenderWindow& window);
 	virtual bool GetIsActive() { return isActive; }
+	sf::Sprite GetAsteroidSprite() { return asteroidSprite; }
 
 
 protected:
 
-	sf::Texture asteroidTexture;
+	sf::Texture* asteroidTexture;
 	sf::Sprite asteroidSprite;
 	const std::string spritePath = "res/assets/Enemies/MeteorSmall.png";
 
@@ -35,7 +36,7 @@ protected:
 
 	virtual void Move();
 	virtual void Deactivate();
-	virtual void LoadTexture(std::string spritePath);
+	virtual void LoadTexture();
 	int RandomizeIntValues(int max, int min);
 	float RandomizeFloatValues(float max, float min);
 

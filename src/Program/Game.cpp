@@ -5,13 +5,36 @@
 Game::Game()
 {
 	srand(time(0));
-	videoMode = sf::VideoMode(WIDTH, HEIGHT);
-	window.create(videoMode, "Rocky Way");
+	videoMode = new sf::VideoMode(WIDTH, HEIGHT);
+	window = new sf::RenderWindow(*videoMode, "Rocky Ways");
+	resourceManager = new ResourceManager();
+}
+
+Game::~Game()
+{
+	if (resourceManager != nullptr)
+	{
+		delete resourceManager;
+		resourceManager = nullptr;
+	}
+
+	if (videoMode != nullptr)
+	{
+		delete videoMode;
+		videoMode = nullptr;
+	}
+
+	if (window != nullptr)
+	{
+		delete window;
+		window = nullptr;
+	}
+
 }
 
 void Game::Run()
 {
-	while (window.isOpen())
+	while (window->isOpen())
 	{
 		ProcessEvents();
 		Update();
@@ -24,10 +47,10 @@ void Game::Run()
 void Game::ProcessEvents()
 {
 	sf::Event event;
-	while (window.pollEvent(event))
+	while (window->pollEvent(event))
 	{
 		if (event.type == sf::Event::Closed)
-			window.close();
+			window->close();
 	}
 }
 
@@ -38,7 +61,7 @@ void Game::Update()
 
 void Game::Draw()
 {
-	window.clear(sf::Color::Black);
-	Gameplay::getInstance().Draw(window);
-	window.display();
+	window->clear(sf::Color::Black);
+	Gameplay::getInstance().Draw(*window);
+	window->display();
 }

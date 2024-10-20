@@ -1,8 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../Entities/Player.h"
 #include "Background.h"
 #include "Wave.h"
+#include "CollisionManager.h"
 
 class Gameplay
 {
@@ -19,6 +19,10 @@ private:
 	Background background;
 	Player player;
 	Wave wave;
+	CollisionManager collisionManager;
+
+	sf::Clock cleanClock;
+	bool isClean;
 	
 	
 

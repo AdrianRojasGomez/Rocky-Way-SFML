@@ -2,12 +2,14 @@
 #include <SFML/Graphics.hpp>
 #include "Gameplay.h"
 #include "../Utilities/Framerate.h"
+#include "../Utilities/ResourceManager.h"
 
 class Game
 
 {
 public:
 	Game();
+	~Game();
 	void Run();
 
 private:
@@ -15,8 +17,9 @@ private:
 	void Update();
 	void Draw();
 
-	sf::VideoMode videoMode;
-	sf::RenderWindow window;
+	ResourceManager* resourceManager;
+	sf::VideoMode* videoMode;
+	sf::RenderWindow* window;
 	const int WIDTH = 1280;
 	const int HEIGHT = 720;
 

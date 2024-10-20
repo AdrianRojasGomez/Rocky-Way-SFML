@@ -1,27 +1,26 @@
 #include "Asteroid.h"
+#include "../Utilities/ResourceManager.h"
 
 
 Asteroid::Asteroid()
 {
-	LoadTexture(spritePath);
 	InitDir();
 }
 
 
-void Asteroid::LoadTexture(std::string spritePath)
+void Asteroid::LoadTexture()
 {
-	if (asteroidTexture.loadFromFile(spritePath))
+	if (asteroidTexture != nullptr)
 	{
-		asteroidSprite.setTexture(asteroidTexture);
+		asteroidSprite.setTexture(*asteroidTexture);
 		asteroidSprite.setScale(scaleX, scaleY);
 		sf::FloatRect bounds = asteroidSprite.getLocalBounds();
 		asteroidSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
 		this->posX = asteroidSprite.getPosition().x;
 		this->posY = asteroidSprite.getPosition().y;
-		this->isActive = true;
 	}
 	else
-		std::cout << "DEBUG: Error!!!!!!!! LOADING Asteroid TEXTURE" << std::endl;
+		std::cout << "DEBUG: Error!!!!!!!! NULL TEXTURE" << std::endl;
 
 }
 

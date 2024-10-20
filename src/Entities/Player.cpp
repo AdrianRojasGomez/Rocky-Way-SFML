@@ -1,26 +1,30 @@
 #include "Player.h"
+#include "../Utilities/Framerate.h"
+#include "../Utilities/WrappingScreenUtility.h"
+#include "../Utilities/ResourceManager.h"
 
 
 
 Player::Player()
 {
 	cooldownClock.restart();
+	this->playerTexture = ResourceManager::GetPlayerTexture();
 	LoadPlayerTexture();
+	//CreatePlayerArea(posX, posY);
 	SetInitialPosition();
 	CreateBullets();
 }
 
 void Player::LoadPlayerTexture()
 {
-	if (playerTexture.loadFromFile("res/assets/Player/player.png"))
+	if (playerTexture != nullptr)
 	{
-		playerSprite.setTexture(playerTexture);
+		playerSprite.setTexture(*playerTexture);
 		playerSprite.setScale(SCALE_X, SCALE_Y);
 		sf::FloatRect bounds = playerSprite.getLocalBounds();
 		playerSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
 		this->posX = playerSprite.getPosition().x;
 		this->posY = playerSprite.getPosition().y;
-		CreatePlayerArea(posX, posY);
 
 	}
 	else
@@ -88,7 +92,7 @@ void Player::Fire()
 		{
 			for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 			{
-				if ((*iterator)->getIsActive() == false)
+				if ((*iterator)->GetIsActive() == false)
 				{
 					(*iterator)->Fire(posX, posY, directionX, directionY);
 					isFiring = true;
@@ -111,7 +115,7 @@ void Player::Update()
 	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 	{
 		Bullet* bulletToDraw = *iterator;
-		if (bulletToDraw->getIsActive())
+		if (bulletToDraw->GetIsActive())
 		{
 			bulletToDraw->Update();
 		}
@@ -126,7 +130,7 @@ void Player::Draw(sf::RenderWindow& window)
 	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 	{
 		Bullet* bulletToDraw = *iterator;
-		if (bulletToDraw->getIsActive())
+		if (bulletToDraw->GetIsActive())
 		{
 			bulletToDraw->Draw(window);
 		}

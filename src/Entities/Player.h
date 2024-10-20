@@ -1,11 +1,8 @@
 #pragma once
 #include <iostream>
 #include <list>
-#include <SFML/Graphics.hpp>
-
 #include "Bullet.h"
-#include "../Utilities/WrappingScreenUtility.h"
-#include "../Utilities/Framerate.h"
+
 
 class Player
 {
@@ -13,11 +10,13 @@ public:
 	Player();
 	void Update();
 	void Draw(sf::RenderWindow& window);
+	sf::Sprite GetPlayerSprite() { return playerSprite; }
 	sf::FloatRect GetPlayerArea() { return playerArea.getGlobalBounds(); }
+	std::list<Bullet*>& GetBullets() { return bullets; }
 
 
 private:
-	sf::Texture playerTexture;
+	sf::Texture* playerTexture;
 	sf::Sprite playerSprite;
 	sf::Clock cooldownClock;
 	sf::RectangleShape playerArea;

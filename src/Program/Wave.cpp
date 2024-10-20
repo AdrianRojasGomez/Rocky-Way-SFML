@@ -11,14 +11,14 @@
 	 {
 		 LargeAsteroid* asteroid = new LargeAsteroid();
 		 largeAsteroids.push_back(asteroid);
-		 std::cout << "one Large Asteroid\n";
+		 //std::cout << "one Large Asteroid\n";
 	 }
 
 	 for (int i = 0; i < 5; i++)
 	 {
 		 SmallAsteroid* asteroid = new SmallAsteroid();
 		 smallAsteroids.push_back(asteroid);
-		 std::cout << "one Small Asteroid\n";
+		 //std::cout << "one Small Asteroid\n";
 
 	 }
  }
