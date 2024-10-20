@@ -5,6 +5,11 @@
 	 CreateAsteroids();
  }
 
+ Wave::~Wave()
+ {
+
+ }
+
  void Wave::CreateAsteroids()
  {
 	 for (int i = 0; i < 5; i++)
@@ -17,13 +22,7 @@
 	 {
 		 SmallAsteroid* asteroid = new SmallAsteroid();
 		 smallAsteroids.push_back(asteroid);
-
 	 }
- }
-
- void Wave::SpawnWave()
- {
-	 return;
  }
 
  void Wave::Update()

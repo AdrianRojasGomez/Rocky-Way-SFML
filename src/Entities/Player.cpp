@@ -95,7 +95,7 @@ void Player::Fire()
 void Player::Update()
 {
 	Movement();
-	WrapAroundScreen(posX, posY, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WrapAroundScreen(posX, posY, SCREEN_WIDTH, SCREEN_HEIGHT, 15.0f);
 	playerSprite.setPosition(posX, posY);
 	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 	{

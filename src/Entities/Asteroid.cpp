@@ -60,7 +60,7 @@ void Asteroid::Move()
 void Asteroid::Update()
 {
 	Move();
-	WrapAroundScreen(posX, posY, 1280, 720);
+	WrapAroundScreen(posX, posY, 1280, 720, 35.0f);
 	asteroidSprite.setPosition(posX, posY);
 }
 

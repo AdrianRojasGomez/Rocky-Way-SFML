@@ -12,15 +12,14 @@ class Wave
 {
 public:
 	Wave();
+	~Wave();
 	void Update();
 	void Draw(sf::RenderWindow& window);
 	std::list<LargeAsteroid*>& GetLargeAsteroids() { return largeAsteroids; }
 	std::list<SmallAsteroid*>& GetSmallAsteroids() { return smallAsteroids; }
 
 private:
-
 	void CreateAsteroids();
-	void SpawnWave();
 
 	std::list<LargeAsteroid*> largeAsteroids;
 	std::list<LargeAsteroid*>::iterator largeIterator;

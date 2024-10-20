@@ -85,7 +85,7 @@ void Bullet::Update()
 		return;
 	BulletMovement();
 	BulletTimer();
-	WrapAroundScreen(posX, posY, 1280, 720);
+	WrapAroundScreen(posX, posY, 1280, 720, 0.0f);
 	bulletSprite.setPosition(posX, posY);
 
 
