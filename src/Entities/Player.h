@@ -29,6 +29,8 @@ private:
 	const int SCREEN_WIDTH = 1280;
 	const int SCREEN_HEIGHT = 720;
 	const int BULLET_CAPACITY = 5;
+	const int FIXED_DEGREES = 90;
+	const float NUM_PI = 3.14159265f;
 
 	bool isFiring = false;
 	float posX = 0;
@@ -37,7 +39,7 @@ private:
 	float directionX = 0.0f;
 	float directionY = 0.0f;
 
-	void LoadPlayerTexture();
+	void SetTextureValues();
 	void SetInitialPosition();
 	void Movement();
 	void CreateBullets();

@@ -9,12 +9,12 @@ Player::Player()
 {
 	cooldownClock.restart();
 	this->playerTexture = ResourceManager::GetPlayerTexture();
-	LoadPlayerTexture();
+	SetTextureValues();
 	SetInitialPosition();
 	CreateBullets();
 }
 
-void Player::LoadPlayerTexture()
+void Player::SetTextureValues()
 {
 	if (playerTexture != nullptr)
 	{
@@ -37,8 +37,8 @@ void Player::SetInitialPosition()
 
 void Player::Movement()
 {
-	this->rotation = playerSprite.getRotation() - 90.0f;
-	this->directionX = std::cos(rotation * 3.14159265f / 180.0f);
+	this->rotation = playerSprite.getRotation() - FIXED_DEGREES;
+	this->directionX = std::cos(rotation * NUM_PI / 180.0f);
 	this->directionY = std::sin(rotation * 3.14159265f / 180.0f);
 
 	Fire();

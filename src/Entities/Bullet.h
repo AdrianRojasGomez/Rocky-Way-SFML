@@ -7,8 +7,8 @@ class Bullet
 {
 
 public:
-
 	Bullet();
+	~Bullet();
 	void Update();
 	void Draw(sf::RenderWindow& window);
 	void Fire(float posX, float posY, float dirX, float dirY);
@@ -19,7 +19,7 @@ public:
 private:
 	sf::Texture* bulletTexture;
 	sf::Sprite bulletSprite;
-	sf::Clock timer;
+	sf::Clock* timer;
 	
 	const float BULLET_SPEED = 650.0f;
 	const float BULLET_LIFETIME = 0.7f;
@@ -32,7 +32,7 @@ private:
 	float shooterDirX = 0.0f;
 	float shooterDirY = 0.0f;
 
-	void LoadBulletTexture();
+	void SetTextureValues();
 	void BulletMovement();
 	void BulletTimer();
 	void SetRotation();

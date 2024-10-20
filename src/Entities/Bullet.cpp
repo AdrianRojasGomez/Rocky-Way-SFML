@@ -9,11 +9,21 @@
 Bullet::Bullet()
 {
 	this->bulletTexture = ResourceManager::GetBulletTexture();
-	LoadBulletTexture();
+	timer = new sf::Clock;
+	SetTextureValues();
+}
+
+Bullet::~Bullet()
+{
+	if (timer != nullptr)
+	{
+		delete timer;
+		timer = nullptr;
+	}
 }
 
 
-void Bullet::LoadBulletTexture()
+void Bullet::SetTextureValues()
 {
 	if (bulletTexture != nullptr)
 	{
@@ -34,7 +44,7 @@ void Bullet::Fire(float posX, float posY, float dirX, float dirY)
 	this->shooterDirX = dirX;
 	this->shooterDirY = dirY;
 	this->isActive = true;
-	timer.restart();
+	timer->restart();
 	SetPosition();
 	SetRotation();
 	BulletTimer();
@@ -63,7 +73,7 @@ void Bullet::BulletMovement()
 
 void Bullet::BulletTimer()
 {
-	if (timer.getElapsedTime().asSeconds() > BULLET_LIFETIME)
+	if (timer->getElapsedTime().asSeconds() > BULLET_LIFETIME)
 	{
 		this->isActive = false;
 	}
