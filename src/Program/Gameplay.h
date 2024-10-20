@@ -17,13 +17,7 @@ public:
 private:
 	Gameplay(){}
 	Background background;
-	Player player;
 	Wave wave;
 	CollisionManager collisionManager;
-
-	sf::Clock cleanClock;
-	bool isClean;
-	
-	
-
+	Player player;
 };

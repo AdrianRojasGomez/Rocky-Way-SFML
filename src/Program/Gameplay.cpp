@@ -5,7 +5,6 @@
 Gameplay& Gameplay::getInstance()
 {
 	static Gameplay instance;
-	
 	return instance;
 }
 
