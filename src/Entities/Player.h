@@ -11,18 +11,16 @@ public:
 	void Update();
 	void Draw(sf::RenderWindow& window);
 	sf::Sprite GetPlayerSprite() { return playerSprite; }
-	sf::FloatRect GetPlayerArea() { return playerArea.getGlobalBounds(); }
 	std::list<Bullet*>& GetBullets() { return bullets; }
-
 
 private:
 	sf::Texture* playerTexture;
 	sf::Sprite playerSprite;
 	sf::Clock cooldownClock;
 	sf::RectangleShape playerArea;
+	std::list<Bullet*> bullets;
+	std::list<Bullet*>::iterator iterator;
 	
-	
-
 	const float COOLDOWN_RATE = 0.25f;
 	const float SCALE_X = 0.3f;
 	const float SCALE_Y = 0.3f;
@@ -32,8 +30,6 @@ private:
 	const int SCREEN_HEIGHT = 720;
 	const int BULLET_CAPACITY = 5;
 
-	std::list<Bullet*> bullets;
-	std::list<Bullet*>::iterator iterator;
 	bool isFiring = false;
 	float posX = 0;
 	float posY = 0;
@@ -41,10 +37,7 @@ private:
 	float directionX = 0.0f;
 	float directionY = 0.0f;
 
-
-
 	void LoadPlayerTexture();
-	void CreatePlayerArea(float posX, float posY);
 	void SetInitialPosition();
 	void Movement();
 	void CreateBullets();
