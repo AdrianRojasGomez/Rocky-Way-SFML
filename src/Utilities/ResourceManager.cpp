@@ -1,10 +1,12 @@
 #include <iostream>
 #include "ResourceManager.h"
 
+const std::string ResourceManager::spritePathBG = "res/assets/Background/Background01.png";
 const std::string ResourceManager::spritePathPlayer = "res/assets/Player/Player.png";
 const std::string ResourceManager::spritePathBullet = "res/assets/Traces/BasicShot.png";
 const std::string ResourceManager::spritePathLarge  = "res/assets/Enemies/MeteorLarge.png";
 const std::string ResourceManager::spritePathSmall  = "res/assets/Enemies/MeteorSmall.png";
+sf::Texture* ResourceManager::backgroundTexture = nullptr;
 sf::Texture* ResourceManager::playerTexture = nullptr;
 sf::Texture* ResourceManager::bulletTexture = nullptr;
 sf::Texture* ResourceManager::largeAsteroidTexture = nullptr;
@@ -12,6 +14,24 @@ sf::Texture* ResourceManager::smallAsteroidTexture = nullptr;
 
 ResourceManager::~ResourceManager()
 {
+	if (backgroundTexture != nullptr)
+	{
+		delete backgroundTexture;
+		backgroundTexture = nullptr;
+	}
+
+	if (playerTexture != nullptr)
+	{
+		delete playerTexture;
+		playerTexture = nullptr;
+	}
+
+	if (bulletTexture != nullptr)
+	{
+		delete bulletTexture;
+		bulletTexture = nullptr;
+	}
+
 	if (largeAsteroidTexture != nullptr)
 	{
 		delete largeAsteroidTexture;
@@ -59,6 +79,15 @@ sf::Texture* ResourceManager::GetBulletTexture()
 		bulletTexture = LoadTexture(spritePathBullet);
 	}
 	return bulletTexture;
+}
+
+sf::Texture* ResourceManager::GetBackgroundTexture()
+{
+	if (backgroundTexture == nullptr)
+	{
+		backgroundTexture = LoadTexture(spritePathBG);
+	}
+	return backgroundTexture;
 }
 
 sf::Texture* ResourceManager::LoadTexture(std::string path)
