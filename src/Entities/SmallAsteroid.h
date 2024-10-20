@@ -8,9 +8,9 @@ public:
 
 
 private:
-	//const std::string spritePath = "res/assets/Enemies/MeteorSmall.png";
-
-
-
+	float minSpeed = 0.1f;
+	float maxspeed = 0.5f;
+	int minRotation = 2;
+	int maxRotation = 5;
 };
 

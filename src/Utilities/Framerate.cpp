@@ -9,7 +9,7 @@ float Framerate::deltaTime = 0.0f;
 
 Framerate::Framerate()
 {
-	beforeTime = clock.getElapsedTime();
+
 }
 
 void Framerate::OnFrameEnd()

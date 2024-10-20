@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "../Utilities/Framerate.h"
+
 #include "../Utilities/WrappingScreenUtility.h"
 
 

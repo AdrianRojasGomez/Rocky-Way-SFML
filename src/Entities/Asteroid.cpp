@@ -1,12 +1,11 @@
 #include "Asteroid.h"
 #include "../Utilities/ResourceManager.h"
-
+#include "../Utilities/Framerate.h"
 
 Asteroid::Asteroid()
 {
 	InitDir();
 }
-
 
 void Asteroid::LoadTexture()
 {
@@ -52,8 +51,6 @@ float Asteroid::RandomizeFloatValues(float max, float min)
 	return min + randomValue * (max - min);
 }
 
-
-
 void Asteroid::Move()
 {
 	asteroidSprite.rotate(-rotationSpeed * sizeMultiplierRotation * Framerate::getDeltaTime());
@@ -65,7 +62,7 @@ void Asteroid::Move()
 
 void Asteroid::Deactivate()
 {
-	//if()
+
 }
 
 void Asteroid::Update()
