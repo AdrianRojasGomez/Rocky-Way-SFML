@@ -2,19 +2,22 @@
 #include "Bullet.h"
 #include "../Utilities/WrappingScreenUtility.h"
 #include "../Utilities/Framerate.h"
+#include "../Utilities/ResourceManager.h"
+
 
 
 Bullet::Bullet()
 {
+	this->bulletTexture = ResourceManager::GetBulletTexture();
 	LoadBulletTexture();
 }
 
 
 void Bullet::LoadBulletTexture()
 {
-	if (bulletTexture.loadFromFile("res/assets/Traces/BasicShot.png"))
+	if (bulletTexture != nullptr)
 	{
-		bulletSprite.setTexture(bulletTexture);
+		bulletSprite.setTexture(*bulletTexture);
 		bulletSprite.setScale(scaleX, scaleY);
 		sf::FloatRect bounds = bulletSprite.getLocalBounds();
 		bulletSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);

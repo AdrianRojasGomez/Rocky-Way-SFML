@@ -15,7 +15,7 @@ public:
 
 
 private:
-	sf::Texture playerTexture;
+	sf::Texture* playerTexture;
 	sf::Sprite playerSprite;
 	sf::Clock cooldownClock;
 	sf::RectangleShape playerArea;

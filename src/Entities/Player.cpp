@@ -1,28 +1,30 @@
 #include "Player.h"
 #include "../Utilities/Framerate.h"
 #include "../Utilities/WrappingScreenUtility.h"
+#include "../Utilities/ResourceManager.h"
 
 
 
 Player::Player()
 {
 	cooldownClock.restart();
+	this->playerTexture = ResourceManager::GetPlayerTexture();
 	LoadPlayerTexture();
+	CreatePlayerArea(posX, posY);
 	SetInitialPosition();
 	CreateBullets();
 }
 
 void Player::LoadPlayerTexture()
 {
-	if (playerTexture.loadFromFile("res/assets/Player/player.png"))
+	if (playerTexture != nullptr)
 	{
-		playerSprite.setTexture(playerTexture);
+		playerSprite.setTexture(*playerTexture);
 		playerSprite.setScale(SCALE_X, SCALE_Y);
 		sf::FloatRect bounds = playerSprite.getLocalBounds();
 		playerSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
 		this->posX = playerSprite.getPosition().x;
 		this->posY = playerSprite.getPosition().y;
-		CreatePlayerArea(posX, posY);
 
 	}
 	else
