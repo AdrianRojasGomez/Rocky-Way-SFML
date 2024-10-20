@@ -7,8 +7,8 @@ public:
 	LargeAsteroid();
 
 private:
-	float minSpeed = 0.2f;
-	float maxspeed = 0.7f;
+	float minSpeed = .5f;
+	float maxspeed = 2.5f;
 	int minRotation = 2;
 	int maxRotation = 7;
 };

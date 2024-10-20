@@ -12,14 +12,14 @@ public:
 	virtual void Update();
 	virtual void Draw(sf::RenderWindow& window);
 	virtual bool GetIsActive() { return isActive; }
+	virtual void SetIsActive(bool isActive) { this->isActive = isActive; }
 	sf::Sprite GetAsteroidSprite() { return asteroidSprite; }
 
 
 protected:
-
+	const float NUM_PI = 3.14159265f;
 	sf::Texture* asteroidTexture;
 	sf::Sprite asteroidSprite;
-	const std::string spritePath = "res/assets/Enemies/MeteorSmall.png";
 
 	bool isActive = false;
 	float sizeMultiplierSpeed = 1.0f;
@@ -32,15 +32,13 @@ protected:
 	float dirY;
 	float rotationSpeed = 10.0f;
 	float rotation;
-	float speed = 300.0f;
+	float speed = 100.0f;
 
 	virtual void Move();
-	virtual void Deactivate();
 	virtual void LoadTexture();
 	int RandomizeIntValues(int max, int min);
 	float RandomizeFloatValues(float max, float min);
 
 private:
-
 	void InitDir();
 };
