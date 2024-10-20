@@ -1,5 +1,6 @@
 #include <ctime>
 #include "Game.h"
+#include "Gameplay.h"
 
 
 Game::Game()
@@ -39,7 +40,6 @@ void Game::Run()
 		ProcessEvents();
 		Update();
 		Draw();
-
 		Framerate::OnFrameEnd();
 	}
 }

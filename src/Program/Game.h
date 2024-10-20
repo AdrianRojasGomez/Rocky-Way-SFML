@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Gameplay.h"
 #include "../Utilities/Framerate.h"
 #include "../Utilities/ResourceManager.h"
 
