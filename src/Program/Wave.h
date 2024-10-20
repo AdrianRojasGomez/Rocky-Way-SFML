@@ -20,9 +20,8 @@ public:
 private:
 
 	void CreateAsteroids();
-	void SpawnWave(sf::FloatRect restrictedSpawnArea);
+	void SpawnWave();
 
-	sf::FloatRect restrictedSpawnArea;
 	std::list<LargeAsteroid*> largeAsteroids;
 	std::list<LargeAsteroid*>::iterator largeIterator;
 	std::list<SmallAsteroid*> smallAsteroids;

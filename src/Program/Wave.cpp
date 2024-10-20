@@ -11,21 +11,19 @@
 	 {
 		 LargeAsteroid* asteroid = new LargeAsteroid();
 		 largeAsteroids.push_back(asteroid);
-		 //std::cout << "one Large Asteroid\n";
 	 }
 
 	 for (int i = 0; i < 5; i++)
 	 {
 		 SmallAsteroid* asteroid = new SmallAsteroid();
 		 smallAsteroids.push_back(asteroid);
-		 //std::cout << "one Small Asteroid\n";
 
 	 }
  }
 
- void Wave::SpawnWave(sf::FloatRect restrictedSpawnArea)
+ void Wave::SpawnWave()
  {
-	 this->restrictedSpawnArea = restrictedSpawnArea;
+	 return;
  }
 
  void Wave::Update()
