@@ -18,7 +18,6 @@ void Asteroid::LoadTexture()
 		asteroidSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
 		this->posX = asteroidSprite.getPosition().x;
 		this->posY = asteroidSprite.getPosition().y;
-		this->isActive = true;
 	}
 	else
 		std::cout << "DEBUG: Error!!!!!!!! NULL TEXTURE" << std::endl;

@@ -5,6 +5,7 @@ class LargeAsteroid : public Asteroid
 {
 public:
 	LargeAsteroid();
+	
 
 
 private:

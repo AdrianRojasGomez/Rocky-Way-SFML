@@ -12,6 +12,7 @@ public:
 	virtual void Update();
 	virtual void Draw(sf::RenderWindow& window);
 	virtual bool GetIsActive() { return isActive; }
+	sf::Sprite GetAsteroidSprite() { return asteroidSprite; }
 
 
 protected:

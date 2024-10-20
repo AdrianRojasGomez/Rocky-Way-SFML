@@ -12,9 +12,9 @@ public:
 	void Update();
 	void Draw(sf::RenderWindow& window);
 	void Fire(float posX, float posY, float dirX, float dirY);
-	int getDamage() { return damage; }
-	bool getIsActive() { return isActive; }
-	sf::Sprite getBulletSprite() { return bulletSprite; }
+	int GetDamage() { return damage; }
+	bool GetIsActive() { return isActive; }
+	sf::Sprite GetBulletSprite() { return bulletSprite; }
 
 private:
 	sf::Texture* bulletTexture;

@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Background.h"
 #include "Wave.h"
+#include "CollisionManager.h"
 
 class Gameplay
 {
@@ -18,6 +19,10 @@ private:
 	Background background;
 	Player player;
 	Wave wave;
+	CollisionManager collisionManager;
+
+	sf::Clock cleanClock;
+	bool isClean;
 	
 	
 

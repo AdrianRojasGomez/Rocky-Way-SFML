@@ -10,7 +10,7 @@ Player::Player()
 	cooldownClock.restart();
 	this->playerTexture = ResourceManager::GetPlayerTexture();
 	LoadPlayerTexture();
-	CreatePlayerArea(posX, posY);
+	//CreatePlayerArea(posX, posY);
 	SetInitialPosition();
 	CreateBullets();
 }
@@ -92,7 +92,7 @@ void Player::Fire()
 		{
 			for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 			{
-				if ((*iterator)->getIsActive() == false)
+				if ((*iterator)->GetIsActive() == false)
 				{
 					(*iterator)->Fire(posX, posY, directionX, directionY);
 					isFiring = true;
@@ -115,7 +115,7 @@ void Player::Update()
 	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 	{
 		Bullet* bulletToDraw = *iterator;
-		if (bulletToDraw->getIsActive())
+		if (bulletToDraw->GetIsActive())
 		{
 			bulletToDraw->Update();
 		}
@@ -130,7 +130,7 @@ void Player::Draw(sf::RenderWindow& window)
 	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 	{
 		Bullet* bulletToDraw = *iterator;
-		if (bulletToDraw->getIsActive())
+		if (bulletToDraw->GetIsActive())
 		{
 			bulletToDraw->Draw(window);
 		}

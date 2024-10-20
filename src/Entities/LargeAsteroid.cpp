@@ -7,6 +7,7 @@ LargeAsteroid::LargeAsteroid()
 	this->sizeMultiplierSpeed = RandomizeFloatValues(0.2f, 0.7f);
 	this->sizeMultiplierRotation = RandomizeIntValues(4, 1);
 	LoadTexture();
+	this->isActive = true;
 }
 
 

@@ -10,8 +10,9 @@ public:
 	Player();
 	void Update();
 	void Draw(sf::RenderWindow& window);
+	sf::Sprite GetPlayerSprite() { return playerSprite; }
 	sf::FloatRect GetPlayerArea() { return playerArea.getGlobalBounds(); }
-	std::list<Bullet*> GetBullets() { return bullets; }
+	std::list<Bullet*>& GetBullets() { return bullets; }
 
 
 private:
