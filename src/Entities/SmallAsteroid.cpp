@@ -8,5 +8,5 @@ SmallAsteroid::SmallAsteroid()
 	this->multiplierSpeed = RandomizeFloatValues(minSpeed, maxspeed);
 	this->multiplierRotation = RandomizeIntValues(maxRotation, minRotation);
 	SetTextureValues();
-	this->isActive = true;
+	this->isActive = false;
 }

@@ -8,15 +8,21 @@ class Player
 {
 public:
 	Player();
+	void Respawn();
+	void RemoveInvulnerability();
 	void Update();
 	void Draw(sf::RenderWindow& window);
 	sf::Sprite GetPlayerSprite() { return playerSprite; }
 	std::list<Bullet*>& GetBullets() { return bullets; }
+	bool GetIsInvulnerable() { return isInvulnerable; }
+	bool GetIsAlive() { return isAlive; }
+	void SetIsAlive(bool isAlive);
 
 private:
 	sf::Texture* playerTexture;
 	sf::Sprite playerSprite;
 	sf::Clock cooldownClock;
+	sf::Clock respawnClock;
 	sf::RectangleShape playerArea;
 	std::list<Bullet*> bullets;
 	std::list<Bullet*>::iterator iterator;
@@ -26,13 +32,16 @@ private:
 	const float SCALE_Y = 0.3f;
 	const float ROTATION_SPEED = 200.0f;
 	const float MOVE_SPEED = 250.0f;
+	const float NUM_PI = 3.14159265f;
 	const int SCREEN_WIDTH = 1280;
 	const int SCREEN_HEIGHT = 720;
 	const int BULLET_CAPACITY = 30;
 	const int FIXED_DEGREES = 90;
-	const float NUM_PI = 3.14159265f;
+	const int RESPAWN_TIME = 2;
+	const int INVULNERABLE_TIME = 3;
 
 	bool isAlive = true;
+	bool isInvulnerable = false;
 	bool isFiring = false;
 	int lifes = 3;
 	float posX = 0.0f;

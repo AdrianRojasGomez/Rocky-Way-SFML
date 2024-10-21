@@ -26,5 +26,9 @@ private:
 	std::list<SmallAsteroid*> smallAsteroids;
 	std::list<SmallAsteroid*>::iterator smallIterator;
 
+	int waveCounter = 0;
+	int currentAsteroidCounter = 0;
+	int maxAsteroidperWave = 0;
+
 
 };

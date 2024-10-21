@@ -17,7 +17,10 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 
 		if (PlayerVsLargeAsteroidCollision(player, *currentAsteroid))
 		{
-			//TODO: Behavior Player vs Large Asteroid
+			if (player.GetIsInvulnerable())
+				break;
+			player.SetIsAlive(false);
+			currentAsteroid->SetIsActive(false);
 		}
 	}
 
@@ -31,7 +34,10 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 
 		if (PlayerVsSmallAsteroidCollision(player, *currentAsteroid))
 		{
-			//TODO: Behavior Player vs Small Asteroid
+			if (player.GetIsInvulnerable())
+				break;
+			player.SetIsAlive(false);
+			currentAsteroid->SetIsActive(false);
 		}
 	}
 
@@ -71,8 +77,6 @@ bool CollisionManager::PlayerVsLargeAsteroidCollision(Player& player, LargeAster
 {
 	return player.GetPlayerSprite().getGlobalBounds().intersects(largeAsteroid.GetAsteroidHitBox());
 }
-
-
 
 bool CollisionManager::PlayerVsSmallAsteroidCollision(Player& player, SmallAsteroid& smallAsteroid)
 {
