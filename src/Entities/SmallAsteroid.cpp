@@ -5,8 +5,8 @@
 SmallAsteroid::SmallAsteroid()
 {
 	this->asteroidTexture = ResourceManager::GetSmallAsteroidTexture();
-	this->sizeMultiplierSpeed = RandomizeFloatValues(minSpeed, maxspeed);
-	this->sizeMultiplierRotation = RandomizeIntValues(maxRotation, minRotation);
-	LoadTexture();
-	this->isActive = true;
+	this->multiplierSpeed = RandomizeFloatValues(minSpeed, maxspeed);
+	this->multiplierRotation = RandomizeIntValues(maxRotation, minRotation);
+	SetTextureValues();
+	this->isActive = false;
 }

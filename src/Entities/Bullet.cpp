@@ -60,13 +60,13 @@ void Bullet::SetRotation()
 
 void Bullet::SetPosition()
 {
-
-	bulletSprite.setPosition(posX,posY);
+	bulletSprite.setPosition(posX, posY);
 }
 
 void Bullet::BulletMovement()
 {
-	bulletSprite.move(shooterDirX * BULLET_SPEED * Framerate::getDeltaTime(), shooterDirY * BULLET_SPEED * Framerate::getDeltaTime());
+	this->bulletSpeed = initialBulletSpeed;
+	bulletSprite.move(shooterDirX * bulletSpeed * Framerate::getDeltaTime(), shooterDirY * bulletSpeed * Framerate::getDeltaTime());
 	this->posX = bulletSprite.getPosition().x;
 	this->posY = bulletSprite.getPosition().y;
 }
@@ -87,8 +87,6 @@ void Bullet::Update()
 	BulletTimer();
 	WrapAroundScreen(posX, posY, 1280, 720, 0.0f);
 	bulletSprite.setPosition(posX, posY);
-
-
 }
 
 void Bullet::Draw(sf::RenderWindow& window)
@@ -98,5 +96,14 @@ void Bullet::Draw(sf::RenderWindow& window)
 	window.draw(bulletSprite);
 }
 
+void Bullet::SetBulletSprite(bool isActive)
+{
+	this->isActive = isActive;
 
+	if (!isActive)
+	{
+		this->bulletSprite.setPosition(-1000, 1000);
+		this->bulletSpeed = 0.0f;
+	}
+}
 

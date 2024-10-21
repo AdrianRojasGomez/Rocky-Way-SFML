@@ -17,7 +17,10 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 
 		if (PlayerVsLargeAsteroidCollision(player, *currentAsteroid))
 		{
-			//TODO: Behavior Player vs Large Asteroid
+			if (player.GetIsInvulnerable())
+				break;
+			player.SetIsAlive(false);
+			currentAsteroid->SetIsActive(false);
 		}
 	}
 
@@ -31,7 +34,10 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 
 		if (PlayerVsSmallAsteroidCollision(player, *currentAsteroid))
 		{
-			//TODO: Behavior Player vs Small Asteroid
+			if (player.GetIsInvulnerable())
+				break;
+			player.SetIsAlive(false);
+			currentAsteroid->SetIsActive(false);
 		}
 	}
 
@@ -48,8 +54,9 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 			LargeAsteroid* currentLargeAsteroid = *largeAsteroidIterator;
 			if (BulletVsLargeAsteroidCollision(*currentBullet, *currentLargeAsteroid))
 			{
-				//TODO: Behavior Bullet vs Large Asteroid
-
+				std::cout << "bullet collision vs Large\n";
+				currentLargeAsteroid->SetIsActive(false);
+				currentBullet->SetBulletSprite(false);
 			}
 		}
 
@@ -58,8 +65,9 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 			SmallAsteroid* currentSmallAsteroid = *smallAsteroidIterator;
 			if (BulletVsSmallAsteroidCollision(*currentBullet, *currentSmallAsteroid))
 			{
-				//TODO: Behavior Player vs Small Asteroid
-
+				std::cout << "bullet collision vs small\n";
+				currentSmallAsteroid->SetIsActive(false);
+				currentBullet->SetBulletSprite(false);
 			}
 		}
 	}
@@ -67,20 +75,20 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 
 bool CollisionManager::PlayerVsLargeAsteroidCollision(Player& player, LargeAsteroid& largeAsteroid)
 {
-	return player.GetPlayerSprite().getGlobalBounds().intersects(largeAsteroid.GetAsteroidSprite().getGlobalBounds());
+	return player.GetPlayerSprite().getGlobalBounds().intersects(largeAsteroid.GetAsteroidHitBox());
 }
 
 bool CollisionManager::PlayerVsSmallAsteroidCollision(Player& player, SmallAsteroid& smallAsteroid)
 {
-	return player.GetPlayerSprite().getGlobalBounds().intersects(smallAsteroid.GetAsteroidSprite().getGlobalBounds());
+	return player.GetPlayerSprite().getGlobalBounds().intersects(smallAsteroid.GetAsteroidHitBox());
 }
 
 bool CollisionManager::BulletVsLargeAsteroidCollision(Bullet& bullet, LargeAsteroid& largeAsteroid)
 {
-	return bullet.GetBulletSprite().getGlobalBounds().intersects(largeAsteroid.GetAsteroidSprite().getGlobalBounds());
+	return bullet.GetBulletSprite().getGlobalBounds().intersects(largeAsteroid.GetAsteroidHitBox());
 }
 
 bool CollisionManager::BulletVsSmallAsteroidCollision(Bullet& bullet, SmallAsteroid& smallAsteroid)
 {
-	return bullet.GetBulletSprite().getGlobalBounds().intersects(smallAsteroid.GetAsteroidSprite().getGlobalBounds());
+	return bullet.GetBulletSprite().getGlobalBounds().intersects(smallAsteroid.GetAsteroidHitBox());
 }

@@ -4,10 +4,20 @@
 
 Asteroid::Asteroid()
 {
+	asteroidHitZone = new sf::FloatRect;
 	InitDir();
 }
 
-void Asteroid::LoadTexture()
+Asteroid::~Asteroid()
+{
+	if (asteroidHitZone != nullptr)
+	{
+		delete asteroidHitZone;
+		asteroidHitZone == nullptr;
+	}
+}
+
+void Asteroid::SetTextureValues()
 {
 	if (asteroidTexture != nullptr)
 	{
@@ -21,6 +31,7 @@ void Asteroid::LoadTexture()
 	else
 		std::cout << "DEBUG: Error!!!!!!!! NULL TEXTURE" << std::endl;
 }
+
 
 void Asteroid::InitDir()
 {
@@ -51,14 +62,17 @@ float Asteroid::RandomizeFloatValues(float max, float min)
 
 void Asteroid::Move()
 {
-	asteroidSprite.rotate(-rotationSpeed * sizeMultiplierRotation * Framerate::getDeltaTime());
-	asteroidSprite.move(dirX * speed * sizeMultiplierSpeed * Framerate::getDeltaTime(), dirY * speed * sizeMultiplierSpeed * Framerate::getDeltaTime());
+	asteroidSprite.rotate(-rotationSpeed * multiplierRotation * Framerate::getDeltaTime());
+	asteroidSprite.move(dirX * speed * multiplierSpeed * Framerate::getDeltaTime(), dirY * speed * multiplierSpeed * Framerate::getDeltaTime());
 	this->posX = asteroidSprite.getPosition().x;
 	this->posY = asteroidSprite.getPosition().y;
+	asteroidHitZone->height *= hitzoneHeight;
+	asteroidHitZone->width *= hitzoneWidth;
 }
 
 void Asteroid::Update()
 {
+	*asteroidHitZone = asteroidSprite.getGlobalBounds();
 	Move();
 	WrapAroundScreen(posX, posY, 1280, 720, 35.0f);
 	asteroidSprite.setPosition(posX, posY);
@@ -67,6 +81,18 @@ void Asteroid::Update()
 void Asteroid::Draw(sf::RenderWindow& window)
 {
 	window.draw(asteroidSprite);
+}
+
+void Asteroid::SetIsActive(bool isActive)
+{
+	this->isActive = isActive; 
+
+	if (!isActive)
+	{
+		this->asteroidSprite.setPosition(-1000, 1000);
+		*asteroidHitZone = asteroidSprite.getGlobalBounds();
+		this->multiplierSpeed = 0.0f;
+	}
 }
 
 

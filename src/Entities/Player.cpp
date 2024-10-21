@@ -88,12 +88,29 @@ void Player::Fire()
 		}
 
 	}
+}
 
+void Player::Respawn()
+{
+	if (!isAlive && respawnClock.getElapsedTime().asSeconds() > RESPAWN_TIME)
+	{
+		isAlive = true;
+		SetInitialPosition();
+	}
+}
 
+void Player::RemoveInvulnerability()
+{
+	if (respawnClock.getElapsedTime().asSeconds() > INVULNERABLE_TIME)
+	{
+		isInvulnerable = false;
+	}
 }
 
 void Player::Update()
 {
+	Respawn();
+	RemoveInvulnerability();
 	Movement();
 	WrapAroundScreen(posX, posY, SCREEN_WIDTH, SCREEN_HEIGHT, 15.0f);
 	playerSprite.setPosition(posX, posY);
@@ -109,6 +126,8 @@ void Player::Update()
 
 void Player::Draw(sf::RenderWindow& window)
 {
+	if (!isAlive)
+		return;
 	window.draw(playerArea);
 	window.draw(playerSprite);
 
@@ -120,5 +139,21 @@ void Player::Draw(sf::RenderWindow& window)
 			bulletToDraw->Draw(window);
 		}
 	}
+}
+
+void Player::SetIsAlive(bool isAlive)
+{
+	if (isInvulnerable)
+		return;
+
+	this->isAlive = isAlive;
+	if (!isAlive)
+	{
+		this->lifes--;
+	}
+	respawnClock.restart();
+	this->isInvulnerable = true;
+	std::cout << lifes << " lifes left\n";
+
 }
 
