@@ -2,7 +2,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "../Utilities/WrappingScreenUtility.h"
 
 
 class Asteroid
@@ -45,4 +44,5 @@ protected:
 
 private:
 	void InitDir();
+	void InitPos();
 };

@@ -47,6 +47,7 @@
     <ClInclude Include="src\Program\Gameplay.h" />
     <ClInclude Include="src\Program\Wave.h" />
     <ClInclude Include="src\Utilities\Framerate.h" />
+    <ClInclude Include="src\Utilities\ScreenResolution.h" />
     <ClInclude Include="src\Utilities\WrappingScreenUtility.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

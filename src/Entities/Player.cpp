@@ -2,6 +2,8 @@
 #include "../Utilities/Framerate.h"
 #include "../Utilities/WrappingScreenUtility.h"
 #include "../Utilities/ResourceManager.h"
+#include "../Utilities/ScreenResolution.h"
+
 
 
 
@@ -32,7 +34,7 @@ void Player::SetTextureValues()
 
 void Player::SetInitialPosition()
 {
-	playerSprite.setPosition(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
+	playerSprite.setPosition(ScreenResolution::SCREEN_WIDTH_720P * 0.5f, ScreenResolution::SCREEN_WIDTH_720P * 0.5f);
 }
 
 void Player::Movement()
@@ -112,7 +114,7 @@ void Player::Update()
 	Respawn();
 	RemoveInvulnerability();
 	Movement();
-	WrapAroundScreen(posX, posY, SCREEN_WIDTH, SCREEN_HEIGHT, 15.0f);
+	WrapAroundScreen(posX, posY, 15.0f);
 	playerSprite.setPosition(posX, posY);
 	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 	{

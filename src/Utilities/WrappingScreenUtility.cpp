@@ -1,14 +1,15 @@
 #include "WrappingScreenUtility.h"
+#include "../Utilities/ScreenResolution.h"
 
-void WrapAroundScreen(float& x, float& y, float screenWidth, float screenHeight, float offset)
+void WrapAroundScreen(float& x, float& y, float offset)
 {
 	if (x < - offset)
-		x = screenWidth;
-	else if (x > screenWidth + offset)
+		x = ScreenResolution::SCREEN_WIDTH_720P;
+	else if (x > ScreenResolution::SCREEN_WIDTH_720P + offset)
 		x = 0;
 
 	if (y < - offset)
-		y = screenHeight;
-	else if (y > screenHeight + offset)
+		y = ScreenResolution::SCREEN_HEIGHT_720P;
+	else if (y > ScreenResolution::SCREEN_HEIGHT_720P + offset)
 		y = 0;
 }

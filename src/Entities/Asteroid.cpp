@@ -1,4 +1,5 @@
 #include "Asteroid.h"
+#include "../Utilities/WrappingScreenUtility.h"
 #include "../Utilities/ResourceManager.h"
 #include "../Utilities/Framerate.h"
 
@@ -49,6 +50,11 @@ void Asteroid::InitDir()
 	} while (!isAssigned);
 }
 
+void Asteroid::InitPos()
+{
+
+}
+
 int Asteroid::RandomizeIntValues(int max, int min)
 {
 	return rand() % max + min;
@@ -74,7 +80,7 @@ void Asteroid::Update()
 {
 	*asteroidHitZone = asteroidSprite.getGlobalBounds();
 	Move();
-	WrapAroundScreen(posX, posY, 1280, 720, 35.0f);
+	WrapAroundScreen(posX, posY, 35.0f);
 	asteroidSprite.setPosition(posX, posY);
 }
 
