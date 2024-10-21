@@ -2,10 +2,12 @@
 #include "../Utilities/WrappingScreenUtility.h"
 #include "../Utilities/ResourceManager.h"
 #include "../Utilities/Framerate.h"
+#include "../Utilities/ScreenResolution.h"
 
 Asteroid::Asteroid()
 {
 	asteroidHitZone = new sf::FloatRect;
+	InitPosition();
 	InitDir();
 }
 
@@ -50,8 +52,40 @@ void Asteroid::InitDir()
 	} while (!isAssigned);
 }
 
-void Asteroid::InitPos()
+void Asteroid::InitPosition()
 {
+	InitialPosition initPos = (InitialPosition)RandomizeIntValues(InitialPosition::EAST, InitialPosition::NORTH);
+	float initPosX;
+	float initPosY;
+	switch (1)
+	{
+	case UNASSIGNED:
+		break;
+	case NORTH:
+		initPosX = RandomizeIntValues(ScreenResolution::SCREEN_WIDTH_720P, 1);
+		initPosY = -200;
+		asteroidSprite.setPosition(initPosX, initPosY);
+		break;
+	case WEST:
+		initPosX = RandomizeIntValues(ScreenResolution::SCREEN_WIDTH_720P, 1);
+		initPosY = 10;
+		asteroidSprite.setPosition(posX, posY);
+		break;
+	case SOUTH:
+		initPosX = RandomizeIntValues(ScreenResolution::SCREEN_WIDTH_720P, 1);
+		initPosY = 10;
+		asteroidSprite.setPosition(posX, posY);
+		break;
+	case EAST:
+		initPosX = RandomizeIntValues(ScreenResolution::SCREEN_WIDTH_720P, 1);
+		initPosY = 10;
+		asteroidSprite.setPosition(posX, posY);
+		break;
+	default:
+		break;
+	}
+
+
 
 }
 
@@ -79,7 +113,7 @@ void Asteroid::Move()
 void Asteroid::Update()
 {
 	*asteroidHitZone = asteroidSprite.getGlobalBounds();
-	Move();
+	//Move();
 	WrapAroundScreen(posX, posY, 35.0f);
 	asteroidSprite.setPosition(posX, posY);
 }

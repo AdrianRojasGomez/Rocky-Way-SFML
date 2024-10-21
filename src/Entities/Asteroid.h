@@ -2,6 +2,14 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+enum InitialPosition
+{
+	UNASSIGNED = 0,
+	NORTH = 1,
+	WEST = 2, 
+	SOUTH = 3,
+	EAST = 4, 
+};
 
 
 class Asteroid
@@ -44,5 +52,5 @@ protected:
 
 private:
 	void InitDir();
-	void InitPos();
+	void InitPosition();
 };
