@@ -2,7 +2,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-enum InitialPosition
+enum class InitialPosition
 {
 	UNASSIGNED = 0,
 	NORTH = 1,
@@ -51,6 +51,6 @@ protected:
 	float RandomizeFloatValues(float max, float min);
 
 private:
-	void InitDir();
+	void InitDirection();
 	void InitPosition();
 };

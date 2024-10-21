@@ -34,7 +34,7 @@ void Player::SetTextureValues()
 
 void Player::SetInitialPosition()
 {
-	playerSprite.setPosition(ScreenResolution::SCREEN_WIDTH_720P * 0.5f, ScreenResolution::SCREEN_WIDTH_720P * 0.5f);
+	playerSprite.setPosition(ScreenResolution::GetScreenCenter720());
 }
 
 void Player::Movement()

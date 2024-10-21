@@ -8,7 +8,7 @@ Asteroid::Asteroid()
 {
 	asteroidHitZone = new sf::FloatRect;
 	InitPosition();
-	InitDir();
+	InitDirection();
 }
 
 Asteroid::~Asteroid()
@@ -36,57 +36,55 @@ void Asteroid::SetTextureValues()
 }
 
 
-void Asteroid::InitDir()
+void Asteroid::InitDirection()
 {
-	bool isAssigned = false;
-	do
+	sf::Vector2f vScreenCenter = ScreenResolution::GetScreenCenter720();
+	this->dirX = (vScreenCenter.x + RandomizeIntValues(300, 30)) - posX;
+	this->dirY = (vScreenCenter.y + RandomizeIntValues(300, 30)) - posY;
+	float magnitude = std::sqrt(dirX * dirX + dirY * dirY);
+	if (magnitude != 0)
 	{
-		this->rotation = RandomizeIntValues(360, 1);
-		this->dirX = std::cos(rotation * NUM_PI / 180.0f);
-		this->rotation = RandomizeIntValues(360, 1);
-		this->dirY = std::sin(rotation * NUM_PI / 180.0f);
-
-		if (dirX != 0 && dirY != 0)
-			isAssigned = true;
-
-	} while (!isAssigned);
+		this->dirX /= magnitude;
+		this->dirY /= magnitude;
+	}
 }
 
 void Asteroid::InitPosition()
 {
-	InitialPosition initPos = (InitialPosition)RandomizeIntValues(InitialPosition::EAST, InitialPosition::NORTH);
-	float initPosX;
-	float initPosY;
-	switch (1)
+	InitialPosition initialPosition = (InitialPosition)RandomizeIntValues((int)InitialPosition::EAST, (int)InitialPosition::NORTH);
+	float initPosX = 0;
+	float initPosY = 0;
+	switch (initialPosition)
 	{
-	case UNASSIGNED:
+	case InitialPosition::UNASSIGNED:
+		std::cout << "Error UNASSIGNED" << std::endl;
 		break;
-	case NORTH:
+	case InitialPosition::NORTH:
 		initPosX = RandomizeIntValues(ScreenResolution::SCREEN_WIDTH_720P, 1);
-		initPosY = -200;
+		initPosY = -100;
 		asteroidSprite.setPosition(initPosX, initPosY);
 		break;
-	case WEST:
-		initPosX = RandomizeIntValues(ScreenResolution::SCREEN_WIDTH_720P, 1);
-		initPosY = 10;
-		asteroidSprite.setPosition(posX, posY);
+	case InitialPosition::WEST:
+		initPosX = ScreenResolution::SCREEN_WIDTH_720P + 100;
+		initPosY = RandomizeIntValues(ScreenResolution::SCREEN_HEIGHT_720P, 1);
+		asteroidSprite.setPosition(initPosX, initPosY);
 		break;
-	case SOUTH:
+	case InitialPosition::SOUTH:
 		initPosX = RandomizeIntValues(ScreenResolution::SCREEN_WIDTH_720P, 1);
-		initPosY = 10;
-		asteroidSprite.setPosition(posX, posY);
+		initPosY = ScreenResolution::SCREEN_HEIGHT_720P + 100;
+		asteroidSprite.setPosition(initPosX, initPosY);
 		break;
-	case EAST:
-		initPosX = RandomizeIntValues(ScreenResolution::SCREEN_WIDTH_720P, 1);
-		initPosY = 10;
-		asteroidSprite.setPosition(posX, posY);
+	case InitialPosition::EAST:
+		initPosX = -100;
+		initPosY = RandomizeIntValues(ScreenResolution::SCREEN_HEIGHT_720P, 1);
+		asteroidSprite.setPosition(initPosX, initPosY);
 		break;
 	default:
+		std::cout << "Error Default Case" << std::endl;
 		break;
 	}
-
-
-
+	this->posX = initPosX;
+	this->posY = initPosY;
 }
 
 int Asteroid::RandomizeIntValues(int max, int min)
@@ -113,7 +111,7 @@ void Asteroid::Move()
 void Asteroid::Update()
 {
 	*asteroidHitZone = asteroidSprite.getGlobalBounds();
-	//Move();
+	Move();
 	WrapAroundScreen(posX, posY, 35.0f);
 	asteroidSprite.setPosition(posX, posY);
 }
