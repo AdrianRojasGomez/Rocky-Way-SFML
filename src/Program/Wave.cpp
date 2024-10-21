@@ -12,7 +12,7 @@
 
  void Wave::CreateAsteroids()
  {
-	 for (int i = 0; i < 5; i++)
+	 for (int i = 0; i < 10; i++)
 	 {
 		 LargeAsteroid* asteroid = new LargeAsteroid();
 		 largeAsteroids.push_back(asteroid);
@@ -21,6 +21,7 @@
 	 for (int i = 0; i < 5; i++)
 	 {
 		 SmallAsteroid* asteroid = new SmallAsteroid();
+		 asteroid->SetIsActive(true);
 		 smallAsteroids.push_back(asteroid);
 	 }
  }

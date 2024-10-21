@@ -88,8 +88,6 @@ void Player::Fire()
 		}
 
 	}
-
-
 }
 
 void Player::Update()
