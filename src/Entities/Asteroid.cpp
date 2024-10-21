@@ -39,8 +39,8 @@ void Asteroid::SetTextureValues()
 void Asteroid::InitDirection()
 {
 	sf::Vector2f vScreenCenter = ScreenResolution::GetScreenCenter720();
-	this->dirX = (vScreenCenter.x + RandomizeIntValues(300, 30)) - posX;
-	this->dirY = (vScreenCenter.y + RandomizeIntValues(300, 30)) - posY;
+	this->dirX = (vScreenCenter.x + RandomizeIntValues(300, 100)) - posX;
+	this->dirY = (vScreenCenter.y + RandomizeIntValues(300, 100)) - posY;
 	float magnitude = std::sqrt(dirX * dirX + dirY * dirY);
 	if (magnitude != 0)
 	{
@@ -61,21 +61,21 @@ void Asteroid::InitPosition()
 		break;
 	case InitialPosition::NORTH:
 		initPosX = RandomizeIntValues(ScreenResolution::SCREEN_WIDTH_720P, 1);
-		initPosY = -100;
+		initPosY = -300;
 		asteroidSprite.setPosition(initPosX, initPosY);
 		break;
 	case InitialPosition::WEST:
-		initPosX = ScreenResolution::SCREEN_WIDTH_720P + 100;
+		initPosX = ScreenResolution::SCREEN_WIDTH_720P + 300;
 		initPosY = RandomizeIntValues(ScreenResolution::SCREEN_HEIGHT_720P, 1);
 		asteroidSprite.setPosition(initPosX, initPosY);
 		break;
 	case InitialPosition::SOUTH:
 		initPosX = RandomizeIntValues(ScreenResolution::SCREEN_WIDTH_720P, 1);
-		initPosY = ScreenResolution::SCREEN_HEIGHT_720P + 100;
+		initPosY = ScreenResolution::SCREEN_HEIGHT_720P + 300;
 		asteroidSprite.setPosition(initPosX, initPosY);
 		break;
 	case InitialPosition::EAST:
-		initPosX = -100;
+		initPosX = -300;
 		initPosY = RandomizeIntValues(ScreenResolution::SCREEN_HEIGHT_720P, 1);
 		asteroidSprite.setPosition(initPosX, initPosY);
 		break;
