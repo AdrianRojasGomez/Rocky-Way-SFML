@@ -112,7 +112,7 @@ void Asteroid::Update()
 {
 	*asteroidHitZone = asteroidSprite.getGlobalBounds();
 	Move();
-	WrapAroundScreen(posX, posY, 35.0f);
+	WrapAroundScreen(posX, posY, dirX, dirY, 35.0f, asteroidSprite);
 	asteroidSprite.setPosition(posX, posY);
 }
 

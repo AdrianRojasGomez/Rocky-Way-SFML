@@ -31,8 +31,8 @@ private:
 	float scaleY = .25f;
 	float posX = 0.0f;
 	float posY = 0.0f;
-	float shooterDirX = 0.0f;
-	float shooterDirY = 0.0f;
+	float bulletDirX = 0.0f;
+	float bulletDirY = 0.0f;
 
 	void SetTextureValues();
 	void BulletMovement();

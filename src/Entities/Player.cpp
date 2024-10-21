@@ -114,7 +114,7 @@ void Player::Update()
 	Respawn();
 	RemoveInvulnerability();
 	Movement();
-	WrapAroundScreen(posX, posY, 15.0f);
+	WrapAroundScreen(posX, posY, directionX, directionY, 15.0f, playerSprite);
 	playerSprite.setPosition(posX, posY);
 	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 	{

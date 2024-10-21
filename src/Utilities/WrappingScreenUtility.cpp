@@ -1,15 +1,18 @@
+#include <SFML/Graphics.hpp>
 #include "WrappingScreenUtility.h"
 #include "../Utilities/ScreenResolution.h"
 
-void WrapAroundScreen(float& x, float& y, float offset)
+void WrapAroundScreen(float& posX, float& posY, float dirX, float dirY , float offset, sf::Sprite currentSprite)
 {
-	if (x < - offset)
-		x = ScreenResolution::SCREEN_WIDTH_720P;
-	else if (x > ScreenResolution::SCREEN_WIDTH_720P + offset)
-		x = 0;
+	if (posX < - offset && dirX < 0)
+		posX = ScreenResolution::SCREEN_WIDTH_720P;
+	else if (posX > ScreenResolution::SCREEN_WIDTH_720P + offset && dirX > 0)
+		posX = 0;
 
-	if (y < - offset)
-		y = ScreenResolution::SCREEN_HEIGHT_720P;
-	else if (y > ScreenResolution::SCREEN_HEIGHT_720P + offset)
-		y = 0;
+	if (posY < - offset && dirY < 0)
+		posY = ScreenResolution::SCREEN_HEIGHT_720P;
+	else if (posY > ScreenResolution::SCREEN_HEIGHT_720P + offset && dirY > 0)
+		posY = 0;
+
+	currentSprite.setPosition(posX, posY);
 }
