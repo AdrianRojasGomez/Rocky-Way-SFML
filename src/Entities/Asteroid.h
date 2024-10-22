@@ -2,7 +2,14 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "../Utilities/WrappingScreenUtility.h"
+enum class InitialPosition
+{
+	UNASSIGNED = 0,
+	NORTH = 1,
+	WEST = 2, 
+	SOUTH = 3,
+	EAST = 4, 
+};
 
 
 class Asteroid
@@ -25,7 +32,8 @@ protected:
 	sf::FloatRect* asteroidHitZone;
 
 	bool isActive = false;
-	float multiplierSpeed = 1.0f;
+	float initialMultiplierSpeed = 1.0f;
+	float currentSpeed = 1.0f;
 	float multiplierRotation = 1.0f;
 	float scaleX = 1.0f;
 	float scaleY = 1.0f;
@@ -44,5 +52,6 @@ protected:
 	float RandomizeFloatValues(float max, float min);
 
 private:
-	void InitDir();
+	void InitDirection();
+	void InitPosition();
 };

@@ -1,12 +1,13 @@
 #include <ctime>
 #include "Game.h"
 #include "Gameplay.h"
+#include "../Utilities/ScreenResolution.h"
 
 
 Game::Game()
 {
 	srand(time(0));
-	videoMode = new sf::VideoMode(WIDTH, HEIGHT);
+	videoMode = new sf::VideoMode(ScreenResolution::SCREEN_WIDTH_720P, ScreenResolution::SCREEN_HEIGHT_720P);
 	window = new sf::RenderWindow(*videoMode, "Rocky Ways");
 	resourceManager = new ResourceManager();
 }

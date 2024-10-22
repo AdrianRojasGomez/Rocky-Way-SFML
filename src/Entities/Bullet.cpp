@@ -41,8 +41,8 @@ void Bullet::Fire(float posX, float posY, float dirX, float dirY)
 
 	this->posX = posX;
 	this->posY = posY;
-	this->shooterDirX = dirX;
-	this->shooterDirY = dirY;
+	this->bulletDirX = dirX;
+	this->bulletDirY = dirY;
 	this->isActive = true;
 	timer->restart();
 	SetPosition();
@@ -53,7 +53,7 @@ void Bullet::Fire(float posX, float posY, float dirX, float dirY)
 
 void Bullet::SetRotation()
 {
-	float angleInRadians = std::atan2(shooterDirY, shooterDirX);
+	float angleInRadians = std::atan2(bulletDirY, bulletDirX);
 	float angleDregrees = angleInRadians * 180 / 3.14159265f;
 	bulletSprite.setRotation(angleDregrees + 90);
 }
@@ -66,7 +66,7 @@ void Bullet::SetPosition()
 void Bullet::BulletMovement()
 {
 	this->bulletSpeed = initialBulletSpeed;
-	bulletSprite.move(shooterDirX * bulletSpeed * Framerate::getDeltaTime(), shooterDirY * bulletSpeed * Framerate::getDeltaTime());
+	bulletSprite.move(bulletDirX * bulletSpeed * Framerate::getDeltaTime(), bulletDirY * bulletSpeed * Framerate::getDeltaTime());
 	this->posX = bulletSprite.getPosition().x;
 	this->posY = bulletSprite.getPosition().y;
 }
@@ -85,7 +85,7 @@ void Bullet::Update()
 		return;
 	BulletMovement();
 	BulletTimer();
-	WrapAroundScreen(posX, posY, 1280, 720, 0.0f);
+	WrapAroundScreen(posX, posY,bulletDirX, bulletDirY, 5.0f, bulletSprite);
 	bulletSprite.setPosition(posX, posY);
 }
 

@@ -33,8 +33,6 @@ private:
 	const float ROTATION_SPEED = 200.0f;
 	const float MOVE_SPEED = 250.0f;
 	const float NUM_PI = 3.14159265f;
-	const int SCREEN_WIDTH = 1280;
-	const int SCREEN_HEIGHT = 720;
 	const int BULLET_CAPACITY = 30;
 	const int FIXED_DEGREES = 90;
 	const int RESPAWN_TIME = 2;
