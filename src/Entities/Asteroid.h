@@ -25,12 +25,12 @@ public:
 
 
 protected:
-	const float NUM_PI = 3.14159265f;
-	const float speed = 100.0f;
 	sf::Texture* asteroidTexture;
 	sf::Sprite asteroidSprite;
 	sf::FloatRect* asteroidHitZone;
 
+	const float NUM_PI = 3.14159265f;
+	const float speed = 100.0f;
 	bool isActive = false;
 	float initialMultiplierSpeed = 1.0f;
 	float currentSpeed = 1.0f;

@@ -30,56 +30,88 @@ void Wave::CreateAsteroids()
 
 void Wave::CreateWave()
 {
+
 	waveCounter++;
-	std::cout << "WaveCounter = " << waveCounter << std::endl;
-
 	if (waveCounter <= 1)
-	{
-		//this->isFirstWave = false;
-		this->largePerWave = 4;
-		this->smallPerWave = 2;
-		std::cout << "First Wave!\n";
-
-	}
+		ActivateFirstWave();
 	else
+		NewWaveValues();
+
+	ActivateAsteroids(largeAsteroids, largeIterator, largePerWave);
+	ActivateAsteroids(smallAsteroids, smallIterator, smallPerWave);
+}
+
+void Wave::ActivateFirstWave()
+{
+	this->largePerWave = 4;
+	this->smallPerWave = 2;
+	std::cout << "First Wave!\n";
+}
+
+void Wave::NewWaveValues()
+{
+	for (int i = 0; i < waveCounter; i++)
 	{
-		for (int i = 0; i < waveCounter; i++)
-		{
-			this->largePerWave += (int)(floor(GROWTH * i * i * RATIO));
-			this->smallPerWave += (int)(floor(GROWTH * i * i * RATIO));
-		}
-	}
-
-	int index = 0;
-	for (largeIterator = largeAsteroids.begin(); largeIterator != largeAsteroids.end(); largeIterator++)
-	{
-		if (index >= largePerWave)
-			break;
-
-		index++;
-		LargeAsteroid* asteroidToActivate = *largeIterator;
-		asteroidToActivate->SetIsActive(true);
-		std::cout << "index Large " << index << std::endl;
-	}
-
-	index = 0;
-	for (smallIterator = smallAsteroids.begin(); smallIterator != smallAsteroids.end(); smallIterator++)
-	{
-
-		if (index >= smallPerWave)
-			break;
-
-		index++;
-		SmallAsteroid* asteroidToActivate = *smallIterator;
-		asteroidToActivate->SetIsActive(true);
-		std::cout << "index Small " << index << std::endl;
+		this->largePerWave += (int)(floor(GROWTH * i * i * RATIO));
+		this->smallPerWave += (int)(floor(GROWTH * i * i * RATIO));
 	}
 }
 
-template <typename list ,typename Iterator, typename Func>
-void Wave::IterateAsteroids(list asteroidType ,Iterator iterator, Func func)
+template <typename list, typename Iterator>
+void Wave::ActivateAsteroids(list asteroidType, Iterator iterator, int asteroidPerWave)
 {
-	
+	int activeAsteroidCount = 0;
+	for (iterator = asteroidType.begin(); iterator != asteroidType.end(); iterator++)
+	{
+		if (activeAsteroidCount >= asteroidPerWave)
+			return;
+
+		activeAsteroidCount++;
+		auto* asteroidToActivate = *iterator;
+		asteroidToActivate->SetIsActive(true);
+	}
+}
+
+
+
+
+
+
+
+void Wave::Update()
+{
+
+	if (shouldCreateWave)
+	{
+		std::cout << "Create Wave\n";
+		shouldCreateWave = false;
+		asteroidsInPool = 0;
+		CreateWave();
+	}
+	UpdateLargeAsteroids();
+	UpdateSmallAsteroids();
+
+	asteroidsInPool = 0;
+	this->asteroidsInPool += CountInactiveAsteroids(largeAsteroids, largeIterator);
+	this->asteroidsInPool += CountInactiveAsteroids(smallAsteroids, smallIterator);
+	if (asteroidsInPool <= 0)
+		shouldCreateWave = true;
+}
+
+void Wave::UpdateLargeAsteroids()
+{
+	IterateAsteroids(largeAsteroids, largeIterator, &LargeAsteroid::Update);
+}
+
+void Wave::UpdateSmallAsteroids()
+{
+	IterateAsteroids(smallAsteroids, smallIterator, &SmallAsteroid::Update);
+}
+
+template <typename list, typename Iterator, typename Func>
+void Wave::IterateAsteroids(list asteroidType, Iterator iterator, Func func)
+{
+
 	for (iterator = asteroidType.begin(); iterator != asteroidType.end(); iterator++)
 	{
 		auto* asteroidToProcess = *iterator;
@@ -119,15 +151,13 @@ int Wave::CountInactiveAsteroids(list asteroidType, Iterator iterator)
 	return aux;
 }
 
-void Wave::UpdateLargeAsteroids()
+
+void Wave::Draw(sf::RenderWindow& window)
 {
-	IterateAsteroids(largeAsteroids, largeIterator, &LargeAsteroid::Update);
+	DrawLargeAsteroids(window);
+	DrawSmallAsteroids(window);
 }
 
-void Wave::UpdateSmallAsteroids()
-{
-	IterateAsteroids(smallAsteroids, smallIterator, &SmallAsteroid::Update);
-}
 
 void Wave::DrawLargeAsteroids(sf::RenderWindow& window)
 {
@@ -138,33 +168,3 @@ void Wave::DrawSmallAsteroids(sf::RenderWindow& window)
 {
 	IterateAsteroids(smallAsteroids, smallIterator, &SmallAsteroid::Draw, window);
 }
-
-
-void Wave::Update()
-{
-
-	if (shouldCreateWave)
-	{
-		std::cout << "Create Wave\n";
-		shouldCreateWave = false;
-		asteroidsInPool = 0;
-		CreateWave();
-	}
-	UpdateLargeAsteroids();
-	UpdateSmallAsteroids();
-	asteroidsInPool = 0;
-	this->asteroidsInPool += CountInactiveAsteroids(largeAsteroids, largeIterator);
-	this->asteroidsInPool += CountInactiveAsteroids(smallAsteroids, smallIterator);
-	if (asteroidsInPool <= 0)
-	{
-		std::cout << "Asteroids in pool:     " << asteroidsInPool;
-		shouldCreateWave = true;
-	}
-}
-
-void Wave::Draw(sf::RenderWindow& window)
-{
-	DrawLargeAsteroids(window);
-	DrawSmallAsteroids(window);
-}
-

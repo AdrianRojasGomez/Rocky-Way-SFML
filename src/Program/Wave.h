@@ -38,15 +38,21 @@ private:
 
 	void CreateAsteroids();
 	void CreateWave();
+	void ActivateFirstWave();
+	void NewWaveValues();
+	void UpdateSmallAsteroids();
+	void UpdateLargeAsteroids();
+	void DrawLargeAsteroids(sf::RenderWindow& window);
+	void DrawSmallAsteroids(sf::RenderWindow& window);
+
+	template<typename list, typename Iterator>
+	void ActivateAsteroids(list asteroidType, Iterator iterator, int asteroidPerWave);
 	template <typename list, typename Iterator, typename Func>
 	void IterateAsteroids(list asteroidType, Iterator it, Func func);
 	template <typename list, typename Iterator, typename Func>
 	void IterateAsteroids(list asteroidType, Iterator iterator, Func func, sf::RenderWindow& window);
 	template <typename list, typename Iterator>
 	int CountInactiveAsteroids(list asteroidType, Iterator iterator);
-	void UpdateSmallAsteroids();
-	void UpdateLargeAsteroids();
-	void DrawLargeAsteroids(sf::RenderWindow& window);
-	void DrawSmallAsteroids(sf::RenderWindow& window);
+
 	
 };
