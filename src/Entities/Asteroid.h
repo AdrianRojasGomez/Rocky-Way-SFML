@@ -32,7 +32,8 @@ protected:
 	sf::FloatRect* asteroidHitZone;
 
 	bool isActive = false;
-	float multiplierSpeed = 1.0f;
+	float initialMultiplierSpeed = 1.0f;
+	float currentSpeed = 1.0f;
 	float multiplierRotation = 1.0f;
 	float scaleX = 1.0f;
 	float scaleY = 1.0f;

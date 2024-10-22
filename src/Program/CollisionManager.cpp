@@ -54,7 +54,6 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 			LargeAsteroid* currentLargeAsteroid = *largeAsteroidIterator;
 			if (BulletVsLargeAsteroidCollision(*currentBullet, *currentLargeAsteroid))
 			{
-				std::cout << "bullet collision vs Large\n";
 				currentLargeAsteroid->SetIsActive(false);
 				currentBullet->SetBulletSprite(false);
 			}
@@ -65,7 +64,6 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 			SmallAsteroid* currentSmallAsteroid = *smallAsteroidIterator;
 			if (BulletVsSmallAsteroidCollision(*currentBullet, *currentSmallAsteroid))
 			{
-				std::cout << "bullet collision vs small\n";
 				currentSmallAsteroid->SetIsActive(false);
 				currentBullet->SetBulletSprite(false);
 			}

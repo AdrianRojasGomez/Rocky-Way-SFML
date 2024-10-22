@@ -12,10 +12,6 @@ public:
 	Wave();
 	~Wave();
 	void Update();
-	void UpdateSmallAsteroids();
-	void UpdateLargeAsteroids();
-	void DrawLargeAsteroids(sf::RenderWindow& window);
-	void DrawSmallAsteroids(sf::RenderWindow& window);
 	void Draw(sf::RenderWindow& window);
 	std::list<LargeAsteroid*>& GetLargeAsteroids() { return largeAsteroids; }
 	std::list<SmallAsteroid*>& GetSmallAsteroids() { return smallAsteroids; }
@@ -27,14 +23,14 @@ private:
 	std::list<SmallAsteroid*> smallAsteroids;
 	std::list<SmallAsteroid*>::iterator smallIterator;
 
-	const int growth = 10;
-	const float ratio = 0.1f;
-	const int largeAsteroidPool = 20;
-	const int smallAsteroidPool = 20;
+	const int GROWTH = 10;
+	const float RATIO = 0.1f;
+	const int LARGE_ASTEROID_POOL = 20;
+	const int SMALL_ASTEROID_POOL = 20;
 	int waveCounter = 0;
 	int currentAsteroidCounter = 0;
 	int maxAsteroidperWave = 0;
-	bool isFirstWave = true;
+	//bool isFirstWave = true;
 	int largePerWave = 0;
 	int smallPerWave = 0;
 	int asteroidsInPool = 0;
@@ -46,5 +42,11 @@ private:
 	void IterateAsteroids(list asteroidType, Iterator it, Func func);
 	template <typename list, typename Iterator, typename Func>
 	void IterateAsteroids(list asteroidType, Iterator iterator, Func func, sf::RenderWindow& window);
-
+	template <typename list, typename Iterator>
+	int CountInactiveAsteroids(list asteroidType, Iterator iterator);
+	void UpdateSmallAsteroids();
+	void UpdateLargeAsteroids();
+	void DrawLargeAsteroids(sf::RenderWindow& window);
+	void DrawSmallAsteroids(sf::RenderWindow& window);
+	
 };

@@ -104,7 +104,7 @@ float Asteroid::RandomizeFloatValues(float max, float min)
 void Asteroid::Move()
 {
 	asteroidSprite.rotate(-rotationSpeed * multiplierRotation * Framerate::getDeltaTime());
-	asteroidSprite.move(dirX * speed * multiplierSpeed * Framerate::getDeltaTime(), dirY * speed * multiplierSpeed * Framerate::getDeltaTime());
+	asteroidSprite.move(dirX * speed * initialMultiplierSpeed * Framerate::getDeltaTime(), dirY * speed * initialMultiplierSpeed * Framerate::getDeltaTime());
 	this->posX = asteroidSprite.getPosition().x;
 	this->posY = asteroidSprite.getPosition().y;
 	asteroidHitZone->height *= hitzoneHeight;
@@ -119,11 +119,12 @@ void Asteroid::SetIsActive(bool isActive)
 	{
 		this->asteroidSprite.setPosition(-1000, 1000);
 		*asteroidHitZone = asteroidSprite.getGlobalBounds();
-		this->multiplierSpeed = 0.0f;
+		this->currentSpeed = 0.0f;
 	}
 
 	if (isActive)
 	{
+		this->currentSpeed = initialMultiplierSpeed;
 		std::cout << "New Asteroid!\n";
 		InitPosition();
 		InitDirection();
