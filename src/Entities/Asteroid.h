@@ -48,8 +48,6 @@ protected:
 
 	virtual void Move();
 	virtual void SetTextureValues();
-	int RandomizeIntValues(int max, int min);
-	float RandomizeFloatValues(float max, float min);
 
 private:
 	void InitDirection();

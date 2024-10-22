@@ -3,6 +3,7 @@
 #include "../Utilities/ResourceManager.h"
 #include "../Utilities/Framerate.h"
 #include "../Utilities/ScreenResolution.h"
+#include "../Utilities/RandomUtility.h"
 
 Asteroid::Asteroid()
 {
@@ -39,8 +40,8 @@ void Asteroid::SetTextureValues()
 void Asteroid::InitDirection()
 {
 	sf::Vector2f vScreenCenter = ScreenResolution::GetScreenCenter720();
-	this->dirX = (vScreenCenter.x + RandomizeIntValues(300, 100)) - posX;
-	this->dirY = (vScreenCenter.y + RandomizeIntValues(300, 100)) - posY;
+	this->dirX = (vScreenCenter.x + RandomUtility::GetRandomInt(300, 100)) - posX;
+	this->dirY = (vScreenCenter.y + RandomUtility::GetRandomInt(300, 100)) - posY;
 	float magnitude = std::sqrt(dirX * dirX + dirY * dirY);
 	if (magnitude != 0)
 	{
@@ -51,7 +52,7 @@ void Asteroid::InitDirection()
 
 void Asteroid::InitPosition()
 {
-	InitialPosition initialPosition = (InitialPosition)RandomizeIntValues((int)InitialPosition::EAST, (int)InitialPosition::NORTH);
+	InitialPosition initialPosition = (InitialPosition)RandomUtility::GetRandomInt((int)InitialPosition::EAST, (int)InitialPosition::NORTH);
 	float initPosX = 0;
 	float initPosY = 0;
 	switch (initialPosition)
@@ -60,23 +61,23 @@ void Asteroid::InitPosition()
 		std::cout << "Error UNASSIGNED" << std::endl;
 		break;
 	case InitialPosition::NORTH:
-		initPosX = RandomizeIntValues(ScreenResolution::SCREEN_WIDTH_720P, 1);
+		initPosX = RandomUtility::GetRandomInt(ScreenResolution::SCREEN_WIDTH_720P, 1);
 		initPosY = -300;
 		asteroidSprite.setPosition(initPosX, initPosY);
 		break;
 	case InitialPosition::WEST:
 		initPosX = ScreenResolution::SCREEN_WIDTH_720P + 300;
-		initPosY = RandomizeIntValues(ScreenResolution::SCREEN_HEIGHT_720P, 1);
+		initPosY = RandomUtility::GetRandomInt(ScreenResolution::SCREEN_HEIGHT_720P, 1);
 		asteroidSprite.setPosition(initPosX, initPosY);
 		break;
 	case InitialPosition::SOUTH:
-		initPosX = RandomizeIntValues(ScreenResolution::SCREEN_WIDTH_720P, 1);
+		initPosX = RandomUtility::GetRandomInt(ScreenResolution::SCREEN_WIDTH_720P, 1);
 		initPosY = ScreenResolution::SCREEN_HEIGHT_720P + 300;
 		asteroidSprite.setPosition(initPosX, initPosY);
 		break;
 	case InitialPosition::EAST:
 		initPosX = -300;
-		initPosY = RandomizeIntValues(ScreenResolution::SCREEN_HEIGHT_720P, 1);
+		initPosY = RandomUtility::GetRandomInt(ScreenResolution::SCREEN_HEIGHT_720P, 1);
 		asteroidSprite.setPosition(initPosX, initPosY);
 		break;
 	default:
@@ -85,20 +86,6 @@ void Asteroid::InitPosition()
 	}
 	this->posX = initPosX;
 	this->posY = initPosY;
-}
-
-
-//TODO: MOVE TO A SEPARATE LIBRARY FOR RANDOMS
-int Asteroid::RandomizeIntValues(int max, int min)
-{
-	return rand() % max + min;
-}
-
-//TODO: MOVE TO A SEPARATE LIBRARY FOR RANDOMS
-float Asteroid::RandomizeFloatValues(float max, float min)
-{
-	float randomValue = (float)rand() / (RAND_MAX + 1.0f);
-	return min + randomValue * (max - min);
 }
 
 void Asteroid::Move()
