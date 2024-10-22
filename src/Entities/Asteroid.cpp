@@ -87,11 +87,14 @@ void Asteroid::InitPosition()
 	this->posY = initPosY;
 }
 
+
+//TODO: MOVE TO A SEPARATE LIBRARY FOR RANDOMS
 int Asteroid::RandomizeIntValues(int max, int min)
 {
 	return rand() % max + min;
 }
 
+//TODO: MOVE TO A SEPARATE LIBRARY FOR RANDOMS
 float Asteroid::RandomizeFloatValues(float max, float min)
 {
 	float randomValue = (float)rand() / (RAND_MAX + 1.0f);
