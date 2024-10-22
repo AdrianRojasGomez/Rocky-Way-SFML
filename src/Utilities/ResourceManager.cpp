@@ -1,12 +1,14 @@
 #include <iostream>
 #include "ResourceManager.h"
 
+const std::string ResourceManager::spritePathMenuBG = "res/assets/Background/Background00.png";
 const std::string ResourceManager::spritePathBG = "res/assets/Background/Background01.png";
 const std::string ResourceManager::spritePathPlayer = "res/assets/Player/Player.png";
 const std::string ResourceManager::spritePathBullet = "res/assets/Traces/BasicShot.png";
 const std::string ResourceManager::spritePathLarge  = "res/assets/Enemies/MeteorLarge.png";
 const std::string ResourceManager::spritePathSmall  = "res/assets/Enemies/MeteorSmall.png";
-sf::Texture* ResourceManager::backgroundTexture = nullptr;
+sf::Texture* ResourceManager::menuBackgroundTexture = nullptr;
+sf::Texture* ResourceManager::gameBackgroundTexture = nullptr;
 sf::Texture* ResourceManager::playerTexture = nullptr;
 sf::Texture* ResourceManager::bulletTexture = nullptr;
 sf::Texture* ResourceManager::largeAsteroidTexture = nullptr;
@@ -14,10 +16,16 @@ sf::Texture* ResourceManager::smallAsteroidTexture = nullptr;
 
 ResourceManager::~ResourceManager()
 {
-	if (backgroundTexture != nullptr)
+	if (menuBackgroundTexture != nullptr)
 	{
-		delete backgroundTexture;
-		backgroundTexture = nullptr;
+		delete gameBackgroundTexture;
+		gameBackgroundTexture = nullptr;
+	}
+
+	if (gameBackgroundTexture != nullptr)
+	{
+		delete gameBackgroundTexture;
+		gameBackgroundTexture = nullptr;
 	}
 
 	if (playerTexture != nullptr)
@@ -45,22 +53,22 @@ ResourceManager::~ResourceManager()
 	}
 }
 
-sf::Texture* ResourceManager::GetLargeAsteroidTexture()
+sf::Texture* ResourceManager::GetMenuBackgroundTexture()
 {
-	if (largeAsteroidTexture == nullptr)
+	if (gameBackgroundTexture == nullptr)
 	{
-		largeAsteroidTexture = LoadTexture(spritePathLarge);
+		gameBackgroundTexture = LoadTexture(spritePathBG);
 	}
-	return largeAsteroidTexture;
+	return gameBackgroundTexture;
 }
 
-sf::Texture* ResourceManager::GetSmallAsteroidTexture()
+sf::Texture* ResourceManager::GetBackgroundTexture()
 {
-	if (smallAsteroidTexture == nullptr)
+	if (gameBackgroundTexture == nullptr)
 	{
-		smallAsteroidTexture = LoadTexture(spritePathSmall);
+		gameBackgroundTexture = LoadTexture(spritePathBG);
 	}
-	return smallAsteroidTexture;
+	return gameBackgroundTexture;
 }
 
 sf::Texture* ResourceManager::GetPlayerTexture()
@@ -81,13 +89,22 @@ sf::Texture* ResourceManager::GetBulletTexture()
 	return bulletTexture;
 }
 
-sf::Texture* ResourceManager::GetBackgroundTexture()
+sf::Texture* ResourceManager::GetSmallAsteroidTexture()
 {
-	if (backgroundTexture == nullptr)
+	if (smallAsteroidTexture == nullptr)
 	{
-		backgroundTexture = LoadTexture(spritePathBG);
+		smallAsteroidTexture = LoadTexture(spritePathSmall);
 	}
-	return backgroundTexture;
+	return smallAsteroidTexture;
+}
+
+sf::Texture* ResourceManager::GetLargeAsteroidTexture()
+{
+	if (largeAsteroidTexture == nullptr)
+	{
+		largeAsteroidTexture = LoadTexture(spritePathLarge);
+	}
+	return largeAsteroidTexture;
 }
 
 sf::Texture* ResourceManager::LoadTexture(std::string path)
