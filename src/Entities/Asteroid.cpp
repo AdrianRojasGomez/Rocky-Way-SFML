@@ -108,6 +108,25 @@ void Asteroid::Move()
 	asteroidHitZone->width *= hitzoneWidth;
 }
 
+void Asteroid::SetIsActive(bool isActive)
+{
+	this->isActive = isActive; 
+
+	if (!isActive)
+	{
+		this->asteroidSprite.setPosition(-1000, 1000);
+		*asteroidHitZone = asteroidSprite.getGlobalBounds();
+		this->multiplierSpeed = 0.0f;
+	}
+
+	if (isActive)
+	{
+		std::cout << "New Asteroid!\n";
+		InitPosition();
+		InitDirection();
+	}
+}
+
 void Asteroid::Update()
 {
 	*asteroidHitZone = asteroidSprite.getGlobalBounds();
@@ -121,16 +140,5 @@ void Asteroid::Draw(sf::RenderWindow& window)
 	window.draw(asteroidSprite);
 }
 
-void Asteroid::SetIsActive(bool isActive)
-{
-	this->isActive = isActive; 
-
-	if (!isActive)
-	{
-		this->asteroidSprite.setPosition(-1000, 1000);
-		*asteroidHitZone = asteroidSprite.getGlobalBounds();
-		this->multiplierSpeed = 0.0f;
-	}
-}
 
 

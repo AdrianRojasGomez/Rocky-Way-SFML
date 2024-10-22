@@ -67,7 +67,6 @@ void Bullet::BulletMovement()
 {
 	this->bulletSpeed = initialBulletSpeed;
 	bulletSprite.move(bulletDirX * bulletSpeed * Framerate::getDeltaTime(), bulletDirY * bulletSpeed * Framerate::getDeltaTime());
-	std::cout << "bulletDirX:    " << bulletDirX << "    bulletDirY:   " << bulletDirY << std::endl;
 	this->posX = bulletSprite.getPosition().x;
 	this->posY = bulletSprite.getPosition().y;
 }
