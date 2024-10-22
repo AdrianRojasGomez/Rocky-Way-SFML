@@ -6,7 +6,6 @@
 Menu::Menu()
 {
 	this->menuBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
-	
 }
 
 void Menu::InitializeBackground()
@@ -25,6 +24,7 @@ void Menu::InitializeBackground()
 
 void Menu::Update()
 {
+
 }
 
 void Menu::Draw(sf::RenderWindow& window)

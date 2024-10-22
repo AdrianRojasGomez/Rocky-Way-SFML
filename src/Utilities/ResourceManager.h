@@ -11,6 +11,7 @@ public:
 	static sf::Texture* GetBulletTexture();
 	static sf::Texture* GetLargeAsteroidTexture();
 	static sf::Texture* GetSmallAsteroidTexture();
+	static sf::Font* GetOxaniumSemiBoldFont();
 
 private:
 	static sf::Texture* menuBackgroundTexture;
@@ -19,6 +20,7 @@ private:
 	static sf::Texture* bulletTexture;
 	static sf::Texture* largeAsteroidTexture;
 	static sf::Texture* smallAsteroidTexture;
+	static sf::Font* oxaniumSemiBoldFont;
 
 	static const std::string spritePathMenuBG;
 	static const std::string spritePathBG;
@@ -26,7 +28,11 @@ private:
 	static const std::string spritePathBullet;
 	static const std::string spritePathLarge;
 	static const std::string spritePathSmall;
+	static const std::string fontPathOxaniumSemiBold;
+
+	
 
 	static sf::Texture* LoadTexture(std::string path);
+	static sf::Font* LoadFont(std::string path);
 };
 

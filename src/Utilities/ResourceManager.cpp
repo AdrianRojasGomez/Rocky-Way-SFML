@@ -2,11 +2,12 @@
 #include "ResourceManager.h"
 
 const std::string ResourceManager::spritePathMenuBG = "res/assets/Background/Background00.png";
-const std::string ResourceManager::spritePathBG = "res/assets/Background/Background01.png";
+const std::string ResourceManager::spritePathBG =	  "res/assets/Background/Background01.png";
 const std::string ResourceManager::spritePathPlayer = "res/assets/Player/Player.png";
 const std::string ResourceManager::spritePathBullet = "res/assets/Traces/BasicShot.png";
 const std::string ResourceManager::spritePathLarge  = "res/assets/Enemies/MeteorLarge.png";
 const std::string ResourceManager::spritePathSmall  = "res/assets/Enemies/MeteorSmall.png";
+const std::string ResourceManager::fontPathOxaniumSemiBold = "res/assets/Fonts/Oxanium-SemiBold.ttf";
 sf::Texture* ResourceManager::menuBackgroundTexture = nullptr;
 sf::Texture* ResourceManager::gameBackgroundTexture = nullptr;
 sf::Texture* ResourceManager::playerTexture = nullptr;
@@ -98,6 +99,15 @@ sf::Texture* ResourceManager::GetSmallAsteroidTexture()
 	return smallAsteroidTexture;
 }
 
+sf::Font* ResourceManager::GetOxaniumSemiBoldFont()
+{
+	if (oxaniumSemiBoldFont == nullptr)
+	{
+		oxaniumSemiBoldFont = LoadTexture(fontPathOxaniumSemiBold);
+	}
+	return oxaniumSemiBoldFont;
+}
+
 sf::Texture* ResourceManager::GetLargeAsteroidTexture()
 {
 	if (largeAsteroidTexture == nullptr)
@@ -121,6 +131,23 @@ sf::Texture* ResourceManager::LoadTexture(std::string path)
 		texture = nullptr;
 	}
 	std::cout << "DEBUG: Error!!!!!!!! LOADING " << path << "  TEXTURE" << std::endl;
+	return nullptr;
+}
+
+sf::Font* ResourceManager::LoadFont(std::string path)
+{
+	sf::Font* font = new sf::Font();
+	if (font->loadFromFile(path))
+	{
+		return font;
+	}
+
+	if (font != nullptr)
+	{
+		delete font;
+		font = nullptr;
+	}
+	std::cout << "DEBUG: Error!!!!!!!! LOADING " << path << "  FONT" << std::endl;
 	return nullptr;
 }
 
