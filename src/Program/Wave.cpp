@@ -90,6 +90,41 @@ void Wave::IterateAsteroids(list asteroidType ,Iterator iterator, Func func)
 	}
 }
 
+template <typename list, typename Iterator, typename Func>
+void Wave::IterateAsteroids(list asteroidType, Iterator iterator, Func func, sf::RenderWindow& window)
+{
+
+	for (iterator = asteroidType.begin(); iterator != asteroidType.end(); iterator++)
+	{
+		auto* asteroidToProcess = *iterator;
+		if (asteroidToProcess->GetIsActive())
+		{
+			(asteroidToProcess->*func)(window);
+		}
+	}
+}
+
+
+
+void Wave::UpdateLargeAsteroids()
+{
+	IterateAsteroids(largeAsteroids, largeIterator, &LargeAsteroid::Update);
+}
+
+void Wave::UpdateSmallAsteroids()
+{
+	IterateAsteroids(smallAsteroids, smallIterator, &SmallAsteroid::Update);
+}
+
+void Wave::DrawLargeAsteroids(sf::RenderWindow& window)
+{
+	IterateAsteroids(largeAsteroids, largeIterator, &LargeAsteroid::Draw, window);
+}
+
+void Wave::DrawSmallAsteroids(sf::RenderWindow& window)
+{
+	IterateAsteroids(smallAsteroids, smallIterator, &SmallAsteroid::Draw, window);
+}
 
 
 void Wave::Update()
@@ -103,66 +138,21 @@ void Wave::Update()
 	UpdateLargeAsteroids();
 	UpdateSmallAsteroids();
 	//TODO: Check for Dead Asteroids
-	//TODO: ABSTRACT THAT FOR TO REUSE
-
-
-
 }
-
-void Wave::UpdateLargeAsteroids()
-{
-	IterateAsteroids(largeAsteroids, largeIterator, &LargeAsteroid::Update);
-}
-
-void Wave::UpdateSmallAsteroids()
-{
-	IterateAsteroids(smallAsteroids, smallIterator, &SmallAsteroid::Update);
-}
-
-//void Wave::ActivateLargeAsteroids()
-//{
-//	for (largeIterator = largeAsteroids.begin(); largeIterator != largeAsteroids.end(); largeIterator++)
-//	{
-//		LargeAsteroid* asteroidToUpdate = *largeIterator;
-//		if (asteroidToUpdate->GetIsActive())
-//		{
-//			asteroidToUpdate->Update();
-//		}
-//	}
-//}
-
-//void Wave::UpdateSmallAsteroids()
-//{
-//	for (smallIterator = smallAsteroids.begin(); smallIterator != smallAsteroids.end(); smallIterator++)
-//	{
-//		SmallAsteroid* asteroidToUpdate = *smallIterator;
-//		if (asteroidToUpdate->GetIsActive())
-//		{
-//			asteroidToUpdate->Update();
-//		}
-//	}
-//}
-
-
 
 void Wave::Draw(sf::RenderWindow& window)
 {
-	for (largeIterator = largeAsteroids.begin(); largeIterator != largeAsteroids.end(); largeIterator++)
-	{
-		LargeAsteroid* asteroidToDraw = *largeIterator;
-		if (asteroidToDraw->GetIsActive())
-		{
-			asteroidToDraw->Draw(window);
-		}
-	}
+	DrawLargeAsteroids(window);
+	DrawSmallAsteroids(window);
 
-	for (smallIterator = smallAsteroids.begin(); smallIterator != smallAsteroids.end(); smallIterator++)
-	{
-		SmallAsteroid* asteroidToDraw = *smallIterator;
-		if (asteroidToDraw->GetIsActive())
-		{
-			asteroidToDraw->Draw(window);
-		}
-	}
+
+	//for (smallIterator = smallAsteroids.begin(); smallIterator != smallAsteroids.end(); smallIterator++)
+	//{
+	//	SmallAsteroid* asteroidToDraw = *smallIterator;
+	//	if (asteroidToDraw->GetIsActive())
+	//	{
+	//		asteroidToDraw->Draw(window);
+	//	}
+	//}
 }
 

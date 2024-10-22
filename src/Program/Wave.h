@@ -14,6 +14,8 @@ public:
 	void Update();
 	void UpdateSmallAsteroids();
 	void UpdateLargeAsteroids();
+	void DrawLargeAsteroids(sf::RenderWindow& window);
+	void DrawSmallAsteroids(sf::RenderWindow& window);
 	void Draw(sf::RenderWindow& window);
 	std::list<LargeAsteroid*>& GetLargeAsteroids() { return largeAsteroids; }
 	std::list<SmallAsteroid*>& GetSmallAsteroids() { return smallAsteroids; }
@@ -42,5 +44,7 @@ private:
 	void CreateWave();
 	template <typename list, typename Iterator, typename Func>
 	void IterateAsteroids(list asteroidType, Iterator it, Func func);
+	template <typename list, typename Iterator, typename Func>
+	void IterateAsteroids(list asteroidType, Iterator iterator, Func func, sf::RenderWindow& window);
 
 };
