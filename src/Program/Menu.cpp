@@ -6,13 +6,13 @@
 
 Menu::Menu()
 {
-	menuBackgroundTexture = new sf::Texture;
-	gameTitle = new sf::Text();
+	//menuBackgroundTexture = new sf::Texture;
+	//gameTitle = new sf::Text();
 	titleFont = new sf::Font();
 	this->menuBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
 	this->titleFont = ResourceManager::GetOxaniumSemiBoldFont();
-	InitializeBackground();
-	CreateTitle();
+	//InitializeBackground();
+	//CreateTitle();
 }
 
 Menu::~Menu()
@@ -40,23 +40,24 @@ void Menu::InitializeBackground()
 {
 	if (menuBackgroundTexture != nullptr)
 	{
-		sf::Vector2u backgroundSize = menuBackgroundTexture->getSize();
-		float scaleX = (float)ScreenResolution::SCREEN_WIDTH_720P / backgroundSize.x;
-		float scaleY = (float)ScreenResolution::SCREEN_HEIGHT_720P / backgroundSize.y;
-		menuBackgroundSprite.setTexture(*menuBackgroundTexture);
-		menuBackgroundSprite.setScale(scaleX, scaleY);
+		//sf::Vector2u backgroundSize = menuBackgroundTexture->getSize();
+		//float scaleX = (float)ScreenResolution::SCREEN_WIDTH_720P / backgroundSize.x;
+		//float scaleY = (float)ScreenResolution::SCREEN_HEIGHT_720P / backgroundSize.y;
+		//menuBackgroundSprite.setTexture(*menuBackgroundTexture);
+		//menuBackgroundSprite.setScale(scaleX, scaleY);
 	}
-	else
-		std::cout << "DEBUG: Error!!!!!!!! LOADING BACKGROUND TEXTURE" << std::endl;
+	//else
+		//std::cout << "DEBUG: Error!!!!!!!! LOADING BACKGROUND TEXTURE" << std::endl;
 }
 
 void Menu::CreateTitle()
 {
-	gameTitle->setFont(*titleFont);
-	gameTitle->setString(TITLE);
-	gameTitle->setCharacterSize(50);
-	gameTitle->setFillColor(sf::Color::White);
-	gameTitle->setPosition(100, 100);
+	//gameTitle->setFont(*titleFont);
+	//gameTitle->setString(TITLE);
+	//gameTitle->setCharacterSize(100);
+	//gameTitle->setFillColor(sf::Color::White);
+	//gameTitle->setStyle(sf::Text::Bold);
+	//gameTitle->setPosition(350, 100);
 }
 
 void Menu::Update()
@@ -67,6 +68,6 @@ void Menu::Update()
 
 void Menu::Draw(sf::RenderWindow& window)
 {
-	window.draw(menuBackgroundSprite);
-	window.draw(*gameTitle);
+	//window.draw(menuBackgroundSprite);
+	//window.draw(*gameTitle);
 }
