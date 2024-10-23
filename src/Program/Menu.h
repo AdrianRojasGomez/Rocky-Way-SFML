@@ -1,14 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-enum class GameState
-{
-	Off = 0,
-	MainMenu = 1,
-	Gameplay = 2,
-	Stats = 3,
-	ExitGame = 4
-};
+
 
 class Menu
 {

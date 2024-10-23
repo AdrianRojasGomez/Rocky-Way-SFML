@@ -1,5 +1,6 @@
 #include <ctime>
 #include "Game.h"
+
 #include "Gameplay.h"
 #include "../Utilities/ScreenResolution.h"
 
@@ -10,6 +11,8 @@ Game::Game()
 	videoMode = new sf::VideoMode(ScreenResolution::SCREEN_WIDTH_720P, ScreenResolution::SCREEN_HEIGHT_720P);
 	window = new sf::RenderWindow(*videoMode, "Rocky Ways");
 	resourceManager = new ResourceManager();
+	gameState = new GameState(GameState::MainMenu);
+	menu = new Menu();
 }
 
 Game::~Game()
@@ -30,6 +33,18 @@ Game::~Game()
 	{
 		delete window;
 		window = nullptr;
+	}
+
+	if (gameState != nullptr)
+	{
+		delete gameState;
+		gameState = nullptr;
+	}
+
+	if (menu != nullptr)
+	{
+		delete menu;
+		menu = nullptr;
 	}
 
 }
@@ -57,12 +72,52 @@ void Game::ProcessEvents()
 
 void Game::Update()
 {
-	Gameplay::getInstance().Update();
+	switch (*gameState)
+	{
+	case GameState::SplashScreen:
+		break;
+	case GameState::MainMenu:
+		menu->Update();
+		break;
+	case GameState::Gameplay:
+		Gameplay::getInstance().Update();
+		break;
+	case GameState::Stats:
+		break;
+	case GameState::ExitGame:
+		break;
+	case GameState::Error:
+		break;
+	default:
+		break;
+	}
+
+
 }
 
 void Game::Draw()
 {
 	window->clear(sf::Color::Black);
-	Gameplay::getInstance().Draw(*window);
+
+	switch (*gameState)
+	{
+	case GameState::SplashScreen:
+		break;
+	case GameState::MainMenu:
+		menu->Draw(*window);
+		break;
+	case GameState::Gameplay:
+		Gameplay::getInstance().Draw(*window);
+		break;
+	case GameState::Stats:
+		break;
+	case GameState::ExitGame:
+		break;
+	case GameState::Error:
+		break;
+	default:
+		break;
+	}
+
 	window->display();
 }

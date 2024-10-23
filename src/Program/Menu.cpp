@@ -6,6 +6,9 @@
 Menu::Menu()
 {
 	this->menuBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
+	InitializeBackground();
+	std::cout << "Menu created \n";
+
 }
 
 void Menu::InitializeBackground()
@@ -24,7 +27,8 @@ void Menu::InitializeBackground()
 
 void Menu::Update()
 {
-
+	//system("cls");
+	//std::cout << "Menu showing up! \n";
 }
 
 void Menu::Draw(sf::RenderWindow& window)

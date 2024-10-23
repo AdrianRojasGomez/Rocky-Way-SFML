@@ -2,11 +2,11 @@
 #include "ResourceManager.h"
 
 const std::string ResourceManager::spritePathMenuBG = "res/assets/Background/Background00.png";
-const std::string ResourceManager::spritePathBG =	  "res/assets/Background/Background01.png";
+const std::string ResourceManager::spritePathBG = "res/assets/Background/Background01.png";
 const std::string ResourceManager::spritePathPlayer = "res/assets/Player/Player.png";
 const std::string ResourceManager::spritePathBullet = "res/assets/Traces/BasicShot.png";
-const std::string ResourceManager::spritePathLarge  = "res/assets/Enemies/MeteorLarge.png";
-const std::string ResourceManager::spritePathSmall  = "res/assets/Enemies/MeteorSmall.png";
+const std::string ResourceManager::spritePathLarge = "res/assets/Enemies/MeteorLarge.png";
+const std::string ResourceManager::spritePathSmall = "res/assets/Enemies/MeteorSmall.png";
 const std::string ResourceManager::fontPathOxaniumSemiBold = "res/assets/Fonts/Oxanium-SemiBold.ttf";
 sf::Texture* ResourceManager::menuBackgroundTexture = nullptr;
 sf::Texture* ResourceManager::gameBackgroundTexture = nullptr;
@@ -14,6 +14,7 @@ sf::Texture* ResourceManager::playerTexture = nullptr;
 sf::Texture* ResourceManager::bulletTexture = nullptr;
 sf::Texture* ResourceManager::largeAsteroidTexture = nullptr;
 sf::Texture* ResourceManager::smallAsteroidTexture = nullptr;
+sf::Font* ResourceManager::oxaniumSemiBoldFont = nullptr;
 
 ResourceManager::~ResourceManager()
 {
@@ -52,13 +53,19 @@ ResourceManager::~ResourceManager()
 		delete smallAsteroidTexture;
 		smallAsteroidTexture = nullptr;
 	}
+
+	if (oxaniumSemiBoldFont != nullptr)
+	{
+		delete oxaniumSemiBoldFont;
+		oxaniumSemiBoldFont = nullptr;
+	}
 }
 
 sf::Texture* ResourceManager::GetMenuBackgroundTexture()
 {
 	if (gameBackgroundTexture == nullptr)
 	{
-		gameBackgroundTexture = LoadTexture(spritePathBG);
+		gameBackgroundTexture = LoadTexture(spritePathMenuBG);
 	}
 	return gameBackgroundTexture;
 }
@@ -103,7 +110,7 @@ sf::Font* ResourceManager::GetOxaniumSemiBoldFont()
 {
 	if (oxaniumSemiBoldFont == nullptr)
 	{
-		oxaniumSemiBoldFont = LoadTexture(fontPathOxaniumSemiBold);
+		oxaniumSemiBoldFont = LoadFont(fontPathOxaniumSemiBold);
 	}
 	return oxaniumSemiBoldFont;
 }
