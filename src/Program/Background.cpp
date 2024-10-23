@@ -6,8 +6,18 @@
 
 Background::Background()
 {
+	backgroundTexture = new sf::Texture;
 	this->backgroundTexture = ResourceManager::GetBackgroundTexture();
 	InitializeBackground();
+}
+
+Background::~Background()
+{
+	if (backgroundTexture != nullptr)
+	{
+		delete backgroundTexture;
+		backgroundTexture = nullptr;
+	}
 }
 
 void Background::InitializeBackground()

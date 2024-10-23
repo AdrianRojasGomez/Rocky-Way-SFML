@@ -9,9 +9,10 @@ enum class GameState
 	SplashScreen = 0,
 	MainMenu = 1,
 	Gameplay = 2,
-	Stats = 3,
-	ExitGame = 4,
-	Error = 5
+	GameOver = 3,
+	Stats = 4,
+	ExitGame = 5,
+	Error = 6
 };
 
 class Game
@@ -21,13 +22,14 @@ public:
 	Game();
 	~Game();
 	void Run();
+	void SetGameState(GameState newState) { gameState = newState; }
+	static GameState gameState;
 
 private:
 	void ProcessEvents();
 	void Update();
 	void Draw();
 
-	GameState* gameState;
 	Menu* menu;
 	ResourceManager* resourceManager;
 	sf::VideoMode* videoMode;

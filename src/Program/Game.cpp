@@ -1,9 +1,9 @@
 #include <ctime>
 #include "Game.h"
-
 #include "Gameplay.h"
 #include "../Utilities/ScreenResolution.h"
 
+GameState Game::gameState = GameState::MainMenu;
 
 Game::Game()
 {
@@ -11,7 +11,6 @@ Game::Game()
 	videoMode = new sf::VideoMode(ScreenResolution::SCREEN_WIDTH_720P, ScreenResolution::SCREEN_HEIGHT_720P);
 	window = new sf::RenderWindow(*videoMode, "Rocky Ways");
 	resourceManager = new ResourceManager();
-	gameState = new GameState(GameState::MainMenu);
 	menu = new Menu();
 }
 
@@ -33,12 +32,6 @@ Game::~Game()
 	{
 		delete window;
 		window = nullptr;
-	}
-
-	if (gameState != nullptr)
-	{
-		delete gameState;
-		gameState = nullptr;
 	}
 
 	if (menu != nullptr)
@@ -72,7 +65,7 @@ void Game::ProcessEvents()
 
 void Game::Update()
 {
-	switch (*gameState)
+	switch (gameState)
 	{
 	case GameState::SplashScreen:
 		break;
@@ -99,7 +92,7 @@ void Game::Draw()
 {
 	window->clear(sf::Color::Black);
 
-	switch (*gameState)
+	switch (gameState)
 	{
 	case GameState::SplashScreen:
 		break;
@@ -108,6 +101,8 @@ void Game::Draw()
 		break;
 	case GameState::Gameplay:
 		Gameplay::getInstance().Draw(*window);
+		break;
+	case GameState::GameOver:
 		break;
 	case GameState::Stats:
 		break;

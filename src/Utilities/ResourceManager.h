@@ -30,8 +30,6 @@ private:
 	static const std::string spritePathSmall;
 	static const std::string fontPathOxaniumSemiBold;
 
-	
-
 	static sf::Texture* LoadTexture(std::string path);
 	static sf::Font* LoadFont(std::string path);
 };
