@@ -3,7 +3,7 @@
 #include "Gameplay.h"
 #include "../Utilities/ScreenResolution.h"
 
-GameState Game::gameState = GameState::MainMenu;
+GameState Game::gameState = GameState::Gameplay;
 
 Game::Game()
 {

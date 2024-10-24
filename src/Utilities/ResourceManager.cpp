@@ -20,8 +20,8 @@ ResourceManager::~ResourceManager()
 {
 	if (menuBackgroundTexture != nullptr)
 	{
-		delete gameBackgroundTexture;
-		gameBackgroundTexture = nullptr;
+		delete menuBackgroundTexture;
+		menuBackgroundTexture = nullptr;
 	}
 
 	if (gameBackgroundTexture != nullptr)
@@ -63,11 +63,12 @@ ResourceManager::~ResourceManager()
 
 sf::Texture* ResourceManager::GetMenuBackgroundTexture()
 {
-	if (gameBackgroundTexture == nullptr)
+	if (menuBackgroundTexture == nullptr)
 	{
-		gameBackgroundTexture = LoadTexture(spritePathMenuBG);
+		menuBackgroundTexture = new sf::Texture();
+		menuBackgroundTexture = LoadTexture(spritePathMenuBG);
 	}
-	return gameBackgroundTexture;
+	return menuBackgroundTexture;
 }
 
 sf::Texture* ResourceManager::GetBackgroundTexture()
