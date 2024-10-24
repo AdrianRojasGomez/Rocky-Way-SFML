@@ -75,6 +75,7 @@ sf::Texture* ResourceManager::GetBackgroundTexture()
 {
 	if (gameBackgroundTexture == nullptr)
 	{
+		gameBackgroundTexture = new sf::Texture;
 		gameBackgroundTexture = LoadTexture(spritePathBG);
 	}
 	return gameBackgroundTexture;
@@ -84,6 +85,7 @@ sf::Texture* ResourceManager::GetPlayerTexture()
 {
 	if (playerTexture == nullptr)
 	{
+		playerTexture = new sf::Texture;
 		playerTexture = LoadTexture(spritePathPlayer);
 	}
 	return playerTexture;
@@ -93,15 +95,27 @@ sf::Texture* ResourceManager::GetBulletTexture()
 {
 	if (bulletTexture == nullptr)
 	{
+		bulletTexture = new sf::Texture;
 		bulletTexture = LoadTexture(spritePathBullet);
 	}
 	return bulletTexture;
+}
+
+sf::Texture* ResourceManager::GetLargeAsteroidTexture()
+{
+	if (largeAsteroidTexture == nullptr)
+	{
+		largeAsteroidTexture = new sf::Texture;
+		largeAsteroidTexture = LoadTexture(spritePathLarge);
+	}
+	return largeAsteroidTexture;
 }
 
 sf::Texture* ResourceManager::GetSmallAsteroidTexture()
 {
 	if (smallAsteroidTexture == nullptr)
 	{
+		smallAsteroidTexture = new sf::Texture;
 		smallAsteroidTexture = LoadTexture(spritePathSmall);
 	}
 	return smallAsteroidTexture;
@@ -111,18 +125,10 @@ sf::Font* ResourceManager::GetOxaniumSemiBoldFont()
 {
 	if (oxaniumSemiBoldFont == nullptr)
 	{
+		oxaniumSemiBoldFont = new sf::Font;
 		oxaniumSemiBoldFont = LoadFont(fontPathOxaniumSemiBold);
 	}
 	return oxaniumSemiBoldFont;
-}
-
-sf::Texture* ResourceManager::GetLargeAsteroidTexture()
-{
-	if (largeAsteroidTexture == nullptr)
-	{
-		largeAsteroidTexture = LoadTexture(spritePathLarge);
-	}
-	return largeAsteroidTexture;
 }
 
 sf::Texture* ResourceManager::LoadTexture(std::string path)

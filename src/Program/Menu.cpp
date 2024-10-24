@@ -10,7 +10,6 @@ Menu::Menu()
 	//buttonOptions = new sf::Texture;
 	//buttonHighscore = new sf::Texture;
 	//buttonQuit = new sf::Texture;
-	titleFont = new sf::Font();
 	menuBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
 	titleFont = ResourceManager::GetOxaniumSemiBoldFont();
 	InitializeBackground();
@@ -19,11 +18,6 @@ Menu::Menu()
 
 Menu::~Menu()
 {
-	if (titleFont != nullptr)
-	{
-		delete titleFont;
-		titleFont = nullptr;
-	}
 }
 
 void Menu::InitializeBackground()
