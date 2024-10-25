@@ -2,7 +2,7 @@
 #include "WrappingScreenUtility.h"
 #include "../Utilities/ScreenResolution.h"
 
-void WrapAroundScreen(float& posX, float& posY, float dirX, float dirY , float offset, sf::Sprite currentSprite)
+void WrapAroundScreen(float& posX, float& posY, float dirX, float dirY , float offset, sf::Sprite& currentSprite)
 {
 	if (posX < - offset && dirX < 0)
 		posX = ScreenResolution::SCREEN_WIDTH_720P;

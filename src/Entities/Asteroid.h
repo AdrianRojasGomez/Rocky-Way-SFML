@@ -19,9 +19,11 @@ public:
 	~Asteroid();
 	virtual void Update();
 	virtual void Draw(sf::RenderWindow& window);
+	virtual sf::Vector2f GetPosition() { return asteroidSprite.getPosition(); }
 	virtual bool GetIsActive() { return isActive; }
 	virtual void SetIsActive(bool isActive);
 	sf::FloatRect GetAsteroidHitBox() { return *asteroidHitZone; }
+	void SetNewDebrisPosition(sf::Vector2f pos);
 
 
 protected:
@@ -45,6 +47,7 @@ protected:
 	float rotation;
 	float hitzoneHeight = 1.0f;
 	float hitzoneWidth = 1.0f;
+	float wrapOffset = 10.0f;
 
 	virtual void Move();
 	virtual void SetTextureValues();

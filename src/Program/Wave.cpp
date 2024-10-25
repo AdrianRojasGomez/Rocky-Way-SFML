@@ -35,10 +35,8 @@ void Wave::CreateWave()
 
 	if (waveCounter <= 1)
 	{
-		//this->isFirstWave = false;
-		this->largePerWave = 4;
-		this->smallPerWave = 2;
-		std::cout << "First Wave!\n";
+		this->largePerWave = FIRST_WAVE_LARGE;
+		this->smallPerWave = FIRST_WAVE_SMALL;
 
 	}
 	else
@@ -59,7 +57,6 @@ void Wave::CreateWave()
 		index++;
 		LargeAsteroid* asteroidToActivate = *largeIterator;
 		asteroidToActivate->SetIsActive(true);
-		std::cout << "index Large " << index << std::endl;
 	}
 
 	index = 0;
@@ -72,7 +69,6 @@ void Wave::CreateWave()
 		index++;
 		SmallAsteroid* asteroidToActivate = *smallIterator;
 		asteroidToActivate->SetIsActive(true);
-		std::cout << "index Small " << index << std::endl;
 	}
 }
 
@@ -145,7 +141,6 @@ void Wave::Update()
 
 	if (shouldCreateWave)
 	{
-		std::cout << "Create Wave\n";
 		shouldCreateWave = false;
 		asteroidsInPool = 0;
 		CreateWave();
@@ -157,7 +152,6 @@ void Wave::Update()
 	this->asteroidsInPool += CountInactiveAsteroids(smallAsteroids, smallIterator);
 	if (asteroidsInPool <= 0)
 	{
-		std::cout << "Asteroids in pool:     " << asteroidsInPool;
 		shouldCreateWave = true;
 	}
 }

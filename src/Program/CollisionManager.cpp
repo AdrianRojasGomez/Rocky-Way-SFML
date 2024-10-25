@@ -52,8 +52,10 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 		for (std::list<LargeAsteroid*>::iterator largeAsteroidIterator = largeAsteroids.begin(); largeAsteroidIterator != largeAsteroids.end(); largeAsteroidIterator++)
 		{
 			LargeAsteroid* currentLargeAsteroid = *largeAsteroidIterator;
+			sf::Vector2f currentLargePosition = currentLargeAsteroid->GetPosition();
 			if (BulletVsLargeAsteroidCollision(*currentBullet, *currentLargeAsteroid))
 			{
+				SpawnSmallAsteroids(smallAsteroids, currentLargePosition);
 				currentLargeAsteroid->SetIsActive(false);
 				currentBullet->SetBulletSprite(false);
 			}
@@ -90,3 +92,25 @@ bool CollisionManager::BulletVsSmallAsteroidCollision(Bullet& bullet, SmallAster
 {
 	return bullet.GetBulletSprite().getGlobalBounds().intersects(smallAsteroid.GetAsteroidHitBox());
 }
+
+void CollisionManager::SpawnSmallAsteroids(std::list<SmallAsteroid*> smallAsteroids, sf::Vector2f largePosition)
+{
+	std::cout << "SmallSpawn Called!\n";
+	int smallSpawned = 0;
+	for (std::list<SmallAsteroid*>::iterator smallAsteroidIterator = smallAsteroids.begin(); smallAsteroidIterator != smallAsteroids.end(); smallAsteroidIterator++)
+	{
+		int maxDebris = rand() % 3 + 2;
+		if (smallSpawned >= maxDebris)
+			break;
+		SmallAsteroid* currentAsteroid = *smallAsteroidIterator;
+		if (!currentAsteroid->GetIsActive())
+		{
+			currentAsteroid->SetIsActive(true);
+			currentAsteroid->SetNewDebrisPosition(largePosition);
+			smallSpawned++;
+		}
+
+	}
+}
+
+

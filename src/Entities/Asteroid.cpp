@@ -100,7 +100,7 @@ void Asteroid::Move()
 
 void Asteroid::SetIsActive(bool isActive)
 {
-	this->isActive = isActive; 
+	this->isActive = isActive;
 
 	if (!isActive)
 	{
@@ -112,18 +112,21 @@ void Asteroid::SetIsActive(bool isActive)
 	if (isActive)
 	{
 		this->currentSpeed = initialMultiplierSpeed;
-		std::cout << "New Asteroid!\n";
 		InitPosition();
 		InitDirection();
 	}
+}
+
+void Asteroid::SetNewDebrisPosition(sf::Vector2f pos)
+{
+	this->asteroidSprite.setPosition(pos);
 }
 
 void Asteroid::Update()
 {
 	*asteroidHitZone = asteroidSprite.getGlobalBounds();
 	Move();
-	WrapAroundScreen(posX, posY, dirX, dirY, 35.0f, asteroidSprite);
-	asteroidSprite.setPosition(posX, posY);
+	WrapAroundScreen(posX, posY, dirX, dirY, wrapOffset, asteroidSprite);
 }
 
 void Asteroid::Draw(sf::RenderWindow& window)
