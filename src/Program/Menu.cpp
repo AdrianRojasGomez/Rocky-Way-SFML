@@ -4,16 +4,15 @@
 #include "../Utilities/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
 
-Menu::Menu()
+Menu::Menu(Game* game)
 {
-	//buttonPlay = new sf::Texture;
-	//buttonOptions = new sf::Texture;
-	//buttonHighscore = new sf::Texture;
-	//buttonQuit = new sf::Texture;
+	this->game = game;
 	menuBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
-	titleFont = ResourceManager::GetOxaniumSemiBoldFont();
+	menuFont = ResourceManager::GetOxaniumSemiBoldFont();
 	InitializeBackground();
 	CreateTitle();
+	InitializeButtons();
+
 }
 
 Menu::~Menu()
@@ -36,22 +35,131 @@ void Menu::InitializeBackground()
 
 void Menu::CreateTitle()
 {
-	gameTitle.setFont(*titleFont);
+	gameTitle.setFont(*menuFont);
 	gameTitle.setString(TITLE);
-	gameTitle.setCharacterSize(120);
+	gameTitle.setCharacterSize(130);
 	gameTitle.setFillColor(sf::Color::White);
 	gameTitle.setStyle(sf::Text::Bold);
-	gameTitle.setPosition(350, 50);
+	gameTitle.setOutlineThickness(3.0f);
+	gameTitle.setPosition(ScreenResolution::SCREEN_WIDTH_720P / 4, 50);
+}
+
+void Menu::InitializeButtons()
+{
+	for (int i = 0; i < OPTIONS_AMOUNT; i++)
+	{
+		menuButtons[i].setFont(*menuFont);
+		menuButtons[i].setString(MENU_BUTTONS_LABELS[i]);
+		menuButtons[i].setCharacterSize(i == 0 ? playButtonSize : otherButtonsSize);
+		menuButtons[i].setFillColor(sf::Color::White);
+
+		float posX = 0, posY = 0;
+		if (i <= 1)
+		{
+			posX = ScreenResolution::SCREEN_WIDTH_720P * 0.22f;
+			posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.65f) + i * 90;
+		}
+		else
+		{
+			posX = ScreenResolution::SCREEN_WIDTH_720P * 0.70f;
+			posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.68f) + (i - 2) * 55;
+		}
+		menuButtons[i].setPosition(sf::Vector2f(posX, posY));
+	}
+}
+
+void Menu::UpdateSelectedButton()
+{
+	for (int i = 0; i < OPTIONS_AMOUNT; i++)
+	{
+		if (i == selectedIndex)
+		{
+			menuButtons[i].setFillColor(sf::Color::Yellow);
+			menuButtons[i].setOutlineColor(sf::Color::Black);
+			menuButtons[i].setOutlineThickness(0.5f);
+			menuButtons[i].setCharacterSize(i == 0 ? playButtonSize + 10 : otherButtonsSize + 10);
+		}
+		else
+		{
+			menuButtons[i].setCharacterSize(i == 0 ? playButtonSize : otherButtonsSize);
+			menuButtons[i].setFillColor(sf::Color::White);
+			menuButtons[i].setOutlineThickness(0);
+			menuButtons[i].setOutlineColor(sf::Color::Transparent);
+		}
+	}
+
+}
+
+void Menu::ChangeButton()
+{
+	if (!canChange)
+		return;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		selectedIndex = (selectedIndex + 3) % 4;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		selectedIndex = (selectedIndex + 1) % 4;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		selectedIndex = (selectedIndex + 2) % 4;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		if (selectedIndex % 2 == 0)
+			selectedIndex = 2 - selectedIndex;
+		else
+			selectedIndex = 4 - selectedIndex;
+	}
+	canChange = false;
+	cdClock.restart();
+}
+
+bool Menu::ButtonCooldown(bool& canChange)
+{
+	if (cdClock.getElapsedTime().asSeconds() > 0.115f)
+		return canChange = true;
+}
+
+void Menu::SelectButton()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+	{
+		if (selectedIndex == 0)
+		{
+			game->SetGameState(GameState::Gameplay);
+		}
+		else if (selectedIndex == 1)
+		{
+			game->SetGameState(GameState::Stats);
+		}
+		else if (selectedIndex == 2)
+		{
+			game->SetGameState(GameState::Options);
+		}
+		else if (selectedIndex == 3)
+		{
+			game->SetGameState(GameState::ExitGame);
+		}
+	}
+}
+
+void Menu::CloseProgram(sf::RenderWindow& window)
+{
+	window.close();
 }
 
 void Menu::Update()
 {
-	//Change the game state:
-	//Game::gameState = GameState::Gameplay;
+	ButtonCooldown(canChange);
+	ChangeButton();
+	UpdateSelectedButton();
+	SelectButton();
 }
 
 void Menu::Draw(sf::RenderWindow& window)
 {
 	window.draw(menuBackgroundSprite);
 	window.draw(gameTitle);
+	for (int i = 0; i < OPTIONS_AMOUNT; i++)
+	{
+		window.draw(menuButtons[i]);
+	}
 }

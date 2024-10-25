@@ -11,8 +11,9 @@ enum class GameState
 	Gameplay = 2,
 	GameOver = 3,
 	Stats = 4,
-	ExitGame = 5,
-	Error = 6
+	Options = 5,
+	ExitGame = 6,
+	Error = 7
 };
 
 class Game
@@ -23,7 +24,7 @@ public:
 	~Game();
 	void Run();
 	void SetGameState(GameState newState) { gameState = newState; }
-	static GameState gameState;
+	GameState gameState;
 
 private:
 	void ProcessEvents();
@@ -34,8 +35,4 @@ private:
 	ResourceManager* resourceManager;
 	sf::VideoMode* videoMode;
 	sf::RenderWindow* window;
-
-
-
-
 };
