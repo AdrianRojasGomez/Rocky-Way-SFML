@@ -1,23 +1,33 @@
 #include <iostream>
 #include "ResourceManager.h"
 
+const std::string ResourceManager::spritePathMenuBG = "res/assets/Background/Background00.png";
 const std::string ResourceManager::spritePathBG = "res/assets/Background/Background01.png";
 const std::string ResourceManager::spritePathPlayer = "res/assets/Player/Player.png";
 const std::string ResourceManager::spritePathBullet = "res/assets/Traces/BasicShot.png";
-const std::string ResourceManager::spritePathLarge  = "res/assets/Enemies/MeteorLarge.png";
-const std::string ResourceManager::spritePathSmall  = "res/assets/Enemies/MeteorSmall.png";
-sf::Texture* ResourceManager::backgroundTexture = nullptr;
+const std::string ResourceManager::spritePathLarge = "res/assets/Enemies/MeteorLarge.png";
+const std::string ResourceManager::spritePathSmall = "res/assets/Enemies/MeteorSmall.png";
+const std::string ResourceManager::fontPathOxaniumSemiBold = "res/assets/Fonts/Oxanium-SemiBold.ttf";
+sf::Texture* ResourceManager::menuBackgroundTexture = nullptr;
+sf::Texture* ResourceManager::gameBackgroundTexture = nullptr;
 sf::Texture* ResourceManager::playerTexture = nullptr;
 sf::Texture* ResourceManager::bulletTexture = nullptr;
 sf::Texture* ResourceManager::largeAsteroidTexture = nullptr;
 sf::Texture* ResourceManager::smallAsteroidTexture = nullptr;
+sf::Font* ResourceManager::oxaniumSemiBoldFont = nullptr;
 
 ResourceManager::~ResourceManager()
 {
-	if (backgroundTexture != nullptr)
+	if (menuBackgroundTexture != nullptr)
 	{
-		delete backgroundTexture;
-		backgroundTexture = nullptr;
+		delete menuBackgroundTexture;
+		menuBackgroundTexture = nullptr;
+	}
+
+	if (gameBackgroundTexture != nullptr)
+	{
+		delete gameBackgroundTexture;
+		gameBackgroundTexture = nullptr;
 	}
 
 	if (playerTexture != nullptr)
@@ -43,30 +53,39 @@ ResourceManager::~ResourceManager()
 		delete smallAsteroidTexture;
 		smallAsteroidTexture = nullptr;
 	}
+
+	if (oxaniumSemiBoldFont != nullptr)
+	{
+		delete oxaniumSemiBoldFont;
+		oxaniumSemiBoldFont = nullptr;
+	}
 }
 
-sf::Texture* ResourceManager::GetLargeAsteroidTexture()
+sf::Texture* ResourceManager::GetMenuBackgroundTexture()
 {
-	if (largeAsteroidTexture == nullptr)
+	if (menuBackgroundTexture == nullptr)
 	{
-		largeAsteroidTexture = LoadTexture(spritePathLarge);
+		menuBackgroundTexture = new sf::Texture();
+		menuBackgroundTexture = LoadTexture(spritePathMenuBG);
 	}
-	return largeAsteroidTexture;
+	return menuBackgroundTexture;
 }
 
-sf::Texture* ResourceManager::GetSmallAsteroidTexture()
+sf::Texture* ResourceManager::GetBackgroundTexture()
 {
-	if (smallAsteroidTexture == nullptr)
+	if (gameBackgroundTexture == nullptr)
 	{
-		smallAsteroidTexture = LoadTexture(spritePathSmall);
+		gameBackgroundTexture = new sf::Texture;
+		gameBackgroundTexture = LoadTexture(spritePathBG);
 	}
-	return smallAsteroidTexture;
+	return gameBackgroundTexture;
 }
 
 sf::Texture* ResourceManager::GetPlayerTexture()
 {
 	if (playerTexture == nullptr)
 	{
+		playerTexture = new sf::Texture;
 		playerTexture = LoadTexture(spritePathPlayer);
 	}
 	return playerTexture;
@@ -76,18 +95,40 @@ sf::Texture* ResourceManager::GetBulletTexture()
 {
 	if (bulletTexture == nullptr)
 	{
+		bulletTexture = new sf::Texture;
 		bulletTexture = LoadTexture(spritePathBullet);
 	}
 	return bulletTexture;
 }
 
-sf::Texture* ResourceManager::GetBackgroundTexture()
+sf::Texture* ResourceManager::GetLargeAsteroidTexture()
 {
-	if (backgroundTexture == nullptr)
+	if (largeAsteroidTexture == nullptr)
 	{
-		backgroundTexture = LoadTexture(spritePathBG);
+		largeAsteroidTexture = new sf::Texture;
+		largeAsteroidTexture = LoadTexture(spritePathLarge);
 	}
-	return backgroundTexture;
+	return largeAsteroidTexture;
+}
+
+sf::Texture* ResourceManager::GetSmallAsteroidTexture()
+{
+	if (smallAsteroidTexture == nullptr)
+	{
+		smallAsteroidTexture = new sf::Texture;
+		smallAsteroidTexture = LoadTexture(spritePathSmall);
+	}
+	return smallAsteroidTexture;
+}
+
+sf::Font* ResourceManager::GetOxaniumSemiBoldFont()
+{
+	if (oxaniumSemiBoldFont == nullptr)
+	{
+		oxaniumSemiBoldFont = new sf::Font;
+		oxaniumSemiBoldFont = LoadFont(fontPathOxaniumSemiBold);
+	}
+	return oxaniumSemiBoldFont;
 }
 
 sf::Texture* ResourceManager::LoadTexture(std::string path)
@@ -104,6 +145,23 @@ sf::Texture* ResourceManager::LoadTexture(std::string path)
 		texture = nullptr;
 	}
 	std::cout << "DEBUG: Error!!!!!!!! LOADING " << path << "  TEXTURE" << std::endl;
+	return nullptr;
+}
+
+sf::Font* ResourceManager::LoadFont(std::string path)
+{
+	sf::Font* font = new sf::Font();
+	if (font->loadFromFile(path))
+	{
+		return font;
+	}
+
+	if (font != nullptr)
+	{
+		delete font;
+		font = nullptr;
+	}
+	std::cout << "DEBUG: Error!!!!!!!! LOADING " << path << "  FONT" << std::endl;
 	return nullptr;
 }
 

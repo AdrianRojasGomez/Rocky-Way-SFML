@@ -7,9 +7,11 @@
 Game::Game()
 {
 	srand(time(0));
+	Game::gameState = GameState::MainMenu;
 	videoMode = new sf::VideoMode(ScreenResolution::SCREEN_WIDTH_720P, ScreenResolution::SCREEN_HEIGHT_720P);
 	window = new sf::RenderWindow(*videoMode, "Rocky Ways");
 	resourceManager = new ResourceManager();
+	menu = new Menu(this);
 }
 
 Game::~Game()
@@ -30,6 +32,12 @@ Game::~Game()
 	{
 		delete window;
 		window = nullptr;
+	}
+
+	if (menu != nullptr)
+	{
+		delete menu;
+		menu = nullptr;
 	}
 
 }
@@ -57,12 +65,60 @@ void Game::ProcessEvents()
 
 void Game::Update()
 {
-	Gameplay::getInstance().Update();
+	switch (gameState)
+	{
+	case GameState::SplashScreen:
+		menu->Update();
+		break;
+	case GameState::MainMenu:
+		menu->Update();
+		break;
+	case GameState::Gameplay:
+		Gameplay::getInstance().Update();
+		break;
+	case GameState::Stats:
+		menu->Update();
+		break;
+	case GameState::Options:
+		menu->Update();
+		break;
+	case GameState::ExitGame:
+		window->close();
+		break;
+	case GameState::Error:
+		break;
+	default:
+		break;
+	}
+
+
 }
 
 void Game::Draw()
 {
 	window->clear(sf::Color::Black);
-	Gameplay::getInstance().Draw(*window);
+
+	switch (gameState)
+	{
+	case GameState::SplashScreen:
+		break;
+	case GameState::MainMenu:
+		menu->Draw(*window);
+		break;
+	case GameState::Gameplay:
+		Gameplay::getInstance().Draw(*window);
+		break;
+	case GameState::GameOver:
+		break;
+	case GameState::Stats:
+		break;
+	case GameState::ExitGame:
+		break;
+	case GameState::Error:
+		break;
+	default:
+		break;
+	}
+
 	window->display();
 }

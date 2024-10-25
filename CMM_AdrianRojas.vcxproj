@@ -29,6 +29,7 @@
     <ClCompile Include="src\Program\CollisionManager.cpp" />
     <ClCompile Include="src\Program\Game.cpp" />
     <ClCompile Include="src\Program\Gameplay.cpp" />
+    <ClCompile Include="src\Program\Menu.cpp" />
     <ClCompile Include="src\Program\Wave.cpp" />
     <ClCompile Include="src\Utilities\Framerate.cpp" />
     <ClCompile Include="src\Utilities\RandomUtility.cpp" />
@@ -36,6 +37,7 @@
     <ClCompile Include="src\Utilities\WrappingScreenUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Program\Menu.h" />
     <ClInclude Include="src\Utilities\RandomUtility.h" />
     <ClInclude Include="src\Utilities\ResourceManager.h" />
     <ClInclude Include="src\Entities\Asteroid.h" />

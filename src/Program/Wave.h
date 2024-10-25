@@ -30,7 +30,6 @@ private:
 	int waveCounter = 0;
 	int currentAsteroidCounter = 0;
 	int maxAsteroidperWave = 0;
-	//bool isFirstWave = true;
 	int largePerWave = 0;
 	int smallPerWave = 0;
 	int asteroidsInPool = 0;

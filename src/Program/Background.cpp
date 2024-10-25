@@ -10,6 +10,10 @@ Background::Background()
 	InitializeBackground();
 }
 
+Background::~Background()
+{
+}
+
 void Background::InitializeBackground()
 {
 	if (backgroundTexture != nullptr)
