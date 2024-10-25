@@ -16,4 +16,8 @@ public:
 	bool PlayerVsSmallAsteroidCollision(Player& player, SmallAsteroid& asteroid);
 	bool BulletVsLargeAsteroidCollision(Bullet& bullet, LargeAsteroid& asteroid);
 	bool BulletVsSmallAsteroidCollision(Bullet& bullet, SmallAsteroid& asteroid);
+
+private:
+	const int SMALL_FROM_LARGE = 3;
+	void SpawnSmallAsteroids(std::list<SmallAsteroid*> smallAsteroids, sf::Vector2f largePosition);
 };

@@ -5,6 +5,7 @@
 LargeAsteroid::LargeAsteroid()
 {
 	this->asteroidTexture = ResourceManager::GetLargeAsteroidTexture();
+	this->wrapOffset = 35.0f;
 	this->hitzoneHeight = 0.8f;
 	this->hitzoneWidth  = 0.8f;
 	this->initialMultiplierSpeed = RandomUtility::GetRandomFloat(minSpeed, maxspeed);

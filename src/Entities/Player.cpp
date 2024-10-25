@@ -72,6 +72,9 @@ void Player::CreateBullets()
 
 void Player::Fire()
 {
+	if (!isAlive)
+		return;
+
 	if (cooldownClock.getElapsedTime().asSeconds() >= COOLDOWN_RATE)
 	{
 		isFiring = false;
