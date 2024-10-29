@@ -95,6 +95,15 @@ void Player::Fire()
 	}
 }
 
+bool Player::HasHPLeft()
+{
+	if (HP <= 0)
+		return false;
+	else
+		return true;
+
+}
+
 void Player::Respawn()
 {
 	if (!isAlive && respawnClock.getElapsedTime().asSeconds() > RESPAWN_TIME)
@@ -114,6 +123,8 @@ void Player::RemoveInvulnerability()
 
 void Player::Update()
 {
+	if (!HasHPLeft())
+		return;
 	Respawn();
 	RemoveInvulnerability();
 	Movement();
@@ -153,12 +164,9 @@ void Player::SetIsAlive(bool isAlive)
 
 	this->isAlive = isAlive;
 	if (!isAlive)
-	{
-		this->lifes--;
-	}
+		this->HP--;
 	respawnClock.restart();
 	this->isInvulnerable = true;
-	std::cout << lifes << " lifes left\n";
-
 }
+
 

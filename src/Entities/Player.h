@@ -17,6 +17,7 @@ public:
 	bool GetIsInvulnerable() { return isInvulnerable; }
 	bool GetIsAlive() { return isAlive; }
 	void SetIsAlive(bool isAlive);
+	int GetHP() { return HP; }
 
 private:
 	sf::Texture* playerTexture;
@@ -41,7 +42,7 @@ private:
 	bool isAlive = true;
 	bool isInvulnerable = false;
 	bool isFiring = false;
-	int lifes = 3;
+	int HP = 3;
 	float posX = 0.0f;
 	float posY = 0.0f;
 	float rotation = 0.0f;
@@ -53,5 +54,6 @@ private:
 	void Movement();
 	void CreateBullets();
 	void Fire();
+	bool HasHPLeft();
 
 };
