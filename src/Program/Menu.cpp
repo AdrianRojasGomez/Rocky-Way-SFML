@@ -114,7 +114,7 @@ void Menu::ChangeButton()
 
 bool Menu::ButtonCooldown(bool& canChange)
 {
-	if (cdClock.getElapsedTime().asSeconds() > 0.115f)
+	if (cdClock.getElapsedTime().asSeconds() > 0.12f)
 		return canChange = true;
 }
 
@@ -122,22 +122,42 @@ void Menu::SelectButton()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 	{
-		if (selectedIndex == 0)
+
+		switch (selectedIndex)
 		{
+		case 0:
 			game->SetGameState(GameState::Gameplay);
-		}
-		else if (selectedIndex == 1)
-		{
+			break;
+		case 1: 
 			game->SetGameState(GameState::Stats);
-		}
-		else if (selectedIndex == 2)
-		{
+			break;
+		case 2:
 			game->SetGameState(GameState::Options);
-		}
-		else if (selectedIndex == 3)
-		{
+			break;
+		case 3:
 			game->SetGameState(GameState::ExitGame);
+			break;
+		default:
+			break;
 		}
+
+
+		//if (selectedIndex == 0)
+		//{
+		//	game->SetGameState(GameState::Gameplay);
+		//}
+		//else if (selectedIndex == 1)
+		//{
+		//	game->SetGameState(GameState::Stats);
+		//}
+		//else if (selectedIndex == 2)
+		//{
+		//	game->SetGameState(GameState::Options);
+		//}
+		//else if (selectedIndex == 3)
+		//{
+		//	game->SetGameState(GameState::ExitGame);
+		//}
 	}
 }
 
