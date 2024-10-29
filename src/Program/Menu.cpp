@@ -140,24 +140,6 @@ void Menu::SelectButton()
 		default:
 			break;
 		}
-
-
-		//if (selectedIndex == 0)
-		//{
-		//	game->SetGameState(GameState::Gameplay);
-		//}
-		//else if (selectedIndex == 1)
-		//{
-		//	game->SetGameState(GameState::Stats);
-		//}
-		//else if (selectedIndex == 2)
-		//{
-		//	game->SetGameState(GameState::Options);
-		//}
-		//else if (selectedIndex == 3)
-		//{
-		//	game->SetGameState(GameState::ExitGame);
-		//}
 	}
 }
 

@@ -13,6 +13,7 @@ void Gameplay::Update()
 	wave.Update();
 	if (player.GetHP() <= 0)
 	{
+		std::cout << "Game Over" << std::endl;
 		//gameOver.show()
 	}
 }
