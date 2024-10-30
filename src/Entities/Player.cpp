@@ -55,7 +55,6 @@ void Player::Movement()
 
 	this->posX = playerSprite.getPosition().x;
 	this->posY = playerSprite.getPosition().y;
-	this->playerArea.setPosition(posX, posY);
 
 }
 
@@ -121,6 +120,18 @@ void Player::RemoveInvulnerability()
 	}
 }
 
+void Player::SetIsAlive(bool isAlive)
+{
+	if (isInvulnerable)
+		return;
+
+	this->isAlive = isAlive;
+	if (!isAlive)
+		this->HP--;
+	respawnClock.restart();
+	this->isInvulnerable = true;
+}
+
 void Player::Update()
 {
 	if (!HasHPLeft())
@@ -144,7 +155,6 @@ void Player::Draw(sf::RenderWindow& window)
 {
 	if (!isAlive)
 		return;
-	window.draw(playerArea);
 	window.draw(playerSprite);
 
 	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
@@ -155,18 +165,11 @@ void Player::Draw(sf::RenderWindow& window)
 			bulletToDraw->Draw(window);
 		}
 	}
+
+	//sf::RectangleShape hitbox = 
+
 }
 
-void Player::SetIsAlive(bool isAlive)
-{
-	if (isInvulnerable)
-		return;
 
-	this->isAlive = isAlive;
-	if (!isAlive)
-		this->HP--;
-	respawnClock.restart();
-	this->isInvulnerable = true;
-}
 
 
