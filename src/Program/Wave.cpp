@@ -1,9 +1,9 @@
 #include <cmath>
-//#include <functional>
 #include "Wave.h"
 
-Wave::Wave()
+Wave::Wave(UI* ui)
 {
+	this->ui = ui;
 	CreateAsteroids();
 	CreateWave();
 }
@@ -31,7 +31,7 @@ void Wave::CreateAsteroids()
 void Wave::CreateWave()
 {
 	waveCounter++;
-	std::cout << "WaveCounter = " << waveCounter << std::endl;
+	ui->SetUIWave(waveCounter);
 
 	if (waveCounter <= 1)
 	{

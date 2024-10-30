@@ -94,8 +94,6 @@ void Asteroid::InitPosition()
 	asteroidHitZone->width = asteroidSprite.getGlobalBounds().width;
 	asteroidHitZone->height *= hitzoneSizeMultiplier;
 	asteroidHitZone->width *= hitzoneSizeMultiplier;
-	std::cout << asteroidHitZone->left << "," << asteroidHitZone->top << "\n";
-
 }
 
 void Asteroid::Move()

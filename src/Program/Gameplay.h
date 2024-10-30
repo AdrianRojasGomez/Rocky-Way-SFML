@@ -4,6 +4,7 @@
 #include "GameOver.h"
 #include "Wave.h"
 #include "CollisionManager.h"
+#include "UI.h"
 
 class Gameplay
 {
@@ -12,11 +13,16 @@ public:
 	void Update();
 	void Draw(sf::RenderWindow& window);
 
+	Gameplay(const Gameplay&) = delete;
+	Gameplay& operator=(const Gameplay&) = delete;
+
 private:
-	Gameplay(){}
-	Background background;
-	GameOver gameOver;
-	Wave wave;
-	CollisionManager collisionManager;
-	Player player;
+	Gameplay();
+	~Gameplay();
+	Background* background;
+	UI* ui;
+	Player* player;
+	Wave* wave;
+	CollisionManager* collisionManager;
+	GameOver* gameOver;
 };

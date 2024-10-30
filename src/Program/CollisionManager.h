@@ -18,6 +18,7 @@ public:
 	bool BulletVsSmallAsteroidCollision(Bullet& bullet, SmallAsteroid& asteroid);
 
 private:
-	const int SMALL_FROM_LARGE = 3;
+	const int MAX_DEBRIS = 3;
+	const int MIN_DEBRIS = 2;
 	void SpawnSmallAsteroids(std::list<SmallAsteroid*> smallAsteroids, sf::Vector2f largePosition);
 };

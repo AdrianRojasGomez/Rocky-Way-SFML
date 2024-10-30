@@ -2,16 +2,18 @@
 #include <iostream>
 #include <list>
 #include "Bullet.h"
+#include "../Program/UI.h"
 
 
 class Player
 {
 public:
-	Player();
-	void Respawn();
-	void RemoveInvulnerability();
+	Player(UI* ui);
+	~Player();
 	void Update();
 	void Draw(sf::RenderWindow& window);
+	void Respawn();
+	void RemoveInvulnerability();
 	sf::Sprite GetPlayerSprite() { return playerSprite; }
 	std::list<Bullet*>& GetBullets() { return bullets; }
 	bool GetIsInvulnerable() { return isInvulnerable; }
@@ -20,13 +22,14 @@ public:
 	int GetHP() { return HP; }
 
 private:
+	UI* ui;
+
 	sf::Texture* playerTexture;
 	sf::Sprite playerSprite;
 	sf::Clock cooldownClock;
 	sf::Clock respawnClock;
 	std::list<Bullet*> bullets;
 	std::list<Bullet*>::iterator iterator;
-
 	const float COOLDOWN_RATE = 0.25f;
 	const float SCALE_X = 0.3f;
 	const float SCALE_Y = 0.3f;
