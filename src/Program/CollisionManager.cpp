@@ -95,11 +95,10 @@ bool CollisionManager::BulletVsSmallAsteroidCollision(Bullet& bullet, SmallAster
 
 void CollisionManager::SpawnSmallAsteroids(std::list<SmallAsteroid*> smallAsteroids, sf::Vector2f largePosition)
 {
-	std::cout << "SmallSpawn Called!\n";
 	int smallSpawned = 0;
 	for (std::list<SmallAsteroid*>::iterator smallAsteroidIterator = smallAsteroids.begin(); smallAsteroidIterator != smallAsteroids.end(); smallAsteroidIterator++)
 	{
-		int maxDebris = rand() % 3 + 2;
+		int maxDebris = rand() % MAX_DEBRIS + MIN_DEBRIS;
 		if (smallSpawned >= maxDebris)
 			break;
 		SmallAsteroid* currentAsteroid = *smallAsteroidIterator;

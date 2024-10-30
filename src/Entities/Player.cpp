@@ -4,9 +4,6 @@
 #include "../Utilities/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
 
-
-
-
 Player::Player()
 {
 	cooldownClock.restart();
@@ -14,6 +11,10 @@ Player::Player()
 	SetTextureValues();
 	SetInitialPosition();
 	CreateBullets();
+}
+
+Player::~Player()
+{
 }
 
 void Player::SetTextureValues()
@@ -128,6 +129,7 @@ void Player::SetIsAlive(bool isAlive)
 	this->isAlive = isAlive;
 	if (!isAlive)
 		this->HP--;
+	playerUI->SetUIHP(HP);
 	respawnClock.restart();
 	this->isInvulnerable = true;
 }
@@ -165,8 +167,6 @@ void Player::Draw(sf::RenderWindow& window)
 			bulletToDraw->Draw(window);
 		}
 	}
-
-	//sf::RectangleShape hitbox = 
 
 }
 

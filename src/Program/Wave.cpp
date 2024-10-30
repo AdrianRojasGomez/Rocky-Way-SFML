@@ -1,6 +1,6 @@
 #include <cmath>
-//#include <functional>
 #include "Wave.h"
+#include "UI.h"
 
 Wave::Wave()
 {

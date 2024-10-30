@@ -31,6 +31,7 @@
     <ClCompile Include="src\Program\GameOver.cpp" />
     <ClCompile Include="src\Program\Gameplay.cpp" />
     <ClCompile Include="src\Program\Menu.cpp" />
+    <ClCompile Include="src\Program\UI.cpp" />
     <ClCompile Include="src\Program\Wave.cpp" />
     <ClCompile Include="src\Utilities\Framerate.cpp" />
     <ClCompile Include="src\Utilities\RandomUtility.cpp" />
@@ -40,6 +41,7 @@
   <ItemGroup>
     <ClInclude Include="src\Program\GameOver.h" />
     <ClInclude Include="src\Program\Menu.h" />
+    <ClInclude Include="src\Program\UI.h" />
     <ClInclude Include="src\Utilities\RandomUtility.h" />
     <ClInclude Include="src\Utilities\ResourceManager.h" />
     <ClInclude Include="src\Entities\Asteroid.h" />

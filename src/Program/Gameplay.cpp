@@ -1,5 +1,15 @@
 #include "Gameplay.h"
 
+Gameplay::Gameplay()
+{
+
+}
+
+Gameplay::~Gameplay()
+{
+
+}
+
 Gameplay& Gameplay::getInstance()
 {
 	static Gameplay instance;
@@ -25,3 +35,4 @@ void Gameplay::Draw(sf::RenderWindow& window)
 	player.Draw(window);
 	
 }
+
