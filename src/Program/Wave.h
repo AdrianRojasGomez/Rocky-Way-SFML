@@ -2,6 +2,7 @@
 #include <iostream>
 #include <list>
 #include <SFML/Graphics.hpp>
+#include "UI.h"
 #include "../Entities/Player.h"
 #include "../Entities/LargeAsteroid.h"
 #include "../Entities/SmallAsteroid.h"
@@ -9,7 +10,7 @@
 class Wave
 {
 public:
-	Wave();
+	Wave(UI* ui);
 	~Wave();
 	void Update();
 	void Draw(sf::RenderWindow& window);
@@ -18,6 +19,7 @@ public:
 
 private:
 
+	UI* ui;
 	std::list<LargeAsteroid*> largeAsteroids;
 	std::list<LargeAsteroid*>::iterator largeIterator;
 	std::list<SmallAsteroid*> smallAsteroids;

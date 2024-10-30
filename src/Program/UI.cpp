@@ -34,7 +34,7 @@ void UI::InitializeUI(int HP)
 		currentHP->setRadius(10);
 		currentHP->setOutlineThickness(2);
 		currentHP->setOutlineColor(sf::Color::White);
-		currentHP->setFillColor(sf::Color::Red);
+		currentHP->setFillColor(sf::Color::Black);
 		currentHP->setPosition(35 + i * 30, 80);
 		hpUI.push_back(currentHP);
 	}
@@ -51,8 +51,17 @@ void UI::InitializeUI(int HP)
 	waveNumber.setPosition(120, 30);
 }
 
-void UI::ModifyUIHealth()
+void UI::UpdateUIHealth()
 {
+
+	if (!isInitialized)
+	{
+		std::cout << " Initialized\n";
+		isInitialized = true;
+		InitializeUI(HP);
+		return;
+	}
+
 	for (int i = 0; i < hpUI.size(); i++)
 	{
 		if (i < HP)
@@ -62,11 +71,21 @@ void UI::ModifyUIHealth()
 	}
 }
 
+void UI::SetUIHP(int HP)
+{
+	this->HP = HP;
+}
+
+void UI::SetUIWave(int wave)
+{
+	this->waveNumberString = std::to_string(wave);
+	waveNumber.setString(waveNumberString);
+}
 
 
 void UI::Update()
 {
-	ModifyUIHealth();
+	UpdateUIHealth();
 }
 
 
@@ -81,13 +100,3 @@ void UI::Draw(sf::RenderWindow& window)
 	window.draw(waveNumber);
 }
 
-void UI::SetUIHP(int HP)
-{
-	this->HP = HP;
-}
-
-void UI::SetUIWave(int wave)
-{
-	this->waveNumberString = std::to_string(wave);
-	waveNumber.setString(waveNumberString);
-}

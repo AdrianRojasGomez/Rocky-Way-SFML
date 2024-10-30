@@ -8,7 +8,7 @@
 class Player
 {
 public:
-	Player();
+	Player(UI* ui);
 	~Player();
 	void Update();
 	void Draw(sf::RenderWindow& window);
@@ -22,7 +22,7 @@ public:
 	int GetHP() { return HP; }
 
 private:
-	UI* playerUI;
+	UI* ui;
 
 	sf::Texture* playerTexture;
 	sf::Sprite playerSprite;

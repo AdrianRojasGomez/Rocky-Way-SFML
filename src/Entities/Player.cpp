@@ -4,13 +4,15 @@
 #include "../Utilities/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
 
-Player::Player()
+Player::Player(UI* ui)
 {
+	this->ui = ui;
 	cooldownClock.restart();
 	this->playerTexture = ResourceManager::GetPlayerTexture();
 	SetTextureValues();
 	SetInitialPosition();
 	CreateBullets();
+	ui->SetUIHP(HP);
 }
 
 Player::~Player()
@@ -129,7 +131,7 @@ void Player::SetIsAlive(bool isAlive)
 	this->isAlive = isAlive;
 	if (!isAlive)
 		this->HP--;
-	playerUI->SetUIHP(HP);
+	ui->SetUIHP(HP);
 	respawnClock.restart();
 	this->isInvulnerable = true;
 }

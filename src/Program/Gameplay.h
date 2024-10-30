@@ -19,10 +19,10 @@ public:
 private:
 	Gameplay();
 	~Gameplay();
-	Background background;
-	UI* UI;
-	Player player;
-	Wave wave;
-	CollisionManager collisionManager;
-	GameOver gameOver;
+	Background* background;
+	UI* ui;
+	Player* player;
+	Wave* wave;
+	CollisionManager* collisionManager;
+	GameOver* gameOver;
 };
