@@ -24,7 +24,6 @@ private:
 	sf::Sprite playerSprite;
 	sf::Clock cooldownClock;
 	sf::Clock respawnClock;
-	sf::RectangleShape playerArea;
 	std::list<Bullet*> bullets;
 	std::list<Bullet*>::iterator iterator;
 

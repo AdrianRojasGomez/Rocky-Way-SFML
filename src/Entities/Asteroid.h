@@ -45,8 +45,8 @@ protected:
 	float dirY;
 	float rotationSpeed = 10.0f;
 	float rotation;
-	float hitzoneHeight = 1.0f;
-	float hitzoneWidth = 1.0f;
+	float hitzoneSizeMultiplier = 1.0f;
+
 	float wrapOffset = 10.0f;
 
 	virtual void Move();
@@ -55,4 +55,5 @@ protected:
 private:
 	void InitDirection();
 	void InitPosition();
+	sf::RectangleShape DebugHitzone();
 };

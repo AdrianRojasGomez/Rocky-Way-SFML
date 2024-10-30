@@ -10,6 +10,7 @@ Asteroid::Asteroid()
 	asteroidHitZone = new sf::FloatRect;
 	InitPosition();
 	InitDirection();
+
 }
 
 Asteroid::~Asteroid()
@@ -86,6 +87,15 @@ void Asteroid::InitPosition()
 	}
 	this->posX = initPosX;
 	this->posY = initPosY;
+
+
+	*asteroidHitZone = asteroidSprite.getGlobalBounds();
+	asteroidHitZone->height = asteroidSprite.getGlobalBounds().height;
+	asteroidHitZone->width = asteroidSprite.getGlobalBounds().width;
+	asteroidHitZone->height *= hitzoneSizeMultiplier;
+	asteroidHitZone->width *= hitzoneSizeMultiplier;
+	std::cout << asteroidHitZone->left << "," << asteroidHitZone->top << "\n";
+
 }
 
 void Asteroid::Move()
@@ -94,8 +104,10 @@ void Asteroid::Move()
 	asteroidSprite.move(dirX * speed * initialMultiplierSpeed * Framerate::getDeltaTime(), dirY * speed * initialMultiplierSpeed * Framerate::getDeltaTime());
 	this->posX = asteroidSprite.getPosition().x;
 	this->posY = asteroidSprite.getPosition().y;
-	asteroidHitZone->height *= hitzoneHeight;
-	asteroidHitZone->width *= hitzoneWidth;
+	sf::Vector2f originOffset = asteroidSprite.getOrigin() * hitzoneSizeMultiplier;
+	asteroidHitZone->left = posX - originOffset.x;
+	asteroidHitZone->top = posY - originOffset.y;
+	
 }
 
 void Asteroid::SetIsActive(bool isActive)
@@ -124,7 +136,6 @@ void Asteroid::SetNewDebrisPosition(sf::Vector2f pos)
 
 void Asteroid::Update()
 {
-	*asteroidHitZone = asteroidSprite.getGlobalBounds();
 	Move();
 	WrapAroundScreen(posX, posY, dirX, dirY, wrapOffset, asteroidSprite);
 }
@@ -132,7 +143,20 @@ void Asteroid::Update()
 void Asteroid::Draw(sf::RenderWindow& window)
 {
 	window.draw(asteroidSprite);
+
+	///DEBUG ONLY
+	///window.draw(DebugHitzone());
 }
 
+sf::RectangleShape Asteroid::DebugHitzone()
+{
+	sf::RectangleShape rectangle;
+	rectangle.setFillColor(sf::Color::Transparent);
+	rectangle.setOutlineThickness(2.5f);
+	rectangle.setOutlineColor(sf::Color::Red);
+	rectangle.setSize(sf::Vector2f(asteroidHitZone->width, asteroidHitZone->height));
+	rectangle.setPosition(asteroidHitZone->left, asteroidHitZone->top);
 
+	return rectangle;
+}
 
