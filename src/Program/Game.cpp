@@ -78,16 +78,16 @@ void Game::Update()
 		//Splash with instructions
 		break;
 	case GameState::MainMenu:
-		gameState = menu->Update(gameState);
+		gameState = menu->Update();
 		break;
 	case GameState::Gameplay:
-		gameState = gameplay->Update(gameState);
+		gameState = gameplay->Update();
 		break;
 	case GameState::Pause:
 		//Pause Menu
 		break;
 	case GameState::GameOver:
-		gameState = gameplay->:
+		gameState = gameplay->ResetGameplay();
 		break;
 	case GameState::Stats:
 		

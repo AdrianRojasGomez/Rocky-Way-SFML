@@ -12,6 +12,7 @@ Menu::Menu()
 	CreateTitle();
 	InitializeButtons();
 	gameState = GameState::MainMenu;
+	std::cout << (int)gameState << " = MainMenu Gamestate\n";
 }
 
 Menu::~Menu()
@@ -126,19 +127,15 @@ void Menu::SelectButton()
 		switch (selectedIndex)
 		{
 		case 0:
-			//game->SetGameState(GameState::Gameplay);
 			gameState = GameState::Gameplay;
 			break;
 		case 1: 
-			//game->SetGameState(GameState::Stats);
 			gameState = GameState::Stats;
 			break;
 		case 2:
-			//game->SetGameState(GameState::Options);
 			gameState = GameState::Options;
 			break;
 		case 3:
-			//game->SetGameState(GameState::ExitGame);
 			gameState = GameState::ExitGame;
 			break;
 		default:
@@ -152,7 +149,7 @@ void Menu::CloseProgram(sf::RenderWindow& window)
 	window.close();
 }
 
-GameState Menu::Update(GameState gameState)
+GameState Menu::Update()
 {
 	ButtonCooldown(canChange);
 	ChangeButton();

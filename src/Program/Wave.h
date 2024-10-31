@@ -26,7 +26,7 @@ private:
 	std::list<SmallAsteroid*> smallAsteroids;
 	std::list<SmallAsteroid*>::iterator smallIterator;
 
-	const int GROWTH = 10;
+	const int GROWTH = 5;
 	const float RATIO = 0.1f;
 	const int LARGE_ASTEROID_POOL = 20;
 	const int SMALL_ASTEROID_POOL = 20;

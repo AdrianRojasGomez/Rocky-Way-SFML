@@ -12,7 +12,7 @@ class Gameplay
 public:
 	Gameplay();
 	~Gameplay();
-	GameState Update(GameState gameState);
+	GameState Update();
 	void Draw(sf::RenderWindow& window);
 	GameState ResetGameplay();
 

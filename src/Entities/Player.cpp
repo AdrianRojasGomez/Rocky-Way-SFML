@@ -25,7 +25,7 @@ void Player::PlayerReset()
 	gameState = GameState::Gameplay;
 	SetInitialPosition();
 	HP = MaxHP;
-
+	ui->SetUIHP(HP);
 }
 
 void Player::SetTextureValues()
@@ -143,11 +143,12 @@ void Player::SetIsAlive(bool isAlive)
 	isInvulnerable = true;
 }
 
-GameState Player::Update(GameState gameState)
+GameState Player::Update()
 {
 	if (!CheckHasHPLeft())
 	{
 		gameState = GameState::GameOver;
+		std::cout << (int)this->gameState << " = GameOver\n";
 		return gameState;
 	}
 

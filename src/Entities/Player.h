@@ -11,7 +11,7 @@ class Player
 public:
 	Player(UI* ui);
 	~Player();
-	GameState Update(GameState gameState);
+	GameState Update();
 	void Draw(sf::RenderWindow& window);
 	void Respawn();
 	void RemoveInvulnerability();

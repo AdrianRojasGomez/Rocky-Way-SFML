@@ -19,6 +19,6 @@ public:
 
 private:
 	const int MAX_DEBRIS = 3;
-	const int MIN_DEBRIS = 2;
+	const int MIN_DEBRIS = 1;
 	void SpawnSmallAsteroids(std::list<SmallAsteroid*> smallAsteroids, sf::Vector2f largePosition);
 };

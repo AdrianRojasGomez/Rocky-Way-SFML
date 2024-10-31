@@ -7,7 +7,7 @@ class Menu
 public:
 	Menu();
 	~Menu();
-	GameState Update(GameState gameState);
+	GameState Update();
 	void Draw(sf::RenderWindow& window);
 
 private:

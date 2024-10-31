@@ -9,6 +9,7 @@ Gameplay::Gameplay()
 	collisionManager = new CollisionManager();
 	gameOver = new GameOver();
 	background = new Background();
+	gameState = GameState::Gameplay;
 }
 
 Gameplay::~Gameplay()
@@ -59,14 +60,14 @@ GameState Gameplay::ResetGameplay()
 }
 
 
-GameState Gameplay::Update(GameState gameState)
+GameState Gameplay::Update()
 {
-	this->gameState = player->Update(gameState);
+	gameState = player->Update();
 	collisionManager->Update(*player, player->GetBullets(),  wave->GetLargeAsteroids(), wave->GetSmallAsteroids());
 	wave->Update();
 	ui->Update();
-	std::cout << (int)this->gameState << " = Gameplay gameState\n";
-	return this->gameState;
+	std::cout << (int)gameState << " = Gameplay gameState\n";
+	return gameState;
 }
 
 void Gameplay::Draw(sf::RenderWindow& window)
