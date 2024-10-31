@@ -3,18 +3,9 @@
 #include "Menu.h"
 #include "../Utilities/Framerate.h"
 #include "../Utilities/ResourceManager.h"
-
-enum class GameState
-{
-	SplashScreen = 0,
-	MainMenu = 1,
-	Gameplay = 2,
-	GameOver = 3,
-	Stats = 4,
-	Options = 5,
-	ExitGame = 6,
-	Error = 7
-};
+#include "Gameplay.h"
+#include "GameState.h"
+#include "GameOver.h"
 
 class Game
 
@@ -23,8 +14,6 @@ public:
 	Game();
 	~Game();
 	void Run();
-	void SetGameState(GameState newState) { gameState = newState; }
-	GameState gameState;
 
 private:
 	void ProcessEvents();
@@ -32,7 +21,10 @@ private:
 	void Draw();
 
 	Menu* menu;
+	Gameplay* gameplay;
+	GameOver* gameOver;
 	ResourceManager* resourceManager;
 	sf::VideoMode* videoMode;
 	sf::RenderWindow* window;
+	GameState gameState;
 };

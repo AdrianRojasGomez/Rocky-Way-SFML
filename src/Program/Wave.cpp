@@ -13,6 +13,23 @@ Wave::~Wave()
 
 }
 
+void Wave::WaveReset()
+{
+	waveCounter = 0;
+
+	for (largeIterator = largeAsteroids.begin(); largeIterator != largeAsteroids.end(); largeIterator++)
+	{
+		LargeAsteroid* asteroidToReset = *largeIterator;
+		asteroidToReset->SetIsActive(false);
+	}
+	for (smallIterator = smallAsteroids.begin(); smallIterator != smallAsteroids.end(); smallIterator++)
+	{
+		SmallAsteroid* asteroidToReset = *smallIterator;
+		asteroidToReset->SetIsActive(false);
+	}
+}
+
+
 void Wave::CreateAsteroids()
 {
 	for (int i = 0; i < LARGE_ASTEROID_POOL; i++)
@@ -44,7 +61,7 @@ void Wave::CreateWave()
 		for (int i = 0; i < waveCounter; i++)
 		{
 			this->largePerWave += (int)(floor(GROWTH * i * i * RATIO));
-			this->smallPerWave += (int)(floor(GROWTH * i * i * RATIO));
+			this->smallPerWave += (int)(floor((int)(GROWTH * 0.2f)) * i * i * RATIO);
 		}
 	}
 
@@ -135,25 +152,29 @@ void Wave::DrawSmallAsteroids(sf::RenderWindow& window)
 	IterateAsteroids(smallAsteroids, smallIterator, &SmallAsteroid::Draw, window);
 }
 
+void Wave::CheckInactiveAsteroids()
+{
+	asteroidsInPool = 0;
+	this->asteroidsInPool += CountInactiveAsteroids(largeAsteroids, largeIterator);
+	this->asteroidsInPool += CountInactiveAsteroids(smallAsteroids, smallIterator);
+	if (asteroidsInPool <= 0)
+		shouldCreateWave = true;
+}
+
 
 void Wave::Update()
 {
 
 	if (shouldCreateWave)
 	{
-		shouldCreateWave = false;
 		asteroidsInPool = 0;
+		shouldCreateWave = false;
 		CreateWave();
 	}
 	UpdateLargeAsteroids();
 	UpdateSmallAsteroids();
-	asteroidsInPool = 0;
-	this->asteroidsInPool += CountInactiveAsteroids(largeAsteroids, largeIterator);
-	this->asteroidsInPool += CountInactiveAsteroids(smallAsteroids, smallIterator);
-	if (asteroidsInPool <= 0)
-	{
-		shouldCreateWave = true;
-	}
+	CheckInactiveAsteroids();
+
 }
 
 void Wave::Draw(sf::RenderWindow& window)

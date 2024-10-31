@@ -4,15 +4,15 @@
 #include "../Utilities/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
 
-Menu::Menu(Game* game)
+Menu::Menu()
 {
-	this->game = game;
 	menuBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
 	menuFont = ResourceManager::GetOxaniumSemiBoldFont();
 	InitializeBackground();
 	CreateTitle();
 	InitializeButtons();
-
+	gameState = GameState::MainMenu;
+	cdClock.restart();
 }
 
 Menu::~Menu()
@@ -92,50 +92,84 @@ void Menu::UpdateSelectedButton()
 
 void Menu::ChangeButton()
 {
+	//TODO: fix response time and looping through the menu
 	if (!canChange)
 		return;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
 		selectedIndex = (selectedIndex + 3) % 4;
+		canChange = false;
+		cdClock.restart();
+		return;
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
 		selectedIndex = (selectedIndex + 1) % 4;
+		canChange = false;
+		cdClock.restart();
+		return;
+	}
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
 		selectedIndex = (selectedIndex + 2) % 4;
+		canChange = false;
+		cdClock.restart();
+		return;
+	}
+
+
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		if (selectedIndex % 2 == 0)
 			selectedIndex = 2 - selectedIndex;
 		else
 			selectedIndex = 4 - selectedIndex;
+
+		canChange = false;
+		cdClock.restart();
+		return;
 	}
-	canChange = false;
-	cdClock.restart();
+
 }
 
 bool Menu::ButtonCooldown(bool& canChange)
 {
-	if (cdClock.getElapsedTime().asSeconds() > 0.12f)
+	if (cdClock.getElapsedTime().asSeconds() > 0.6f)
 		return canChange = true;
 }
 
 void Menu::SelectButton()
 {
+	if (!canChange)
+		return;
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 	{
 
 		switch (selectedIndex)
 		{
 		case 0:
-			game->SetGameState(GameState::Gameplay);
+			gameState = GameState::Gameplay;
+			canChange = false;
+			cdClock.restart();
 			break;
-		case 1: 
-			game->SetGameState(GameState::Stats);
+		case 1:
+			gameState = GameState::Stats;
+			canChange = false;
+			cdClock.restart();
 			break;
 		case 2:
-			game->SetGameState(GameState::Options);
+			gameState = GameState::Options;
+			canChange = false;
+			cdClock.restart();
 			break;
 		case 3:
-			game->SetGameState(GameState::ExitGame);
+			gameState = GameState::ExitGame;
+			canChange = false;
+			cdClock.restart();
 			break;
 		default:
 			break;
@@ -143,17 +177,17 @@ void Menu::SelectButton()
 	}
 }
 
-void Menu::CloseProgram(sf::RenderWindow& window)
-{
-	window.close();
-}
-
-void Menu::Update()
+GameState Menu::Update()
 {
 	ButtonCooldown(canChange);
 	ChangeButton();
 	UpdateSelectedButton();
 	SelectButton();
+
+
+		std::cout << "gamestate MENU: " << (int)gameState << ".\n";
+
+	return gameState;
 }
 
 void Menu::Draw(sf::RenderWindow& window)
@@ -161,7 +195,12 @@ void Menu::Draw(sf::RenderWindow& window)
 	window.draw(menuBackgroundSprite);
 	window.draw(gameTitle);
 	for (int i = 0; i < OPTIONS_AMOUNT; i++)
-	{
 		window.draw(menuButtons[i]);
-	}
+}
+
+void Menu::ResetState()
+{
+	if (gameState == GameState::MainMenu)
+		return;
+	{ gameState = GameState::MainMenu; }
 }

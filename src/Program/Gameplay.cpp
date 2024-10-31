@@ -1,3 +1,4 @@
+#include <iostream> //DEBUG ONLY 
 #include "Gameplay.h"
 
 Gameplay::Gameplay()
@@ -6,8 +7,8 @@ Gameplay::Gameplay()
 	player = new Player(ui);
 	wave = new Wave(ui);
 	collisionManager = new CollisionManager();
-	gameOver = new GameOver();
 	background = new Background();
+	gameState = GameState::Gameplay;
 }
 
 Gameplay::~Gameplay()
@@ -36,12 +37,6 @@ Gameplay::~Gameplay()
 		collisionManager = nullptr;
 	}
 
-	if (gameOver != nullptr)
-	{
-		delete gameOver;
-		gameOver = nullptr;
-	}
-
 	if (background != nullptr)
 	{
 		delete background;
@@ -50,23 +45,22 @@ Gameplay::~Gameplay()
 	
 }
 
-Gameplay& Gameplay::getInstance()
+GameState Gameplay::ResetGameplay()
 {
-	static Gameplay instance;
-	return instance;
+	player->PlayerReset();
+	wave->WaveReset();
+
+	return gameState = GameState::Gameplay;
 }
 
-void Gameplay::Update()
+
+GameState Gameplay::Update()
 {
-	player->Update();
+	gameState = player->Update();
 	collisionManager->Update(*player, player->GetBullets(),  wave->GetLargeAsteroids(), wave->GetSmallAsteroids());
 	wave->Update();
 	ui->Update();
-	if (player->GetHP() <= 0)
-	{
-		std::cout << "Game Over" << std::endl;
-		//gameOver.show()
-	}
+	return gameState;
 }
 
 void Gameplay::Draw(sf::RenderWindow& window)

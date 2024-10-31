@@ -11,11 +11,19 @@ Game::Game()
 	videoMode = new sf::VideoMode(ScreenResolution::SCREEN_WIDTH_720P, ScreenResolution::SCREEN_HEIGHT_720P);
 	window = new sf::RenderWindow(*videoMode, "Rocky Ways");
 	resourceManager = new ResourceManager();
-	menu = new Menu(this);
+	gameplay = new Gameplay();
+	menu = new Menu();
+	gameOver = new GameOver();
 }
 
 Game::~Game()
 {
+	if (gameplay != nullptr)
+	{
+		delete gameplay;
+		gameplay = nullptr;
+	}
+
 	if (resourceManager != nullptr)
 	{
 		delete resourceManager;
@@ -38,6 +46,12 @@ Game::~Game()
 	{
 		delete menu;
 		menu = nullptr;
+	}
+
+	if (gameOver != nullptr)
+	{
+		delete gameOver;
+		gameOver = nullptr;
 	}
 
 }
@@ -68,19 +82,34 @@ void Game::Update()
 	switch (gameState)
 	{
 	case GameState::SplashScreen:
-		menu->Update();
+		//Splash with instructions
 		break;
 	case GameState::MainMenu:
-		menu->Update();
+		gameOver->ResetState();
+		gameState = menu->Update();
 		break;
 	case GameState::Gameplay:
-		Gameplay::getInstance().Update();
+		menu->ResetState();
+		gameState = gameplay->Update();
+		break;
+	case GameState::Pause:
+		//Pause Menu
+		break;
+	case GameState::GameOver:
+		menu->ResetState();
+		gameState = gameOver->Update();
 		break;
 	case GameState::Stats:
-		menu->Update();
 		break;
 	case GameState::Options:
-		menu->Update();
+		///OPTIONS USING AS GAMEOVER FOR DEBUGING AND TESTING
+		menu->ResetState();
+		gameState = gameOver->Update();
+		break;
+	case GameState::Replay:
+		menu->ResetState();
+		gameOver->ResetState();
+		gameState = gameplay->ResetGameplay();
 		break;
 	case GameState::ExitGame:
 		window->close();
@@ -90,14 +119,11 @@ void Game::Update()
 	default:
 		break;
 	}
-
-
 }
 
 void Game::Draw()
 {
 	window->clear(sf::Color::Black);
-
 	switch (gameState)
 	{
 	case GameState::SplashScreen:
@@ -106,11 +132,19 @@ void Game::Draw()
 		menu->Draw(*window);
 		break;
 	case GameState::Gameplay:
-		Gameplay::getInstance().Draw(*window);
+		gameplay->Draw(*window);
+		break;
+	case GameState::Pause:
 		break;
 	case GameState::GameOver:
+		gameOver->Draw(*window);
 		break;
 	case GameState::Stats:
+		break;
+	case GameState::Options:
+		gameOver->Draw(*window);
+		break;
+	case GameState::Replay:
 		break;
 	case GameState::ExitGame:
 		break;

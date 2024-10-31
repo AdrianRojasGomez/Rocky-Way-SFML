@@ -1,22 +1,23 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-class Game;
+#include "GameState.h"
 
 class Menu
 {
 public:
-	Menu(Game* game);
+	Menu();
 	~Menu();
-	void Update();
+	GameState Update();
 	void Draw(sf::RenderWindow& window);
+	void ResetState();
 
 private:
-	Game* game = nullptr;
 	static constexpr int OPTIONS_AMOUNT = 4;
 	const std::string TITLE = "Rocky Way";
 	const std::string MENU_BUTTONS_LABELS[OPTIONS_AMOUNT] = { "Play", "Highscore", "Options", "Quit" };
 	const int playButtonSize = 60;
 	const int otherButtonsSize = 35;
+	GameState gameState;
 	sf::Text menuButtons[OPTIONS_AMOUNT];
 	sf::Texture* menuBackgroundTexture = nullptr;
 	sf::Sprite menuBackgroundSprite;
@@ -34,5 +35,5 @@ private:
 	void ChangeButton();
 	bool ButtonCooldown(bool& canChange);
 	void SelectButton();
-	void CloseProgram(sf::RenderWindow& window);
+
 };
