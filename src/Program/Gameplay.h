@@ -12,12 +12,11 @@ class Gameplay
 public:
 	Gameplay();
 	~Gameplay();
-	//static Gameplay& getInstance();
-	GameState Update();
+	GameState Update(GameState gameState);
 	void Draw(sf::RenderWindow& window);
+	GameState ResetGameplay();
 
-	//Gameplay(const Gameplay&) = delete;
-	//Gameplay& operator=(const Gameplay&) = delete;
+
 
 private:
 	GameState gameState;
@@ -27,4 +26,6 @@ private:
 	Wave* wave;
 	CollisionManager* collisionManager;
 	GameOver* gameOver;
+
+
 };

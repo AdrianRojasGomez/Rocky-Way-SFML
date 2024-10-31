@@ -75,24 +75,25 @@ void Game::Update()
 	switch (gameState)
 	{
 	case GameState::SplashScreen:
-		menu->Update();
+		//Splash with instructions
 		break;
 	case GameState::MainMenu:
-		gameState = menu->Update();
+		gameState = menu->Update(gameState);
 		break;
 	case GameState::Gameplay:
-		gameState = gameplay->Update();
+		gameState = gameplay->Update(gameState);
 		break;
 	case GameState::Pause:
+		//Pause Menu
 		break;
 	case GameState::GameOver:
-		//TODO: GameOver:
+		gameState = gameplay->:
 		break;
 	case GameState::Stats:
-		menu->Update();
+		
 		break;
 	case GameState::Options:
-		menu->Update();
+		//Options Menu (Sound and Mute mostly)
 		break;
 	case GameState::ExitGame:
 		window->close();
@@ -103,7 +104,7 @@ void Game::Update()
 		break;
 	}
 
-
+	std::cout << (int)this->gameState << " = Game gameState\n";
 }
 
 void Game::Draw()

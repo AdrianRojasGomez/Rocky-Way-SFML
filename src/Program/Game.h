@@ -13,7 +13,6 @@ public:
 	Game();
 	~Game();
 	void Run();
-	//void SetGameState(GameState newState) { gameState = newState; }
 
 private:
 	void ProcessEvents();

@@ -13,10 +13,19 @@ Player::Player(UI* ui)
 	SetInitialPosition();
 	CreateBullets();
 	ui->SetUIHP(HP);
+	gameState = GameState::Gameplay;
 }
 
 Player::~Player()
 {
+}
+
+void Player::PlayerReset()
+{
+	gameState = GameState::Gameplay;
+	SetInitialPosition();
+	HP = MaxHP;
+
 }
 
 void Player::SetTextureValues()
@@ -61,8 +70,6 @@ void Player::Movement()
 
 }
 
-
-
 void Player::CreateBullets()
 {
 	for (int i = 0; i < BULLET_CAPACITY; i++)
@@ -97,7 +104,7 @@ void Player::Fire()
 	}
 }
 
-bool Player::HasHPLeft()
+bool Player::CheckHasHPLeft()
 {
 	if (HP <= 0)
 		return false;
@@ -130,16 +137,20 @@ void Player::SetIsAlive(bool isAlive)
 
 	this->isAlive = isAlive;
 	if (!isAlive)
-		this->HP--;
+		HP--;
 	ui->SetUIHP(HP);
 	respawnClock.restart();
-	this->isInvulnerable = true;
+	isInvulnerable = true;
 }
 
-void Player::Update()
+GameState Player::Update(GameState gameState)
 {
-	if (!HasHPLeft())
-		return;
+	if (!CheckHasHPLeft())
+	{
+		gameState = GameState::GameOver;
+		return gameState;
+	}
+
 	Respawn();
 	RemoveInvulnerability();
 	Movement();
@@ -153,6 +164,9 @@ void Player::Update()
 			bulletToDraw->Update();
 		}
 	}
+
+	std::cout << (int)this->gameState << " = Player gameState\n";
+	return this->gameState;
 }
 
 void Player::Draw(sf::RenderWindow& window)

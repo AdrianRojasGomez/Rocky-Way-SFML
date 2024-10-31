@@ -152,14 +152,15 @@ void Menu::CloseProgram(sf::RenderWindow& window)
 	window.close();
 }
 
-GameState Menu::Update()
+GameState Menu::Update(GameState gameState)
 {
 	ButtonCooldown(canChange);
 	ChangeButton();
 	UpdateSelectedButton();
 	SelectButton();
 
-	return gameState;
+	std::cout << (int)this->gameState << " = Menu gameState\n";
+	return this->gameState;
 }
 
 void Menu::Draw(sf::RenderWindow& window)

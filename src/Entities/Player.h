@@ -3,6 +3,7 @@
 #include <list>
 #include "Bullet.h"
 #include "../Program/UI.h"
+#include "../Program/GameState.h"
 
 
 class Player
@@ -10,7 +11,7 @@ class Player
 public:
 	Player(UI* ui);
 	~Player();
-	void Update();
+	GameState Update(GameState gameState);
 	void Draw(sf::RenderWindow& window);
 	void Respawn();
 	void RemoveInvulnerability();
@@ -20,10 +21,12 @@ public:
 	bool GetIsAlive() { return isAlive; }
 	void SetIsAlive(bool isAlive);
 	int GetHP() { return HP; }
+	bool CheckHasHPLeft();
+	void PlayerReset();
 
 private:
+	GameState gameState;
 	UI* ui;
-
 	sf::Texture* playerTexture;
 	sf::Sprite playerSprite;
 	sf::Clock cooldownClock;
@@ -44,6 +47,7 @@ private:
 	bool isAlive = true;
 	bool isInvulnerable = false;
 	bool isFiring = false;
+	int MaxHP = 3;
 	int HP = 3;
 	float posX = 0.0f;
 	float posY = 0.0f;
@@ -56,6 +60,6 @@ private:
 	void Movement();
 	void CreateBullets();
 	void Fire();
-	bool HasHPLeft();
+
 
 };

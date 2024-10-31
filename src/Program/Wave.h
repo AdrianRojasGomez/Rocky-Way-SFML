@@ -16,6 +16,7 @@ public:
 	void Draw(sf::RenderWindow& window);
 	std::list<LargeAsteroid*>& GetLargeAsteroids() { return largeAsteroids; }
 	std::list<SmallAsteroid*>& GetSmallAsteroids() { return smallAsteroids; }
+	void WaveReset();
 
 private:
 
@@ -51,5 +52,6 @@ private:
 	void UpdateLargeAsteroids();
 	void DrawLargeAsteroids(sf::RenderWindow& window);
 	void DrawSmallAsteroids(sf::RenderWindow& window);
-	
+	void CheckInactiveAsteroids();
+
 };
