@@ -5,20 +5,22 @@
 #include "Wave.h"
 #include "CollisionManager.h"
 #include "UI.h"
+#include "GameState.h"
 
 class Gameplay
 {
 public:
-	static Gameplay& getInstance();
-	void Update();
-	void Draw(sf::RenderWindow& window);
-
-	Gameplay(const Gameplay&) = delete;
-	Gameplay& operator=(const Gameplay&) = delete;
-
-private:
 	Gameplay();
 	~Gameplay();
+	//static Gameplay& getInstance();
+	GameState Update();
+	void Draw(sf::RenderWindow& window);
+
+	//Gameplay(const Gameplay&) = delete;
+	//Gameplay& operator=(const Gameplay&) = delete;
+
+private:
+	GameState gameState;
 	Background* background;
 	UI* ui;
 	Player* player;

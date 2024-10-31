@@ -8,6 +8,7 @@ Gameplay::Gameplay()
 	collisionManager = new CollisionManager();
 	gameOver = new GameOver();
 	background = new Background();
+	gameState = GameState::Gameplay;
 }
 
 Gameplay::~Gameplay()
@@ -50,13 +51,7 @@ Gameplay::~Gameplay()
 	
 }
 
-Gameplay& Gameplay::getInstance()
-{
-	static Gameplay instance;
-	return instance;
-}
-
-void Gameplay::Update()
+GameState Gameplay::Update()
 {
 	player->Update();
 	collisionManager->Update(*player, player->GetBullets(),  wave->GetLargeAsteroids(), wave->GetSmallAsteroids());
@@ -66,7 +61,9 @@ void Gameplay::Update()
 	{
 		std::cout << "Game Over" << std::endl;
 		//gameOver.show()
+
 	}
+	return gameState;
 }
 
 void Gameplay::Draw(sf::RenderWindow& window)

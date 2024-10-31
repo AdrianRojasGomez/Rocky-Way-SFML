@@ -11,11 +11,18 @@ Game::Game()
 	videoMode = new sf::VideoMode(ScreenResolution::SCREEN_WIDTH_720P, ScreenResolution::SCREEN_HEIGHT_720P);
 	window = new sf::RenderWindow(*videoMode, "Rocky Ways");
 	resourceManager = new ResourceManager();
-	menu = new Menu(this);
+	gameplay = new Gameplay();
+	menu = new Menu();
 }
 
 Game::~Game()
 {
+	if (gameplay != nullptr)
+	{
+		delete gameplay;
+		gameplay = nullptr;
+	}
+
 	if (resourceManager != nullptr)
 	{
 		delete resourceManager;
@@ -71,10 +78,15 @@ void Game::Update()
 		menu->Update();
 		break;
 	case GameState::MainMenu:
-		menu->Update();
+		gameState = menu->Update();
 		break;
 	case GameState::Gameplay:
-		Gameplay::getInstance().Update();
+		gameState = gameplay->Update();
+		break;
+	case GameState::Pause:
+		break;
+	case GameState::GameOver:
+		//TODO: GameOver:
 		break;
 	case GameState::Stats:
 		menu->Update();
@@ -106,7 +118,7 @@ void Game::Draw()
 		menu->Draw(*window);
 		break;
 	case GameState::Gameplay:
-		Gameplay::getInstance().Draw(*window);
+		gameplay->Draw(*window);
 		break;
 	case GameState::GameOver:
 		break;

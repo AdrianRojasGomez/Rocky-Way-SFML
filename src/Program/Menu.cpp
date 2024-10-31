@@ -4,15 +4,14 @@
 #include "../Utilities/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
 
-Menu::Menu(Game* game)
+Menu::Menu()
 {
-	this->game = game;
 	menuBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
 	menuFont = ResourceManager::GetOxaniumSemiBoldFont();
 	InitializeBackground();
 	CreateTitle();
 	InitializeButtons();
-
+	gameState = GameState::MainMenu;
 }
 
 Menu::~Menu()
@@ -92,6 +91,7 @@ void Menu::UpdateSelectedButton()
 
 void Menu::ChangeButton()
 {
+	//TODO: fix response time and looping through the menu
 	if (!canChange)
 		return;
 
@@ -126,16 +126,20 @@ void Menu::SelectButton()
 		switch (selectedIndex)
 		{
 		case 0:
-			game->SetGameState(GameState::Gameplay);
+			//game->SetGameState(GameState::Gameplay);
+			gameState = GameState::Gameplay;
 			break;
 		case 1: 
-			game->SetGameState(GameState::Stats);
+			//game->SetGameState(GameState::Stats);
+			gameState = GameState::Stats;
 			break;
 		case 2:
-			game->SetGameState(GameState::Options);
+			//game->SetGameState(GameState::Options);
+			gameState = GameState::Options;
 			break;
 		case 3:
-			game->SetGameState(GameState::ExitGame);
+			//game->SetGameState(GameState::ExitGame);
+			gameState = GameState::ExitGame;
 			break;
 		default:
 			break;
@@ -148,12 +152,14 @@ void Menu::CloseProgram(sf::RenderWindow& window)
 	window.close();
 }
 
-void Menu::Update()
+GameState Menu::Update()
 {
 	ButtonCooldown(canChange);
 	ChangeButton();
 	UpdateSelectedButton();
 	SelectButton();
+
+	return gameState;
 }
 
 void Menu::Draw(sf::RenderWindow& window)
