@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Background.h"
-#include "GameOver.h"
 #include "Wave.h"
 #include "CollisionManager.h"
 #include "UI.h"
@@ -25,7 +24,6 @@ private:
 	Player* player;
 	Wave* wave;
 	CollisionManager* collisionManager;
-	GameOver* gameOver;
 
 
 };

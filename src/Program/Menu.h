@@ -9,6 +9,7 @@ public:
 	~Menu();
 	GameState Update();
 	void Draw(sf::RenderWindow& window);
+	void ResetState();
 
 private:
 	static constexpr int OPTIONS_AMOUNT = 4;
@@ -34,5 +35,5 @@ private:
 	void ChangeButton();
 	bool ButtonCooldown(bool& canChange);
 	void SelectButton();
-	void CloseProgram(sf::RenderWindow& window);
+
 };

@@ -12,7 +12,7 @@ Menu::Menu()
 	CreateTitle();
 	InitializeButtons();
 	gameState = GameState::MainMenu;
-	std::cout << (int)gameState << " = MainMenu Gamestate\n";
+	cdClock.restart();
 }
 
 Menu::~Menu()
@@ -97,30 +97,55 @@ void Menu::ChangeButton()
 		return;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
 		selectedIndex = (selectedIndex + 3) % 4;
+		canChange = false;
+		cdClock.restart();
+		return;
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
 		selectedIndex = (selectedIndex + 1) % 4;
+		canChange = false;
+		cdClock.restart();
+		return;
+	}
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
 		selectedIndex = (selectedIndex + 2) % 4;
+		canChange = false;
+		cdClock.restart();
+		return;
+	}
+
+
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		if (selectedIndex % 2 == 0)
 			selectedIndex = 2 - selectedIndex;
 		else
 			selectedIndex = 4 - selectedIndex;
+
+		canChange = false;
+		cdClock.restart();
+		return;
 	}
-	canChange = false;
-	cdClock.restart();
+
 }
 
 bool Menu::ButtonCooldown(bool& canChange)
 {
-	if (cdClock.getElapsedTime().asSeconds() > 0.12f)
+	if (cdClock.getElapsedTime().asSeconds() > 0.25f)
 		return canChange = true;
 }
 
 void Menu::SelectButton()
 {
+	if (!canChange)
+		return;
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 	{
 
@@ -128,25 +153,28 @@ void Menu::SelectButton()
 		{
 		case 0:
 			gameState = GameState::Gameplay;
+			canChange = false;
+			cdClock.restart();
 			break;
-		case 1: 
+		case 1:
 			gameState = GameState::Stats;
+			canChange = false;
+			cdClock.restart();
 			break;
 		case 2:
 			gameState = GameState::Options;
+			canChange = false;
+			cdClock.restart();
 			break;
 		case 3:
 			gameState = GameState::ExitGame;
+			canChange = false;
+			cdClock.restart();
 			break;
 		default:
 			break;
 		}
 	}
-}
-
-void Menu::CloseProgram(sf::RenderWindow& window)
-{
-	window.close();
 }
 
 GameState Menu::Update()
@@ -156,8 +184,10 @@ GameState Menu::Update()
 	UpdateSelectedButton();
 	SelectButton();
 
-	std::cout << (int)this->gameState << " = Menu gameState\n";
-	return this->gameState;
+
+		std::cout << "gamestate MENU: " << (int)gameState << ".\n";
+
+	return gameState;
 }
 
 void Menu::Draw(sf::RenderWindow& window)
@@ -165,7 +195,12 @@ void Menu::Draw(sf::RenderWindow& window)
 	window.draw(menuBackgroundSprite);
 	window.draw(gameTitle);
 	for (int i = 0; i < OPTIONS_AMOUNT; i++)
-	{
 		window.draw(menuButtons[i]);
-	}
+}
+
+void Menu::ResetState()
+{
+	if (gameState == GameState::MainMenu)
+		return;
+	{ gameState = GameState::MainMenu; }
 }

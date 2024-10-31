@@ -148,7 +148,6 @@ GameState Player::Update()
 	if (!CheckHasHPLeft())
 	{
 		gameState = GameState::GameOver;
-		std::cout << (int)this->gameState << " = GameOver\n";
 		return gameState;
 	}
 
@@ -165,8 +164,6 @@ GameState Player::Update()
 			bulletToDraw->Update();
 		}
 	}
-
-	std::cout << (int)this->gameState << " = Player gameState\n";
 	return this->gameState;
 }
 

@@ -7,7 +7,6 @@ Gameplay::Gameplay()
 	player = new Player(ui);
 	wave = new Wave(ui);
 	collisionManager = new CollisionManager();
-	gameOver = new GameOver();
 	background = new Background();
 	gameState = GameState::Gameplay;
 }
@@ -38,12 +37,6 @@ Gameplay::~Gameplay()
 		collisionManager = nullptr;
 	}
 
-	if (gameOver != nullptr)
-	{
-		delete gameOver;
-		gameOver = nullptr;
-	}
-
 	if (background != nullptr)
 	{
 		delete background;
@@ -56,6 +49,7 @@ GameState Gameplay::ResetGameplay()
 {
 	player->PlayerReset();
 	wave->WaveReset();
+
 	return gameState = GameState::Gameplay;
 }
 
@@ -66,7 +60,6 @@ GameState Gameplay::Update()
 	collisionManager->Update(*player, player->GetBullets(),  wave->GetLargeAsteroids(), wave->GetSmallAsteroids());
 	wave->Update();
 	ui->Update();
-	std::cout << (int)gameState << " = Gameplay gameState\n";
 	return gameState;
 }
 

@@ -9,6 +9,7 @@ enum class GameState
 	GameOver,
 	Stats,
 	Options,
+	Replay,
 	ExitGame,
 	Error
 };

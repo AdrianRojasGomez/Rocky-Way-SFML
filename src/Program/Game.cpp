@@ -13,6 +13,7 @@ Game::Game()
 	resourceManager = new ResourceManager();
 	gameplay = new Gameplay();
 	menu = new Menu();
+	gameOver = new GameOver();
 }
 
 Game::~Game()
@@ -47,6 +48,12 @@ Game::~Game()
 		menu = nullptr;
 	}
 
+	if (gameOver != nullptr)
+	{
+		delete gameOver;
+		gameOver = nullptr;
+	}
+
 }
 
 void Game::Run()
@@ -78,22 +85,31 @@ void Game::Update()
 		//Splash with instructions
 		break;
 	case GameState::MainMenu:
+		gameOver->ResetState();
 		gameState = menu->Update();
 		break;
 	case GameState::Gameplay:
+		menu->ResetState();
 		gameState = gameplay->Update();
 		break;
 	case GameState::Pause:
 		//Pause Menu
 		break;
 	case GameState::GameOver:
-		gameState = gameplay->ResetGameplay();
+		menu->ResetState();
+		gameState = gameOver->Update();
 		break;
 	case GameState::Stats:
-		
 		break;
 	case GameState::Options:
-		//Options Menu (Sound and Mute mostly)
+		///OPTIONS USING AS GAMEOVER FOR DEBUGING AND TESTING
+		menu->ResetState();
+		gameState = gameOver->Update();
+		break;
+	case GameState::Replay:
+		menu->ResetState();
+		gameOver->ResetState();
+		gameState = gameplay->ResetGameplay();
 		break;
 	case GameState::ExitGame:
 		window->close();
@@ -103,14 +119,11 @@ void Game::Update()
 	default:
 		break;
 	}
-
-	std::cout << (int)this->gameState << " = Game gameState\n";
 }
 
 void Game::Draw()
 {
 	window->clear(sf::Color::Black);
-
 	switch (gameState)
 	{
 	case GameState::SplashScreen:
@@ -121,9 +134,17 @@ void Game::Draw()
 	case GameState::Gameplay:
 		gameplay->Draw(*window);
 		break;
+	case GameState::Pause:
+		break;
 	case GameState::GameOver:
+		gameOver->Draw(*window);
 		break;
 	case GameState::Stats:
+		break;
+	case GameState::Options:
+		gameOver->Draw(*window);
+		break;
+	case GameState::Replay:
 		break;
 	case GameState::ExitGame:
 		break;

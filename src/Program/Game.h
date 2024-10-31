@@ -5,6 +5,7 @@
 #include "../Utilities/ResourceManager.h"
 #include "Gameplay.h"
 #include "GameState.h"
+#include "GameOver.h"
 
 class Game
 
@@ -21,6 +22,7 @@ private:
 
 	Menu* menu;
 	Gameplay* gameplay;
+	GameOver* gameOver;
 	ResourceManager* resourceManager;
 	sf::VideoMode* videoMode;
 	sf::RenderWindow* window;
