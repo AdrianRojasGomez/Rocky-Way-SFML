@@ -36,6 +36,7 @@
     <ClCompile Include="src\Utilities\Framerate.cpp" />
     <ClCompile Include="src\Utilities\RandomUtility.cpp" />
     <ClCompile Include="src\Utilities\ResourceManager.cpp" />
+    <ClCompile Include="src\Utilities\ScoreManager.cpp" />
     <ClCompile Include="src\Utilities\WrappingScreenUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +57,7 @@
     <ClInclude Include="src\Program\Gameplay.h" />
     <ClInclude Include="src\Program\Wave.h" />
     <ClInclude Include="src\Utilities\Framerate.h" />
+    <ClInclude Include="src\Utilities\ScoreManager.h" />
     <ClInclude Include="src\Utilities\ScreenResolution.h" />
     <ClInclude Include="src\Utilities\WrappingScreenUtility.h" />
   </ItemGroup>
