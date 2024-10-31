@@ -132,7 +132,7 @@ void GameOver::ChangeButton()
 
 bool GameOver::ButtonCooldown(bool& canChange)
 {
-	if (GOClock.getElapsedTime().asSeconds() > 0.25f)
+	if (GOClock.getElapsedTime().asSeconds() > 0.6f)
 		return canChange = true;
 }
 

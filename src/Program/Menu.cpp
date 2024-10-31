@@ -137,7 +137,7 @@ void Menu::ChangeButton()
 
 bool Menu::ButtonCooldown(bool& canChange)
 {
-	if (cdClock.getElapsedTime().asSeconds() > 0.25f)
+	if (cdClock.getElapsedTime().asSeconds() > 0.6f)
 		return canChange = true;
 }
 
