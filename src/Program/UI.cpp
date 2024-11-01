@@ -1,7 +1,10 @@
 #include <iostream>
 #include <list>
 #include "UI.h"
+#include "../Utilities/ScreenResolution.h"
 #include "../Utilities/ResourceManager.h"
+#include "../Utilities/ScoreManager.h"
+
 
 UI::UI()
 {
@@ -21,11 +24,8 @@ UI::~UI()
 	hpUI.clear();
 }
 
-
-
-
-void UI::InitializeUI(int HP)
-{	
+void UI::InitializeHealthAndWaveUI()
+{
 	this->maxHP = HP;
 	this->HP = maxHP;
 	for (int i = 0; i < maxHP; i++)
@@ -51,6 +51,35 @@ void UI::InitializeUI(int HP)
 	waveNumber.setPosition(120, 30);
 }
 
+void UI::InitializeScoreUI()
+{
+	scoreTitle.setFont(*uiFont);
+	scoreTitle.setString(SCORE_TITLE_STRING);
+	scoreTitle.setCharacterSize(26);
+	scoreTitle.setPosition(ScreenResolution::SCREEN_WIDTH_720P - 143, 20);
+	scoreTitle.setLetterSpacing(1.0f);
+
+	scoreShown.setFont(*uiFont);
+	scoreShown.setString(scoreString);
+	scoreShown.setCharacterSize(26);
+	scoreShown.setStyle(sf::Text::Italic);
+	scoreShown.setPosition(ScreenResolution::SCREEN_WIDTH_720P - 150, 50);
+	score = newScore;
+
+
+
+}
+
+
+void UI::InitializeUI(int HP)
+{
+	this->maxHP = HP;
+	this->HP = maxHP;
+	InitializeHealthAndWaveUI();
+	InitializeScoreUI();
+
+}
+
 void UI::UpdateUIHealth()
 {
 
@@ -71,6 +100,8 @@ void UI::UpdateUIHealth()
 	}
 }
 
+
+
 void UI::SetUIHP(int HP)
 {
 	this->HP = HP;
@@ -82,10 +113,31 @@ void UI::SetUIWave(int wave)
 	waveNumber.setString(waveNumberString);
 }
 
+void UI::UpdateUIScore()
+{
+	scoreString = std::to_string(newScore);
+	while (scoreString.length() < 6)
+	{
+		scoreString = '0' + scoreString;
+	}
+	scoreShown.setString(scoreString);
+	scoreClock.restart();
+}
+
+void UI::UpdateScore()
+{
+	newScore = ScoreManager::getInstance().GetScore();
+	scoreClock.restart();
+}
+
+
+
 
 void UI::Update()
 {
+	UpdateScore();
 	UpdateUIHealth();
+	UpdateUIScore();
 }
 
 
@@ -98,5 +150,7 @@ void UI::Draw(sf::RenderWindow& window)
 	}
 	window.draw(waveTitle);
 	window.draw(waveNumber);
+	window.draw(scoreTitle);
+	window.draw(scoreShown);
 }
 

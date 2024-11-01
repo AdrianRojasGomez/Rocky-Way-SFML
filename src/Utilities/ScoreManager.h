@@ -15,6 +15,7 @@ private:
     ScoreManager& operator= (const ScoreManager&) = delete;
 
     const int LARGE_ASTEROID_VALUE = 100;
-    const int SMALL_ASTEROID_VALUE = 50;
+    const int SMALL_ASTEROID_VALUE = 30;
     int score;
+
 };
