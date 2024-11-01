@@ -1,5 +1,6 @@
 #include <iostream>
 #include "CollisionManager.h"
+#include "../Utilities/ScoreManager.h"
 
 CollisionManager::CollisionManager()
 {
@@ -58,6 +59,7 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 				SpawnSmallAsteroids(smallAsteroids, currentLargePosition);
 				currentLargeAsteroid->SetIsActive(false);
 				currentBullet->SetBulletSprite(false);
+				ScoreManager::getInstance().AddScoreLarge();
 			}
 		}
 
@@ -68,6 +70,7 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 			{
 				currentSmallAsteroid->SetIsActive(false);
 				currentBullet->SetBulletSprite(false);
+				ScoreManager::getInstance().AddScoreSmall();
 			}
 		}
 	}

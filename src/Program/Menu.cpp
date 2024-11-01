@@ -184,9 +184,6 @@ GameState Menu::Update()
 	UpdateSelectedButton();
 	SelectButton();
 
-
-		std::cout << "gamestate MENU: " << (int)gameState << ".\n";
-
 	return gameState;
 }
 
