@@ -96,6 +96,7 @@ void GameOver::ChangeButton()
 	if (!canChange)
 		return;
 
+	
 	if (sf::Event::KeyPressed == sf::Keyboard::Up)
 	{
 		if (selectedIndex == 0)

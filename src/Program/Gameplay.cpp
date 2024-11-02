@@ -1,14 +1,14 @@
 #include <iostream> //DEBUG ONLY 
 #include "Gameplay.h"
 
-Gameplay::Gameplay()
+Gameplay::Gameplay(GameState* gameState)
 {
+	this->gameState = gameState;
 	ui = new UI();
 	player = new Player(ui);
 	wave = new Wave(ui);
 	collisionManager = new CollisionManager();
 	background = new Background();
-	gameState = GameState::Gameplay;
 }
 
 Gameplay::~Gameplay()
@@ -45,22 +45,20 @@ Gameplay::~Gameplay()
 	
 }
 
-GameState Gameplay::ResetGameplay()
+void Gameplay::ResetGameplay()
 {
 	player->PlayerReset();
 	wave->WaveReset();
 
-	return gameState = GameState::Gameplay;
+	*gameState = GameState::Gameplay;
 }
 
 
-GameState Gameplay::Update()
+void Gameplay::Update()
 {
-	gameState = player->Update();
 	collisionManager->Update(*player, player->GetBullets(),  wave->GetLargeAsteroids(), wave->GetSmallAsteroids());
 	wave->Update();
-	ui->Update();
-	return gameState;
+	ui->Update();;
 }
 
 void Gameplay::Draw(sf::RenderWindow& window)

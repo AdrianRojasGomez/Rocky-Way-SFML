@@ -5,11 +5,13 @@
 class Menu
 {
 public:
-	Menu();
+	Menu(GameState* gameState);
 	~Menu();
-	GameState Update();
+	void Input(sf::Event event);
+	void Update();
 	void Draw(sf::RenderWindow& window);
 	void ResetState();
+	void SelectButton();
 
 private:
 	static constexpr int OPTIONS_AMOUNT = 4;
@@ -17,7 +19,7 @@ private:
 	const std::string MENU_BUTTONS_LABELS[OPTIONS_AMOUNT] = { "Play", "Highscore", "Options", "Quit" };
 	const int playButtonSize = 60;
 	const int otherButtonsSize = 35;
-	GameState gameState;
+	GameState* gameState;
 	sf::Text menuButtons[OPTIONS_AMOUNT];
 	sf::Texture* menuBackgroundTexture = nullptr;
 	sf::Sprite menuBackgroundSprite;
@@ -34,6 +36,5 @@ private:
 	void UpdateSelectedButton();
 	void ChangeButton();
 	bool ButtonCooldown(bool& canChange);
-	void SelectButton();
 
 };

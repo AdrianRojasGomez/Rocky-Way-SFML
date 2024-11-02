@@ -34,6 +34,6 @@ private:
 	void InitializeTitle();
 	void InitializeRanking();
 	void InitializeButton();
-	void SelectButton();
 	void FetchHighScoreList();
+	void SelectButton();
 };

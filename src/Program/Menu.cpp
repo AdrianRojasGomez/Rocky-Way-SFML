@@ -4,19 +4,30 @@
 #include "../Utilities/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
 
-Menu::Menu()
+Menu::Menu(GameState* gameState)
 {
+	this->gameState = gameState;
 	menuBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
 	menuFont = ResourceManager::GetOxaniumSemiBoldFont();
 	InitializeBackground();
 	CreateTitle();
 	InitializeButtons();
-	gameState = GameState::MainMenu;
 	cdClock.restart();
 }
 
 Menu::~Menu()
 {
+}
+
+void Menu::Input(sf::Event event)
+{
+	if (event.type == sf::Event::KeyPressed)
+	{
+		if (event.key.code == sf::Keyboard::Enter)
+		{
+			SelectButton();
+		}
+	}
 }
 
 void Menu::InitializeBackground()
@@ -146,45 +157,44 @@ void Menu::SelectButton()
 	if (!canChange)
 		return;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-	{
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+	//{
 
 		switch (selectedIndex)
 		{
 		case 0:
-			gameState = GameState::Gameplay;
+			*gameState = GameState::Gameplay;
 			canChange = false;
 			cdClock.restart();
 			break;
 		case 1:
-			gameState = GameState::HighScores;
+			*gameState = GameState::HighScores;
 			canChange = false;
 			cdClock.restart();
 			break;
 		case 2:
-			gameState = GameState::Options;
+			*gameState = GameState::Options;
 			canChange = false;
 			cdClock.restart();
 			break;
 		case 3:
-			gameState = GameState::ExitGame;
+			*gameState = GameState::ExitGame;
 			canChange = false;
 			cdClock.restart();
 			break;
 		default:
 			break;
 		}
-	}
+	//}
 }
 
-GameState Menu::Update()
+void Menu::Update()
 {
 	ButtonCooldown(canChange);
 	ChangeButton();
 	UpdateSelectedButton();
-	SelectButton();
+	//SelectButton();
 
-	return gameState;
 }
 
 void Menu::Draw(sf::RenderWindow& window)
@@ -197,8 +207,8 @@ void Menu::Draw(sf::RenderWindow& window)
 
 void Menu::ResetState()
 {
-	if (gameState == GameState::MainMenu)
+	if (*gameState == GameState::MainMenu)
 		return;
 
-	 gameState = GameState::MainMenu; 
+	 *gameState = GameState::MainMenu; 
 }
