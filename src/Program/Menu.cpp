@@ -157,7 +157,7 @@ void Menu::SelectButton()
 			cdClock.restart();
 			break;
 		case 1:
-			gameState = GameState::Stats;
+			gameState = GameState::HighScores;
 			canChange = false;
 			cdClock.restart();
 			break;
@@ -199,5 +199,6 @@ void Menu::ResetState()
 {
 	if (gameState == GameState::MainMenu)
 		return;
-	{ gameState = GameState::MainMenu; }
+
+	 gameState = GameState::MainMenu; 
 }

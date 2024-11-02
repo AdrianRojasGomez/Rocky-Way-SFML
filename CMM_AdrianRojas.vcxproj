@@ -30,6 +30,7 @@
     <ClCompile Include="src\Program\Game.cpp" />
     <ClCompile Include="src\Program\GameOver.cpp" />
     <ClCompile Include="src\Program\Gameplay.cpp" />
+    <ClCompile Include="src\Program\HighScore.cpp" />
     <ClCompile Include="src\Program\Menu.cpp" />
     <ClCompile Include="src\Program\UI.cpp" />
     <ClCompile Include="src\Program\Wave.cpp" />
@@ -42,6 +43,7 @@
   <ItemGroup>
     <ClInclude Include="src\Program\GameOver.h" />
     <ClInclude Include="src\Program\GameState.h" />
+    <ClInclude Include="src\Program\HighScore.h" />
     <ClInclude Include="src\Program\Menu.h" />
     <ClInclude Include="src\Program\UI.h" />
     <ClInclude Include="src\Utilities\RandomUtility.h" />
@@ -60,6 +62,9 @@
     <ClInclude Include="src\Utilities\ScoreManager.h" />
     <ClInclude Include="src\Utilities\ScreenResolution.h" />
     <ClInclude Include="src\Utilities\WrappingScreenUtility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\GameData\Highscores.dat" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
