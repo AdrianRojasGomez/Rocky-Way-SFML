@@ -2,18 +2,20 @@
 #include "Game.h"
 #include "Gameplay.h"
 #include "../Utilities/ScreenResolution.h"
+#include "../Utilities/Framerate.h"
 
 
 Game::Game()
 {
 	srand(time(0));
-	Game::gameState = GameState::MainMenu;
+	Game::gameState = GameState::HighScores;
 	videoMode = new sf::VideoMode(ScreenResolution::SCREEN_WIDTH_720P, ScreenResolution::SCREEN_HEIGHT_720P);
 	window = new sf::RenderWindow(*videoMode, "Rocky Ways");
 	resourceManager = new ResourceManager();
 	gameplay = new Gameplay();
 	menu = new Menu();
 	gameOver = new GameOver();
+	highScore = new HighScore();
 }
 
 Game::~Game()
@@ -52,6 +54,12 @@ Game::~Game()
 	{
 		delete gameOver;
 		gameOver = nullptr;
+	}
+
+	if (highScore != nullptr)
+	{
+		delete highScore;
+		highScore = nullptr;
 	}
 
 }
@@ -99,12 +107,10 @@ void Game::Update()
 		menu->ResetState();
 		gameState = gameOver->Update();
 		break;
-	case GameState::Stats:
+	case GameState::HighScores:
+		gameState = highScore->Update();
 		break;
 	case GameState::Options:
-		///OPTIONS USING AS GAMEOVER FOR DEBUGING AND TESTING
-		menu->ResetState();
-		gameState = gameOver->Update();
 		break;
 	case GameState::Replay:
 		menu->ResetState();
@@ -139,12 +145,14 @@ void Game::Draw()
 	case GameState::GameOver:
 		gameOver->Draw(*window);
 		break;
-	case GameState::Stats:
+	case GameState::HighScores:
+		highScore->Draw(*window);
 		break;
 	case GameState::Options:
 		gameOver->Draw(*window);
 		break;
 	case GameState::Replay:
+
 		break;
 	case GameState::ExitGame:
 		break;

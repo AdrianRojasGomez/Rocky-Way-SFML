@@ -1,11 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Menu.h"
-#include "../Utilities/Framerate.h"
 #include "../Utilities/ResourceManager.h"
+#include "Menu.h"
 #include "Gameplay.h"
 #include "GameState.h"
 #include "GameOver.h"
+#include "HighScore.h"
+
 
 class Game
 
@@ -23,6 +24,7 @@ private:
 	Menu* menu;
 	Gameplay* gameplay;
 	GameOver* gameOver;
+	HighScore* highScore;
 	ResourceManager* resourceManager;
 	sf::VideoMode* videoMode;
 	sf::RenderWindow* window;

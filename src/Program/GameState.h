@@ -7,7 +7,7 @@ enum class GameState
 	Gameplay,
 	Pause,
 	GameOver,
-	Stats,
+	HighScores,
 	Options,
 	Replay,
 	ExitGame,
