@@ -3,20 +3,15 @@
 #include <string>
 #include <vector>
 
-struct HighScores
+struct HighScoresValues
 {
 	std::string name;
 	int score;
 	int maxWave;
-
-	//Lo mismo que vimos con el ostream pero con el boolean ==
-	//bool operator==(const HighScores& other) const {
-	//    return name == other.name && score == other.score && maxWave == other.maxWave;
-	//}
 };
 
 //Operator Overload << for debugging
-std::ostream& operator<<(std::ostream& os, const HighScores& highscore);
+//std::ostream& operator<<(std::ostream& os, const HighScoresValues& highscore);
 
 
 class ScoreManager
@@ -26,11 +21,13 @@ class ScoreManager
 public:
 	static ScoreManager& getInstance();
 	int GetScore();
+	std::vector<HighScoresValues>& const GetHighScoresList();
 	void SetWave(int waveCounter);
 	void AddScoreLarge();
 	void AddScoreSmall();
 	void ResetScore();
 	void CompareHighScore();
+	std::vector<HighScoresValues> highScoresList;
 
 
 private:
@@ -42,10 +39,9 @@ private:
 
 	ScoreManager& operator= (const ScoreManager&) = delete;
 	const std::string filePath = "res/GameData/Highscores.dat";
-	std::vector<HighScores> highScoresList;
 	const int LARGE_ASTEROID_VALUE = 100;
 	const int SMALL_ASTEROID_VALUE = 30;
-	std::string name = "Test5";
+	std::string name = "Test7";
 	int score;
 	int maxWave;
 

@@ -62,16 +62,6 @@ void ScoreManager::LimitListToSixRankings()
 {
 	if (highScoresList.size() > 6)
 		highScoresList.resize(6);
-
-	std::cout << highScoresList.size() << ": SIZE()\n";
-	//DEBUG PURPOSES
-	for (int i = 0; i < highScoresList.size(); i++)
-	{
-		std::cout << i + 1 << "\n";
-		std::cout << highScoresList[i];
-		std::cout << "\n\n\n";
-	}
-	std::cout << highScoresList.size() << ": SIZE()\n";
 }
 
 ScoreManager& ScoreManager::getInstance()
@@ -83,6 +73,11 @@ ScoreManager& ScoreManager::getInstance()
 int ScoreManager::GetScore()
 {
 	return score;
+}
+
+std::vector<HighScoresValues>& ScoreManager::GetHighScoresList()
+{
+	return highScoresList;
 }
 
 void ScoreManager::SetWave(int waveCounter)
@@ -115,17 +110,16 @@ void ScoreManager::CompareHighScore()
 	if (score > highScoresList[i].score)
 		{
 			itClasifies = true;
-			highScoresList.push_back(HighScores {name, score, maxWave});
+			highScoresList.push_back(HighScoresValues {name, score, maxWave});
 			break;
 		}
 	}
 	if (!itClasifies)
 		return;
 
-
-
 	SortDescending();
 	LimitListToSixRankings();
+
 	std::ofstream HighScoreFileWrite(filePath);
 
 	if (!HighScoreFileWrite.is_open())
@@ -143,7 +137,7 @@ void ScoreManager::CompareHighScore()
 }
 
 //DEBUG PURPOSES
-std::ostream& operator<<(std::ostream& os, const HighScores& highscore)
+/*std::ostream& operator<<(std::ostream& os, const HighScoresValues& highscore)
 {
 	{
 		os << highscore.name << "\n"
@@ -153,3 +147,4 @@ std::ostream& operator<<(std::ostream& os, const HighScores& highscore)
 		return os;
 	}
 }
+*/

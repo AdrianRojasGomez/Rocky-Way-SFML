@@ -4,16 +4,17 @@
 #include "../Utilities/ScreenResolution.h"
 
 
+
 HighScore::HighScore()
 {
 	highScoreBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
 	font = ResourceManager::GetOxaniumSemiBoldFont();
+	FetchHighScoreList();
 	InitializeHighScoreScreen();
 	InitializeTitle();
 	InitializeRanking();
 	InitializeButton();
 	gameState = GameState::HighScores;
-
 }
 
 HighScore::~HighScore()
@@ -77,6 +78,11 @@ void HighScore::SelectButton()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 		gameState = GameState::MainMenu;
+}
+
+void HighScore::FetchHighScoreList()
+{
+	highScoresList = ScoreManager::getInstance().GetHighScoresList();
 }
 
 GameState HighScore::Update()

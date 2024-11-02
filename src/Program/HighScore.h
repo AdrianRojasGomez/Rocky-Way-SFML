@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "GameState.h"
+#include "../Utilities/ScoreManager.h"
 
 class HighScore
 {
@@ -18,8 +19,12 @@ private:
 	const std::string RANKING_NUMBER[RANKING_AMOUNT] = { "1.","2.","3.","4.","5.","6." };
 	const int playButtonSize = 40;
 	GameState gameState;
+	std::vector<HighScoresValues> highScoresList;
 	sf::Text highScoreTitle;
 	sf::Text rankingNumbersText[RANKING_AMOUNT];
+	sf::Text rankingNames[RANKING_AMOUNT];
+	sf::Text rankingScore[RANKING_AMOUNT];
+	sf::Text rankingMaxWave[RANKING_AMOUNT];
 	sf::Text menuButton;
 	sf::Texture* highScoreBackgroundTexture = nullptr;
 	sf::Sprite highScoreBackgroundSprite;
@@ -30,4 +35,5 @@ private:
 	void InitializeRanking();
 	void InitializeButton();
 	void SelectButton();
+	void FetchHighScoreList();
 };
