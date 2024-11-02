@@ -132,7 +132,7 @@ void GameOver::ChangeButton()
 
 bool GameOver::ButtonCooldown(bool& canChange)
 {
-	if (GOClock.getElapsedTime().asSeconds() > 0.6f)
+	if (GOClock.getElapsedTime().asSeconds() > 0.25f)
 		return canChange = true;
 }
 
@@ -141,7 +141,7 @@ void GameOver::SelectButton()
 	if (!canChange)
 		return;
 
-	if (sf::Event::KeyPressed == sf::Keyboard::Enter)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 	{
 		switch (selectedIndex)
 		{
@@ -168,7 +168,6 @@ GameState GameOver::Update()
 	UpdateSelectedButton();
 	SelectButton();
 
-	std::cout << "gamestate GO: " << (int)gameState << ".\n";
 	return gameState;
 }
 

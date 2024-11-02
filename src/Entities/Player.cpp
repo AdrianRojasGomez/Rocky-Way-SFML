@@ -3,6 +3,7 @@
 #include "../Utilities/WrappingScreenUtility.h"
 #include "../Utilities/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
+#include "../Utilities/ScoreManager.h"
 
 Player::Player(UI* ui)
 {
@@ -147,6 +148,7 @@ GameState Player::Update()
 {
 	if (!CheckHasHPLeft())
 	{
+		ScoreManager::getInstance().CompareHighScore();
 		gameState = GameState::GameOver;
 		return gameState;
 	}

@@ -152,6 +152,7 @@ void Game::Draw()
 		gameOver->Draw(*window);
 		break;
 	case GameState::Replay:
+
 		break;
 	case GameState::ExitGame:
 		break;

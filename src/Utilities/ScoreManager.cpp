@@ -18,27 +18,23 @@ ScoreManager::ScoreManager()
 
 void ScoreManager::LoadRankingFromFile()
 {
-	std::ifstream HighscoresFile(filePath);
+	std::ifstream HighscoresFileRead(filePath);
 	std::string line;
 
-	if (HighscoresFile.is_open())
-	{
-		while (std::getline(HighscoresFile, line))
-		{
-			std::stringstream ss(line);
-			std::string rankedName;
-			int rankedScore, rankedMaxWave;
-
-			if (std::getline(ss, rankedName, ',') && (ss >> rankedScore) && ss.ignore() && (ss >> rankedMaxWave))
-				highScoresList.push_back({ rankedName, rankedScore, rankedMaxWave });
-		}
-	}
-	else
-	{
+	if (!HighscoresFileRead.is_open())
 		std::cout << "Error en apertura de file de Highscores!!!\n";
+
+	while (std::getline(HighscoresFileRead, line))
+	{
+		std::stringstream ss(line);
+		std::string rankedName;
+		int rankedScore, rankedMaxWave;
+
+		if (std::getline(ss, rankedName, ',') && (ss >> rankedScore) && ss.ignore() && (ss >> rankedMaxWave))
+			highScoresList.push_back({ rankedName, rankedScore, rankedMaxWave });
 	}
 
-	HighscoresFile.close();
+	HighscoresFileRead.close();
 }
 
 void ScoreManager::SortDescending()
@@ -53,19 +49,29 @@ void ScoreManager::SortDescending()
 	}
 
 	//DEBUG PURPOSES
-	for (int i = 0; i < highScoresList.size(); i++)
-	{
-		std::cout << i + 1 << "\n";
-		std::cout << highScoresList[i];
-		std::cout << "\n\n\n";
-
-	}
+	//for (int i = 0; i < highScoresList.size(); i++)
+	//{
+	//	std::cout << i + 1 << "\n";
+	//	std::cout << highScoresList[i];
+	//	std::cout << "\n\n\n";
+	//
+	//}
 }
 
 void ScoreManager::LimitListToSixRankings()
 {
 	if (highScoresList.size() > 6)
 		highScoresList.resize(6);
+
+	std::cout << highScoresList.size() << ": SIZE()\n";
+	//DEBUG PURPOSES
+	for (int i = 0; i < highScoresList.size(); i++)
+	{
+		std::cout << i + 1 << "\n";
+		std::cout << highScoresList[i];
+		std::cout << "\n\n\n";
+	}
+	std::cout << highScoresList.size() << ": SIZE()\n";
 }
 
 ScoreManager& ScoreManager::getInstance()
@@ -77,6 +83,11 @@ ScoreManager& ScoreManager::getInstance()
 int ScoreManager::GetScore()
 {
 	return score;
+}
+
+void ScoreManager::SetWave(int waveCounter)
+{
+	this->maxWave = waveCounter;
 }
 
 void ScoreManager::AddScoreLarge()
@@ -94,6 +105,41 @@ void ScoreManager::AddScoreSmall()
 void ScoreManager::ResetScore()
 {
 	score = 0;
+}
+
+void ScoreManager::CompareHighScore()
+{
+	bool itClasifies = false;
+	for (int i = 0; i < highScoresList.size(); i++)
+	{
+	if (score > highScoresList[i].score)
+		{
+			itClasifies = true;
+			highScoresList.push_back(HighScores {name, score, maxWave});
+			break;
+		}
+	}
+	if (!itClasifies)
+		return;
+
+
+
+	SortDescending();
+	LimitListToSixRankings();
+	std::ofstream HighScoreFileWrite(filePath);
+
+	if (!HighScoreFileWrite.is_open())
+		std::cout << "Error en apertura de file de Highscores!!!\n";
+
+	for (int i = 0; i < highScoresList.size(); i++)
+	{
+		HighScoreFileWrite << highScoresList[i].name << ","
+			<< highScoresList[i].score << ","
+			<< highScoresList[i].maxWave << "\n";
+	}
+
+	HighScoreFileWrite.close();
+
 }
 
 //DEBUG PURPOSES

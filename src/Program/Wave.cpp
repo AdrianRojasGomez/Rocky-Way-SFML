@@ -1,5 +1,6 @@
 #include <cmath>
 #include "Wave.h"
+#include "../Utilities/ScoreManager.h"
 
 Wave::Wave(UI* ui)
 {
@@ -48,13 +49,13 @@ void Wave::CreateAsteroids()
 void Wave::CreateWave()
 {
 	waveCounter++;
+	ScoreManager::getInstance().SetWave(waveCounter);
 	ui->SetUIWave(waveCounter);
 
 	if (waveCounter <= 1)
 	{
 		this->largePerWave = FIRST_WAVE_LARGE;
 		this->smallPerWave = FIRST_WAVE_SMALL;
-
 	}
 	else
 	{
