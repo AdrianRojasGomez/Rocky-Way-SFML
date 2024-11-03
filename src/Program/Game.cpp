@@ -91,8 +91,10 @@ void Game::ProcessEvents()
 			menu->Input(event);
 			break;
 		case GameState::Gameplay:
+			gameplay->Input(event);
 			break;
 		case GameState::Pause:
+			gameplay->Input(event);
 			break;
 		case GameState::GameOver:
 			gameOver->Input(event);
@@ -130,7 +132,7 @@ void Game::Update()
 		gameplay->Update();
 		break;
 	case GameState::Pause:
-		//Pause Menu
+		gameplay->Update();
 		break;
 	case GameState::GameOver:
 		gameOver->Update();
@@ -167,6 +169,7 @@ void Game::Draw()
 		gameplay->Draw(*window);
 		break;
 	case GameState::Pause:
+		gameplay->Draw(*window);
 		break;
 	case GameState::GameOver:
 		gameOver->Draw(*window);
@@ -177,7 +180,6 @@ void Game::Draw()
 	case GameState::Options:
 		break;
 	case GameState::Replay:
-
 		break;
 	case GameState::ExitGame:
 		break;

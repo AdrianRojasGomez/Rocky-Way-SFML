@@ -5,12 +5,14 @@
 #include "CollisionManager.h"
 #include "UI.h"
 #include "GameState.h"
+#include "Pause.h"
 
 class Gameplay
 {
 public:
 	Gameplay(GameState* gameState);
 	~Gameplay();
+	void Input(sf::Event event);
 	void Update();
 	void Draw(sf::RenderWindow& window);
 	void ResetGameplay();
@@ -24,6 +26,7 @@ private:
 	Player* player;
 	Wave* wave;
 	CollisionManager* collisionManager;
+	Pause* pause;
 
 
 };
