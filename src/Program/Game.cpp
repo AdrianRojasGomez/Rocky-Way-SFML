@@ -98,6 +98,7 @@ void Game::ProcessEvents()
 			gameOver->Input(event);
 			break;
 		case GameState::HighScores:
+			highScore->Input(event);
 			break;
 		case GameState::Options:
 			break;

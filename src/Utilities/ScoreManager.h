@@ -41,7 +41,7 @@ private:
 	const std::string filePath = "res/GameData/Highscores.dat";
 	const int LARGE_ASTEROID_VALUE = 100;
 	const int SMALL_ASTEROID_VALUE = 30;
-	std::string name = "Test7";
+	std::string name = "Player 01";
 	int score;
 	int maxWave;
 
