@@ -9,16 +9,16 @@
 class Gameplay
 {
 public:
-	Gameplay();
+	Gameplay(GameState* gameState);
 	~Gameplay();
-	GameState Update();
+	void Update();
 	void Draw(sf::RenderWindow& window);
-	GameState ResetGameplay();
+	void ResetGameplay();
 
 
 
 private:
-	GameState gameState;
+	GameState* gameState;
 	Background* background;
 	UI* ui;
 	Player* player;

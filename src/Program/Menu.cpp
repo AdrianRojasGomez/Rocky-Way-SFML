@@ -4,19 +4,50 @@
 #include "../Utilities/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
 
-Menu::Menu()
+Menu::Menu(GameState* gameState)
 {
+	this->gameState = gameState;
 	menuBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
 	menuFont = ResourceManager::GetOxaniumSemiBoldFont();
 	InitializeBackground();
 	CreateTitle();
 	InitializeButtons();
-	gameState = GameState::MainMenu;
-	cdClock.restart();
 }
 
 Menu::~Menu()
 {
+}
+
+void Menu::Input(sf::Event event)
+{
+	if (event.type == sf::Event::KeyPressed)
+	{
+		if (event.key.code == sf::Keyboard::Enter)
+			SelectButton();
+
+		if (event.key.code == sf::Keyboard::Up)
+		{
+			selectedIndex = (selectedIndex + 3) % 4;
+		}
+		if (event.key.code == sf::Keyboard::Down)
+		{
+			selectedIndex = (selectedIndex + 1) % 4;
+		}
+
+		if (event.key.code == sf::Keyboard::Right)
+		{
+			selectedIndex = (selectedIndex + 2) % 4;
+		}
+
+		if (event.key.code == sf::Keyboard::Left)
+		{
+			if (selectedIndex % 2 == 0)
+				selectedIndex = 2 - selectedIndex;
+			else
+				selectedIndex = 4 - selectedIndex;
+		}
+
+	}
 }
 
 void Menu::InitializeBackground()
@@ -90,101 +121,30 @@ void Menu::UpdateSelectedButton()
 
 }
 
-void Menu::ChangeButton()
-{
-	//TODO: fix response time and looping through the menu
-	if (!canChange)
-		return;
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-	{
-		selectedIndex = (selectedIndex + 3) % 4;
-		canChange = false;
-		cdClock.restart();
-		return;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-	{
-		selectedIndex = (selectedIndex + 1) % 4;
-		canChange = false;
-		cdClock.restart();
-		return;
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-	{
-		selectedIndex = (selectedIndex + 2) % 4;
-		canChange = false;
-		cdClock.restart();
-		return;
-	}
-
-
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-	{
-		if (selectedIndex % 2 == 0)
-			selectedIndex = 2 - selectedIndex;
-		else
-			selectedIndex = 4 - selectedIndex;
-
-		canChange = false;
-		cdClock.restart();
-		return;
-	}
-
-}
-
-bool Menu::ButtonCooldown(bool& canChange)
-{
-	if (cdClock.getElapsedTime().asSeconds() > 0.6f)
-		return canChange = true;
-}
-
 void Menu::SelectButton()
 {
-	if (!canChange)
-		return;
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-	{
-
 		switch (selectedIndex)
 		{
 		case 0:
-			gameState = GameState::Gameplay;
-			canChange = false;
-			cdClock.restart();
+			*gameState = GameState::Gameplay;
 			break;
 		case 1:
-			gameState = GameState::HighScores;
-			canChange = false;
-			cdClock.restart();
+			*gameState = GameState::HighScores;
 			break;
 		case 2:
-			gameState = GameState::Options;
-			canChange = false;
-			cdClock.restart();
+			*gameState = GameState::Options;
 			break;
 		case 3:
-			gameState = GameState::ExitGame;
-			canChange = false;
-			cdClock.restart();
+			*gameState = GameState::ExitGame;
 			break;
 		default:
 			break;
 		}
-	}
 }
 
-GameState Menu::Update()
+void Menu::Update()
 {
-	ButtonCooldown(canChange);
-	ChangeButton();
 	UpdateSelectedButton();
-	SelectButton();
-
-	return gameState;
 }
 
 void Menu::Draw(sf::RenderWindow& window)
@@ -197,8 +157,5 @@ void Menu::Draw(sf::RenderWindow& window)
 
 void Menu::ResetState()
 {
-	if (gameState == GameState::MainMenu)
-		return;
-
-	 gameState = GameState::MainMenu; 
+	 *gameState = GameState::MainMenu; 
 }

@@ -9,9 +9,10 @@
 class Player
 {
 public:
-	Player(UI* ui);
+	Player(UI* ui, GameState* gameState);
 	~Player();
-	GameState Update();
+	void Input(sf::Event event);
+	void Update();
 	void Draw(sf::RenderWindow& window);
 	void Respawn();
 	void RemoveInvulnerability();
@@ -25,7 +26,7 @@ public:
 	void PlayerReset();
 
 private:
-	GameState gameState;
+	GameState* gameState;
 	UI* ui;
 	sf::Texture* playerTexture;
 	sf::Sprite playerSprite;
@@ -47,8 +48,8 @@ private:
 	bool isAlive = true;
 	bool isInvulnerable = false;
 	bool isFiring = false;
-	int MaxHP = 3;
-	int HP = 3;
+	int MaxHP = 1;
+	int HP;
 	float posX = 0.0f;
 	float posY = 0.0f;
 	float rotation = 0.0f;

@@ -5,25 +5,31 @@
 #include "../Utilities/ScreenResolution.h"
 #include "../Utilities/ScoreManager.h"
 
-Player::Player(UI* ui)
+Player::Player(UI* ui, GameState* gameState)
 {
+	this->gameState = gameState;
 	this->ui = ui;
+	HP = MaxHP;
 	cooldownClock.restart();
 	this->playerTexture = ResourceManager::GetPlayerTexture();
 	SetTextureValues();
 	SetInitialPosition();
 	CreateBullets();
 	ui->SetUIHP(HP);
-	gameState = GameState::Gameplay;
 }
 
 Player::~Player()
 {
 }
 
+void Player::Input(sf::Event event)
+{
+
+}
+
 void Player::PlayerReset()
 {
-	gameState = GameState::Gameplay;
+	*gameState = GameState::Gameplay;
 	SetInitialPosition();
 	HP = MaxHP;
 	ui->SetUIHP(HP);
@@ -144,13 +150,13 @@ void Player::SetIsAlive(bool isAlive)
 	isInvulnerable = true;
 }
 
-GameState Player::Update()
+void Player::Update()
 {
 	if (!CheckHasHPLeft())
 	{
 		ScoreManager::getInstance().CompareHighScore();
-		gameState = GameState::GameOver;
-		return gameState;
+		*gameState = GameState::GameOver;
+		
 	}
 
 	Respawn();
@@ -165,8 +171,7 @@ GameState Player::Update()
 		{
 			bulletToDraw->Update();
 		}
-	}
-	return this->gameState;
+	};
 }
 
 void Player::Draw(sf::RenderWindow& window)

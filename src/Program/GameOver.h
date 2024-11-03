@@ -4,11 +4,11 @@
 class GameOver
 {
 public:
-	GameOver();
+	GameOver(GameState* gameState);
 	~GameOver();
-	GameState Update();
+	void Input(sf::Event event);
+	void Update();
 	void Draw(sf::RenderWindow& window);
-	void ResetState();
 
 
 private:
@@ -22,18 +22,15 @@ private:
 	sf::Font* menuFont = nullptr;
 	sf::Text gameOverTitle;
 	sf::Text menuButtons[OPTIONS_AMOUNT];
-	GameState gameState;
+	GameState* gameState;
 
 	int selectedIndex = 0;
 	bool canChange = false;
-	sf::Clock GOClock;
 
 	void CreateTitle();
 	void InitializeBackground();
 	void InitializeButtons();
 	void UpdateSelectedButton();
-	void ChangeButton();
-	bool ButtonCooldown(bool& canChange);
 	void SelectButton();
 
 };

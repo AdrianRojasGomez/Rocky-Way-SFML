@@ -8,14 +8,14 @@
 Game::Game()
 {
 	srand(time(0));
-	Game::gameState = GameState::HighScores;
+	Game::gameState = GameState::MainMenu;
 	videoMode = new sf::VideoMode(ScreenResolution::SCREEN_WIDTH_720P, ScreenResolution::SCREEN_HEIGHT_720P);
 	window = new sf::RenderWindow(*videoMode, "Rocky Ways");
 	resourceManager = new ResourceManager();
-	gameplay = new Gameplay();
-	menu = new Menu();
-	gameOver = new GameOver();
-	highScore = new HighScore();
+	gameplay = new Gameplay(&gameState);
+	menu = new Menu(&gameState);
+	gameOver = new GameOver(&gameState);
+	highScore = new HighScore(&gameState);
 }
 
 Game::~Game()
@@ -82,6 +82,37 @@ void Game::ProcessEvents()
 	{
 		if (event.type == sf::Event::Closed)
 			window->close();
+
+		switch (gameState)
+		{
+		case GameState::SplashScreen:
+			break;
+		case GameState::MainMenu:
+			menu->Input(event);
+			break;
+		case GameState::Gameplay:
+			break;
+		case GameState::Pause:
+			break;
+		case GameState::GameOver:
+			gameOver->Input(event);
+			break;
+		case GameState::HighScores:
+			highScore->Input(event);
+			break;
+		case GameState::Options:
+			break;
+		case GameState::Replay:
+			break;
+		case GameState::ExitGame:
+			break;
+		case GameState::Error:
+			break;
+		default:
+			break;
+		}
+
+
 	}
 }
 
@@ -93,29 +124,24 @@ void Game::Update()
 		//Splash with instructions
 		break;
 	case GameState::MainMenu:
-		gameOver->ResetState();
-		gameState = menu->Update();
+		menu->Update();
 		break;
 	case GameState::Gameplay:
-		menu->ResetState();
-		gameState = gameplay->Update();
+		gameplay->Update();
 		break;
 	case GameState::Pause:
 		//Pause Menu
 		break;
 	case GameState::GameOver:
-		menu->ResetState();
-		gameState = gameOver->Update();
+		gameOver->Update();
 		break;
 	case GameState::HighScores:
-		gameState = highScore->Update();
+		highScore->Update();
 		break;
 	case GameState::Options:
 		break;
 	case GameState::Replay:
-		menu->ResetState();
-		gameOver->ResetState();
-		gameState = gameplay->ResetGameplay();
+		gameplay->ResetGameplay();
 		break;
 	case GameState::ExitGame:
 		window->close();
@@ -149,7 +175,6 @@ void Game::Draw()
 		highScore->Draw(*window);
 		break;
 	case GameState::Options:
-		gameOver->Draw(*window);
 		break;
 	case GameState::Replay:
 
