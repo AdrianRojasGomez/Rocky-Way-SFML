@@ -12,25 +12,47 @@ AudioManager::AudioManager()
 {
 	menuMusic = ResourceManager::GetMenuMusic();
 	gameplayMusic = ResourceManager::GetGameplayMusic();
+	menuMusic->setLoop(true);
+	gameplayMusic->setLoop(true);
 
 }
 
 void AudioManager::PlayMenuMusic()
 {
-	if (isInMenu)
+	if (isInMainMenu)
 		return;
 
-	isInMenu = true;
+	isInMainMenu = true;
 	gameplayMusic->stop();
 	menuMusic->play();
 }
 
 void AudioManager::PlayGameplayMusic()
 {
-	if (!isInMenu)
+	if (!isInMainMenu)
 		return;
 
-	isInMenu = false;
+	isInMainMenu = false;
 	menuMusic->stop();
 	gameplayMusic->play();
+}
+
+void AudioManager::SetMusicVolume(int volume)
+{
+	menuMusic->setVolume(volume);
+	gameplayMusic->setVolume(volume);
+}
+
+void AudioManager::MuteAll(bool isMuted)
+{
+	if (!isMuted)
+	{
+		menuMusic->setVolume(0);
+		gameplayMusic->setVolume(0);
+	}
+	else
+	{
+		menuMusic->setVolume(100);
+		gameplayMusic->setVolume(100);
+	}
 }

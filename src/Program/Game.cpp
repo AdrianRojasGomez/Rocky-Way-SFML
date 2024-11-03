@@ -17,6 +17,7 @@ Game::Game()
 	menu = new Menu(&gameState);
 	gameOver = new GameOver(&gameState);
 	highScore = new HighScore(&gameState);
+	options = new Options(&gameState);
 }
 
 Game::~Game()
@@ -106,6 +107,7 @@ void Game::ProcessEvents()
 			highScore->Input(event);
 			break;
 		case GameState::Options:
+			options->Input(event);
 			break;
 		case GameState::Replay:
 			break;
@@ -144,6 +146,7 @@ void Game::Update()
 		highScore->Update();
 		break;
 	case GameState::Options:
+		options->Update();
 		break;
 	case GameState::Replay:
 		gameplay->ResetGameplay();
@@ -181,6 +184,7 @@ void Game::Draw()
 		highScore->Draw(*window);
 		break;
 	case GameState::Options:
+		options->Draw(*window);
 		break;
 	case GameState::Replay:
 		break;

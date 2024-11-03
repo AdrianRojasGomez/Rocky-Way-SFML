@@ -33,6 +33,7 @@
     <ClCompile Include="src\Program\Gameplay.cpp" />
     <ClCompile Include="src\Program\HighScore.cpp" />
     <ClCompile Include="src\Program\Menu.cpp" />
+    <ClCompile Include="src\Program\Options.cpp" />
     <ClCompile Include="src\Program\Pause.cpp" />
     <ClCompile Include="src\Program\UI.cpp" />
     <ClCompile Include="src\Program\Wave.cpp" />
@@ -48,6 +49,7 @@
     <ClInclude Include="src\Program\GameState.h" />
     <ClInclude Include="src\Program\HighScore.h" />
     <ClInclude Include="src\Program\Menu.h" />
+    <ClInclude Include="src\Program\Options.h" />
     <ClInclude Include="src\Program\Pause.h" />
     <ClInclude Include="src\Program\UI.h" />
     <ClInclude Include="src\Utilities\RandomUtility.h" />

@@ -12,6 +12,8 @@ public:
 	static sf::Texture* GetBulletTexture();
 	static sf::Texture* GetLargeAsteroidTexture();
 	static sf::Texture* GetSmallAsteroidTexture();
+	static sf::Texture* GetMusicOffTexture();
+	static sf::Texture* GetMusicOnTexture();
 	static sf::Font* GetOxaniumSemiBoldFont();
 	static sf::Music* GetMenuMusic();
 	static sf::Music* GetGameplayMusic();
@@ -23,19 +25,23 @@ private:
 	static sf::Texture* bulletTexture;
 	static sf::Texture* largeAsteroidTexture;
 	static sf::Texture* smallAsteroidTexture;
+	static sf::Texture* musicOnTexture;
+	static sf::Texture* musicOffTexture;
 	static sf::Font* oxaniumSemiBoldFont;
 	static sf::Music* menuMusic;
 	static sf::Music* gameplayMusic;
 
-	static const std::string spritePathMenuBG;
-	static const std::string spritePathBG;
-	static const std::string spritePathPlayer;
-	static const std::string spritePathBullet;
-	static const std::string spritePathLarge;
-	static const std::string spritePathSmall;
-	static const std::string fontPathOxaniumSemiBold;
-	static const std::string MusicPathMenu;
-	static const std::string MusicPathGameplay;
+	static const std::string pathTextureMenuBG;
+	static const std::string pathTextureBG;
+	static const std::string pathTexturePlayer;
+	static const std::string pathTextureBullet;
+	static const std::string pathTextureLarge;
+	static const std::string pathTextureSmall;
+	static const std::string pathTextureMusicOn;
+	static const std::string pathTextureMusicOff;
+	static const std::string pathFontOxaniumSemiBold;
+	static const std::string pathMusicMenu;
+	static const std::string pathMusicGameplay;
 
 	static sf::Texture* LoadTexture(std::string path);
 	static sf::Font* LoadFont(std::string path);

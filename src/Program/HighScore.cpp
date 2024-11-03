@@ -172,8 +172,6 @@ void HighScore::Input(sf::Event event)
 
 void HighScore::Update()
 {
-	
-	//std::cout << "hasUpdated Hs?" << hasHighscoresUpdated;
 	if (!hasHighscoresUpdated)
 	{
 		FetchHighScoreList();

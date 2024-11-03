@@ -8,6 +8,8 @@ public:
 	static AudioManager& getInstance();
 	void PlayMenuMusic();
 	void PlayGameplayMusic();
+	void SetMusicVolume(int volume);
+	void MuteAll(bool isMuted);
 
 private:
 	AudioManager();
@@ -17,6 +19,8 @@ private:
 	sf::Music* menuMusic;
 	sf::Music* gameplayMusic;
 
-	bool isInMenu = false;
+	bool isInMainMenu = false;
+	
+
 
 };
