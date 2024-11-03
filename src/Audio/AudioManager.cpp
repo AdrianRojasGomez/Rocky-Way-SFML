@@ -14,7 +14,8 @@ AudioManager::AudioManager()
 	gameplayMusic = ResourceManager::GetGameplayMusic();
 	menuMusic->setLoop(true);
 	gameplayMusic->setLoop(true);
-
+	menuMusic->setVolume(80);
+	gameplayMusic->setVolume(80);
 }
 
 void AudioManager::PlayMenuMusic()

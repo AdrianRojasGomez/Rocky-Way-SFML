@@ -4,7 +4,7 @@
 const std::string ResourceManager::pathTextureSplash = "res/assets/Background/Splash.png";
 const std::string ResourceManager::pathTextureMenuBG = "res/assets/Background/Background00.png";
 const std::string ResourceManager::pathTextureBG = "res/assets/Background/Background01.png";
-const std::string ResourceManager::pathTexturePlayer = "res/assets/Player/Player.png";
+const std::string ResourceManager::pathTexturePlayer = "res/assets/Player/PlayerSheet.png";
 const std::string ResourceManager::pathTextureBullet = "res/assets/Player/BasicShot.png";
 const std::string ResourceManager::pathTextureLarge = "res/assets/Enemies/MeteorLarge.png";
 const std::string ResourceManager::pathTextureSmall = "res/assets/Enemies/MeteorSmall.png";
