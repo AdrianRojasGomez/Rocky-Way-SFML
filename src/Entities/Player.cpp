@@ -11,7 +11,7 @@ Player::Player(UI* ui, GameState* gameState)
 	this->ui = ui;
 	HP = MaxHP;
 	cooldownClock.restart();
-	this->playerTexture = ResourceManager::GetPlayerTexture();
+	playerTexture = ResourceManager::GetPlayerTexture();
 	SetTextureValues();
 	SetInitialPosition();
 	CreateBullets();

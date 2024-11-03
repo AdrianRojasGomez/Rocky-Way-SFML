@@ -6,6 +6,7 @@
 #include "GameState.h"
 #include "GameOver.h"
 #include "HighScore.h"
+#include "Options.h"
 
 
 class Game
@@ -25,7 +26,11 @@ private:
 	Gameplay* gameplay;
 	GameOver* gameOver;
 	HighScore* highScore;
+	Options* options;
+
+	//Convertir en singleton REFACTOR
 	ResourceManager* resourceManager;
+
 	sf::VideoMode* videoMode;
 	sf::RenderWindow* window;
 	GameState gameState;

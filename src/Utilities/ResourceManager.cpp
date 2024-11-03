@@ -1,15 +1,17 @@
 #include <iostream>
 #include "ResourceManager.h"
 
-const std::string ResourceManager::spritePathMenuBG = "res/assets/Background/Background00.png";
-const std::string ResourceManager::spritePathBG = "res/assets/Background/Background01.png";
-const std::string ResourceManager::spritePathPlayer = "res/assets/Player/Player.png";
-const std::string ResourceManager::spritePathBullet = "res/assets/Traces/BasicShot.png";
-const std::string ResourceManager::spritePathLarge = "res/assets/Enemies/MeteorLarge.png";
-const std::string ResourceManager::spritePathSmall = "res/assets/Enemies/MeteorSmall.png";
-const std::string ResourceManager::fontPathOxaniumSemiBold = "res/assets/Fonts/Oxanium-SemiBold.ttf";
-const std::string ResourceManager::MusicPathMenu = "res/assets/Audio/Music/Menu.wav";
-const std::string ResourceManager::MusicPathGameplay = "res/assets/Audio/Music/Gameplay.wav";
+const std::string ResourceManager::pathTextureMenuBG = "res/assets/Background/Background00.png";
+const std::string ResourceManager::pathTextureBG = "res/assets/Background/Background01.png";
+const std::string ResourceManager::pathTexturePlayer = "res/assets/Player/Player.png";
+const std::string ResourceManager::pathTextureBullet = "res/assets/Player/BasicShot.png";
+const std::string ResourceManager::pathTextureLarge = "res/assets/Enemies/MeteorLarge.png";
+const std::string ResourceManager::pathTextureSmall = "res/assets/Enemies/MeteorSmall.png";
+const std::string ResourceManager::pathTextureMusicOn = "res/assets/UI/musicOn.png";
+const std::string ResourceManager::pathTextureMusicOff = "res/assets/UI/musicOff.png";
+const std::string ResourceManager::pathFontOxaniumSemiBold = "res/assets/Fonts/Oxanium-SemiBold.ttf";
+const std::string ResourceManager::pathMusicMenu = "res/assets/Audio/Music/Menu.wav";
+const std::string ResourceManager::pathMusicGameplay = "res/assets/Audio/Music/Gameplay.wav";
 
 sf::Texture* ResourceManager::menuBackgroundTexture = nullptr;
 sf::Texture* ResourceManager::gameBackgroundTexture = nullptr;
@@ -17,6 +19,8 @@ sf::Texture* ResourceManager::playerTexture = nullptr;
 sf::Texture* ResourceManager::bulletTexture = nullptr;
 sf::Texture* ResourceManager::largeAsteroidTexture = nullptr;
 sf::Texture* ResourceManager::smallAsteroidTexture = nullptr;
+sf::Texture* ResourceManager::musicOnTexture = nullptr;
+sf::Texture* ResourceManager::musicOffTexture = nullptr;
 sf::Font* ResourceManager::oxaniumSemiBoldFont = nullptr;
 sf::Music* ResourceManager::menuMusic = nullptr;
 sf::Music* ResourceManager::gameplayMusic = nullptr;
@@ -60,6 +64,18 @@ ResourceManager::~ResourceManager()
 		smallAsteroidTexture = nullptr;
 	}
 
+	if (musicOnTexture != nullptr)
+	{
+		delete musicOnTexture;
+		musicOnTexture = nullptr;
+	}
+
+	if (musicOffTexture != nullptr)
+	{
+		delete musicOffTexture;
+		musicOffTexture = nullptr;
+	}
+
 	if (oxaniumSemiBoldFont != nullptr)
 	{
 		delete oxaniumSemiBoldFont;
@@ -68,15 +84,20 @@ ResourceManager::~ResourceManager()
 
 	if (menuMusic != nullptr)
 	{
+		menuMusic->stop();
 		delete menuMusic;
 		menuMusic = nullptr;
 	}
 
 	if (gameplayMusic != nullptr)
 	{
+		gameplayMusic->stop();
 		delete gameplayMusic;
 		gameplayMusic = nullptr;
 	}
+
+
+
 }
 
 sf::Texture* ResourceManager::GetMenuBackgroundTexture()
@@ -84,7 +105,7 @@ sf::Texture* ResourceManager::GetMenuBackgroundTexture()
 	if (menuBackgroundTexture == nullptr)
 	{
 		menuBackgroundTexture = new sf::Texture();
-		menuBackgroundTexture = LoadTexture(spritePathMenuBG);
+		menuBackgroundTexture = LoadTexture(pathTextureMenuBG);
 	}
 	return menuBackgroundTexture;
 }
@@ -94,7 +115,7 @@ sf::Texture* ResourceManager::GetBackgroundTexture()
 	if (gameBackgroundTexture == nullptr)
 	{
 		gameBackgroundTexture = new sf::Texture;
-		gameBackgroundTexture = LoadTexture(spritePathBG);
+		gameBackgroundTexture = LoadTexture(pathTextureMenuBG);
 	}
 	return gameBackgroundTexture;
 }
@@ -104,7 +125,7 @@ sf::Texture* ResourceManager::GetPlayerTexture()
 	if (playerTexture == nullptr)
 	{
 		playerTexture = new sf::Texture;
-		playerTexture = LoadTexture(spritePathPlayer);
+		playerTexture = LoadTexture(pathTexturePlayer);
 	}
 	return playerTexture;
 }
@@ -114,7 +135,7 @@ sf::Texture* ResourceManager::GetBulletTexture()
 	if (bulletTexture == nullptr)
 	{
 		bulletTexture = new sf::Texture;
-		bulletTexture = LoadTexture(spritePathBullet);
+		bulletTexture = LoadTexture(pathTextureBullet);
 	}
 	return bulletTexture;
 }
@@ -124,7 +145,7 @@ sf::Texture* ResourceManager::GetLargeAsteroidTexture()
 	if (largeAsteroidTexture == nullptr)
 	{
 		largeAsteroidTexture = new sf::Texture;
-		largeAsteroidTexture = LoadTexture(spritePathLarge);
+		largeAsteroidTexture = LoadTexture(pathTextureLarge);
 	}
 	return largeAsteroidTexture;
 }
@@ -134,17 +155,40 @@ sf::Texture* ResourceManager::GetSmallAsteroidTexture()
 	if (smallAsteroidTexture == nullptr)
 	{
 		smallAsteroidTexture = new sf::Texture;
-		smallAsteroidTexture = LoadTexture(spritePathSmall);
+		smallAsteroidTexture = LoadTexture(pathTextureSmall);
 	}
 	return smallAsteroidTexture;
 }
+
+sf::Texture* ResourceManager::GetMusicOffTexture()
+{
+	if (musicOffTexture == nullptr)
+	{
+		musicOffTexture = new sf::Texture;
+		musicOffTexture = LoadTexture(pathTextureMusicOff);
+	}
+	
+	return musicOffTexture;
+}
+
+sf::Texture* ResourceManager::GetMusicOnTexture()
+{
+	if (musicOnTexture == nullptr)
+	{
+		musicOnTexture = new sf::Texture;
+		musicOnTexture = LoadTexture(pathTextureMusicOff);
+	}
+
+	return musicOnTexture;
+}
+
 
 sf::Font* ResourceManager::GetOxaniumSemiBoldFont()
 {
 	if (oxaniumSemiBoldFont == nullptr)
 	{
 		oxaniumSemiBoldFont = new sf::Font;
-		oxaniumSemiBoldFont = LoadFont(fontPathOxaniumSemiBold);
+		oxaniumSemiBoldFont = LoadFont(pathFontOxaniumSemiBold);
 	}
 	return oxaniumSemiBoldFont;
 }
@@ -154,7 +198,7 @@ sf::Music* ResourceManager::GetMenuMusic()
 	if (menuMusic == nullptr)
 	{
 		menuMusic = new sf::Music();
-		menuMusic = LoadMusic(MusicPathMenu);
+		menuMusic = LoadMusic(pathMusicMenu);
 	}
 	return menuMusic;
 }
@@ -164,7 +208,7 @@ sf::Music* ResourceManager::GetGameplayMusic()
 	if (gameplayMusic == nullptr)
 	{
 		gameplayMusic = new sf::Music();
-		gameplayMusic = LoadMusic(MusicPathGameplay);
+		gameplayMusic = LoadMusic(pathMusicGameplay);
 	}
 	return gameplayMusic;
 }
