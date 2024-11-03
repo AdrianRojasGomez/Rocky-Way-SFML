@@ -21,6 +21,7 @@ class ScoreManager
 public:
 	static ScoreManager& getInstance();
 	int GetScore();
+	std::string GetName() { return name; }
 	std::vector<HighScoresValues>& const GetHighScoresList();
 	void SetWave(int waveCounter);
 	void AddScoreLarge();
@@ -41,7 +42,7 @@ private:
 	const std::string filePath = "res/GameData/Highscores.dat";
 	const int LARGE_ASTEROID_VALUE = 100;
 	const int SMALL_ASTEROID_VALUE = 30;
-	std::string name = "Player 01";
+	std::string name = "Pilot 01";
 	int score;
 	int maxWave;
 

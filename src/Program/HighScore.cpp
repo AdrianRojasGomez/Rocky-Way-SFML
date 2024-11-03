@@ -130,6 +130,14 @@ void HighScore::ModifyLoadedTextProperties(sf::Text& text)
 	text.setFillColor(sf::Color::White);
 	text.setOutlineThickness(1.5);
 	text.setStyle(sf::Text::Bold);
+
+	if (text.getString() == ScoreManager::getInstance().GetName())
+	{
+		text.setFillColor(sf::Color::Yellow);
+		text.setOutlineThickness(2);
+		text.setOutlineColor(sf::Color::Black);
+		text.setStyle(sf::Text::Bold);
+	}
 }
 
 
