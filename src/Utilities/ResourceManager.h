@@ -6,6 +6,7 @@ class ResourceManager
 {
 public:
 	~ResourceManager();
+	static sf::Texture* GetSplashTexture();
 	static sf::Texture* GetMenuBackgroundTexture();
 	static sf::Texture* GetBackgroundTexture();
 	static sf::Texture* GetPlayerTexture();
@@ -19,6 +20,7 @@ public:
 	static sf::Music* GetGameplayMusic();
 
 private:
+	static sf::Texture* splashBackgroundTexture;
 	static sf::Texture* menuBackgroundTexture;
 	static sf::Texture* gameBackgroundTexture;
 	static sf::Texture* playerTexture;
@@ -31,6 +33,7 @@ private:
 	static sf::Music* menuMusic;
 	static sf::Music* gameplayMusic;
 
+	static const std::string pathTextureSplash;
 	static const std::string pathTextureMenuBG;
 	static const std::string pathTextureBG;
 	static const std::string pathTexturePlayer;

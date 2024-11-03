@@ -126,8 +126,6 @@ void Game::ProcessEvents()
 		default:
 			break;
 		}
-
-
 	}
 }
 
