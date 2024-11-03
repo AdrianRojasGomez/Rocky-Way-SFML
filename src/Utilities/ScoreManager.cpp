@@ -47,15 +47,6 @@ void ScoreManager::SortDescending()
 			}
 		}
 	}
-
-	//DEBUG PURPOSES
-	//for (int i = 0; i < highScoresList.size(); i++)
-	//{
-	//	std::cout << i + 1 << "\n";
-	//	std::cout << highScoresList[i];
-	//	std::cout << "\n\n\n";
-	//
-	//}
 }
 
 void ScoreManager::LimitListToSixRankings()
@@ -135,16 +126,3 @@ void ScoreManager::CompareHighScore()
 	HighScoreFileWrite.close();
 
 }
-
-//DEBUG PURPOSES
-/*std::ostream& operator<<(std::ostream& os, const HighScoresValues& highscore)
-{
-	{
-		os << highscore.name << "\n"
-			<< highscore.score << "\n"
-			<< highscore.maxWave;
-
-		return os;
-	}
-}
-*/

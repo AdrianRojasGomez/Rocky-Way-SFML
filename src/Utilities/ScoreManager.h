@@ -10,8 +10,7 @@ struct HighScoresValues
 	int maxWave;
 };
 
-//Operator Overload << for debugging
-//std::ostream& operator<<(std::ostream& os, const HighScoresValues& highscore);
+
 
 
 class ScoreManager

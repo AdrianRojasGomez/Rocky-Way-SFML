@@ -24,7 +24,11 @@ Player::~Player()
 
 void Player::Input(sf::Event event)
 {
-
+	if (event.type == sf::Event::KeyPressed)
+	{
+		if (event.key.code == sf::Keyboard::P || event.key.code == sf::Keyboard::Escape)
+			*gameState = GameState::Pause;
+	}
 }
 
 void Player::PlayerReset()
@@ -60,16 +64,16 @@ void Player::Movement()
 {
 	this->rotation = playerSprite.getRotation() - FIXED_DEGREES;
 	this->directionX = std::cos(rotation * NUM_PI / 180.0f);
-	this->directionY = std::sin(rotation * 3.14159265f / 180.0f);
+	this->directionY = std::sin(rotation * NUM_PI / 180.0f);
 
 	Fire();
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)))
 		playerSprite.move(directionX * MOVE_SPEED * Framerate::getDeltaTime(), directionY * MOVE_SPEED * Framerate::getDeltaTime());
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)))
 		playerSprite.rotate(-ROTATION_SPEED * Framerate::getDeltaTime());
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)))
 		playerSprite.rotate(ROTATION_SPEED * Framerate::getDeltaTime());
 
 	this->posX = playerSprite.getPosition().x;

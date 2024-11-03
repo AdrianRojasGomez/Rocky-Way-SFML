@@ -9,6 +9,7 @@ Gameplay::Gameplay(GameState* gameState)
 	wave = new Wave(ui);
 	collisionManager = new CollisionManager();
 	background = new Background();
+	pause = new Pause(gameState);
 }
 
 Gameplay::~Gameplay()
@@ -41,31 +42,57 @@ Gameplay::~Gameplay()
 	{
 		delete background;
 		background = nullptr;
-	}	
-	
+	}
+
+	if (pause != nullptr)
+	{
+		delete pause;
+		pause = nullptr;
+	}
+
+}
+
+void Gameplay::Input(sf::Event event)
+{
+	if (*gameState == GameState::Pause)
+	{
+		pause->Input(event);
+		return;
+	}
+
+	player->Input(event);
+}
+
+
+void Gameplay::Update()
+{
+	if (*gameState == GameState::Pause)
+	{
+		pause->Update();
+		return;
+	}
+
+	player->Update();
+	collisionManager->Update(*player, player->GetBullets(), wave->GetLargeAsteroids(), wave->GetSmallAsteroids());
+	wave->Update();
+	ui->Update();
+}
+
+void Gameplay::Draw(sf::RenderWindow& window)
+{
+	background->Draw(window);
+	ui->Draw(window);
+	if (*gameState == GameState::Pause)
+	{
+		pause->Draw(window);
+		return;
+	}
+	wave->Draw(window);
+	player->Draw(window);
 }
 
 void Gameplay::ResetGameplay()
 {
 	player->PlayerReset();
 	wave->WaveReset();
-
 }
-
-
-void Gameplay::Update()
-{
-	player->Update();
-	collisionManager->Update(*player, player->GetBullets(),  wave->GetLargeAsteroids(), wave->GetSmallAsteroids());
-	wave->Update();
-	ui->Update();;
-}
-
-void Gameplay::Draw(sf::RenderWindow& window)
-{
-	background->Draw(window);
-	wave->Draw(window);
-	player->Draw(window);
-	ui->Draw(window);
-}
-
