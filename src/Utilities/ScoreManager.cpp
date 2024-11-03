@@ -4,16 +4,17 @@
 #include <sstream>
 #include "ScoreManager.h"
 
+ScoreManager& ScoreManager::getInstance()
+{
+	static ScoreManager instance;
+	return instance;
+}
 
 ScoreManager::ScoreManager()
 {
-	score = 0;
 	LoadRankingFromFile();
 	SortDescending();
 	LimitListToSixRankings();
-
-
-
 }
 
 void ScoreManager::LoadRankingFromFile()
@@ -55,11 +56,6 @@ void ScoreManager::LimitListToSixRankings()
 		highScoresList.resize(6);
 }
 
-ScoreManager& ScoreManager::getInstance()
-{
-	static ScoreManager instance;
-	return instance;
-}
 
 int ScoreManager::GetScore()
 {

@@ -11,8 +11,6 @@ struct HighScoresValues
 };
 
 
-
-
 class ScoreManager
 {
 
@@ -33,17 +31,17 @@ public:
 private:
 	ScoreManager();
 	ScoreManager(const ScoreManager&) = delete;
+	ScoreManager& operator= (const ScoreManager&) = delete;
 	void LoadRankingFromFile();
 	void SortDescending();
 	void LimitListToSixRankings();
 
-	ScoreManager& operator= (const ScoreManager&) = delete;
 	const std::string filePath = "res/GameData/Highscores.dat";
 	const int LARGE_ASTEROID_VALUE = 100;
 	const int SMALL_ASTEROID_VALUE = 30;
 	std::string name = "Pilot 01";
-	int score;
-	int maxWave;
+	int score = 0;
+	int maxWave = 0;
 
 };
 

@@ -8,6 +8,9 @@ const std::string ResourceManager::spritePathBullet = "res/assets/Traces/BasicSh
 const std::string ResourceManager::spritePathLarge = "res/assets/Enemies/MeteorLarge.png";
 const std::string ResourceManager::spritePathSmall = "res/assets/Enemies/MeteorSmall.png";
 const std::string ResourceManager::fontPathOxaniumSemiBold = "res/assets/Fonts/Oxanium-SemiBold.ttf";
+const std::string ResourceManager::MusicPathMenu = "res/assets/Audio/Music/Menu.wav";
+const std::string ResourceManager::MusicPathGameplay = "res/assets/Audio/Music/Gameplay.wav";
+
 sf::Texture* ResourceManager::menuBackgroundTexture = nullptr;
 sf::Texture* ResourceManager::gameBackgroundTexture = nullptr;
 sf::Texture* ResourceManager::playerTexture = nullptr;
@@ -15,6 +18,9 @@ sf::Texture* ResourceManager::bulletTexture = nullptr;
 sf::Texture* ResourceManager::largeAsteroidTexture = nullptr;
 sf::Texture* ResourceManager::smallAsteroidTexture = nullptr;
 sf::Font* ResourceManager::oxaniumSemiBoldFont = nullptr;
+sf::Music* ResourceManager::menuMusic = nullptr;
+sf::Music* ResourceManager::gameplayMusic = nullptr;
+
 
 ResourceManager::~ResourceManager()
 {
@@ -58,6 +64,18 @@ ResourceManager::~ResourceManager()
 	{
 		delete oxaniumSemiBoldFont;
 		oxaniumSemiBoldFont = nullptr;
+	}
+
+	if (menuMusic != nullptr)
+	{
+		delete menuMusic;
+		menuMusic = nullptr;
+	}
+
+	if (gameplayMusic != nullptr)
+	{
+		delete gameplayMusic;
+		gameplayMusic = nullptr;
 	}
 }
 
@@ -131,6 +149,26 @@ sf::Font* ResourceManager::GetOxaniumSemiBoldFont()
 	return oxaniumSemiBoldFont;
 }
 
+sf::Music* ResourceManager::GetMenuMusic()
+{
+	if (menuMusic == nullptr)
+	{
+		menuMusic = new sf::Music();
+		menuMusic = LoadMusic(MusicPathMenu);
+	}
+	return menuMusic;
+}
+
+sf::Music* ResourceManager::GetGameplayMusic()
+{
+	if (gameplayMusic == nullptr)
+	{
+		gameplayMusic = new sf::Music();
+		gameplayMusic = LoadMusic(MusicPathGameplay);
+	}
+	return gameplayMusic;
+}
+
 sf::Texture* ResourceManager::LoadTexture(std::string path)
 {
 	sf::Texture* texture = new sf::Texture();
@@ -165,5 +203,21 @@ sf::Font* ResourceManager::LoadFont(std::string path)
 	return nullptr;
 }
 
+sf::Music* ResourceManager::LoadMusic(std::string path)
+{
+	sf::Music* music = new sf::Music();
 
+	if (music->openFromFile(path))
+	{
+		return music;
+	}
+
+	if (music != nullptr)
+	{
+		delete music;
+		music = nullptr;
+	}
+	std::cout << "DEBUG: Error!!!!!!!! LOADING " << path << "  MUSIC" << std::endl;
+	return nullptr;
+}
 
