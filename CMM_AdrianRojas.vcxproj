@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Audio\AudioManager.cpp" />
     <ClCompile Include="src\Entities\Asteroid.cpp" />
     <ClCompile Include="src\Entities\Bullet.cpp" />
     <ClCompile Include="src\Entities\LargeAsteroid.cpp" />
@@ -42,6 +43,7 @@
     <ClCompile Include="src\Utilities\WrappingScreenUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Audio\AudioManager.h" />
     <ClInclude Include="src\Program\GameOver.h" />
     <ClInclude Include="src\Program\GameState.h" />
     <ClInclude Include="src\Program\HighScore.h" />
