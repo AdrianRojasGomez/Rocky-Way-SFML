@@ -1,6 +1,7 @@
 #include <iostream>
 #include "ResourceManager.h"
 
+const std::string ResourceManager::pathTextureSplash = "res/assets/Background/Splash.png";
 const std::string ResourceManager::pathTextureMenuBG = "res/assets/Background/Background00.png";
 const std::string ResourceManager::pathTextureBG = "res/assets/Background/Background01.png";
 const std::string ResourceManager::pathTexturePlayer = "res/assets/Player/Player.png";
@@ -13,6 +14,7 @@ const std::string ResourceManager::pathFontOxaniumSemiBold = "res/assets/Fonts/O
 const std::string ResourceManager::pathMusicMenu = "res/assets/Audio/Music/Menu.wav";
 const std::string ResourceManager::pathMusicGameplay = "res/assets/Audio/Music/Gameplay.wav";
 
+sf::Texture* ResourceManager::splashBackgroundTexture = nullptr;
 sf::Texture* ResourceManager::menuBackgroundTexture = nullptr;
 sf::Texture* ResourceManager::gameBackgroundTexture = nullptr;
 sf::Texture* ResourceManager::playerTexture = nullptr;
@@ -28,6 +30,12 @@ sf::Music* ResourceManager::gameplayMusic = nullptr;
 
 ResourceManager::~ResourceManager()
 {
+	if (splashBackgroundTexture != nullptr)
+	{
+		delete splashBackgroundTexture;
+		splashBackgroundTexture = nullptr;
+	}
+
 	if (menuBackgroundTexture != nullptr)
 	{
 		delete menuBackgroundTexture;
@@ -95,9 +103,16 @@ ResourceManager::~ResourceManager()
 		delete gameplayMusic;
 		gameplayMusic = nullptr;
 	}
+}
 
-
-
+sf::Texture* ResourceManager::GetSplashTexture()
+{
+	if (splashBackgroundTexture == nullptr)
+	{
+		splashBackgroundTexture = new sf::Texture;
+		splashBackgroundTexture = LoadTexture(pathTextureSplash);
+	}
+	return splashBackgroundTexture;
 }
 
 sf::Texture* ResourceManager::GetMenuBackgroundTexture()
