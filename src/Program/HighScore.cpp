@@ -5,8 +5,9 @@
 
 
 
-HighScore::HighScore()
+HighScore::HighScore(GameState* gameState)
 {
+	this->gameState = gameState;
 	highScoreBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
 	font = ResourceManager::GetOxaniumSemiBoldFont();
 	FetchHighScoreList();
@@ -14,7 +15,6 @@ HighScore::HighScore()
 	InitializeTitle();
 	InitializeRanking();
 	InitializeButton();
-	gameState = GameState::HighScores;
 }
 
 HighScore::~HighScore()
@@ -77,7 +77,7 @@ void HighScore::InitializeButton()
 void HighScore::SelectButton()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-		gameState = GameState::MainMenu;
+		*gameState = GameState::MainMenu;
 }
 
 void HighScore::FetchHighScoreList()
@@ -85,10 +85,9 @@ void HighScore::FetchHighScoreList()
 	highScoresList = ScoreManager::getInstance().GetHighScoresList();
 }
 
-GameState HighScore::Update()
+void HighScore::Update()
 {
-	SelectButton();
-	return gameState;
+	//SelectButton();
 }
 
 void HighScore::Draw(sf::RenderWindow& window)
@@ -101,13 +100,6 @@ void HighScore::Draw(sf::RenderWindow& window)
 	window.draw(menuButton);
 }
 
-void HighScore::ResetState()
-{
-	if (gameState == GameState::HighScores)
-		return;
-
-	gameState = GameState::HighScores;
-}
 
 
 

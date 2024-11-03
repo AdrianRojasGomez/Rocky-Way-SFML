@@ -12,10 +12,10 @@ Game::Game()
 	videoMode = new sf::VideoMode(ScreenResolution::SCREEN_WIDTH_720P, ScreenResolution::SCREEN_HEIGHT_720P);
 	window = new sf::RenderWindow(*videoMode, "Rocky Ways");
 	resourceManager = new ResourceManager();
-	gameplay = new Gameplay();
+	gameplay = new Gameplay(&gameState);
 	menu = new Menu(&gameState);
-	gameOver = new GameOver();
-	highScore = new HighScore();
+	gameOver = new GameOver(&gameState);
+	highScore = new HighScore(&gameState);
 }
 
 Game::~Game()
@@ -95,6 +95,7 @@ void Game::ProcessEvents()
 		case GameState::Pause:
 			break;
 		case GameState::GameOver:
+			gameOver->Input(event);
 			break;
 		case GameState::HighScores:
 			break;
@@ -110,7 +111,7 @@ void Game::ProcessEvents()
 			break;
 		}
 
-		
+
 	}
 }
 
@@ -122,29 +123,24 @@ void Game::Update()
 		//Splash with instructions
 		break;
 	case GameState::MainMenu:
-		gameOver->ResetState();
 		menu->Update();
 		break;
 	case GameState::Gameplay:
-		menu->ResetState();
-		gameState = gameplay->Update();
+		gameplay->Update();
 		break;
 	case GameState::Pause:
 		//Pause Menu
 		break;
 	case GameState::GameOver:
-		menu->ResetState();
-		gameState = gameOver->Update();
+		gameOver->Update();
 		break;
 	case GameState::HighScores:
-		gameState = highScore->Update();
+		highScore->Update();
 		break;
 	case GameState::Options:
 		break;
 	case GameState::Replay:
-		menu->ResetState();
-		gameOver->ResetState();
-		gameState = gameplay->ResetGameplay();
+		gameplay->ResetGameplay();
 		break;
 	case GameState::ExitGame:
 		window->close();
@@ -178,7 +174,6 @@ void Game::Draw()
 		highScore->Draw(*window);
 		break;
 	case GameState::Options:
-		gameOver->Draw(*window);
 		break;
 	case GameState::Replay:
 

@@ -5,7 +5,7 @@ Gameplay::Gameplay(GameState* gameState)
 {
 	this->gameState = gameState;
 	ui = new UI();
-	player = new Player(ui);
+	player = new Player(ui, gameState);
 	wave = new Wave(ui);
 	collisionManager = new CollisionManager();
 	background = new Background();
@@ -50,12 +50,12 @@ void Gameplay::ResetGameplay()
 	player->PlayerReset();
 	wave->WaveReset();
 
-	*gameState = GameState::Gameplay;
 }
 
 
 void Gameplay::Update()
 {
+	player->Update();
 	collisionManager->Update(*player, player->GetBullets(),  wave->GetLargeAsteroids(), wave->GetSmallAsteroids());
 	wave->Update();
 	ui->Update();;

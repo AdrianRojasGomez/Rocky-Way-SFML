@@ -4,19 +4,50 @@
 #include "../Utilities/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
 
-GameOver::GameOver()
+GameOver::GameOver(GameState* gameState)
 {
+	this->gameState = gameState;
 	GameOverBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
 	menuFont = ResourceManager::GetOxaniumSemiBoldFont();
 	InitializeBackground();
 	CreateTitle();
 	InitializeButtons();
-	gameState = GameState::GameOver;
-	GOClock.restart();
 }
 
 GameOver::~GameOver()
 {
+}
+
+void GameOver::Input(sf::Event event)
+{
+	if (event.type == sf::Event::KeyPressed)
+	{
+		if (event.key.code == sf::Keyboard::Enter)
+			SelectButton();
+
+		if (event.key.code == sf::Keyboard::Up)
+		{
+			if (selectedIndex == 0)
+				selectedIndex = 1;
+			else
+				selectedIndex = 0;
+
+			std::cout << "Up\n";
+		}
+
+		if (event.key.code == sf::Keyboard::Down)
+		{
+			if (selectedIndex == 0)
+				selectedIndex = 1;
+
+			else
+				selectedIndex = 0;
+
+			std::cout << "Down\n";
+		}
+
+			std::cout << "Input\n";
+	}
 }
 
 void GameOver::InitializeBackground()
@@ -32,7 +63,6 @@ void GameOver::InitializeBackground()
 	else
 		std::cout << "DEBUG: Error!!!!!!!! LOADING GAME OVER BACKGROUND TEXTURE" << std::endl;
 }
-
 
 void GameOver::CreateTitle()
 {
@@ -91,98 +121,32 @@ void GameOver::UpdateSelectedButton()
 
 }
 
-void GameOver::ChangeButton()
-{
-	if (!canChange)
-		return;
-
-	
-	if (sf::Event::KeyPressed == sf::Keyboard::Up)
-	{
-		if (selectedIndex == 0)
-		{
-			selectedIndex = 1;
-			canChange = false;
-			GOClock.restart();
-		}
-		else
-		{
-			selectedIndex = 0;
-			canChange = false;
-			GOClock.restart();
-		}
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-	{
-		if (selectedIndex == 0)
-		{
-			selectedIndex = 1;
-			canChange = false;
-			GOClock.restart();
-		}
-		else
-		{
-			selectedIndex = 0;
-			canChange = false;
-			GOClock.restart();
-		}
-	}
-
-}
-
-bool GameOver::ButtonCooldown(bool& canChange)
-{
-	if (GOClock.getElapsedTime().asSeconds() > 0.25f)
-		return canChange = true;
-}
-
 void GameOver::SelectButton()
 {
-	if (!canChange)
-		return;
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-	{
 		switch (selectedIndex)
 		{
 		case 0:
-			gameState = GameState::Replay;
+			*gameState = GameState::Replay;
 			canChange = false;
-			GOClock.restart();
 			break;
 		case 1:
-			gameState = GameState::MainMenu;
+			*gameState = GameState::MainMenu;
 			canChange = false;
-			GOClock.restart();
 			break;
 		}
-	}
-
-
 }
 
-GameState GameOver::Update()
+void GameOver::Update()
 {
-	ButtonCooldown(canChange);
-	ChangeButton();
 	UpdateSelectedButton();
-	SelectButton();
-
-	return gameState;
 }
 
 void GameOver::Draw(sf::RenderWindow& window)
 {
 	window.draw(GameOverBackgroundSprite);
 	window.draw(gameOverTitle);
-	for (int i = 0; i < OPTIONS_AMOUNT; i++)		window.draw(menuButtons[i]);
+	for (int i = 0; i < OPTIONS_AMOUNT; i++)
+		window.draw(menuButtons[i]);
 }
 
-void GameOver::ResetState()
-{
-	if (gameState == GameState::GameOver)
-		return;
-	gameState = GameState::GameOver;
-}
 

@@ -6,9 +6,9 @@
 class HighScore
 {
 public:
-	HighScore();
+	HighScore(GameState* gameState);
 	~HighScore();
-	GameState Update();
+	void Update();
 	void Draw(sf::RenderWindow& window);
 	void ResetState();
 
@@ -18,7 +18,7 @@ private:
 	const std::string BUTTON_LABEL = "Main Menu";
 	const std::string RANKING_NUMBER[RANKING_AMOUNT] = { "1.","2.","3.","4.","5.","6." };
 	const int playButtonSize = 40;
-	GameState gameState;
+	GameState* gameState;
 	std::vector<HighScoresValues> highScoresList;
 	sf::Text highScoreTitle;
 	sf::Text rankingNumbersText[RANKING_AMOUNT];

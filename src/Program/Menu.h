@@ -25,16 +25,11 @@ private:
 	sf::Sprite menuBackgroundSprite;
 	sf::Font* menuFont = nullptr;
 	sf::Text gameTitle;
-	sf::Clock cdClock;
 
 	int selectedIndex = 0;
-	bool canChange = true;
 
 	void InitializeBackground();
 	void CreateTitle();
 	void InitializeButtons();
 	void UpdateSelectedButton();
-	void ChangeButton();
-	bool ButtonCooldown(bool& canChange);
-
 };
