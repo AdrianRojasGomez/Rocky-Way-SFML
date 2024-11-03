@@ -3,6 +3,7 @@
 #include "Gameplay.h"
 #include "../Utilities/ScreenResolution.h"
 #include "../Utilities/Framerate.h"
+#include "../Audio/AudioManager.h"
 
 
 Game::Game()
@@ -88,9 +89,11 @@ void Game::ProcessEvents()
 		case GameState::SplashScreen:
 			break;
 		case GameState::MainMenu:
+			AudioManager::getInstance().PlayMenuMusic();
 			menu->Input(event);
 			break;
 		case GameState::Gameplay:
+			AudioManager::getInstance().PlayGameplayMusic();
 			gameplay->Input(event);
 			break;
 		case GameState::Pause:
