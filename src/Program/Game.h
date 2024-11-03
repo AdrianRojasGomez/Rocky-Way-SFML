@@ -7,6 +7,7 @@
 #include "GameOver.h"
 #include "HighScore.h"
 #include "Options.h"
+#include "SplashScreen.h"
 
 
 class Game
@@ -22,6 +23,7 @@ private:
 	void Update();
 	void Draw();
 
+	SplashScreen* splash;
 	Menu* menu;
 	Gameplay* gameplay;
 	GameOver* gameOver;

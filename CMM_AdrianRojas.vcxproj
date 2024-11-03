@@ -35,6 +35,7 @@
     <ClCompile Include="src\Program\Menu.cpp" />
     <ClCompile Include="src\Program\Options.cpp" />
     <ClCompile Include="src\Program\Pause.cpp" />
+    <ClCompile Include="src\Program\SplashScreen.cpp" />
     <ClCompile Include="src\Program\UI.cpp" />
     <ClCompile Include="src\Program\Wave.cpp" />
     <ClCompile Include="src\Utilities\Framerate.cpp" />
@@ -51,6 +52,7 @@
     <ClInclude Include="src\Program\Menu.h" />
     <ClInclude Include="src\Program\Options.h" />
     <ClInclude Include="src\Program\Pause.h" />
+    <ClInclude Include="src\Program\SplashScreen.h" />
     <ClInclude Include="src\Program\UI.h" />
     <ClInclude Include="src\Utilities\RandomUtility.h" />
     <ClInclude Include="src\Utilities\ResourceManager.h" />
