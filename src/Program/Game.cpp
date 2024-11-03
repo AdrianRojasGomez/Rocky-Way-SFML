@@ -146,6 +146,7 @@ void Game::Update()
 		highScore->Update();
 		break;
 	case GameState::Options:
+		options->Update();
 		break;
 	case GameState::Replay:
 		gameplay->ResetGameplay();

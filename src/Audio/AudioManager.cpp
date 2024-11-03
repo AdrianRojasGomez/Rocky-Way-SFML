@@ -43,8 +43,16 @@ void AudioManager::SetMusicVolume(int volume)
 	gameplayMusic->setVolume(volume);
 }
 
-void AudioManager::MuteAll()
+void AudioManager::MuteAll(bool isMuted)
 {
-	menuMusic->setVolume(0);
-	gameplayMusic->setVolume(0);
+	if (!isMuted)
+	{
+		menuMusic->setVolume(0);
+		gameplayMusic->setVolume(0);
+	}
+	else
+	{
+		menuMusic->setVolume(100);
+		gameplayMusic->setVolume(100);
+	}
 }

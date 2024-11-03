@@ -4,12 +4,6 @@
 
 class Options
 {
-	enum class OptionsSelected
-	{
-		MuteAll = 0,
-		SetVolume = 1,
-		ExitToMenu = 2
-	};
 
 
 public:
@@ -21,9 +15,9 @@ public:
 
 
 private:
-	OptionsSelected options;
 	GameState* gameState;
 
+	sf::Font* font = nullptr;
 	sf::Texture* optionsBackgroundTexture = nullptr;
 	sf::Texture* musicOffTexture = nullptr;
 	sf::Texture* musicOnTexture = nullptr;
@@ -31,17 +25,32 @@ private:
 	sf::Sprite musicOffSprite;
 	sf::Sprite musicOnSprite;
 
+	int selectedIndex = 0;
 
+	const float SCALE_MUSIC_SPRITE = 0.7f;
 	static constexpr int OPTIONS_AMOUNT = 3;
 	const std::string OPTION_TITLE = "SETTINGS";
-	const std::string OPTION_BUTTON_LABELS[OPTIONS_AMOUNT] = {"MUTE ALL", "VOLUME", "Main Menu"};
+	const std::string OPTION_BUTTON_LABELS[OPTIONS_AMOUNT] = {"SOUNDS", "VOLUME", "Main Menu"};
 	sf::Text optionTitle;
-
+	sf::Text optionButtons[OPTIONS_AMOUNT];
+	sf::Text volumeText;
+	bool isMuted = false;
+	bool isChangingVolume = false;
+	int volumeNumber = 100;
+	std::string volumeString = std::to_string(volumeNumber);
 
 	void InitializeBackground();
 	void InitializeMusicSprites();
 	void InitializeTitle();
+	void InitializeButtons();
+	void InitializeVolumeText();
+	void UpdateSelectedButton();
+	void UpdateVolumeNumber();
+	void SelectButton();
+	void IncreaseVolume();
+	void DecreaseVolume();
 	void CenterTextOrigin(sf::Text& textToCenter);
+	void ModifyTextProperties(sf::Text& text);
 
 
 

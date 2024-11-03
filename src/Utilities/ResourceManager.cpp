@@ -115,7 +115,7 @@ sf::Texture* ResourceManager::GetBackgroundTexture()
 	if (gameBackgroundTexture == nullptr)
 	{
 		gameBackgroundTexture = new sf::Texture;
-		gameBackgroundTexture = LoadTexture(pathTextureMenuBG);
+		gameBackgroundTexture = LoadTexture(pathTextureBG);
 	}
 	return gameBackgroundTexture;
 }
@@ -176,12 +176,11 @@ sf::Texture* ResourceManager::GetMusicOnTexture()
 	if (musicOnTexture == nullptr)
 	{
 		musicOnTexture = new sf::Texture;
-		musicOnTexture = LoadTexture(pathTextureMusicOff);
+		musicOnTexture = LoadTexture(pathTextureMusicOn);
 	}
 
 	return musicOnTexture;
 }
-
 
 sf::Font* ResourceManager::GetOxaniumSemiBoldFont()
 {

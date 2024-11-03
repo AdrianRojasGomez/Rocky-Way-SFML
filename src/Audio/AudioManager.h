@@ -9,7 +9,7 @@ public:
 	void PlayMenuMusic();
 	void PlayGameplayMusic();
 	void SetMusicVolume(int volume);
-	void MuteAll();
+	void MuteAll(bool isMuted);
 
 private:
 	AudioManager();
@@ -20,6 +20,7 @@ private:
 	sf::Music* gameplayMusic;
 
 	bool isInMainMenu = false;
+	
 
 
 };
