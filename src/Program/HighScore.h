@@ -20,7 +20,8 @@ private:
 	const std::string RANKING_NUMBER[RANKING_AMOUNT] = { "1.","2.","3.","4.","5.","6." };
 	const std::string RANKING_LABELS[RANKING_AMOUNT] = { "ID","SCORE","WAVE"};
 	const int playButtonSize = 40;
-	bool hasHighscoresUpdated = false;
+	bool isFirstTime = true;
+	bool hasHighscoresUpdated = false;;
 	GameState* gameState;
 	std::vector<HighScoresValues> highScoresList;
 	sf::Text highScoreTitle;

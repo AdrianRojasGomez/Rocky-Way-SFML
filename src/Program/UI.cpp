@@ -127,7 +127,7 @@ void UI::UpdateHP()
 
 void UI::UpdateUIAnimation()
 {
-	if (!(animationClock.getElapsedTime().asMilliseconds() > 60))
+	if (!(animationClock.getElapsedTime().asMilliseconds() > 70))
 		return;
 
 	animationClock.restart();
@@ -136,7 +136,7 @@ void UI::UpdateUIAnimation()
 	{
 		if (lifeUISprites[i].getTexture() == lifeUITexture)
 		{
-			const int limitPixel = 384; 
+			const int limitPixel = 512; 
 			int intRectX = lifeUISprites[i].getTextureRect().left;
 
 			if (intRectX >= limitPixel)
@@ -150,14 +150,14 @@ void UI::UpdateUIAnimation()
 
 	for (int i = 0; i < lifeUISprites.size(); i++)
 	{
-		const int limitPixel = 382;
+		const int limitPixel = 512;
 		int intRectX = lifeUISprites[i].getTextureRect().left;
 		if (lifeUISprites[i].getTexture() == lifeLostUITexture)
 		{
 			if (intRectX >= limitPixel)
 				continue;
 
-			intRectX += 128;
+			intRectX += 129;
 			lifeLostIntRect = sf::IntRect(intRectX, 0, 129, 136);
 			lifeUISprites[i].setTextureRect(lifeLostIntRect);
 		}

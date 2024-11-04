@@ -35,11 +35,18 @@ void Player::Input(sf::Event event)
 
 void Player::Update()
 {
-	if (!CheckHasHPLeft())
+
+	if (!CheckHasHPLeft() && deathClock.getElapsedTime().asSeconds() > 1.5f)
 	{
 		ScoreManager::getInstance().CompareHighScore();
+		ScoreManager::getInstance().ResetScore();
+		SetInitialPosition();
+		HP = MaxHP;
+		ui->SetUIHP(HP);
 		*gameState = GameState::GameOver;
+		return;
 	}
+
 
 	Respawn();
 	RemoveInvulnerability();
@@ -75,14 +82,6 @@ void Player::Draw(sf::RenderWindow& window)
 
 }
 
-
-void Player::PlayerReset()
-{
-	*gameState = GameState::Gameplay;
-	SetInitialPosition();
-	HP = MaxHP;
-	ui->SetUIHP(HP);
-}
 
 void Player::SetTextureValues()
 {
@@ -200,6 +199,11 @@ void Player::SetIsAlive(bool isAlive)
 	ui->SetUIHP(HP);
 	respawnClock.restart();
 	isInvulnerable = true;
+
+	if (HP <= 0)
+	{
+		deathClock.restart();
+	}
 }
 
 void Player::UpdateFrameanimation()

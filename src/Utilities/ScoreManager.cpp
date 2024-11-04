@@ -120,5 +120,4 @@ void ScoreManager::CompareHighScore()
 	}
 
 	HighScoreFileWrite.close();
-
 }

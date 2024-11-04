@@ -1,5 +1,4 @@
 #include <iostream>
-#include <SFML/Window/Event.hpp>
 #include "GameOver.h"
 #include "../Utilities/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
@@ -125,10 +124,14 @@ void GameOver::SelectButton()
 	{
 	case 0:
 		*gameState = GameState::Replay;
+		isMenu = false;
+		selectedIndex = 0;
 		canChange = false;
 		break;
 	case 1:
-		*gameState = GameState::MainMenu;
+		*gameState = GameState::Replay;
+		isMenu = true;
+		selectedIndex = 0;
 		canChange = false;
 		break;
 	}

@@ -91,8 +91,11 @@ void Gameplay::Draw(sf::RenderWindow& window)
 	ui->Draw(window);
 }
 
-void Gameplay::ResetGameplay()
+void Gameplay::ResetGameplay(bool isMenu)
 {
-	player->PlayerReset();
 	wave->WaveReset();
+	if (!isMenu)
+		*gameState = GameState::Gameplay;
+	else
+		*gameState = GameState::MainMenu;
 }

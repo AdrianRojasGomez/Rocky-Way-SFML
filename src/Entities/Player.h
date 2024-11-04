@@ -23,7 +23,6 @@ public:
 	void SetIsAlive(bool isAlive);
 	int GetHP() { return HP; }
 	bool CheckHasHPLeft();
-	void PlayerReset();
 
 private:
 	GameState* gameState;
@@ -37,6 +36,7 @@ private:
 
 	sf::IntRect textureRect;
 	sf::Clock animationClock;
+	sf::Clock deathClock;
 	int intRectPosX = 0;
 
 	const float COOLDOWN_RATE = 0.15f;
@@ -52,6 +52,7 @@ private:
 	bool isAlive = true;
 	bool isInvulnerable = false;
 	bool isFiring = false;
+	bool isReadyToRevive = false;
 	int MaxHP = 3;
 	int HP;
 	float posX = 0.0f;
