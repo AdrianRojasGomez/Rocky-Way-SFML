@@ -32,5 +32,5 @@ private:
 	void InitializeButtons();
 	void UpdateSelectedButton();
 	void SelectButton();
-
+	void CenterTextOrigin(sf::Text& textToCenter);
 };
