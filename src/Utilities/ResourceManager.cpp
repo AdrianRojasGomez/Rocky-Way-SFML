@@ -10,8 +10,8 @@ ResourceManager& ResourceManager::getInstance()
 ResourceManager::ResourceManager()
 {
 	LoadImage(pathImageIcon);
-	LoadAllTextures();
 	LoadFont(pathFontOxaniumSemiBold);
+	LoadAllTextures();
 	LoadAllSoundBuffers();
 	LoadAllMusics();
 }
@@ -220,6 +220,16 @@ sf::SoundBuffer* ResourceManager::GetShootSoundBuffer()
 	return shootSoundBuffer;
 }
 
+sf::SoundBuffer* ResourceManager::GetEngineSoundBuffer()
+{
+	if (engineSoundBuffer == nullptr)
+	{
+		engineSoundBuffer = new sf::SoundBuffer;
+		engineSoundBuffer = LoadSoundBuffer(pathSoundEngineBuffer);
+	}
+	return engineSoundBuffer;
+}
+
 sf::Music* ResourceManager::GetMenuMusic()
 {
 	if (menuMusic == nullptr)
@@ -337,6 +347,7 @@ void ResourceManager::LoadAllTextures()
 void ResourceManager::LoadAllSoundBuffers()
 {
 	LoadSoundBuffer(pathSoundShootBuffer);
+	LoadSoundBuffer(pathSoundEngineBuffer);
 }
 
 void ResourceManager::LoadAllMusics()
