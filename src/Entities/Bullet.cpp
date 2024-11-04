@@ -3,6 +3,7 @@
 #include "../Utilities/WrappingScreenUtility.h"
 #include "../Utilities/Framerate.h"
 #include "../Utilities/ResourceManager.h"
+#include "../Utilities/RandomUtility.h"
 
 
 
@@ -43,7 +44,7 @@ void Bullet::Fire(float posX, float posY, float dirX, float dirY)
 	this->posY = posY;
 	this->bulletDirX = dirX;
 	this->bulletDirY = dirY;
-	this->isActive = true;
+	isActive = true;
 	timer->restart();
 	SetPosition();
 	SetRotation();
@@ -65,17 +66,17 @@ void Bullet::SetPosition()
 
 void Bullet::BulletMovement()
 {
-	this->bulletSpeed = initialBulletSpeed;
-	bulletSprite.move(bulletDirX * bulletSpeed * Framerate::getDeltaTime(), bulletDirY * bulletSpeed * Framerate::getDeltaTime());
-	this->posX = bulletSprite.getPosition().x;
-	this->posY = bulletSprite.getPosition().y;
+	bulletSpeed = initialBulletSpeed;
+	bulletSprite.move(bulletDirX  * bulletSpeed * Framerate::getDeltaTime(), bulletDirY  * bulletSpeed * Framerate::getDeltaTime());
+	posX = bulletSprite.getPosition().x;
+	posY = bulletSprite.getPosition().y;
 }
 
 void Bullet::BulletTimer()
 {
 	if (timer->getElapsedTime().asSeconds() > BULLET_LIFETIME)
 	{
-		this->isActive = false;
+		isActive = false;
 	}
 }
 
@@ -85,7 +86,7 @@ void Bullet::Update()
 		return;
 	BulletMovement();
 	BulletTimer();
-	WrapAroundScreen(posX, posY,bulletDirX, bulletDirY, 5.0f, bulletSprite);
+	WrapAroundScreen(posX, posY,bulletDirX, bulletDirY, offset, bulletSprite);
 	bulletSprite.setPosition(posX, posY);
 }
 
@@ -102,8 +103,8 @@ void Bullet::SetBulletSprite(bool isActive)
 
 	if (!isActive)
 	{
-		this->bulletSprite.setPosition(-1000, 1000);
-		this->bulletSpeed = 0.0f;
+		bulletSprite.setPosition(-100, -100);
+		bulletSpeed = 0.0f;
 	}
 }
 
