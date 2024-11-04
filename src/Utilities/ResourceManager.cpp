@@ -1,34 +1,20 @@
 #include <iostream>
 #include "ResourceManager.h"
 
-const std::string ResourceManager::pathTextureSplash = "res/assets/Background/Splash.png";
-const std::string ResourceManager::pathTextureMenuBG = "res/assets/Background/Background00.png";
-const std::string ResourceManager::pathTextureBG = "res/assets/Background/Background01.png";
-const std::string ResourceManager::pathTexturePlayer = "res/assets/Player/PlayerSheet.png";
-const std::string ResourceManager::pathTextureBullet = "res/assets/Player/BasicShot.png";
-const std::string ResourceManager::pathTextureLarge = "res/assets/Enemies/MeteorLarge.png";
-const std::string ResourceManager::pathTextureSmall = "res/assets/Enemies/MeteorSmall.png";
-const std::string ResourceManager::pathTextureMusicOn = "res/assets/UI/musicOn.png";
-const std::string ResourceManager::pathTextureMusicOff = "res/assets/UI/musicOff.png";
-const std::string ResourceManager::pathFontOxaniumSemiBold = "res/assets/Fonts/Oxanium-SemiBold.ttf";
-const std::string ResourceManager::pathMusicMenu = "res/assets/Audio/Music/Menu.wav";
-const std::string ResourceManager::pathMusicGameplay = "res/assets/Audio/Music/Gameplay.wav";
-const std::string ResourceManager::pathSoundShootBuffer = "res/assets/Audio/SFX/PulseShot.wav";
+ResourceManager& ResourceManager::getInstance()
+{
+	static ResourceManager instance;
+	return instance;
+}
 
-sf::Texture* ResourceManager::splashBackgroundTexture = nullptr;
-sf::Texture* ResourceManager::menuBackgroundTexture = nullptr;
-sf::Texture* ResourceManager::gameBackgroundTexture = nullptr;
-sf::Texture* ResourceManager::playerTexture = nullptr;
-sf::Texture* ResourceManager::bulletTexture = nullptr;
-sf::Texture* ResourceManager::largeAsteroidTexture = nullptr;
-sf::Texture* ResourceManager::smallAsteroidTexture = nullptr;
-sf::Texture* ResourceManager::musicOnTexture = nullptr;
-sf::Texture* ResourceManager::musicOffTexture = nullptr;
-sf::Font* ResourceManager::oxaniumSemiBoldFont = nullptr;
-sf::Music* ResourceManager::menuMusic = nullptr;
-sf::Music* ResourceManager::gameplayMusic = nullptr;
-sf::SoundBuffer* ResourceManager::shootSoundBuffer = nullptr;
-
+ResourceManager::ResourceManager()
+{
+	LoadImage(pathImageIcon);
+	LoadAllTextures();
+	LoadFont(pathFontOxaniumSemiBold);
+	LoadAllSoundBuffers();
+	LoadAllMusics();
+}
 
 ResourceManager::~ResourceManager()
 {
@@ -105,6 +91,16 @@ ResourceManager::~ResourceManager()
 		delete gameplayMusic;
 		gameplayMusic = nullptr;
 	}
+}
+
+sf::Image* ResourceManager::GetIconImage()
+{
+	if (iconImage == nullptr)
+	{
+		iconImage = new sf::Image;
+		iconImage = LoadImage(pathImageIcon);
+	}
+	return iconImage;
 }
 
 sf::Texture* ResourceManager::GetSplashTexture()
@@ -239,6 +235,24 @@ sf::Music* ResourceManager::GetGameplayMusic()
 	return gameplayMusic;
 }
 
+sf::Image* ResourceManager::LoadImage(std::string path)
+{
+	sf::Image* image = new sf::Image();
+	if (image->loadFromFile(path))
+	{
+		return image;
+	}
+
+	if (image != nullptr)
+	{
+		delete image;
+		image = nullptr;
+	}
+	std::cout << "DEBUG: Error!!!!!!!! LOADING " << path << "  IMAGE" << std::endl;
+	return nullptr;
+}
+
+
 sf::Texture* ResourceManager::LoadTexture(std::string path)
 {
 	sf::Texture* texture = new sf::Texture();
@@ -299,4 +313,28 @@ sf::Music* ResourceManager::LoadMusic(std::string path)
 	}
 	std::cout << "DEBUG: Error!!!!!!!! LOADING " << path << "  MUSIC" << std::endl;
 	return nullptr;
+}
+
+void ResourceManager::LoadAllTextures()
+{
+	LoadTexture(pathTextureSplash);
+	LoadTexture(pathTextureMenuBG);
+	LoadTexture(pathTextureBG);
+	LoadTexture(pathTexturePlayer);
+	LoadTexture(pathTextureBullet);
+	LoadTexture(pathTextureLarge);
+	LoadTexture(pathTextureSmall);
+	LoadTexture(pathTextureMusicOn);
+	LoadTexture(pathTextureMusicOff);
+}
+
+void ResourceManager::LoadAllSoundBuffers()
+{
+	LoadSoundBuffer(pathSoundShootBuffer);
+}
+
+void ResourceManager::LoadAllMusics()
+{
+	LoadMusic(pathMusicMenu);
+	LoadMusic(pathMusicGameplay);
 }

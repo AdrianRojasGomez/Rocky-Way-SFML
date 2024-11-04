@@ -13,7 +13,7 @@ Player::Player(UI* ui, GameState* gameState)
 	textureRect = sf::IntRect(0, 0, 128, 128);
 	HP = MaxHP;
 	cooldownClock.restart();
-	playerTexture = ResourceManager::GetPlayerTexture();
+	playerTexture = ResourceManager::getInstance().GetPlayerTexture();
 	SetTextureValues();
 	SetInitialPosition();
 	CreateBullets();

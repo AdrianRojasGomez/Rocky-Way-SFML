@@ -4,7 +4,7 @@
 
 LargeAsteroid::LargeAsteroid()
 {
-	asteroidTexture = ResourceManager::GetLargeAsteroidTexture();
+	asteroidTexture = ResourceManager::getInstance().GetLargeAsteroidTexture();
 	hitzoneSizeMultiplier = 0.4f;
 	scale = RandomUtility::GetRandomFloat(maxScale, minScale);
 	wrapOffset = 35.0f;

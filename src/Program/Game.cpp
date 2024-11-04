@@ -1,8 +1,9 @@
 #include <ctime>
 #include "Game.h"
 #include "Gameplay.h"
-#include "../Utilities/ScreenResolution.h"
 #include "../Utilities/Framerate.h"
+#include "../Utilities/ResourceManager.h"
+#include "../Utilities/ScreenResolution.h"
 #include "../Audio/AudioManager.h"
 
 
@@ -12,13 +13,14 @@ Game::Game()
 	Game::gameState = GameState::SplashScreen;
 	videoMode = new sf::VideoMode(ScreenResolution::SCREEN_WIDTH_720P, ScreenResolution::SCREEN_HEIGHT_720P);
 	window = new sf::RenderWindow(*videoMode, "Rocky Ways");
-	resourceManager = new ResourceManager();
+	//resourceManager = new ResourceManager();
 	splash = new SplashScreen(&gameState);
 	gameplay = new Gameplay(&gameState);
 	menu = new Menu(&gameState);
 	gameOver = new GameOver(&gameState);
 	highScore = new HighScore(&gameState);
 	options = new Options(&gameState);
+	SetIcon();
 }
 
 Game::~Game()
@@ -27,12 +29,6 @@ Game::~Game()
 	{
 		delete gameplay;
 		gameplay = nullptr;
-	}
-
-	if (resourceManager != nullptr)
-	{
-		delete resourceManager;
-		resourceManager = nullptr;
 	}
 
 	if (videoMode != nullptr)
@@ -204,4 +200,10 @@ void Game::Draw()
 	}
 
 	window->display();
+}
+
+void Game::SetIcon()
+{
+	iconImage = ResourceManager::getInstance().GetIconImage();
+	window->setIcon(iconImage->getSize().x, iconImage->getSize().y, iconImage->getPixelsPtr());
 }

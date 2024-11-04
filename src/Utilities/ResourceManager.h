@@ -5,55 +5,71 @@
 class ResourceManager
 {
 public:
-	~ResourceManager();
-	static sf::Texture* GetSplashTexture();
-	static sf::Texture* GetMenuBackgroundTexture();
-	static sf::Texture* GetBackgroundTexture();
-	static sf::Texture* GetPlayerTexture();
-	static sf::Texture* GetBulletTexture();
-	static sf::Texture* GetLargeAsteroidTexture();
-	static sf::Texture* GetSmallAsteroidTexture();
-	static sf::Texture* GetMusicOffTexture();
-	static sf::Texture* GetMusicOnTexture();
-	static sf::Font* GetOxaniumSemiBoldFont();
-	static sf::SoundBuffer* GetShootSoundBuffer();
-	static sf::Music* GetMenuMusic();
-	static sf::Music* GetGameplayMusic();
+	static ResourceManager& getInstance();
+	sf::Image* GetIconImage();
+	sf::Texture* GetSplashTexture();
+	sf::Texture* GetMenuBackgroundTexture();
+	sf::Texture* GetBackgroundTexture();
+	sf::Texture* GetPlayerTexture();
+	sf::Texture* GetBulletTexture();
+	sf::Texture* GetLargeAsteroidTexture();
+	sf::Texture* GetSmallAsteroidTexture();
+	sf::Texture* GetMusicOffTexture();
+	sf::Texture* GetMusicOnTexture();
+	sf::Font* GetOxaniumSemiBoldFont();
+	sf::SoundBuffer* GetShootSoundBuffer();
+	sf::Music* GetMenuMusic();
+	sf::Music* GetGameplayMusic();
 
 
 private:
-	static sf::Texture* splashBackgroundTexture;
-	static sf::Texture* menuBackgroundTexture;
-	static sf::Texture* gameBackgroundTexture;
-	static sf::Texture* playerTexture;
-	static sf::Texture* bulletTexture;
-	static sf::Texture* largeAsteroidTexture;
-	static sf::Texture* smallAsteroidTexture;
-	static sf::Texture* musicOnTexture;
-	static sf::Texture* musicOffTexture;
-	static sf::Font* oxaniumSemiBoldFont;
-	static sf::Music* menuMusic;
-	static sf::Music* gameplayMusic;
-	static sf::SoundBuffer* shootSoundBuffer;
+	ResourceManager();
+	ResourceManager(const ResourceManager&) = delete;
+	ResourceManager& operator= (const ResourceManager&) = delete;
+	~ResourceManager();
 
-	static const std::string pathTextureSplash;
-	static const std::string pathTextureMenuBG;
-	static const std::string pathTextureBG;
-	static const std::string pathTexturePlayer;
-	static const std::string pathTextureBullet;
-	static const std::string pathTextureLarge;
-	static const std::string pathTextureSmall;
-	static const std::string pathTextureMusicOn;
-	static const std::string pathTextureMusicOff;
-	static const std::string pathFontOxaniumSemiBold;
-	static const std::string pathMusicMenu;
-	static const std::string pathMusicGameplay;
-	static const std::string pathSoundShootBuffer;
+	sf::Image* iconImage = nullptr;
+	sf::Texture* splashBackgroundTexture = nullptr;
+	sf::Texture* menuBackgroundTexture = nullptr;
+	sf::Texture* gameBackgroundTexture = nullptr;
+	sf::Texture* playerTexture = nullptr;
+	sf::Texture* bulletTexture = nullptr;
+	sf::Texture* largeAsteroidTexture = nullptr;
+	sf::Texture* smallAsteroidTexture = nullptr;
+	sf::Texture* musicOnTexture = nullptr;
+	sf::Texture* musicOffTexture = nullptr;
+	sf::Font* oxaniumSemiBoldFont = nullptr;
+	sf::Music* menuMusic = nullptr;
+	sf::Music* gameplayMusic = nullptr;
+	sf::SoundBuffer* shootSoundBuffer = nullptr;
 
+	const std::string pathImageIcon = "res/assets/System/iconBlack2.png";
 
-	static sf::Texture* LoadTexture(std::string path);
-	static sf::Font* LoadFont(std::string path);
-	static sf::SoundBuffer* LoadSoundBuffer(std::string path);
-	static sf::Music* LoadMusic(std::string path);
+	const std::string pathTextureSplash = "res/assets/Background/Splash.png";
+	const std::string pathTextureMenuBG = "res/assets/Background/Background00.png";
+	const std::string pathTextureBG = "res/assets/Background/Background01.png";
+	const std::string pathTexturePlayer = "res/assets/Player/PlayerSheet.png";
+	const std::string pathTextureBullet = "res/assets/Player/BasicShot.png";
+	const std::string pathTextureLarge = "res/assets/Enemies/MeteorLarge.png";
+	const std::string pathTextureSmall = "res/assets/Enemies/MeteorSmall.png";
+	const std::string pathTextureMusicOn = "res/assets/UI/musicOn.png";
+	const std::string pathTextureMusicOff = "res/assets/UI/musicOff.png";
+
+	const std::string pathFontOxaniumSemiBold = "res/assets/Fonts/Oxanium-SemiBold.ttf";
+
+	const std::string pathSoundShootBuffer = "res/assets/Audio/SFX/PulseShot.wav";
+	
+	const std::string pathMusicMenu = "res/assets/Audio/Music/MenuChilledCut60.wav";
+	const std::string pathMusicGameplay = "res/assets/Audio/Music/GameplayRoutineIntensity2.wav";
+
+	sf::Image* LoadImage(std::string path);
+	sf::Texture* LoadTexture(std::string path);
+	sf::Font* LoadFont(std::string path);
+	sf::SoundBuffer* LoadSoundBuffer(std::string path);
+	sf::Music* LoadMusic(std::string path);
+
+	void LoadAllTextures();
+	void LoadAllSoundBuffers();
+	void LoadAllMusics();
 };
 

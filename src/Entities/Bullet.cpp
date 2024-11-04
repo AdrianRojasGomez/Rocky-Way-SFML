@@ -7,7 +7,7 @@
 
 Bullet::Bullet() : gen(rd()), dis(-MAX_SPREAD_ANGLE, MAX_SPREAD_ANGLE)
 {
-    this->bulletTexture = ResourceManager::GetBulletTexture();
+    this->bulletTexture = ResourceManager::getInstance().GetBulletTexture();
     timer = new sf::Clock;
     SetTextureValues();
 }

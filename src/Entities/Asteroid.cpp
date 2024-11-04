@@ -1,6 +1,5 @@
 #include "Asteroid.h"
 #include "../Utilities/WrappingScreenUtility.h"
-#include "../Utilities/ResourceManager.h"
 #include "../Utilities/Framerate.h"
 #include "../Utilities/ScreenResolution.h"
 #include "../Utilities/RandomUtility.h"

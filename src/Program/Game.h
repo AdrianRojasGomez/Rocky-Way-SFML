@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../Utilities/ResourceManager.h"
 #include "Menu.h"
 #include "Gameplay.h"
 #include "GameState.h"
@@ -23,6 +22,8 @@ private:
 	void Update();
 	void Draw();
 
+	GameState gameState;
+
 	SplashScreen* splash;
 	Menu* menu;
 	Gameplay* gameplay;
@@ -30,10 +31,9 @@ private:
 	HighScore* highScore;
 	Options* options;
 
-	//Convertir en singleton REFACTOR
-	ResourceManager* resourceManager;
-
 	sf::VideoMode* videoMode;
 	sf::RenderWindow* window;
-	GameState gameState;
+	sf::Image* iconImage;
+
+	void SetIcon();
 };
