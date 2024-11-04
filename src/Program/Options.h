@@ -19,11 +19,9 @@ private:
 
 	sf::Font* font = nullptr;
 	sf::Texture* optionsBackgroundTexture = nullptr;
-	sf::Texture* musicOffTexture = nullptr;
-	sf::Texture* musicOnTexture = nullptr;
+	sf::Texture* musicSwitchTexture = nullptr;
 	sf::Sprite optionsBackgroundSprite;
-	sf::Sprite musicOffSprite;
-	sf::Sprite musicOnSprite;
+	sf::Sprite musicSwitchSprite;
 
 	int selectedIndex = 0;
 
@@ -38,6 +36,9 @@ private:
 	bool isChangingVolume = false;
 	int volumeNumber = 100;
 	std::string volumeString = std::to_string(volumeNumber);
+	sf::IntRect musicSwitchIntRect;
+	int intRectPosX = 0;
+
 
 	void InitializeBackground();
 	void InitializeMusicSprites();

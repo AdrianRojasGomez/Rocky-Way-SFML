@@ -90,7 +90,7 @@ void Player::SetTextureValues()
 	{
 		playerSprite.setTexture(*playerTexture);
 		playerSprite.setTextureRect(textureRect);
-		playerSprite.setScale(SCALE,SCALE);
+		playerSprite.setScale(SCALE, SCALE);
 		sf::FloatRect bounds = playerSprite.getLocalBounds();
 		playerSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
 		this->posX = playerSprite.getPosition().x;
@@ -204,27 +204,28 @@ void Player::SetIsAlive(bool isAlive)
 
 void Player::UpdateFrameanimation()
 {
-	if (animationClock.getElapsedTime().asMilliseconds() > 42)
-	{
-		if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::W) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))))
-		{
-			if (intRectPosX <= 0)
-				intRectPosX = 0;
-			else
-				intRectPosX -= 128;
-		}
-		else if (speedX != 0 || speedY != 0)
-		{
-			if (intRectPosX >= 384)
-				intRectPosX = 128;
-			else
-				intRectPosX += 128;
-		}
+	if (!(animationClock.getElapsedTime().asMilliseconds() > 42))
+		return;
 
-		textureRect = sf::IntRect(intRectPosX, 0, 128, 128);
-		playerSprite.setTextureRect(textureRect);
-		animationClock.restart();
+	if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::W) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))))
+	{
+		if (intRectPosX <= 0)
+			intRectPosX = 0;
+		else
+			intRectPosX -= 128;
 	}
+	else if (speedX != 0 || speedY != 0)
+	{
+		if (intRectPosX >= 384)
+			intRectPosX = 128;
+		else
+			intRectPosX += 128;
+	}
+
+	textureRect = sf::IntRect(intRectPosX, 0, 128, 128);
+	playerSprite.setTextureRect(textureRect);
+	animationClock.restart();
+
 }
 
 

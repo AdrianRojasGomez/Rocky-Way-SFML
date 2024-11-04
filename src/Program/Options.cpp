@@ -9,14 +9,13 @@ Options::Options(GameState* gameState)
 	this->gameState = gameState;
 	font = ResourceManager::getInstance().GetOxaniumSemiBoldFont();
 	optionsBackgroundTexture = ResourceManager::getInstance().GetMenuBackgroundTexture();
-	musicOffTexture = ResourceManager::getInstance().GetMusicOffTexture();
-	musicOnTexture = ResourceManager::getInstance().GetMusicOnTexture();
+	musicSwitchTexture = ResourceManager::getInstance().GetMusicSwitchTexture();
+	musicSwitchIntRect = sf::IntRect(intRectPosX, 0, 100, 100);
 	InitializeBackground();
 	InitializeMusicSprites();
 	InitializeTitle();
 	InitializeButtons();
 	InitializeVolumeText();
-
 }
 
 Options::~Options()
@@ -36,11 +35,9 @@ void Options::Input(sf::Event event)
 			if (event.key.code == sf::Keyboard::Enter)
 			{
 				isChangingVolume = false;
-				selectedIndex = 2;
 			}
 			return;
 		}
-
 
 		if (event.key.code == sf::Keyboard::Enter)
 			SelectButton();
@@ -50,15 +47,11 @@ void Options::Input(sf::Event event)
 			selectedIndex++;
 			if (selectedIndex > 2)
 				selectedIndex = 0;
-
-
-
 		}
 		if (event.key.code == sf::Keyboard::Up)
 			selectedIndex--;
 		if (selectedIndex < 0)
 			selectedIndex = 2;
-
 	}
 }
 
@@ -76,7 +69,7 @@ void Options::Draw(sf::RenderWindow& window)
 	{
 		window.draw(optionButtons[i]);
 	}
-	isMuted ? window.draw(musicOffSprite) : window.draw(musicOnSprite);
+	window.draw(musicSwitchSprite);
 	window.draw(volumeText);
 
 }
@@ -95,22 +88,18 @@ void Options::InitializeBackground()
 
 void Options::InitializeMusicSprites()
 {
-	if (musicOffTexture != nullptr && musicOnTexture != nullptr)
+	if (musicSwitchTexture != nullptr )
 	{
-		musicOffSprite.setTexture(*musicOffTexture);
-		musicOnSprite.setTexture(*musicOnTexture);
+		musicSwitchSprite.setTexture(*musicSwitchTexture);
+		musicSwitchSprite.setTextureRect(musicSwitchIntRect);
 		///TEST VALUES, CREATE VARIABLE
-		musicOffSprite.setScale(SCALE_MUSIC_SPRITE, SCALE_MUSIC_SPRITE);
-		musicOnSprite.setScale(SCALE_MUSIC_SPRITE, SCALE_MUSIC_SPRITE);
-		sf::FloatRect bounds = musicOffSprite.getLocalBounds();
-		musicOffSprite.setOrigin(bounds.width * 0.5f, bounds.height * 0.5f);
-		bounds = musicOnSprite.getLocalBounds();
-		musicOnSprite.setOrigin(bounds.width * 0.5f, bounds.height * 0.5f);
+		musicSwitchSprite.setScale(SCALE_MUSIC_SPRITE, SCALE_MUSIC_SPRITE);
+		sf::FloatRect bounds = musicSwitchSprite.getLocalBounds();
+		musicSwitchSprite.setOrigin(bounds.width * 0.5f, bounds.height * 0.5f);
 		float posX = 0, posY = 0;
 		posX = (ScreenResolution::SCREEN_WIDTH_720P * 0.62f);
 		posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.32f);
-		musicOnSprite.setPosition(posX, posY);
-		musicOffSprite.setPosition(posX, posY);
+		musicSwitchSprite.setPosition(posX, posY);
 	}
 }
 
@@ -204,6 +193,13 @@ void Options::SelectButton()
 	case 0:
 		AudioManager::getInstance().MuteAll(isMuted);
 		isMuted = !isMuted;
+		if (intRectPosX <= 0)
+			intRectPosX += 100;
+		else
+			intRectPosX -= 100;
+
+		musicSwitchIntRect = sf::IntRect(intRectPosX, 0, 100, 100);
+		musicSwitchSprite.setTextureRect(musicSwitchIntRect);
 		break;
 	case 1:
 		isChangingVolume = true;

@@ -81,14 +81,14 @@ void Gameplay::Update()
 void Gameplay::Draw(sf::RenderWindow& window)
 {
 	background->Draw(window);
-	ui->Draw(window);
+	player->Draw(window);
+	wave->Draw(window);
 	if (*gameState == GameState::Pause)
 	{
 		pause->Draw(window);
 		return;
 	}
-	wave->Draw(window);
-	player->Draw(window);
+	ui->Draw(window);
 }
 
 void Gameplay::ResetGameplay()
