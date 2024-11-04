@@ -117,11 +117,10 @@ void Player::Movement()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)))
 	{
 		playerSprite.move(speedX * Framerate::getDeltaTime(), directionY * MOVE_SPEED * Framerate::getDeltaTime());
-		if (engineClock.getElapsedTime().asSeconds() > 0.5f)
+		if (engineClock.getElapsedTime().asSeconds() > 0.2f)
 		{
 			AudioManager::getInstance().PlayEngineSound();
 			engineClock.restart();
-			std::cout << "Play!\n";
 		}
 	}
 
@@ -242,12 +241,8 @@ void Player::UpdateFrameanimation()
 
 void Player::TurnDownEngine()
 {
-	if (engineClock.getElapsedTime().asSeconds() > 0.5f)
-	{
+	if (engineClock.getElapsedTime().asSeconds() > 0.19f)
 		AudioManager::getInstance().StopEngineSound();
-		std::cout << "stop!\n";
-
-	}
 
 }
 

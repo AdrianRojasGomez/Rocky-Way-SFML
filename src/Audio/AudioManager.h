@@ -28,8 +28,8 @@ private:
 	sf::Sound engineSound;
 
 	const int defaultMusicVolume = 80;
-	const int maxShootSoundVolume = defaultMusicVolume * 0.5;
-	const int maxEngineSoundVolume = maxShootSoundVolume;
+	const int maxShootSoundVolume = 40;
+	const int maxEngineSoundVolume = 40;
 	bool isInMainMenu = false;
 	bool engineSwitch = false;
 
