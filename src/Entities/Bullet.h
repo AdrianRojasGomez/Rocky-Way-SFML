@@ -45,7 +45,7 @@ private:
     std::mt19937 gen;
     std::uniform_real_distribution<float> dis;
 
-    // Helper functions
+    // Spread functions
     float getRandomDeviation();
     float degToRad(float degrees);
     sf::Vector2f rotateVector(const sf::Vector2f& vec, float angleRadians);

@@ -64,19 +64,19 @@ void Bullet::Fire(float posX, float posY, float dirX, float dirY)
     BulletTimer();
 }
 
-// Helper: Get random deviation
+//Get random deviation
 float Bullet::getRandomDeviation()
 {
     return dis(gen); // Returns a random float between -MAX_SPREAD_ANGLE and +MAX_SPREAD_ANGLE
 }
 
-// Helper: Convert degrees to radians
+//Convert degrees to radians
 float Bullet::degToRad(float degrees)
 {
     return degrees * (3.14159265f / 180.0f);
 }
 
-// Helper: Rotate a vector by a given angle in radians
+//Rotate a vector by a given angle in radians
 sf::Vector2f Bullet::rotateVector(const sf::Vector2f& vec, float angleRadians)
 {
     float cosA = std::cos(angleRadians);
@@ -90,9 +90,10 @@ sf::Vector2f Bullet::rotateVector(const sf::Vector2f& vec, float angleRadians)
 // Set rotation based on direction
 void Bullet::SetRotation()
 {
+    // Adjust based on sprite orientation
     float angleInRadians = std::atan2(bulletDirY, bulletDirX);
     float angleDegrees = angleInRadians * 180 / 3.14159265f;
-    bulletSprite.setRotation(angleDegrees + 90); // Adjust based on sprite orientation
+    bulletSprite.setRotation(angleDegrees + 90); 
 }
 
 void Bullet::SetPosition()
