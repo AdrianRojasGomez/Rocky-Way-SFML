@@ -52,7 +52,7 @@ private:
 	bool isAlive = true;
 	bool isInvulnerable = false;
 	bool isFiring = false;
-	int MaxHP = 1;
+	int MaxHP = 3;
 	int HP;
 	float posX = 0.0f;
 	float posY = 0.0f;

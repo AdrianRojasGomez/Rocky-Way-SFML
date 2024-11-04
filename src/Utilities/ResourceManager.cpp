@@ -178,6 +178,28 @@ sf::Texture* ResourceManager::GetMusicSwitchTexture()
 	return musicSwitchTexture;
 }
 
+sf::Texture* ResourceManager::GetLifeUITexture()
+{
+	if (lifeUITexture == nullptr)
+	{
+		lifeUITexture = new sf::Texture;
+		lifeUITexture = LoadTexture(pathTextureLifeUI);
+	}
+
+	return lifeUITexture;
+}
+
+sf::Texture* ResourceManager::GetLifeLostUITexture()
+{
+	if (lifeLostUITexture == nullptr)
+	{
+		lifeLostUITexture = new sf::Texture;
+		lifeLostUITexture = LoadTexture(pathTextureLifeLostUI);
+	}
+
+	return lifeLostUITexture;
+}
+
 sf::Font* ResourceManager::GetOxaniumSemiBoldFont()
 {
 	if (oxaniumSemiBoldFont == nullptr)
@@ -308,6 +330,8 @@ void ResourceManager::LoadAllTextures()
 	LoadTexture(pathTextureLarge);
 	LoadTexture(pathTextureSmall);
 	LoadTexture(pathTextureMusicSwitch);
+	LoadTexture(pathTextureLifeUI);
+	LoadTexture(pathTextureLifeLostUI);
 }
 
 void ResourceManager::LoadAllSoundBuffers()

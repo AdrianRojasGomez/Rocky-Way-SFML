@@ -15,6 +15,8 @@ public:
 	sf::Texture* GetLargeAsteroidTexture();
 	sf::Texture* GetSmallAsteroidTexture();
 	sf::Texture* GetMusicSwitchTexture();
+	sf::Texture* GetLifeUITexture();
+	sf::Texture* GetLifeLostUITexture();
 	sf::Font* GetOxaniumSemiBoldFont();
 	sf::SoundBuffer* GetShootSoundBuffer();
 	sf::Music* GetMenuMusic();
@@ -36,6 +38,8 @@ private:
 	sf::Texture* largeAsteroidTexture = nullptr;
 	sf::Texture* smallAsteroidTexture = nullptr;
 	sf::Texture* musicSwitchTexture = nullptr;
+	sf::Texture* lifeUITexture = nullptr;
+	sf::Texture* lifeLostUITexture = nullptr;
 	sf::Font* oxaniumSemiBoldFont = nullptr;
 	sf::Music* menuMusic = nullptr;
 	sf::Music* gameplayMusic = nullptr;
@@ -51,6 +55,8 @@ private:
 	const std::string pathTextureLarge = "res/assets/Enemies/MeteorLarge.png";
 	const std::string pathTextureSmall = "res/assets/Enemies/MeteorSmall.png";
 	const std::string pathTextureMusicSwitch = "res/assets/UI/MusicMuteSwitch.png";
+	const std::string pathTextureLifeUI = "res/assets/UI/LifeUI.png";
+	const std::string pathTextureLifeLostUI = "res/assets/UI/LifelostUI.png";
 
 	const std::string pathFontOxaniumSemiBold = "res/assets/Fonts/Oxanium-SemiBold.ttf";
 
