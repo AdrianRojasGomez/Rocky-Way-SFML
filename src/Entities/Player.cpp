@@ -4,6 +4,7 @@
 #include "../Utilities/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
 #include "../Utilities/ScoreManager.h"
+#include "../Audio/AudioManager.h"
 
 Player::Player(UI* ui, GameState* gameState)
 {
@@ -146,6 +147,7 @@ void Player::Fire()
 		isFiring = false;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && isFiring == false)
 		{
+			//AudioManager::getInstance().PlayShootSound();
 			for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 			{
 				if ((*iterator)->GetIsActive() == false)

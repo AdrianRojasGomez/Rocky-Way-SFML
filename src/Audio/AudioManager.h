@@ -10,17 +10,21 @@ public:
 	void PlayGameplayMusic();
 	void SetMusicVolume(int volume);
 	void MuteAll(bool isMuted);
+	void PlayShootSound();
 
 private:
 	AudioManager();
 	AudioManager(const AudioManager&) = delete;
 	AudioManager& operator= (const AudioManager&) = delete;
 
-	sf::Music* menuMusic;
-	sf::Music* gameplayMusic;
+	sf::Music* menuMusic = nullptr;
+	sf::Music* gameplayMusic = nullptr;
+	sf::SoundBuffer* playerShootBuffer = nullptr;
+	sf::Sound playerShootSound;
 
 	bool isInMainMenu = false;
 	
-
+	void SetGameMusic();
+	void SetPlayerShootSound();
 
 };

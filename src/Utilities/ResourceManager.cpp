@@ -13,6 +13,7 @@ const std::string ResourceManager::pathTextureMusicOff = "res/assets/UI/musicOff
 const std::string ResourceManager::pathFontOxaniumSemiBold = "res/assets/Fonts/Oxanium-SemiBold.ttf";
 const std::string ResourceManager::pathMusicMenu = "res/assets/Audio/Music/Menu.wav";
 const std::string ResourceManager::pathMusicGameplay = "res/assets/Audio/Music/Gameplay.wav";
+const std::string ResourceManager::pathSoundShoot = "res/assets/Audio/SFX/PulseShot.wav";
 
 sf::Texture* ResourceManager::splashBackgroundTexture = nullptr;
 sf::Texture* ResourceManager::menuBackgroundTexture = nullptr;
@@ -26,6 +27,7 @@ sf::Texture* ResourceManager::musicOffTexture = nullptr;
 sf::Font* ResourceManager::oxaniumSemiBoldFont = nullptr;
 sf::Music* ResourceManager::menuMusic = nullptr;
 sf::Music* ResourceManager::gameplayMusic = nullptr;
+sf::SoundBuffer* ResourceManager::shootSoundBuffer = nullptr;
 
 
 ResourceManager::~ResourceManager()
@@ -261,6 +263,16 @@ sf::Font* ResourceManager::LoadFont(std::string path)
 	return nullptr;
 }
 
+
+sf::SoundBuffer* ResourceManager::Loadsound(std::string path)
+{
+	sf::SoundBuffer* buffer = new sf::SoundBuffer();
+	if (buffer->loadFromFile(path))
+	{
+		return buffer;
+	}
+}
+
 sf::Music* ResourceManager::LoadMusic(std::string path)
 {
 	sf::Music* music = new sf::Music();
@@ -278,4 +290,3 @@ sf::Music* ResourceManager::LoadMusic(std::string path)
 	std::cout << "DEBUG: Error!!!!!!!! LOADING " << path << "  MUSIC" << std::endl;
 	return nullptr;
 }
-

@@ -36,7 +36,7 @@ private:
 	void SortDescending();
 	void LimitListToSixRankings();
 
-	const std::string filePath = "res/GameData/Highscores.dat";
+	const std::string filePath = "res/data/Highscores.dat";
 	const int LARGE_ASTEROID_VALUE = 100;
 	const int SMALL_ASTEROID_VALUE = 30;
 	std::string name = "Pilot 01";
