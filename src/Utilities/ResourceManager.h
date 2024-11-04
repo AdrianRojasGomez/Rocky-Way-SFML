@@ -16,8 +16,10 @@ public:
 	static sf::Texture* GetMusicOffTexture();
 	static sf::Texture* GetMusicOnTexture();
 	static sf::Font* GetOxaniumSemiBoldFont();
+	static sf::SoundBuffer* GetShootSoundBuffer();
 	static sf::Music* GetMenuMusic();
 	static sf::Music* GetGameplayMusic();
+
 
 private:
 	static sf::Texture* splashBackgroundTexture;
@@ -46,12 +48,12 @@ private:
 	static const std::string pathFontOxaniumSemiBold;
 	static const std::string pathMusicMenu;
 	static const std::string pathMusicGameplay;
-	static const std::string pathSoundShoot;
+	static const std::string pathSoundShootBuffer;
 
 
 	static sf::Texture* LoadTexture(std::string path);
 	static sf::Font* LoadFont(std::string path);
-	static sf::SoundBuffer* Loadsound(std::string path);
+	static sf::SoundBuffer* LoadSoundBuffer(std::string path);
 	static sf::Music* LoadMusic(std::string path);
 };
 

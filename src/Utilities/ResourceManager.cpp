@@ -13,7 +13,7 @@ const std::string ResourceManager::pathTextureMusicOff = "res/assets/UI/musicOff
 const std::string ResourceManager::pathFontOxaniumSemiBold = "res/assets/Fonts/Oxanium-SemiBold.ttf";
 const std::string ResourceManager::pathMusicMenu = "res/assets/Audio/Music/Menu.wav";
 const std::string ResourceManager::pathMusicGameplay = "res/assets/Audio/Music/Gameplay.wav";
-const std::string ResourceManager::pathSoundShoot = "res/assets/Audio/SFX/PulseShot.wav";
+const std::string ResourceManager::pathSoundShootBuffer = "res/assets/Audio/SFX/PulseShot.wav";
 
 sf::Texture* ResourceManager::splashBackgroundTexture = nullptr;
 sf::Texture* ResourceManager::menuBackgroundTexture = nullptr;
@@ -209,6 +209,16 @@ sf::Font* ResourceManager::GetOxaniumSemiBoldFont()
 	return oxaniumSemiBoldFont;
 }
 
+sf::SoundBuffer* ResourceManager::GetShootSoundBuffer()
+{
+	if (shootSoundBuffer == nullptr)
+	{
+		shootSoundBuffer = new sf::SoundBuffer;
+		shootSoundBuffer = LoadSoundBuffer(pathSoundShootBuffer);
+	}
+	return shootSoundBuffer;
+}
+
 sf::Music* ResourceManager::GetMenuMusic()
 {
 	if (menuMusic == nullptr)
@@ -264,7 +274,7 @@ sf::Font* ResourceManager::LoadFont(std::string path)
 }
 
 
-sf::SoundBuffer* ResourceManager::Loadsound(std::string path)
+sf::SoundBuffer* ResourceManager::LoadSoundBuffer(std::string path)
 {
 	sf::SoundBuffer* buffer = new sf::SoundBuffer();
 	if (buffer->loadFromFile(path))

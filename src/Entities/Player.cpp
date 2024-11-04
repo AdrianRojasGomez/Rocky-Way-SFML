@@ -147,7 +147,7 @@ void Player::Fire()
 		isFiring = false;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && isFiring == false)
 		{
-			//AudioManager::getInstance().PlayShootSound();
+			AudioManager::getInstance().PlayShootSound();
 			for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 			{
 				if ((*iterator)->GetIsActive() == false)

@@ -19,8 +19,8 @@ private:
 
 	sf::Music* menuMusic = nullptr;
 	sf::Music* gameplayMusic = nullptr;
-	sf::SoundBuffer* playerShootBuffer = nullptr;
-	sf::Sound playerShootSound;
+	sf::SoundBuffer* shootSoundBuffer = nullptr;
+	sf::Sound shootSound;
 
 	bool isInMainMenu = false;
 	
