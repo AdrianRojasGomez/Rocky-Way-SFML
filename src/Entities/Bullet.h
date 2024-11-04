@@ -22,8 +22,8 @@ private:
 	sf::Sprite bulletSprite;
 	sf::Clock* timer;
 	
-	const float BULLET_LIFETIME = 0.7f;
-	float initialBulletSpeed = 650.0f;
+	const float BULLET_LIFETIME = 0.65f;
+	float initialBulletSpeed = 750.0f;
 	float bulletSpeed = 650.0f;
 	bool isActive = false;
 	int damage = 10;

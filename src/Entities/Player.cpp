@@ -206,8 +206,6 @@ void Player::UpdateFrameanimation()
 {
 	if (animationClock.getElapsedTime().asMilliseconds() > 42)
 	{
-
-
 		if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::W) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))))
 		{
 			if (intRectPosX <= 0)
@@ -227,7 +225,6 @@ void Player::UpdateFrameanimation()
 		playerSprite.setTextureRect(textureRect);
 		animationClock.restart();
 	}
-
 }
 
 
