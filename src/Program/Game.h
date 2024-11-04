@@ -22,6 +22,7 @@ private:
 	void Update();
 	void Draw();
 
+	bool isMenu = false;
 	GameState gameState;
 
 	SplashScreen* splash;

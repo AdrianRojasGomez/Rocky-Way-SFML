@@ -102,7 +102,6 @@ void HighScore::InitializeLoadedItems()
 		rankingMaxWave[i].setPosition(sf::Vector2f(posX + 400, posY));
 
 	}
-	std::cout << "strings loaded\n";
 }
 
 void HighScore::InitializeLabels()
@@ -118,9 +117,7 @@ void HighScore::InitializeLabels()
 		posX = (ScreenResolution::SCREEN_WIDTH_720P * 0.40f) + i * 200;
 		posY = ScreenResolution::SCREEN_HEIGHT_720P * 0.25f;
 		rankingLabelsText[i].setPosition(sf::Vector2f(posX, posY));
-
 	}
-
 }
 
 void HighScore::ModifyLoadedTextProperties(sf::Text& text)
@@ -140,12 +137,9 @@ void HighScore::ModifyLoadedTextProperties(sf::Text& text)
 	}
 }
 
-
-
 void HighScore::SelectButton()
 {
 	hasHighscoresUpdated = false;
-	std::cout << "hasUpdated Hs?" << hasHighscoresUpdated;
 	*gameState = GameState::MainMenu;
 }
 
@@ -158,6 +152,11 @@ void HighScore::CenterTextOrigin(sf::Text& textToCenter)
 void HighScore::FetchHighScoreList()
 {
 	highScoresList = ScoreManager::getInstance().GetHighScoresList();
+	if (isFirstTime)
+	{
+		isFirstTime = false;
+		return;
+	}
 	hasHighscoresUpdated = true;
 }
 
@@ -174,6 +173,7 @@ void HighScore::Update()
 {
 	if (!hasHighscoresUpdated)
 	{
+		std::cout << " hasHighscoresUpdated   " << hasHighscoresUpdated << "\n";
 		FetchHighScoreList();
 		InitializeLoadedItems();
 	}

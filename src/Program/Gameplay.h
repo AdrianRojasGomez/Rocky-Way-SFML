@@ -15,11 +15,11 @@ public:
 	void Input(sf::Event event);
 	void Update();
 	void Draw(sf::RenderWindow& window);
-	void ResetGameplay();
-
-
+	void ResetGameplay(bool isMenu);
 
 private:
+
+
 	GameState* gameState;
 	Background* background;
 	UI* ui;
@@ -27,6 +27,5 @@ private:
 	Wave* wave;
 	CollisionManager* collisionManager;
 	Pause* pause;
-
 
 };

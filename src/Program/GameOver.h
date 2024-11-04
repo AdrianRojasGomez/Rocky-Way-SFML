@@ -9,7 +9,7 @@ public:
 	void Input(sf::Event event);
 	void Update();
 	void Draw(sf::RenderWindow& window);
-
+	bool GetIsMenu() { return isMenu; }
 
 private:
 	static constexpr int OPTIONS_AMOUNT = 2;
@@ -26,6 +26,7 @@ private:
 
 	int selectedIndex = 0;
 	bool canChange = false;
+	bool isMenu = false;
 
 	void CreateTitle();
 	void InitializeBackground();

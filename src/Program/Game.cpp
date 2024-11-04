@@ -136,6 +136,7 @@ void Game::Update()
 	case GameState::MainMenu:
 		if (AudioManager::getInstance().GetMenuMusic()->getStatus() == sf::SoundSource::Stopped)
 			AudioManager::getInstance().PlayMenuMusic();
+
 		menu->Update();
 		break;
 	case GameState::Gameplay:
@@ -155,7 +156,8 @@ void Game::Update()
 		options->Update();
 		break;
 	case GameState::Replay:
-		gameplay->ResetGameplay();
+		isMenu = gameOver->GetIsMenu();
+		gameplay->ResetGameplay(isMenu);
 		break;
 	case GameState::ExitGame:
 		window->close();
