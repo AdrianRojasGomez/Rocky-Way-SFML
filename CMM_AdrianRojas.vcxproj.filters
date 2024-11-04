@@ -166,7 +166,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\GameData\Highscores.dat">
+    <None Include="res\data\Highscores.dat">
       <Filter>Archivos de recursos</Filter>
     </None>
   </ItemGroup>

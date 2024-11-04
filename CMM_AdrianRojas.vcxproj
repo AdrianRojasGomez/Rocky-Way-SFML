@@ -72,7 +72,7 @@
     <ClInclude Include="src\Utilities\WrappingScreenUtility.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\GameData\Highscores.dat" />
+    <None Include="res\data\Highscores.dat" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
