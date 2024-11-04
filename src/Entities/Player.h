@@ -40,8 +40,7 @@ private:
 	int intRectPosX = 0;
 
 	const float COOLDOWN_RATE = 0.15f;
-	const float SCALE_X = 0.6f;
-	const float SCALE_Y = 0.6f;
+	const float SCALE = 0.5f;
 	const float ROTATION_SPEED = 200.0f;
 	const float MOVE_SPEED = 250.0f;
 	const float NUM_PI = 3.14159265f;

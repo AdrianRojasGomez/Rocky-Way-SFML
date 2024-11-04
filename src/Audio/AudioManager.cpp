@@ -29,7 +29,7 @@ void AudioManager::SetPlayerShootSound()
 {
 	shootSoundBuffer = ResourceManager::GetShootSoundBuffer();
 	shootSound.setBuffer(*shootSoundBuffer);
-	shootSound.setVolume(80);
+	shootSound.setVolume(40);
 }
 
 void AudioManager::PlayMenuMusic()

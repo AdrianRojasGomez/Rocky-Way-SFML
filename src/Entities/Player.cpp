@@ -90,7 +90,7 @@ void Player::SetTextureValues()
 	{
 		playerSprite.setTexture(*playerTexture);
 		playerSprite.setTextureRect(textureRect);
-		playerSprite.setScale(SCALE_X, SCALE_Y);
+		playerSprite.setScale(SCALE,SCALE);
 		sf::FloatRect bounds = playerSprite.getLocalBounds();
 		playerSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
 		this->posX = playerSprite.getPosition().x;

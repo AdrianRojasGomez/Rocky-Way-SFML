@@ -8,8 +8,10 @@ public:
 
 
 private:
-	float minSpeed = .5f;
+	float minSpeed = 2.0f;
 	float maxspeed = 2.5f;
-	int minRotation = 2;
-	int maxRotation = 7;
+	int minRotation = -10;
+	int maxRotation = 10;
+	float minScale = 0.6f;
+	float maxScale = 1.4f;
 };

@@ -61,8 +61,8 @@ void Wave::CreateWave()
 	{
 		for (int i = 0; i < waveCounter; i++)
 		{
-			this->largePerWave += (int)(floor(GROWTH * i * i * RATIO));
-			this->smallPerWave += (int)(floor((int)(GROWTH * 0.2f)) * i * i * RATIO);
+			largePerWave += (int)(floor(GROWTH * i * i * RATIO));
+			smallPerWave += (int)(floor((int)(GROWTH * 0.2f)) * i * i * RATIO);
 		}
 	}
 

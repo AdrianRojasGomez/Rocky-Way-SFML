@@ -4,13 +4,14 @@
 
 LargeAsteroid::LargeAsteroid()
 {
-	this->asteroidTexture = ResourceManager::GetLargeAsteroidTexture();
-	this->hitzoneSizeMultiplier = 0.4f;
-	this->wrapOffset = 35.0f;
-	this->initialMultiplierSpeed = RandomUtility::GetRandomFloat(minSpeed, maxspeed);
-	this->multiplierRotation = RandomUtility::GetRandomInt(maxRotation, minRotation);
+	asteroidTexture = ResourceManager::GetLargeAsteroidTexture();
+	hitzoneSizeMultiplier = 0.4f;
+	scale = RandomUtility::GetRandomFloat(maxScale, minScale);
+	wrapOffset = 35.0f;
+	initialMultiplierSpeed = RandomUtility::GetRandomFloat(minSpeed, maxspeed);
+	multiplierRotation = RandomUtility::GetRandomInt(maxRotation, minRotation);
 	SetTextureValues();
-	this->isActive = false;
+	isActive = false;
 }
 
 
