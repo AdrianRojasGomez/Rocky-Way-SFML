@@ -32,4 +32,6 @@ private:
 	void CreateTitle();
 	void InitializeButtons();
 	void UpdateSelectedButton();
+	void CenterTextOrigin(sf::Text& textToCenter);
+	
 };

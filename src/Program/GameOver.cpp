@@ -31,8 +31,6 @@ void GameOver::Input(sf::Event event)
 				selectedIndex = 1;
 			else
 				selectedIndex = 0;
-
-			std::cout << "Up\n";
 		}
 
 		if (event.key.code == sf::Keyboard::Down)
@@ -42,11 +40,7 @@ void GameOver::Input(sf::Event event)
 
 			else
 				selectedIndex = 0;
-
-			std::cout << "Down\n";
 		}
-
-			std::cout << "Input\n";
 	}
 }
 
@@ -72,7 +66,8 @@ void GameOver::CreateTitle()
 	gameOverTitle.setFillColor(sf::Color::White);
 	gameOverTitle.setStyle(sf::Text::Bold);
 	gameOverTitle.setOutlineThickness(3.0f);
-	gameOverTitle.setPosition(ScreenResolution::SCREEN_WIDTH_720P * 0.22f, ScreenResolution::SCREEN_HEIGHT_720P * 0.15f);
+	CenterTextOrigin(gameOverTitle);
+	gameOverTitle.setPosition(ScreenResolution::SCREEN_WIDTH_720P * 0.5f, ScreenResolution::SCREEN_HEIGHT_720P * 0.25f);
 }
 
 void GameOver::InitializeButtons()
@@ -85,16 +80,17 @@ void GameOver::InitializeButtons()
 		menuButtons[i].setFillColor(sf::Color::White);
 
 		float posX = 0, posY = 0;
-		if (i < 1)
+		if (i == 0)
 		{
-			posX = ScreenResolution::SCREEN_WIDTH_720P * 0.4f;
-			posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.50f);
+			posX = ScreenResolution::SCREEN_WIDTH_720P * 0.5f;
+			posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.60f);
 		}
 		else
 		{
-			posX = ScreenResolution::SCREEN_WIDTH_720P * 0.40f;
-			posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.65f);
+			posX = ScreenResolution::SCREEN_WIDTH_720P * 0.5f;
+			posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.75f);
 		}
+		CenterTextOrigin(menuButtons[i]);
 		menuButtons[i].setPosition(sf::Vector2f(posX, posY));
 	}
 }
@@ -109,10 +105,12 @@ void GameOver::UpdateSelectedButton()
 			menuButtons[i].setOutlineColor(sf::Color::Black);
 			menuButtons[i].setOutlineThickness(0.5f);
 			menuButtons[i].setCharacterSize(i == 0 ? replayButtonSize + 10 : otherButtonsSize + 10);
+			CenterTextOrigin(menuButtons[i]);
 		}
 		else
 		{
 			menuButtons[i].setCharacterSize(i == 0 ? replayButtonSize : otherButtonsSize);
+			CenterTextOrigin(menuButtons[i]);
 			menuButtons[i].setFillColor(sf::Color::White);
 			menuButtons[i].setOutlineThickness(0);
 			menuButtons[i].setOutlineColor(sf::Color::Transparent);
@@ -123,17 +121,17 @@ void GameOver::UpdateSelectedButton()
 
 void GameOver::SelectButton()
 {
-		switch (selectedIndex)
-		{
-		case 0:
-			*gameState = GameState::Replay;
-			canChange = false;
-			break;
-		case 1:
-			*gameState = GameState::MainMenu;
-			canChange = false;
-			break;
-		}
+	switch (selectedIndex)
+	{
+	case 0:
+		*gameState = GameState::Replay;
+		canChange = false;
+		break;
+	case 1:
+		*gameState = GameState::MainMenu;
+		canChange = false;
+		break;
+	}
 }
 
 void GameOver::Update()
@@ -149,4 +147,10 @@ void GameOver::Draw(sf::RenderWindow& window)
 		window.draw(menuButtons[i]);
 }
 
+void GameOver::CenterTextOrigin(sf::Text& textToCenter)
+{
+	sf::FloatRect rc = textToCenter.getLocalBounds();
+	textToCenter.setOrigin(rc.width / 2, rc.height / 2);
+
+}
 

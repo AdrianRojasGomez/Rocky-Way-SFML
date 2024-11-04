@@ -72,7 +72,8 @@ void Menu::CreateTitle()
 	gameTitle.setFillColor(sf::Color::White);
 	gameTitle.setStyle(sf::Text::Bold);
 	gameTitle.setOutlineThickness(3.0f);
-	gameTitle.setPosition(ScreenResolution::SCREEN_WIDTH_720P / 4, 50);
+	CenterTextOrigin(gameTitle);
+	gameTitle.setPosition(ScreenResolution::SCREEN_WIDTH_720P / 2, 150);
 }
 
 void Menu::InitializeButtons()
@@ -85,16 +86,17 @@ void Menu::InitializeButtons()
 		menuButtons[i].setFillColor(sf::Color::White);
 
 		float posX = 0, posY = 0;
-		if (i <= 1)
+		if (i < 2)
 		{
-			posX = ScreenResolution::SCREEN_WIDTH_720P * 0.22f;
+			posX = ScreenResolution::SCREEN_WIDTH_720P * 0.3f;
 			posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.65f) + i * 90;
 		}
 		else
 		{
 			posX = ScreenResolution::SCREEN_WIDTH_720P * 0.70f;
-			posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.68f) + (i - 2) * 55;
+			posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.67f) + (i - 2) * 67;
 		}
+		CenterTextOrigin(menuButtons[i]);
 		menuButtons[i].setPosition(sf::Vector2f(posX, posY));
 	}
 }
@@ -108,11 +110,13 @@ void Menu::UpdateSelectedButton()
 			menuButtons[i].setFillColor(sf::Color::Yellow);
 			menuButtons[i].setOutlineColor(sf::Color::Black);
 			menuButtons[i].setOutlineThickness(0.5f);
-			menuButtons[i].setCharacterSize(i == 0 ? playButtonSize + 10 : otherButtonsSize + 10);
+			menuButtons[i].setCharacterSize(i == 0 ? playButtonSize + 10 : otherButtonsSize + 5);
+			CenterTextOrigin(menuButtons[i]);
 		}
 		else
 		{
 			menuButtons[i].setCharacterSize(i == 0 ? playButtonSize : otherButtonsSize);
+			CenterTextOrigin(menuButtons[i]);
 			menuButtons[i].setFillColor(sf::Color::White);
 			menuButtons[i].setOutlineThickness(0);
 			menuButtons[i].setOutlineColor(sf::Color::Transparent);
@@ -158,4 +162,12 @@ void Menu::Draw(sf::RenderWindow& window)
 void Menu::ResetState()
 {
 	 *gameState = GameState::MainMenu; 
+}
+
+void Menu::CenterTextOrigin(sf::Text& textToCenter)
+{
+	{
+		sf::FloatRect rc = textToCenter.getLocalBounds();
+		textToCenter.setOrigin(rc.width / 2, rc.height / 2);
+	}
 }
