@@ -27,8 +27,8 @@ private:
 	float bulletSpeed = 650.0f;
 	bool isActive = false;
 	int damage = 10;
-	float scaleX = .04f;
-	float scaleY = .25f;
+	float scaleX = 0.25f;
+	float scaleY = 0.5f;
 	float posX = 0.0f;
 	float posY = 0.0f;
 	float bulletDirX = 0.0f;
