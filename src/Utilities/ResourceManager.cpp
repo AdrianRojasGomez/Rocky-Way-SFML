@@ -60,16 +60,10 @@ ResourceManager::~ResourceManager()
 		smallAsteroidTexture = nullptr;
 	}
 
-	if (musicOnTexture != nullptr)
+	if (musicSwitchTexture != nullptr)
 	{
-		delete musicOnTexture;
-		musicOnTexture = nullptr;
-	}
-
-	if (musicOffTexture != nullptr)
-	{
-		delete musicOffTexture;
-		musicOffTexture = nullptr;
+		delete musicSwitchTexture;
+		musicSwitchTexture = nullptr;
 	}
 
 	if (oxaniumSemiBoldFont != nullptr)
@@ -173,26 +167,15 @@ sf::Texture* ResourceManager::GetSmallAsteroidTexture()
 	return smallAsteroidTexture;
 }
 
-sf::Texture* ResourceManager::GetMusicOffTexture()
+sf::Texture* ResourceManager::GetMusicSwitchTexture()
 {
-	if (musicOffTexture == nullptr)
+	if (musicSwitchTexture == nullptr)
 	{
-		musicOffTexture = new sf::Texture;
-		musicOffTexture = LoadTexture(pathTextureMusicOff);
-	}
-	
-	return musicOffTexture;
-}
-
-sf::Texture* ResourceManager::GetMusicOnTexture()
-{
-	if (musicOnTexture == nullptr)
-	{
-		musicOnTexture = new sf::Texture;
-		musicOnTexture = LoadTexture(pathTextureMusicOn);
+		musicSwitchTexture = new sf::Texture;
+		musicSwitchTexture = LoadTexture(pathTextureMusicSwitch);
 	}
 
-	return musicOnTexture;
+	return musicSwitchTexture;
 }
 
 sf::Font* ResourceManager::GetOxaniumSemiBoldFont()
@@ -324,8 +307,7 @@ void ResourceManager::LoadAllTextures()
 	LoadTexture(pathTextureBullet);
 	LoadTexture(pathTextureLarge);
 	LoadTexture(pathTextureSmall);
-	LoadTexture(pathTextureMusicOn);
-	LoadTexture(pathTextureMusicOff);
+	LoadTexture(pathTextureMusicSwitch);
 }
 
 void ResourceManager::LoadAllSoundBuffers()
