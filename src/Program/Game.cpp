@@ -13,7 +13,6 @@ Game::Game()
 	Game::gameState = GameState::SplashScreen;
 	videoMode = new sf::VideoMode(ScreenResolution::SCREEN_WIDTH_720P, ScreenResolution::SCREEN_HEIGHT_720P);
 	window = new sf::RenderWindow(*videoMode, "Rocky Ways");
-	//resourceManager = new ResourceManager();
 	splash = new SplashScreen(&gameState);
 	gameplay = new Gameplay(&gameState);
 	menu = new Menu(&gameState);
@@ -91,14 +90,15 @@ void Game::ProcessEvents()
 		switch (gameState)
 		{
 		case GameState::SplashScreen:
+			
 			splash->Input(event);
 			break;
 		case GameState::MainMenu:
-			AudioManager::getInstance().PlayMenuMusic();
+			
 			menu->Input(event);
 			break;
 		case GameState::Gameplay:
-			AudioManager::getInstance().PlayGameplayMusic();
+			
 			gameplay->Input(event);
 			break;
 		case GameState::Pause:
@@ -130,12 +130,16 @@ void Game::Update()
 	switch (gameState)
 	{
 	case GameState::SplashScreen:
+		AudioManager::getInstance().PlayMenuMusic();
 		splash->Update();
 		break;
 	case GameState::MainMenu:
+		if (AudioManager::getInstance().GetMenuMusic()->getStatus() == sf::SoundSource::Stopped)
+			AudioManager::getInstance().PlayMenuMusic();
 		menu->Update();
 		break;
 	case GameState::Gameplay:
+		AudioManager::getInstance().PlayGameplayMusic();
 		gameplay->Update();
 		break;
 	case GameState::Pause:
@@ -198,7 +202,6 @@ void Game::Draw()
 	default:
 		break;
 	}
-
 	window->display();
 }
 

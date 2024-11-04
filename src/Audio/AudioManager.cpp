@@ -80,4 +80,5 @@ void AudioManager::MuteAll(bool isMuted)
 void AudioManager::PlayShootSound()
 {
 	shootSound.play();
+	
 }

@@ -59,9 +59,9 @@ private:
 
 	const std::string pathSoundShootBuffer = "res/assets/Audio/SFX/PulseShot.wav";
 	
-	const std::string pathMusicMenu = "res/assets/Audio/Music/MenuChilledCut60.wav";
-	const std::string pathMusicGameplay = "res/assets/Audio/Music/GameplayRoutineIntensity2.wav";
-
+	const std::string pathMusicMenu = "res/assets/Audio/Music/MenuElectronicChilledCut60.wav";
+	const std::string pathMusicGameplay = "res/assets/Audio/Music/GameplayElectronicRoutinecut60.wav";
+	
 	sf::Image* LoadImage(std::string path);
 	sf::Texture* LoadTexture(std::string path);
 	sf::Font* LoadFont(std::string path);

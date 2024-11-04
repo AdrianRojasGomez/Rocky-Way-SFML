@@ -11,6 +11,8 @@ public:
 	void SetMusicVolume(int volume);
 	void MuteAll(bool isMuted);
 	void PlayShootSound();
+	sf::Music* GetMenuMusic() { return menuMusic; }
+	sf::Music* GetGameplayMusic() { return gameplayMusic; }
 
 private:
 	AudioManager();
