@@ -34,9 +34,13 @@ private:
 	sf::Clock respawnClock;
 	std::list<Bullet*> bullets;
 	std::list<Bullet*>::iterator iterator;
-	const float COOLDOWN_RATE = 0.25f;
-	const float SCALE_X = 0.3f;
-	const float SCALE_Y = 0.3f;
+
+	sf::IntRect textureRect;
+	sf::Clock animationClock;
+	int intRectPosX = 0;
+
+	const float COOLDOWN_RATE = 0.15f;
+	const float SCALE = 0.5f;
 	const float ROTATION_SPEED = 200.0f;
 	const float MOVE_SPEED = 250.0f;
 	const float NUM_PI = 3.14159265f;
@@ -55,12 +59,15 @@ private:
 	float rotation = 0.0f;
 	float directionX = 0.0f;
 	float directionY = 0.0f;
+	float speedX = 0.0f;
+	float speedY = 0.0f;
 
 	void SetTextureValues();
 	void SetInitialPosition();
 	void Movement();
 	void CreateBullets();
 	void Fire();
+	void UpdateFrameanimation();
 
 
 };

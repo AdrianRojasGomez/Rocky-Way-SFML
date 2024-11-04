@@ -27,7 +27,7 @@ void Asteroid::SetTextureValues()
 	if (asteroidTexture != nullptr)
 	{
 		asteroidSprite.setTexture(*asteroidTexture);
-		asteroidSprite.setScale(scaleX, scaleY);
+		asteroidSprite.setScale(scale, scale);
 		sf::FloatRect bounds = asteroidSprite.getLocalBounds();
 		asteroidSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
 		this->posX = asteroidSprite.getPosition().x;
@@ -35,20 +35,6 @@ void Asteroid::SetTextureValues()
 	}
 	else
 		std::cout << "DEBUG: Error!!!!!!!! NULL TEXTURE" << std::endl;
-}
-
-
-void Asteroid::InitDirection()
-{
-	sf::Vector2f vScreenCenter = ScreenResolution::GetScreenCenter720();
-	this->dirX = (vScreenCenter.x + RandomUtility::GetRandomInt(300, 100)) - posX;
-	this->dirY = (vScreenCenter.y + RandomUtility::GetRandomInt(300, 100)) - posY;
-	float magnitude = std::sqrt(dirX * dirX + dirY * dirY);
-	if (magnitude != 0)
-	{
-		this->dirX /= magnitude;
-		this->dirY /= magnitude;
-	}
 }
 
 void Asteroid::InitPosition()
@@ -96,6 +82,19 @@ void Asteroid::InitPosition()
 	asteroidHitZone->width *= hitzoneSizeMultiplier;
 }
 
+void Asteroid::InitDirection()
+{
+	sf::Vector2f vScreenCenter = ScreenResolution::GetScreenCenter720();
+	this->dirX = (vScreenCenter.x + RandomUtility::GetRandomInt(300, 100)) - posX;
+	this->dirY = (vScreenCenter.y + RandomUtility::GetRandomInt(300, 100)) - posY;
+	float magnitude = std::sqrt(dirX * dirX + dirY * dirY);
+	if (magnitude != 0)
+	{
+		this->dirX /= magnitude;
+		this->dirY /= magnitude;
+	}
+}
+
 void Asteroid::Move()
 {
 	asteroidSprite.rotate(-rotationSpeed * multiplierRotation * Framerate::getDeltaTime());
@@ -141,9 +140,6 @@ void Asteroid::Update()
 void Asteroid::Draw(sf::RenderWindow& window)
 {
 	window.draw(asteroidSprite);
-
-	///DEBUG ONLY
-	///window.draw(DebugHitzone());
 }
 
 sf::RectangleShape Asteroid::DebugHitzone()

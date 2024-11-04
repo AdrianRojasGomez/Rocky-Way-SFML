@@ -4,11 +4,13 @@
 #include "../Utilities/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
 #include "../Utilities/ScoreManager.h"
+#include "../Audio/AudioManager.h"
 
 Player::Player(UI* ui, GameState* gameState)
 {
 	this->gameState = gameState;
 	this->ui = ui;
+	textureRect = sf::IntRect(0, 0, 128, 128);
 	HP = MaxHP;
 	cooldownClock.restart();
 	playerTexture = ResourceManager::GetPlayerTexture();
@@ -31,6 +33,49 @@ void Player::Input(sf::Event event)
 	}
 }
 
+void Player::Update()
+{
+	if (!CheckHasHPLeft())
+	{
+		ScoreManager::getInstance().CompareHighScore();
+		*gameState = GameState::GameOver;
+	}
+
+	Respawn();
+	RemoveInvulnerability();
+	Fire();
+	Movement();
+	UpdateFrameanimation();
+	WrapAroundScreen(posX, posY, directionX, directionY, 15.0f, playerSprite);
+	playerSprite.setPosition(posX, posY);
+	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
+	{
+		Bullet* bulletToDraw = *iterator;
+		if (bulletToDraw->GetIsActive())
+		{
+			bulletToDraw->Update();
+		}
+	};
+}
+
+void Player::Draw(sf::RenderWindow& window)
+{
+	if (!isAlive)
+		return;
+	window.draw(playerSprite);
+
+	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
+	{
+		Bullet* bulletToDraw = *iterator;
+		if (bulletToDraw->GetIsActive())
+		{
+			bulletToDraw->Draw(window);
+		}
+	}
+
+}
+
+
 void Player::PlayerReset()
 {
 	*gameState = GameState::Gameplay;
@@ -44,7 +89,8 @@ void Player::SetTextureValues()
 	if (playerTexture != nullptr)
 	{
 		playerSprite.setTexture(*playerTexture);
-		playerSprite.setScale(SCALE_X, SCALE_Y);
+		playerSprite.setTextureRect(textureRect);
+		playerSprite.setScale(SCALE,SCALE);
 		sf::FloatRect bounds = playerSprite.getLocalBounds();
 		playerSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
 		this->posX = playerSprite.getPosition().x;
@@ -62,14 +108,15 @@ void Player::SetInitialPosition()
 
 void Player::Movement()
 {
+
 	this->rotation = playerSprite.getRotation() - FIXED_DEGREES;
 	this->directionX = std::cos(rotation * NUM_PI / 180.0f);
 	this->directionY = std::sin(rotation * NUM_PI / 180.0f);
-
-	Fire();
+	speedX = directionX * MOVE_SPEED;
+	speedY = directionY * MOVE_SPEED;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)))
-		playerSprite.move(directionX * MOVE_SPEED * Framerate::getDeltaTime(), directionY * MOVE_SPEED * Framerate::getDeltaTime());
+		playerSprite.move(speedX * Framerate::getDeltaTime(), directionY * MOVE_SPEED * Framerate::getDeltaTime());
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)))
 		playerSprite.rotate(-ROTATION_SPEED * Framerate::getDeltaTime());
@@ -100,6 +147,7 @@ void Player::Fire()
 		isFiring = false;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && isFiring == false)
 		{
+			AudioManager::getInstance().PlayShootSound();
 			for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 			{
 				if ((*iterator)->GetIsActive() == false)
@@ -154,47 +202,30 @@ void Player::SetIsAlive(bool isAlive)
 	isInvulnerable = true;
 }
 
-void Player::Update()
+void Player::UpdateFrameanimation()
 {
-	if (!CheckHasHPLeft())
+	if (animationClock.getElapsedTime().asMilliseconds() > 42)
 	{
-		ScoreManager::getInstance().CompareHighScore();
-		*gameState = GameState::GameOver;
-		
-	}
-
-	Respawn();
-	RemoveInvulnerability();
-	Movement();
-	WrapAroundScreen(posX, posY, directionX, directionY, 15.0f, playerSprite);
-	playerSprite.setPosition(posX, posY);
-	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
-	{
-		Bullet* bulletToDraw = *iterator;
-		if (bulletToDraw->GetIsActive())
+		if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::W) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))))
 		{
-			bulletToDraw->Update();
+			if (intRectPosX <= 0)
+				intRectPosX = 0;
+			else
+				intRectPosX -= 128;
 		}
-	};
-}
-
-void Player::Draw(sf::RenderWindow& window)
-{
-	if (!isAlive)
-		return;
-	window.draw(playerSprite);
-
-	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
-	{
-		Bullet* bulletToDraw = *iterator;
-		if (bulletToDraw->GetIsActive())
+		else if (speedX != 0 || speedY != 0)
 		{
-			bulletToDraw->Draw(window);
+			if (intRectPosX >= 384)
+				intRectPosX = 128;
+			else
+				intRectPosX += 128;
 		}
+
+		textureRect = sf::IntRect(intRectPosX, 0, 128, 128);
+		playerSprite.setTextureRect(textureRect);
+		animationClock.restart();
 	}
-
 }
-
 
 
 

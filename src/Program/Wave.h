@@ -30,7 +30,7 @@ private:
 	const float RATIO = 0.1f;
 	const int LARGE_ASTEROID_POOL = 20;
 	const int SMALL_ASTEROID_POOL = 20;
-	const int FIRST_WAVE_LARGE = 3;
+	const int FIRST_WAVE_LARGE = 8;
 	const int FIRST_WAVE_SMALL = 1;
 	int waveCounter = 0;
 	int currentAsteroidCounter = 0;

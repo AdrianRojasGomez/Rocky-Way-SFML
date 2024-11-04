@@ -5,11 +5,12 @@
 
 SmallAsteroid::SmallAsteroid()
 {
-	this->asteroidTexture = ResourceManager::GetSmallAsteroidTexture();
-	this->hitzoneSizeMultiplier = 0.3f;
-	this->wrapOffset = 3.0f;
-	this->initialMultiplierSpeed = RandomUtility::GetRandomFloat(minSpeed, maxspeed);
-	this->multiplierRotation = RandomUtility::GetRandomInt(maxRotation, minRotation);
+	asteroidTexture = ResourceManager::GetSmallAsteroidTexture();
+	hitzoneSizeMultiplier = 0.3f;
+	scale = RandomUtility::GetRandomFloat(maxScale, minScale);
+	wrapOffset = 3.0f;
+	initialMultiplierSpeed = RandomUtility::GetRandomFloat(minSpeed, maxspeed);
+	multiplierRotation = RandomUtility::GetRandomInt(maxRotation, minRotation);
 	SetTextureValues();
-	this->isActive = false;
+	isActive = false;
 }
