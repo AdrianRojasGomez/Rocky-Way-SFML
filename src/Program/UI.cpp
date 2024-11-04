@@ -8,7 +8,7 @@
 
 UI::UI()
 {
-	uiFont = ResourceManager::GetOxaniumSemiBoldFont();
+	uiFont = ResourceManager::getInstance().GetOxaniumSemiBoldFont();
 }
 
 UI::~UI()

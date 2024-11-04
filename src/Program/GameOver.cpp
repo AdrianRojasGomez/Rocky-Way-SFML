@@ -7,8 +7,8 @@
 GameOver::GameOver(GameState* gameState)
 {
 	this->gameState = gameState;
-	GameOverBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
-	menuFont = ResourceManager::GetOxaniumSemiBoldFont();
+	GameOverBackgroundTexture = ResourceManager::getInstance().GetMenuBackgroundTexture();
+	menuFont = ResourceManager::getInstance().GetOxaniumSemiBoldFont();
 	InitializeBackground();
 	CreateTitle();
 	InitializeButtons();

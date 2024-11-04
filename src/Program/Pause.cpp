@@ -5,7 +5,7 @@
 Pause::Pause(GameState* gameState)
 {
 	this->gameState = gameState;
-	menuFont = ResourceManager::GetOxaniumSemiBoldFont();
+	menuFont = ResourceManager::getInstance().GetOxaniumSemiBoldFont();
 	InitializeTitle();
 
 

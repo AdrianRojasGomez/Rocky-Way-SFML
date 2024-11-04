@@ -7,10 +7,10 @@
 Options::Options(GameState* gameState)
 {
 	this->gameState = gameState;
-	font = ResourceManager::GetOxaniumSemiBoldFont();
-	optionsBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
-	musicOffTexture = ResourceManager::GetMusicOffTexture();
-	musicOnTexture = ResourceManager::GetMusicOnTexture();
+	font = ResourceManager::getInstance().GetOxaniumSemiBoldFont();
+	optionsBackgroundTexture = ResourceManager::getInstance().GetMenuBackgroundTexture();
+	musicOffTexture = ResourceManager::getInstance().GetMusicOffTexture();
+	musicOnTexture = ResourceManager::getInstance().GetMusicOnTexture();
 	InitializeBackground();
 	InitializeMusicSprites();
 	InitializeTitle();

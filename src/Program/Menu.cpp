@@ -7,8 +7,8 @@
 Menu::Menu(GameState* gameState)
 {
 	this->gameState = gameState;
-	menuBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
-	menuFont = ResourceManager::GetOxaniumSemiBoldFont();
+	menuBackgroundTexture = ResourceManager::getInstance().GetMenuBackgroundTexture();
+	menuFont = ResourceManager::getInstance().GetOxaniumSemiBoldFont();
 	InitializeBackground();
 	CreateTitle();
 	InitializeButtons();

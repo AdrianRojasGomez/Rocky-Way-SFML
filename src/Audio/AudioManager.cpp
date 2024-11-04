@@ -17,8 +17,8 @@ AudioManager::AudioManager()
 
 void AudioManager::SetGameMusic()
 {
-	menuMusic = ResourceManager::GetMenuMusic();
-	gameplayMusic = ResourceManager::GetGameplayMusic();
+	menuMusic = ResourceManager::getInstance().GetMenuMusic();
+	gameplayMusic = ResourceManager::getInstance().GetGameplayMusic();
 	menuMusic->setLoop(true);
 	gameplayMusic->setLoop(true);
 	menuMusic->setVolume(80);
@@ -27,7 +27,7 @@ void AudioManager::SetGameMusic()
 
 void AudioManager::SetPlayerShootSound()
 {
-	shootSoundBuffer = ResourceManager::GetShootSoundBuffer();
+	shootSoundBuffer = ResourceManager::getInstance().GetShootSoundBuffer();
 	shootSound.setBuffer(*shootSoundBuffer);
 	shootSound.setVolume(40);
 }

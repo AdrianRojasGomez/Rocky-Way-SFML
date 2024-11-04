@@ -8,8 +8,8 @@
 HighScore::HighScore(GameState* gameState)
 {
 	this->gameState = gameState;
-	highScoreBackgroundTexture = ResourceManager::GetMenuBackgroundTexture();
-	font = ResourceManager::GetOxaniumSemiBoldFont();
+	highScoreBackgroundTexture = ResourceManager::getInstance().GetMenuBackgroundTexture();
+	font = ResourceManager::getInstance().GetOxaniumSemiBoldFont();
 	FetchHighScoreList();
 	InitializeHighScoreScreen();
 	InitializeTitle();

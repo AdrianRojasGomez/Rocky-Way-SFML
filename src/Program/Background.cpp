@@ -6,7 +6,7 @@
 
 Background::Background()
 {
-	this->backgroundTexture = ResourceManager::GetBackgroundTexture();
+	this->backgroundTexture = ResourceManager::getInstance().GetBackgroundTexture();
 	InitializeBackground();
 }
 

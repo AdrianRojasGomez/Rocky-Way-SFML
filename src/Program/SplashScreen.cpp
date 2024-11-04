@@ -6,7 +6,7 @@
 SplashScreen::SplashScreen(GameState* gameState)
 {
 	this->gameState = gameState;
-	splashTexture = ResourceManager::GetSplashTexture();
+	splashTexture = ResourceManager::getInstance().GetSplashTexture();
 	InitializeBackground();
 }
 
