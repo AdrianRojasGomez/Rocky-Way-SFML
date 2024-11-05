@@ -77,7 +77,7 @@ private:
 	void Movement();
 	void CreateBullets();
 	void Fire();
-	void UpdateFrameanimation();
+	void UpdateFrameAnimation();
 	void TurnDownEngine();
 
 

@@ -27,12 +27,16 @@ private:
     float bulletSpeed = 650.0f;
     bool isActive = false;
     int damage = 10;
-    float scaleX = 0.25f;
-    float scaleY = 0.5f;
+    float scaleX = 0.20f;
+    float scaleY = 0.20f;
     float posX = 0.0f;
     float posY = 0.0f;
     float bulletDirX = 0.0f;
     float bulletDirY = 0.0f;
+
+    int intRectPosX = 0;
+    sf::IntRect textureRect;
+    sf::Clock animationClock;
 
     void SetTextureValues();
     void BulletMovement();
@@ -49,4 +53,5 @@ private:
     float getRandomDeviation();
     float degToRad(float degrees);
     sf::Vector2f rotateVector(const sf::Vector2f& vec, float angleRadians);
+    void UpdateFameAnimation();
 };

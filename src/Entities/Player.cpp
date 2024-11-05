@@ -11,9 +11,9 @@ Player::Player(UI* ui, GameState* gameState, ScreenShake* screenShake)
 	this->gameState = gameState;
 	this->ui = ui;
 	this->screenShake = screenShake;
+	HP = MaxHP;
 	playerHitZone = new sf::FloatRect;
 	textureRect = sf::IntRect(0, 0, 128, 128);
-	HP = MaxHP;
 	cooldownClock.restart();
 	playerTexture = ResourceManager::getInstance().GetPlayerTexture();
 	SetTextureValues();
@@ -65,7 +65,7 @@ void Player::Update()
 	RemoveInvulnerability();
 	Fire();
 	Movement();
-	UpdateFrameanimation();
+	UpdateFrameAnimation();
 	WrapAroundScreen(posX, posY, directionX, directionY, 15.0f, playerSprite);
 	playerSprite.setPosition(posX, posY);
 	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
@@ -249,7 +249,7 @@ void Player::SetIsAlive(bool isAlive)
 	}
 }
 
-void Player::UpdateFrameanimation()
+void Player::UpdateFrameAnimation()
 {
 	if (!(animationClock.getElapsedTime().asMilliseconds() > 42))
 		return;

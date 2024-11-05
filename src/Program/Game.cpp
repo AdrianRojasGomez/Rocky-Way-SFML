@@ -89,7 +89,7 @@ void Game::Run()
 	{
 		ProcessEvents();
 		Update();
-		Draw();
+                                                                    		Draw();
 		Framerate::OnFrameEnd();
 	}
 }
