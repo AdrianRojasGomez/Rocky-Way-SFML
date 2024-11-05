@@ -26,6 +26,7 @@ public:
 	int GetHP() { return HP; }
 	bool CheckHasHPLeft();
 	void TriggerScreenshake();
+	void ResetFromPause();
 
 private:
 
@@ -55,7 +56,7 @@ private:
 	const int FIXED_DEGREES = 90;
 	const int RESPAWN_TIME = 2;
 	const int INVULNERABLE_TIME = 3;
-	const float hitzoneSizeMultiplier = 0.6f;
+	const float hitzoneSizeMultiplier = 0.5f;
 
 	bool isAlive = true;
 	bool isInvulnerable = false;

@@ -204,6 +204,14 @@ void Player::TriggerScreenshake()
 	
 }
 
+void Player::ResetFromPause()
+{
+	ScoreManager::getInstance().ResetScore();
+	SetInitialPosition();
+	HP = MaxHP;
+	ui->SetUIHP(HP);
+}
+
 void Player::Respawn()
 {
 	if (!isAlive && respawnClock.getElapsedTime().asSeconds() > RESPAWN_TIME)

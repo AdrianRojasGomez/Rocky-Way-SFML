@@ -24,21 +24,12 @@ void GameOver::Input(sf::Event event)
 		if (event.key.code == sf::Keyboard::Enter)
 			SelectButton();
 
-		if (event.key.code == sf::Keyboard::Up)
+		if (event.key.code == sf::Keyboard::Up ||
+			event.key.code == sf::Keyboard::W ||
+			event.key.code == sf::Keyboard::Down ||
+			event.key.code == sf::Keyboard::S)
 		{
-			if (selectedIndex == 0)
-				selectedIndex = 1;
-			else
-				selectedIndex = 0;
-		}
-
-		if (event.key.code == sf::Keyboard::Down)
-		{
-			if (selectedIndex == 0)
-				selectedIndex = 1;
-
-			else
-				selectedIndex = 0;
+			selectedIndex = 1 - selectedIndex;
 		}
 	}
 }

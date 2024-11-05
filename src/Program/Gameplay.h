@@ -29,4 +29,6 @@ private:
 	CollisionManager* collisionManager;
 	Pause* pause;
 
+	void InitializeGameOnReturn();
+
 };
