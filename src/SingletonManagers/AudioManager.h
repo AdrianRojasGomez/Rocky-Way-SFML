@@ -8,6 +8,7 @@ public:
 	static AudioManager& getInstance();
 	void PlayMenuMusic();
 	void PlayGameplayMusic();
+	void PlayGameOverMusic();
 	void SetMusicVolume(int volume);
 	void MuteAll(bool isMuted);
 	void PlayShootSound();
@@ -22,6 +23,7 @@ private:
 
 	sf::Music* menuMusic = nullptr;
 	sf::Music* gameplayMusic = nullptr;
+	sf::Music* gameOverMusic = nullptr;
 	sf::SoundBuffer* shootSoundBuffer = nullptr;
 	sf::SoundBuffer* engineSoundBuffer = nullptr;
 	sf::Sound shootSound;

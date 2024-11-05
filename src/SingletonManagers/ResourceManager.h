@@ -23,6 +23,7 @@ public:
 	sf::SoundBuffer* GetEngineSoundBuffer();
 	sf::Music* GetMenuMusic();
 	sf::Music* GetGameplayMusic();
+	sf::Music* GetGameOverMusic();
 
 
 private:
@@ -32,6 +33,7 @@ private:
 	~ResourceManager();
 
 	sf::Image* iconImage = nullptr;
+
 	sf::Texture* splashBackgroundTexture = nullptr;
 	sf::Texture* menuBackgroundTexture = nullptr;
 	sf::Texture* pauseBackgroundTexture = nullptr;
@@ -43,11 +45,16 @@ private:
 	sf::Texture* musicSwitchTexture = nullptr;
 	sf::Texture* lifeUITexture = nullptr;
 	sf::Texture* lifeLostUITexture = nullptr;
+
 	sf::Font* oxaniumSemiBoldFont = nullptr;
+
 	sf::SoundBuffer* shootSoundBuffer = nullptr;
 	sf::SoundBuffer* engineSoundBuffer = nullptr;
+
 	sf::Music* menuMusic = nullptr;
 	sf::Music* gameplayMusic = nullptr;
+	sf::Music* gameOverMusic = nullptr;
+
 
 	const std::string pathImageIcon = "res/assets/System/iconBlack2.png";
 
@@ -70,6 +77,7 @@ private:
 	
 	const std::string pathMusicMenu = "res/assets/Audio/Music/MenuElectronicChilledCut60.wav";
 	const std::string pathMusicGameplay = "res/assets/Audio/Music/GameplayElectronicRoutinecut60.wav";
+	const std::string pathMusicGameOver = "res/assets/Audio/Music/GameOverElectronicDefeatcut60.wav";
 	
 	sf::Image* LoadImage(std::string path);
 	sf::Texture* LoadTexture(std::string path);

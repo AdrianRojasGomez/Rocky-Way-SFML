@@ -22,7 +22,7 @@ Game::Game()
 	highScore = new HighScore(&gameState);
 	options = new Options(&gameState);
 	SetIcon();
-	
+
 }
 
 Game::~Game()
@@ -105,15 +105,15 @@ void Game::ProcessEvents()
 		switch (gameState)
 		{
 		case GameState::SplashScreen:
-			
+
 			splash->Input(event);
 			break;
 		case GameState::MainMenu:
-			
+
 			menu->Input(event);
 			break;
 		case GameState::Gameplay:
-			
+
 			gameplay->Input(event);
 			break;
 		case GameState::Pause:
@@ -157,9 +157,14 @@ void Game::Update()
 		break;
 	case GameState::Gameplay:
 		AudioManager::getInstance().PlayGameplayMusic();
+		if (AudioManager::getInstance().GetGameplayMusic()->getPitch() != 1)
+		{
+			AudioManager::getInstance().SetGameplayMusicPitch(1);
+		}
 		gameplay->Update();
 		break;
 	case GameState::Pause:
+		AudioManager::getInstance().SetGameplayMusicPitch(-0.5);
 		gameplay->Update();
 		break;
 	case GameState::GameOver:
@@ -172,6 +177,7 @@ void Game::Update()
 		options->Update();
 		break;
 	case GameState::Replay:
+		AudioManager::getInstance().PlayGameOverMusic();
 		isMenu = gameOver->GetIsMenu();
 		gameplay->ResetGameplay(isMenu);
 		break;
