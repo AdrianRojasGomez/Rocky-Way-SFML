@@ -29,8 +29,8 @@ void Asteroid::SetTextureValues()
 		asteroidSprite.setScale(scale, scale);
 		sf::FloatRect bounds = asteroidSprite.getLocalBounds();
 		asteroidSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
-		this->posX = asteroidSprite.getPosition().x;
-		this->posY = asteroidSprite.getPosition().y;
+		posX = asteroidSprite.getPosition().x;
+		posY = asteroidSprite.getPosition().y;
 	}
 	else
 		std::cout << "DEBUG: Error!!!!!!!! NULL TEXTURE" << std::endl;
@@ -75,8 +75,9 @@ void Asteroid::InitPosition()
 
 
 	*asteroidHitZone = asteroidSprite.getGlobalBounds();
-	asteroidHitZone->height = asteroidSprite.getGlobalBounds().height;
-	asteroidHitZone->width = asteroidSprite.getGlobalBounds().width;
+	//OLD METHOD, DELETE AFTER TESTING
+	//asteroidHitZone->height = asteroidSprite.getGlobalBounds().height;
+	//asteroidHitZone->width = asteroidSprite.getGlobalBounds().width;
 	asteroidHitZone->height *= hitzoneSizeMultiplier;
 	asteroidHitZone->width *= hitzoneSizeMultiplier;
 }
@@ -98,8 +99,8 @@ void Asteroid::Move()
 {
 	asteroidSprite.rotate(-rotationSpeed * multiplierRotation * Framerate::getDeltaTime());
 	asteroidSprite.move(dirX * speed * initialMultiplierSpeed * Framerate::getDeltaTime(), dirY * speed * initialMultiplierSpeed * Framerate::getDeltaTime());
-	this->posX = asteroidSprite.getPosition().x;
-	this->posY = asteroidSprite.getPosition().y;
+	posX = asteroidSprite.getPosition().x;
+	posY = asteroidSprite.getPosition().y;
 	sf::Vector2f originOffset = asteroidSprite.getOrigin() * hitzoneSizeMultiplier;
 	asteroidHitZone->left = posX - originOffset.x;
 	asteroidHitZone->top = posY - originOffset.y;

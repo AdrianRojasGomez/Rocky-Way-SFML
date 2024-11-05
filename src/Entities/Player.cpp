@@ -10,6 +10,7 @@ Player::Player(UI* ui, GameState* gameState)
 {
 	this->gameState = gameState;
 	this->ui = ui;
+	playerHitZone = new sf::FloatRect;
 	textureRect = sf::IntRect(0, 0, 128, 128);
 	HP = MaxHP;
 	cooldownClock.restart();
@@ -22,6 +23,12 @@ Player::Player(UI* ui, GameState* gameState)
 
 Player::~Player()
 {
+	if (playerHitZone != nullptr)
+	{
+		delete playerHitZone;
+		playerHitZone = nullptr;
+	}
+
 }
 
 void Player::Input(sf::Event event)
@@ -80,8 +87,12 @@ void Player::Draw(sf::RenderWindow& window)
 		}
 	}
 
+	zone.setSize(sf::Vector2f(playerHitZone->height, playerHitZone->width));
+	zone.setOutlineColor(sf::Color::Red);
+	zone.setOutlineThickness(2);
+	zone.setFillColor(sf::Color::Transparent);
+	window.draw(zone);
 }
-
 
 void Player::SetTextureValues()
 {
@@ -92,8 +103,8 @@ void Player::SetTextureValues()
 		playerSprite.setScale(SCALE, SCALE);
 		sf::FloatRect bounds = playerSprite.getLocalBounds();
 		playerSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
-		this->posX = playerSprite.getPosition().x;
-		this->posY = playerSprite.getPosition().y;
+		posX = playerSprite.getPosition().x;
+		posY = playerSprite.getPosition().y;
 
 	}
 	else
@@ -103,14 +114,19 @@ void Player::SetTextureValues()
 void Player::SetInitialPosition()
 {
 	playerSprite.setPosition(ScreenResolution::GetScreenCenter720());
+	*playerHitZone = playerSprite.getGlobalBounds();
+	//OLD METHOD, DELETE AFTER TESTING
+	//playerHitZone->height = playerSprite.getGlobalBounds().height;
+	//playerHitZone->width = playerSprite.getGlobalBounds().width;
+	playerHitZone->height *= hitzoneSizeMultiplier;
+	playerHitZone->width *= hitzoneSizeMultiplier;
 }
 
 void Player::Movement()
 {
-
-	this->rotation = playerSprite.getRotation() - FIXED_DEGREES;
-	this->directionX = std::cos(rotation * NUM_PI / 180.0f);
-	this->directionY = std::sin(rotation * NUM_PI / 180.0f);
+	rotation = playerSprite.getRotation() - FIXED_DEGREES;
+	directionX = std::cos(rotation * NUM_PI / 180.0f);
+	directionY = std::sin(rotation * NUM_PI / 180.0f);
 	speedX = directionX * MOVE_SPEED;
 	speedY = directionY * MOVE_SPEED;
 
@@ -129,9 +145,13 @@ void Player::Movement()
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)))
 		playerSprite.rotate(ROTATION_SPEED * Framerate::getDeltaTime());
 
-	this->posX = playerSprite.getPosition().x;
-	this->posY = playerSprite.getPosition().y;
+	posX = playerSprite.getPosition().x;
+	posY = playerSprite.getPosition().y;
+	sf::Vector2f originOffset = playerSprite.getOrigin() * hitzoneSizeMultiplier;
+	playerHitZone->left = posX  - playerSprite.getOrigin().x / 2;
+	playerHitZone->top = posY  - originOffset.y / 2;
 
+	zone.setPosition(playerHitZone->left, playerHitZone->top);
 }
 
 void Player::CreateBullets()
