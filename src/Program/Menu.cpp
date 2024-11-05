@@ -25,28 +25,7 @@ void Menu::Input(sf::Event event)
 		if (event.key.code == sf::Keyboard::Enter)
 			SelectButton();
 
-		if (event.key.code == sf::Keyboard::Up)
-		{
-			selectedIndex = (selectedIndex + 3) % 4;
-		}
-		if (event.key.code == sf::Keyboard::Down)
-		{
-			selectedIndex = (selectedIndex + 1) % 4;
-		}
-
-		if (event.key.code == sf::Keyboard::Right)
-		{
-			selectedIndex = (selectedIndex + 2) % 4;
-		}
-
-		if (event.key.code == sf::Keyboard::Left)
-		{
-			if (selectedIndex % 2 == 0)
-				selectedIndex = 2 - selectedIndex;
-			else
-				selectedIndex = 4 - selectedIndex;
-		}
-
+		CheckForDirectionalInput(event);
 	}
 }
 
@@ -127,23 +106,48 @@ void Menu::UpdateSelectedButton()
 
 void Menu::SelectButton()
 {
-		switch (selectedIndex)
-		{
-		case 0:
-			*gameState = GameState::Gameplay;
-			break;
-		case 1:
-			*gameState = GameState::HighScores;
-			break;
-		case 2:
-			*gameState = GameState::Options;
-			break;
-		case 3:
-			*gameState = GameState::ExitGame;
-			break;
-		default:
-			break;
-		}
+	switch (selectedIndex)
+	{
+	case 0:
+		*gameState = GameState::Gameplay;
+		break;
+	case 1:
+		*gameState = GameState::HighScores;
+		break;
+	case 2:
+		*gameState = GameState::Options;
+		break;
+	case 3:
+		*gameState = GameState::ExitGame;
+		break;
+	default:
+		break;
+	}
+}
+
+void Menu::CheckForDirectionalInput(sf::Event event)
+{
+	if (event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::W)
+	{
+		selectedIndex = (selectedIndex + 3) % 4;
+	}
+	if (event.key.code == sf::Keyboard::Down || event.key.code == sf::Keyboard::S)
+	{
+		selectedIndex = (selectedIndex + 1) % 4;
+	}
+
+	if (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::D)
+	{
+		selectedIndex = (selectedIndex + 2) % 4;
+	}
+
+	if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::A)
+	{
+		if (selectedIndex % 2 == 0)
+			selectedIndex = 2 - selectedIndex;
+		else
+			selectedIndex = 4 - selectedIndex;
+	}
 }
 
 void Menu::Update()
@@ -161,7 +165,7 @@ void Menu::Draw(sf::RenderWindow& window)
 
 void Menu::ResetState()
 {
-	 *gameState = GameState::MainMenu; 
+	*gameState = GameState::MainMenu;
 }
 
 void Menu::CenterTextOrigin(sf::Text& textToCenter)

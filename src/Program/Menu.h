@@ -11,7 +11,6 @@ public:
 	void Update();
 	void Draw(sf::RenderWindow& window);
 	void ResetState();
-	void SelectButton();
 
 private:
 	static constexpr int OPTIONS_AMOUNT = 4;
@@ -32,6 +31,8 @@ private:
 	void CreateTitle();
 	void InitializeButtons();
 	void UpdateSelectedButton();
+	void SelectButton();
+	void CheckForDirectionalInput(sf::Event event);
 	void CenterTextOrigin(sf::Text& textToCenter);
 	
 };

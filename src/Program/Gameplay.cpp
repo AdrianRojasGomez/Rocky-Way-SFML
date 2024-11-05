@@ -72,6 +72,13 @@ void Gameplay::Update()
 		return;
 	}
 
+	if (pause->GetIsReset())
+	{
+		pause->SetIsReset(false);
+		InitializeGameOnReturn();
+		return;
+	}
+
 	player->Update();
 	collisionManager->Update(*player, player->GetBullets(), wave->GetLargeAsteroids(), wave->GetSmallAsteroids());
 	wave->Update();
@@ -83,12 +90,12 @@ void Gameplay::Draw(sf::RenderWindow& window)
 	background->Draw(window);
 	player->Draw(window);
 	wave->Draw(window);
+	ui->Draw(window);
 	if (*gameState == GameState::Pause)
 	{
 		pause->Draw(window);
 		return;
 	}
-	ui->Draw(window);
 }
 
 void Gameplay::ResetGameplay(bool isMenu)
@@ -98,4 +105,10 @@ void Gameplay::ResetGameplay(bool isMenu)
 		*gameState = GameState::Gameplay;
 	else
 		*gameState = GameState::MainMenu;
+}
+
+void Gameplay::InitializeGameOnReturn()
+{
+	wave->WaveReset();
+	player->ResetFromPause();
 }
