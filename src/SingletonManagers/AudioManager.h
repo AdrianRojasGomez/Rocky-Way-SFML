@@ -14,6 +14,8 @@ public:
 	void PlayShootSound();
 	void PlayEngineSound();
 	void StopEngineSound();
+	void PauseGameplayMusic();
+	void ResumeGameplayMusic();
 	sf::Music* GetMenuMusic() { return menuMusic; }
 	sf::Music* GetGameplayMusic() { return gameplayMusic; }
 private:

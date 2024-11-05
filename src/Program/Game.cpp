@@ -156,15 +156,16 @@ void Game::Update()
 		menu->Update();
 		break;
 	case GameState::Gameplay:
-		AudioManager::getInstance().PlayGameplayMusic();
-		if (AudioManager::getInstance().GetGameplayMusic()->getPitch() != 1)
+		if (AudioManager::getInstance().GetGameplayMusic()->getStatus() == sf::SoundSource::Paused
+			|| AudioManager::getInstance().GetGameplayMusic()->getStatus() == sf::SoundSource::Stopped)
 		{
-			AudioManager::getInstance().SetGameplayMusicPitch(1);
+			AudioManager::getInstance().PlayGameplayMusic();
+			AudioManager::getInstance().ResumeGameplayMusic();
 		}
 		gameplay->Update();
 		break;
 	case GameState::Pause:
-		AudioManager::getInstance().SetGameplayMusicPitch(-0.5);
+		AudioManager::getInstance().PauseGameplayMusic();
 		gameplay->Update();
 		break;
 	case GameState::GameOver:

@@ -120,3 +120,14 @@ void AudioManager::StopEngineSound()
 {
 	engineSound.stop();
 }
+
+void AudioManager::PauseGameplayMusic()
+{
+	gameplayMusic->pause();
+}
+
+void AudioManager::ResumeGameplayMusic()
+{
+	if (gameplayMusic->getStatus() == sf::SoundSource::Paused)
+		gameplayMusic->play();
+}
