@@ -1,10 +1,10 @@
 #include "Player.h"
 #include "../Utilities/Framerate.h"
 #include "../Utilities/WrappingScreenUtility.h"
-#include "../Utilities/ResourceManager.h"
+#include "../SingletonManagers/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
-#include "../Utilities/ScoreManager.h"
-#include "../Audio/AudioManager.h"
+#include "../SingletonManagers/ScoreManager.h"
+#include "../SingletonManagers/AudioManager.h"
 
 Player::Player(UI* ui, GameState* gameState)
 {

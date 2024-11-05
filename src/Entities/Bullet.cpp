@@ -2,7 +2,7 @@
 #include <iostream>
 #include "../Utilities/WrappingScreenUtility.h"
 #include "../Utilities/Framerate.h"
-#include "../Utilities/ResourceManager.h"
+#include "../SingletonManagers/ResourceManager.h"
 #include "../Utilities/RandomUtility.h"
 
 Bullet::Bullet() : gen(rd()), dis(-MAX_SPREAD_ANGLE, MAX_SPREAD_ANGLE)

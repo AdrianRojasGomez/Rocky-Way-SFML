@@ -1,6 +1,6 @@
 #include <iostream>
 #include "CollisionManager.h"
-#include "../Utilities/ScoreManager.h"
+#include "../SingletonManagers/ScoreManager.h"
 
 CollisionManager::CollisionManager()
 {

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Menu.h"
 #include "Game.h"
-#include "../Utilities/ResourceManager.h"
+#include "../SingletonManagers/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
 
 Menu::Menu(GameState* gameState)

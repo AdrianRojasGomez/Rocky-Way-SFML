@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Audio\AudioManager.cpp" />
     <ClCompile Include="src\Entities\Asteroid.cpp" />
     <ClCompile Include="src\Entities\Bullet.cpp" />
     <ClCompile Include="src\Entities\LargeAsteroid.cpp" />
@@ -38,14 +37,14 @@
     <ClCompile Include="src\Program\SplashScreen.cpp" />
     <ClCompile Include="src\Program\UI.cpp" />
     <ClCompile Include="src\Program\Wave.cpp" />
+    <ClCompile Include="src\SingletonManagers\AudioManager.cpp" />
+    <ClCompile Include="src\SingletonManagers\ResourceManager.cpp" />
+    <ClCompile Include="src\SingletonManagers\ScoreManager.cpp" />
     <ClCompile Include="src\Utilities\Framerate.cpp" />
     <ClCompile Include="src\Utilities\RandomUtility.cpp" />
-    <ClCompile Include="src\Utilities\ResourceManager.cpp" />
-    <ClCompile Include="src\Utilities\ScoreManager.cpp" />
     <ClCompile Include="src\Utilities\WrappingScreenUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Audio\AudioManager.h" />
     <ClInclude Include="src\Program\GameOver.h" />
     <ClInclude Include="src\Program\GameState.h" />
     <ClInclude Include="src\Program\HighScore.h" />
@@ -54,8 +53,10 @@
     <ClInclude Include="src\Program\Pause.h" />
     <ClInclude Include="src\Program\SplashScreen.h" />
     <ClInclude Include="src\Program\UI.h" />
+    <ClInclude Include="src\SingletonManagers\AudioManager.h" />
+    <ClInclude Include="src\SingletonManagers\ResourceManager.h" />
+    <ClInclude Include="src\SingletonManagers\ScoreManager.h" />
     <ClInclude Include="src\Utilities\RandomUtility.h" />
-    <ClInclude Include="src\Utilities\ResourceManager.h" />
     <ClInclude Include="src\Entities\Asteroid.h" />
     <ClInclude Include="src\Entities\Bullet.h" />
     <ClInclude Include="src\Entities\LargeAsteroid.h" />
@@ -67,7 +68,6 @@
     <ClInclude Include="src\Program\Gameplay.h" />
     <ClInclude Include="src\Program\Wave.h" />
     <ClInclude Include="src\Utilities\Framerate.h" />
-    <ClInclude Include="src\Utilities\ScoreManager.h" />
     <ClInclude Include="src\Utilities\ScreenResolution.h" />
     <ClInclude Include="src\Utilities\WrappingScreenUtility.h" />
   </ItemGroup>

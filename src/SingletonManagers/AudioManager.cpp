@@ -1,5 +1,5 @@
 #include "AudioManager.h"
-#include "../Utilities/ResourceManager.h"
+#include "../SingletonManagers/ResourceManager.h"
 
 
 AudioManager& AudioManager::getInstance()
