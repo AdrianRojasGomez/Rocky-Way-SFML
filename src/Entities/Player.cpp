@@ -41,13 +41,9 @@ void Player::Input(sf::Event event)
 
 		if (event.key.code == sf::Keyboard::R)
 		{
-			screenShake->StartShake(0.1f, 1);
-			std::cout << "Rumbling\n";
+			screenShake->StartShake(0.2f, 5.0f);
 		}
-
 	}
-
-
 }
 
 void Player::Update()
@@ -174,6 +170,7 @@ void Player::Fire()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && isFiring == false)
 		{
 			AudioManager::getInstance().PlayShootSound();
+			screenShake->StartShake(0.1f, 1.25f);
 			for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 			{
 				if ((*iterator)->GetIsActive() == false)
@@ -196,6 +193,15 @@ bool Player::CheckHasHPLeft()
 	else
 		return true;
 
+}
+
+void Player::TriggerScreenshake()
+{
+	if(HP>0)
+		screenShake->StartShake(0.2f, 5.0f);
+	else
+		screenShake->StartShake(0.3f, 5.0f);
+	
 }
 
 void Player::Respawn()
@@ -222,7 +228,9 @@ void Player::SetIsAlive(bool isAlive)
 
 	this->isAlive = isAlive;
 	if (!isAlive)
+	{
 		HP--;
+	}
 	ui->SetUIHP(HP);
 	respawnClock.restart();
 	isInvulnerable = true;

@@ -21,6 +21,7 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 			if (player.GetIsInvulnerable())
 				break;
 			player.SetIsAlive(false);
+			player.TriggerScreenshake();
 			currentAsteroid->SetIsActive(false);
 		}
 	}
@@ -38,6 +39,7 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 			if (player.GetIsInvulnerable())
 				break;
 			player.SetIsAlive(false);
+			player.TriggerScreenshake();
 			currentAsteroid->SetIsActive(false);
 		}
 	}

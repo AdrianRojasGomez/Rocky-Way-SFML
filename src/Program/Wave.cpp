@@ -5,8 +5,8 @@
 Wave::Wave(UI* ui)
 {
 	this->ui = ui;
-	//CreateAsteroids();
-	//CreateWave();
+	CreateAsteroids();
+	CreateWave();
 }
 
 Wave::~Wave()
