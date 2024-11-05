@@ -127,7 +127,7 @@ void UI::UpdateHP()
 
 void UI::UpdateUIAnimation()
 {
-	if (!(animationClock.getElapsedTime().asMilliseconds() > 70))
+	if (!(animationClock.getElapsedTime().asMilliseconds() > 80))
 		return;
 
 	animationClock.restart();
@@ -157,8 +157,8 @@ void UI::UpdateUIAnimation()
 			if (intRectX >= limitPixel)
 				continue;
 
-			intRectX += 129;
-			lifeLostIntRect = sf::IntRect(intRectX, 0, 129, 136);
+			intRectX += 128;
+			lifeLostIntRect = sf::IntRect(intRectX, 0, 128, 128);
 			lifeUISprites[i].setTextureRect(lifeLostIntRect);
 		}
 	}

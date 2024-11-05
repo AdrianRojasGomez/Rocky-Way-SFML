@@ -47,7 +47,7 @@ void Player::Update()
 		return;
 	}
 
-
+	TurnDownEngine();
 	Respawn();
 	RemoveInvulnerability();
 	Fire();
@@ -115,7 +115,14 @@ void Player::Movement()
 	speedY = directionY * MOVE_SPEED;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)))
+	{
 		playerSprite.move(speedX * Framerate::getDeltaTime(), directionY * MOVE_SPEED * Framerate::getDeltaTime());
+		if (engineClock.getElapsedTime().asSeconds() > 0.2f)
+		{
+			AudioManager::getInstance().PlayEngineSound();
+			engineClock.restart();
+		}
+	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)))
 		playerSprite.rotate(-ROTATION_SPEED * Framerate::getDeltaTime());
@@ -229,6 +236,13 @@ void Player::UpdateFrameanimation()
 	textureRect = sf::IntRect(intRectPosX, 0, 128, 128);
 	playerSprite.setTextureRect(textureRect);
 	animationClock.restart();
+
+}
+
+void Player::TurnDownEngine()
+{
+	if (engineClock.getElapsedTime().asSeconds() > 0.19f)
+		AudioManager::getInstance().StopEngineSound();
 
 }
 

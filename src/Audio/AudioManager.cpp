@@ -10,9 +10,9 @@ AudioManager& AudioManager::getInstance()
 
 AudioManager::AudioManager()
 {
-	SetPlayerShootSound();
+	SetPlayerSounds();
 	SetGameMusic();
-	
+
 }
 
 void AudioManager::SetGameMusic()
@@ -21,15 +21,18 @@ void AudioManager::SetGameMusic()
 	gameplayMusic = ResourceManager::getInstance().GetGameplayMusic();
 	menuMusic->setLoop(true);
 	gameplayMusic->setLoop(true);
-	menuMusic->setVolume(80);
-	gameplayMusic->setVolume(80);
+	menuMusic->setVolume(defaultMusicVolume);
+	gameplayMusic->setVolume(defaultMusicVolume);
 }
 
-void AudioManager::SetPlayerShootSound()
+void AudioManager::SetPlayerSounds()
 {
 	shootSoundBuffer = ResourceManager::getInstance().GetShootSoundBuffer();
 	shootSound.setBuffer(*shootSoundBuffer);
-	shootSound.setVolume(40);
+	shootSound.setVolume(maxShootSoundVolume);
+	engineSoundBuffer = ResourceManager::getInstance().GetEngineSoundBuffer();
+	engineSound.setBuffer(*engineSoundBuffer);
+	engineSound.setVolume(maxEngineSoundVolume);
 }
 
 void AudioManager::PlayMenuMusic()
@@ -54,10 +57,14 @@ void AudioManager::PlayGameplayMusic()
 
 void AudioManager::SetMusicVolume(int volume)
 {
-	shootSound.setVolume(volume);
 	menuMusic->setVolume(volume);
 	gameplayMusic->setVolume(volume);
-	
+	shootSound.setVolume(volume);
+	if (volume > maxShootSoundVolume)
+	{
+		shootSound.setVolume(maxShootSoundVolume);
+	}
+
 }
 
 void AudioManager::MuteAll(bool isMuted)
@@ -67,18 +74,27 @@ void AudioManager::MuteAll(bool isMuted)
 		shootSound.setVolume(0);
 		menuMusic->setVolume(0);
 		gameplayMusic->setVolume(0);
-		
+
 	}
 	else
 	{
 		shootSound.setVolume(100);
 		menuMusic->setVolume(100);
-		gameplayMusic->setVolume(100);	
+		gameplayMusic->setVolume(100);
 	}
 }
 
 void AudioManager::PlayShootSound()
 {
 	shootSound.play();
-	
+}
+
+void AudioManager::PlayEngineSound()
+{
+	engineSound.play();
+}
+
+void AudioManager::StopEngineSound()
+{
+	engineSound.stop();
 }
