@@ -25,6 +25,7 @@ public:
 	void SetIsAlive(bool isAlive);
 	int GetHP() { return HP; }
 	bool CheckHasHPLeft();
+	void TriggerScreenshake();
 
 private:
 
