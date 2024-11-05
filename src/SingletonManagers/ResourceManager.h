@@ -10,6 +10,7 @@ public:
 	sf::Texture* GetSplashTexture();
 	sf::Texture* GetMenuBackgroundTexture();
 	sf::Texture* GetBackgroundTexture();
+	sf::Texture* GetPauseBackgroundTexture();
 	sf::Texture* GetPlayerTexture();
 	sf::Texture* GetBulletTexture();
 	sf::Texture* GetLargeAsteroidTexture();
@@ -33,6 +34,7 @@ private:
 	sf::Image* iconImage = nullptr;
 	sf::Texture* splashBackgroundTexture = nullptr;
 	sf::Texture* menuBackgroundTexture = nullptr;
+	sf::Texture* pauseBackgroundTexture = nullptr;
 	sf::Texture* gameBackgroundTexture = nullptr;
 	sf::Texture* playerTexture = nullptr;
 	sf::Texture* bulletTexture = nullptr;
@@ -51,6 +53,7 @@ private:
 
 	const std::string pathTextureSplash = "res/assets/Background/Splash.png";
 	const std::string pathTextureMenuBG = "res/assets/Background/Background00.png";
+	const std::string pathTexturePauseBG = "res/assets/Background/PauseBackground.png";
 	const std::string pathTextureBG = "res/assets/Background/Background01.png";
 	const std::string pathTexturePlayer = "res/assets/Player/PlayerSheet.png";
 	const std::string pathTextureBullet = "res/assets/Player/BasicShot.png";

@@ -20,12 +20,15 @@ private:
 	const int playButtonSize = 40;
 	const int otherButtonsSize = 35;
 	sf::Font* menuFont = nullptr;
+	sf::Texture* backgroundTexture = nullptr;
+	sf::Sprite backgroundSprite;
 	sf::Text pauseTitleText;
 	sf::Text menuButtons[OPTIONS_AMOUNT];
 
 	int selectedIndex = 0;
 	bool isReset = false;
 
+	void InitializeBackground();
 	void InitializeTitle();
 	void InitializeButtons();
 	void UpdateSelectedButton();

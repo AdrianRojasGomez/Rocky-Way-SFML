@@ -36,6 +36,12 @@ ResourceManager::~ResourceManager()
 		gameBackgroundTexture = nullptr;
 	}
 
+	if (pauseBackgroundTexture != nullptr)
+	{
+		delete pauseBackgroundTexture;
+		pauseBackgroundTexture = nullptr;
+	}
+
 	if (playerTexture != nullptr)
 	{
 		delete playerTexture;
@@ -125,6 +131,16 @@ sf::Texture* ResourceManager::GetBackgroundTexture()
 		gameBackgroundTexture = LoadTexture(pathTextureBG);
 	}
 	return gameBackgroundTexture;
+}
+
+sf::Texture* ResourceManager::GetPauseBackgroundTexture()
+{
+	if (pauseBackgroundTexture == nullptr)
+	{
+		pauseBackgroundTexture = new sf::Texture;
+		pauseBackgroundTexture = LoadTexture(pathTexturePauseBG);
+	}
+	return pauseBackgroundTexture;
 }
 
 sf::Texture* ResourceManager::GetPlayerTexture()
@@ -335,6 +351,7 @@ void ResourceManager::LoadAllTextures()
 	LoadTexture(pathTextureSplash);
 	LoadTexture(pathTextureMenuBG);
 	LoadTexture(pathTextureBG);
+	LoadTexture(pathTexturePauseBG);
 	LoadTexture(pathTexturePlayer);
 	LoadTexture(pathTextureBullet);
 	LoadTexture(pathTextureLarge);
