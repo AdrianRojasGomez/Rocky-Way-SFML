@@ -28,12 +28,13 @@ private:
 	sf::Sound engineSound;
 
 	const int defaultMusicVolume = 80;
-	const int maxShootSoundVolume = 40;
+	const int maxShootSoundVolume = 25;
 	const int maxEngineSoundVolume = 40;
 	bool isInMainMenu = false;
 	bool engineSwitch = false;
 
 	void SetGameMusic();
 	void SetPlayerSounds();
+	void SetDefaultVolumes();
 
 };

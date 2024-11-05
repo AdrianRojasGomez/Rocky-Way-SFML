@@ -21,8 +21,10 @@ void AudioManager::SetGameMusic()
 	gameplayMusic = ResourceManager::getInstance().GetGameplayMusic();
 	menuMusic->setLoop(true);
 	gameplayMusic->setLoop(true);
+	SetDefaultVolumes();
 	menuMusic->setVolume(defaultMusicVolume);
 	gameplayMusic->setVolume(defaultMusicVolume);
+
 }
 
 void AudioManager::SetPlayerSounds()
@@ -32,6 +34,14 @@ void AudioManager::SetPlayerSounds()
 	shootSound.setVolume(maxShootSoundVolume);
 	engineSoundBuffer = ResourceManager::getInstance().GetEngineSoundBuffer();
 	engineSound.setBuffer(*engineSoundBuffer);
+	engineSound.setVolume(maxEngineSoundVolume);
+}
+
+void AudioManager::SetDefaultVolumes()
+{
+	menuMusic->setVolume(defaultMusicVolume);
+	gameplayMusic->setVolume(defaultMusicVolume);
+	shootSound.setVolume(maxShootSoundVolume);
 	engineSound.setVolume(maxEngineSoundVolume);
 }
 
@@ -63,6 +73,7 @@ void AudioManager::SetMusicVolume(int volume)
 	if (volume > maxShootSoundVolume)
 	{
 		shootSound.setVolume(maxShootSoundVolume);
+		engineSound.setVolume(maxEngineSoundVolume);
 	}
 
 }
