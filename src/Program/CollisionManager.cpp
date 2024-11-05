@@ -78,12 +78,12 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 
 bool CollisionManager::PlayerVsLargeAsteroidCollision(Player& player, LargeAsteroid& largeAsteroid)
 {
-	return player.GetPlayerSprite().getGlobalBounds().intersects(largeAsteroid.GetAsteroidHitBox());
+	return player.GetPlayerHitbox().intersects(largeAsteroid.GetAsteroidHitBox());
 }
 
 bool CollisionManager::PlayerVsSmallAsteroidCollision(Player& player, SmallAsteroid& smallAsteroid)
 {
-	return player.GetPlayerSprite().getGlobalBounds().intersects(smallAsteroid.GetAsteroidHitBox());
+	return player.GetPlayerHitbox().intersects(smallAsteroid.GetAsteroidHitBox());
 }
 
 bool CollisionManager::BulletVsLargeAsteroidCollision(Bullet& bullet, LargeAsteroid& largeAsteroid)
@@ -98,6 +98,8 @@ bool CollisionManager::BulletVsSmallAsteroidCollision(Bullet& bullet, SmallAster
 
 void CollisionManager::SpawnSmallAsteroids(std::list<SmallAsteroid*> smallAsteroids, sf::Vector2f largePosition)
 {
+	//Esto lo deberia hacer el Wave, es una tarea del Wave, pero collision Manager no tiene porque conocer al wave, 
+	//entonces la pregunta es, deberia conocerlo o hay otra manera de generar esta funcion?
 	int smallSpawned = 0;
 	for (std::list<SmallAsteroid*>::iterator smallAsteroidIterator = smallAsteroids.begin(); smallAsteroidIterator != smallAsteroids.end(); smallAsteroidIterator++)
 	{

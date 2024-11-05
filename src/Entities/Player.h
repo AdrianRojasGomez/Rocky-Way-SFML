@@ -16,7 +16,7 @@ public:
 	void Draw(sf::RenderWindow& window);
 	void Respawn();
 	void RemoveInvulnerability();
-	sf::Sprite GetPlayerSprite() { return playerSprite; }
+	sf::FloatRect GetPlayerHitbox() { return *playerHitZone; }
 	std::list<Bullet*>& GetBullets() { return bullets; }
 	bool GetIsInvulnerable() { return isInvulnerable; }
 	bool GetIsAlive() { return isAlive; }
@@ -25,8 +25,6 @@ public:
 	bool CheckHasHPLeft();
 
 private:
-
-	sf::RectangleShape zone;
 
 
 	GameState* gameState;

@@ -86,12 +86,6 @@ void Player::Draw(sf::RenderWindow& window)
 			bulletToDraw->Draw(window);
 		}
 	}
-
-	zone.setSize(sf::Vector2f(playerHitZone->height, playerHitZone->width));
-	zone.setOutlineColor(sf::Color::Red);
-	zone.setOutlineThickness(2);
-	zone.setFillColor(sf::Color::Transparent);
-	window.draw(zone);
 }
 
 void Player::SetTextureValues()
@@ -115,9 +109,6 @@ void Player::SetInitialPosition()
 {
 	playerSprite.setPosition(ScreenResolution::GetScreenCenter720());
 	*playerHitZone = playerSprite.getGlobalBounds();
-	//OLD METHOD, DELETE AFTER TESTING
-	//playerHitZone->height = playerSprite.getGlobalBounds().height;
-	//playerHitZone->width = playerSprite.getGlobalBounds().width;
 	playerHitZone->height *= hitzoneSizeMultiplier;
 	playerHitZone->width *= hitzoneSizeMultiplier;
 }
@@ -148,10 +139,9 @@ void Player::Movement()
 	posX = playerSprite.getPosition().x;
 	posY = playerSprite.getPosition().y;
 	sf::Vector2f originOffset = playerSprite.getOrigin() * hitzoneSizeMultiplier;
-	playerHitZone->left = posX  - playerSprite.getOrigin().x / 2;
+	playerHitZone->left = posX  - originOffset.x / 2;
 	playerHitZone->top = posY  - originOffset.y / 2;
 
-	zone.setPosition(playerHitZone->left, playerHitZone->top);
 }
 
 void Player::CreateBullets()

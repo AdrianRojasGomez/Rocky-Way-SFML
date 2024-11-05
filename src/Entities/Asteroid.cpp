@@ -75,9 +75,6 @@ void Asteroid::InitPosition()
 
 
 	*asteroidHitZone = asteroidSprite.getGlobalBounds();
-	//OLD METHOD, DELETE AFTER TESTING
-	//asteroidHitZone->height = asteroidSprite.getGlobalBounds().height;
-	//asteroidHitZone->width = asteroidSprite.getGlobalBounds().width;
 	asteroidHitZone->height *= hitzoneSizeMultiplier;
 	asteroidHitZone->width *= hitzoneSizeMultiplier;
 }
