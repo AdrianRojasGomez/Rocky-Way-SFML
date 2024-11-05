@@ -16,7 +16,7 @@ public:
 	void Draw(sf::RenderWindow& window);
 	void Respawn();
 	void RemoveInvulnerability();
-	sf::Sprite GetPlayerSprite() { return playerSprite; }
+	sf::FloatRect GetPlayerHitbox() { return *playerHitZone; }
 	std::list<Bullet*>& GetBullets() { return bullets; }
 	bool GetIsInvulnerable() { return isInvulnerable; }
 	bool GetIsAlive() { return isAlive; }
@@ -25,10 +25,13 @@ public:
 	bool CheckHasHPLeft();
 
 private:
+
+
 	GameState* gameState;
 	UI* ui;
 	sf::Texture* playerTexture;
 	sf::Sprite playerSprite;
+	sf::FloatRect* playerHitZone;
 	sf::Clock cooldownClock;
 	sf::Clock respawnClock;
 	std::list<Bullet*> bullets;
@@ -49,6 +52,7 @@ private:
 	const int FIXED_DEGREES = 90;
 	const int RESPAWN_TIME = 2;
 	const int INVULNERABLE_TIME = 3;
+	const float hitzoneSizeMultiplier = 0.6f;
 
 	bool isAlive = true;
 	bool isInvulnerable = false;
