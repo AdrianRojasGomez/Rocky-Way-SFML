@@ -266,6 +266,16 @@ sf::Music* ResourceManager::GetGameplayMusic()
 	return gameplayMusic;
 }
 
+sf::Music* ResourceManager::GetGameOverMusic()
+{
+	if (gameOverMusic == nullptr)
+	{
+		gameOverMusic = new sf::Music();
+		gameOverMusic = LoadMusic(pathMusicGameplay);
+	}
+	return gameOverMusic;
+}
+
 sf::Image* ResourceManager::LoadImage(std::string path)
 {
 	sf::Image* image = new sf::Image();
@@ -371,4 +381,5 @@ void ResourceManager::LoadAllMusics()
 {
 	LoadMusic(pathMusicMenu);
 	LoadMusic(pathMusicGameplay);
+	LoadMusic(pathMusicGameOver);
 }

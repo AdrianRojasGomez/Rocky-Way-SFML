@@ -277,7 +277,7 @@ void Player::UpdateFrameanimation()
 
 void Player::TurnDownEngine()
 {
-	if (engineClock.getElapsedTime().asSeconds() > 0.19f)
+	if (engineClock.getElapsedTime().asSeconds() > 0.1f)
 		AudioManager::getInstance().StopEngineSound();
 
 }
