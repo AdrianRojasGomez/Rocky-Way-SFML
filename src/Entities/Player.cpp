@@ -1,15 +1,16 @@
 #include "Player.h"
 #include "../Utilities/Framerate.h"
+#include "../Utilities/ScreenResolution.h"
 #include "../Utilities/WrappingScreenUtility.h"
 #include "../SingletonManagers/ResourceManager.h"
-#include "../Utilities/ScreenResolution.h"
 #include "../SingletonManagers/ScoreManager.h"
 #include "../SingletonManagers/AudioManager.h"
 
-Player::Player(UI* ui, GameState* gameState)
+Player::Player(UI* ui, GameState* gameState, ScreenShake* screenShake)
 {
 	this->gameState = gameState;
 	this->ui = ui;
+	this->screenShake = screenShake;
 	playerHitZone = new sf::FloatRect;
 	textureRect = sf::IntRect(0, 0, 128, 128);
 	HP = MaxHP;
@@ -37,7 +38,16 @@ void Player::Input(sf::Event event)
 	{
 		if (event.key.code == sf::Keyboard::P || event.key.code == sf::Keyboard::Escape)
 			*gameState = GameState::Pause;
+
+		if (event.key.code == sf::Keyboard::R)
+		{
+			screenShake->StartShake(0.1f, 1);
+			std::cout << "Rumbling\n";
+		}
+
 	}
+
+
 }
 
 void Player::Update()

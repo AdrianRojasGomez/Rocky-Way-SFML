@@ -7,6 +7,8 @@
 #include "HighScore.h"
 #include "Options.h"
 #include "SplashScreen.h"
+#include "../Utilities/ScreenShakeUtility.h"
+
 
 
 class Game
@@ -31,8 +33,11 @@ private:
 	GameOver* gameOver;
 	HighScore* highScore;
 	Options* options;
+	ScreenShake* screenShake;
+	
 
 	sf::VideoMode* videoMode;
+	sf::View* view;
 	sf::RenderWindow* window;
 	sf::Image* iconImage;
 

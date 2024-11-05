@@ -13,17 +13,26 @@ Game::Game()
 	Game::gameState = GameState::SplashScreen;
 	videoMode = new sf::VideoMode(ScreenResolution::SCREEN_WIDTH_720P, ScreenResolution::SCREEN_HEIGHT_720P);
 	window = new sf::RenderWindow(*videoMode, "Rocky Ways");
+	view = new sf::View(window->getView());
+	screenShake = new ScreenShake(view);
 	splash = new SplashScreen(&gameState);
-	gameplay = new Gameplay(&gameState);
+	gameplay = new Gameplay(&gameState, screenShake);
 	menu = new Menu(&gameState);
 	gameOver = new GameOver(&gameState);
 	highScore = new HighScore(&gameState);
 	options = new Options(&gameState);
 	SetIcon();
+	
 }
 
 Game::~Game()
 {
+	if (splash != nullptr)
+	{
+		delete splash;
+		splash = nullptr;
+	}
+
 	if (gameplay != nullptr)
 	{
 		delete gameplay;
@@ -60,10 +69,16 @@ Game::~Game()
 		highScore = nullptr;
 	}
 
-	if (splash != nullptr)
+	if (screenShake != nullptr)
 	{
-		delete splash;
-		splash = nullptr;
+		delete screenShake;
+		screenShake = nullptr;
+	}
+
+	if (view != nullptr)
+	{
+		delete view;
+		view = nullptr;
 	}
 
 }
@@ -127,6 +142,8 @@ void Game::ProcessEvents()
 
 void Game::Update()
 {
+	screenShake->Update();
+
 	switch (gameState)
 	{
 	case GameState::SplashScreen:
@@ -136,7 +153,6 @@ void Game::Update()
 	case GameState::MainMenu:
 		if (AudioManager::getInstance().GetMenuMusic()->getStatus() == sf::SoundSource::Stopped)
 			AudioManager::getInstance().PlayMenuMusic();
-
 		menu->Update();
 		break;
 	case GameState::Gameplay:
@@ -171,6 +187,8 @@ void Game::Update()
 
 void Game::Draw()
 {
+	screenShake->Draw(*window);
+
 	window->clear(sf::Color::Black);
 	switch (gameState)
 	{

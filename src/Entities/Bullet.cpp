@@ -1,12 +1,14 @@
-#include "Bullet.h"
 #include <iostream>
-#include "../Utilities/WrappingScreenUtility.h"
-#include "../Utilities/Framerate.h"
+#include "Bullet.h"
 #include "../SingletonManagers/ResourceManager.h"
+#include "../Utilities/Framerate.h"
 #include "../Utilities/RandomUtility.h"
+#include "../Utilities/WrappingScreenUtility.h"
 
-Bullet::Bullet() : gen(rd()), dis(-MAX_SPREAD_ANGLE, MAX_SPREAD_ANGLE)
+Bullet::Bullet()
 {
+    gen = std::mt19937(rd());
+    dis = std::uniform_real_distribution<float>(-MAX_SPREAD_ANGLE, MAX_SPREAD_ANGLE);
     this->bulletTexture = ResourceManager::getInstance().GetBulletTexture();
     timer = new sf::Clock;
     SetTextureValues();

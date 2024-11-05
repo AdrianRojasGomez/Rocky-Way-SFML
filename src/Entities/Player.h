@@ -2,14 +2,16 @@
 #include <iostream>
 #include <list>
 #include "Bullet.h"
-#include "../Program/UI.h"
 #include "../Program/GameState.h"
+#include "../Program/UI.h"
+#include "../Utilities/ScreenShakeUtility.h"
+
 
 
 class Player
 {
 public:
-	Player(UI* ui, GameState* gameState);
+	Player(UI* ui, GameState* gameState, ScreenShake* screenshake);
 	~Player();
 	void Input(sf::Event event);
 	void Update();
@@ -26,7 +28,7 @@ public:
 
 private:
 
-
+	ScreenShake* screenShake;
 	GameState* gameState;
 	UI* ui;
 	sf::Texture* playerTexture;

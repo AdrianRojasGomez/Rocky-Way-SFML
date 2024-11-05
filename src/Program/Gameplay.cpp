@@ -1,11 +1,11 @@
-#include <iostream> //DEBUG ONLY 
 #include "Gameplay.h"
 
-Gameplay::Gameplay(GameState* gameState)
+Gameplay::Gameplay(GameState* gameState, ScreenShake* screenshacke)
 {
 	this->gameState = gameState;
+	this->screenShake = screenshacke;
 	ui = new UI();
-	player = new Player(ui, gameState);
+	player = new Player(ui, gameState, screenShake);
 	wave = new Wave(ui);
 	collisionManager = new CollisionManager();
 	background = new Background();

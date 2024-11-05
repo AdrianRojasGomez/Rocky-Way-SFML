@@ -1,16 +1,17 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Background.h"
-#include "Wave.h"
 #include "CollisionManager.h"
-#include "UI.h"
 #include "GameState.h"
 #include "Pause.h"
+#include "UI.h"
+#include "Wave.h"
+#include "../Utilities/ScreenShakeUtility.h"
 
 class Gameplay
 {
 public:
-	Gameplay(GameState* gameState);
+	Gameplay(GameState* gameState, ScreenShake* screenshake);
 	~Gameplay();
 	void Input(sf::Event event);
 	void Update();
@@ -19,7 +20,7 @@ public:
 
 private:
 
-
+	ScreenShake* screenShake;
 	GameState* gameState;
 	Background* background;
 	UI* ui;

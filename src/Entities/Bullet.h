@@ -22,7 +22,7 @@ private:
     sf::Clock* timer;
 
     const float BULLET_LIFETIME = 0.65f;
-    const float MAX_SPREAD_ANGLE = 5.0f; 
+    const float MAX_SPREAD_ANGLE = 4.0f; 
     float initialBulletSpeed = 750.0f;
     float bulletSpeed = 650.0f;
     bool isActive = false;
