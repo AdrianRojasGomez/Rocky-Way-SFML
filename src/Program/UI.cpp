@@ -2,8 +2,8 @@
 #include <list>
 #include "UI.h"
 #include "../Utilities/ScreenResolution.h"
-#include "../Utilities/ResourceManager.h"
-#include "../Utilities/ScoreManager.h"
+#include "../SingletonManagers/ResourceManager.h"
+#include "../SingletonManagers/ScoreManager.h"
 
 
 UI::UI()

@@ -1,6 +1,6 @@
 #include <cmath>
 #include "Wave.h"
-#include "../Utilities/ScoreManager.h"
+#include "../SingletonManagers/ScoreManager.h"
 
 Wave::Wave(UI* ui)
 {

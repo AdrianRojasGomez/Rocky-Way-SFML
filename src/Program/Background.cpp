@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Background.h"
-#include "../Utilities/ResourceManager.h"
+#include "../SingletonManagers/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
 
 

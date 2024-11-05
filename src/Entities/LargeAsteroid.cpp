@@ -1,5 +1,5 @@
 #include "LargeAsteroid.h"
-#include "../Utilities/ResourceManager.h"
+#include "../SingletonManagers/ResourceManager.h"
 #include "../Utilities//RandomUtility.h"
 
 LargeAsteroid::LargeAsteroid()

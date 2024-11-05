@@ -1,5 +1,5 @@
 #include "Pause.h"
-#include "../Utilities/ResourceManager.h"
+#include "../SingletonManagers/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
 
 Pause::Pause(GameState* gameState)

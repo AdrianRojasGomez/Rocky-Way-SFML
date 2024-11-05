@@ -1,8 +1,8 @@
 #include <iostream>
 #include "Options.h"
-#include "../Utilities/ResourceManager.h"
+#include "../SingletonManagers/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
-#include "../Audio/AudioManager.h"
+#include "../SingletonManagers/AudioManager.h"
 
 Options::Options(GameState* gameState)
 {
