@@ -31,9 +31,11 @@ private:
 	sf::Text optionTitle;
 	sf::Text optionButtons[OPTIONS_AMOUNT];
 	sf::Text volumeText;
+	sf::Text maxVolumeText;
 	bool isMuted = false;
 	bool isChangingVolume = false;
-	int volumeNumber = 100;
+	//const int maxVolumeNumber = 50;
+	int volumeNumber = 50;
 	std::string volumeString = std::to_string(volumeNumber);
 	sf::IntRect musicSwitchIntRect;
 	int intRectPosX = 0;

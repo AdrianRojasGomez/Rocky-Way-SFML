@@ -46,8 +46,8 @@ private:
 	sf::Sound enterSound;
 	sf::Sound moveUISound;
 
-	const int defaultMusicVolume = 60;
-	const int maxShootSoundVolume = 25;
+	const int defaultMusicVolume = 50;
+	const int maxShootSoundVolume = 20;
 	const int maxEngineSoundVolume = 50;
 	const int maxAsteroidDestroyedSoundVolume = 20;
 	bool isInMainMenu = false;

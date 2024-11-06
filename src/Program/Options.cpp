@@ -48,7 +48,7 @@ void Options::Input(sf::Event event)
 			SelectButton();
 
 			if (selectedIndex == 0)
-				volumeNumber = 100;
+				volumeNumber = 50;
 		}
 
 		if (event.key.code == sf::Keyboard::Down)
@@ -85,6 +85,7 @@ void Options::Draw(sf::RenderWindow& window)
 	}
 	window.draw(musicSwitchSprite);
 	window.draw(volumeText);
+	window.draw(maxVolumeText);
 
 }
 
@@ -153,8 +154,17 @@ void Options::InitializeVolumeText()
 	CenterTextOrigin(volumeText);
 	float posX = 0, posY = 0;
 	posX = (ScreenResolution::SCREEN_WIDTH_720P * 0.62f);
-	posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.51f);
+	posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.50f);
 	volumeText.setPosition(posX, posY);
+
+	std::string maxVolumeString = "/ " + volumeString;
+	maxVolumeText.setString(maxVolumeString);
+	ModifyTextProperties(maxVolumeText);
+	CenterTextOrigin(maxVolumeText);
+	posX = 0, posY = 0;
+	posX = (ScreenResolution::SCREEN_WIDTH_720P * 0.674f);
+	posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.505f);
+	maxVolumeText.setPosition(posX, posY);
 }
 
 void Options::UpdateSelectedButton()
@@ -181,6 +191,9 @@ void Options::UpdateSelectedButton()
 		volumeText.setFillColor(sf::Color::Yellow);
 		volumeText.setOutlineThickness(1.0f);
 		volumeText.setCharacterSize(45);
+		maxVolumeText.setFillColor(sf::Color::Yellow);
+		maxVolumeText.setOutlineThickness(1.0f);
+		maxVolumeText.setCharacterSize(45);
 	}
 	else
 	{
@@ -228,11 +241,11 @@ void Options::SelectButton()
 
 void Options::IncreaseVolume()
 {
-	if (volumeNumber <= 100)
+	if (volumeNumber <= 50)
 		volumeNumber++;
 
-	if (volumeNumber > 100)
-		volumeNumber = 100;
+	if (volumeNumber > 50)
+		volumeNumber = 50;
 	AudioManager::getInstance().SetMusicVolume(volumeNumber);
 }
 
@@ -245,10 +258,6 @@ void Options::DecreaseVolume()
 		volumeNumber--;
 	AudioManager::getInstance().SetMusicVolume(volumeNumber);
 }
-
-
-
-
 
 void Options::CenterTextOrigin(sf::Text& textToCenter)
 {
