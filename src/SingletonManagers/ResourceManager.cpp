@@ -194,6 +194,17 @@ sf::Texture* ResourceManager::GetMusicSwitchTexture()
 	return musicSwitchTexture;
 }
 
+sf::Texture* ResourceManager::GetImpactTexture()
+{
+	if (impactTexture == nullptr)
+	{
+		impactTexture = new sf::Texture;
+		impactTexture = LoadTexture(pathTextureHitEffect);
+	}
+
+	return impactTexture;
+}
+
 sf::Texture* ResourceManager::GetLifeUITexture()
 {
 	if (lifeUITexture == nullptr)
@@ -367,6 +378,7 @@ void ResourceManager::LoadAllTextures()
 	LoadTexture(pathTextureLarge);
 	LoadTexture(pathTextureSmall);
 	LoadTexture(pathTextureMusicSwitch);
+	LoadTexture(pathTextureHitEffect);
 	LoadTexture(pathTextureLifeUI);
 	LoadTexture(pathTextureLifeLostUI);
 }

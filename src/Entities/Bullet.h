@@ -11,7 +11,6 @@ public:
     void Update();
     void Draw(sf::RenderWindow& window);
     void Fire(float posX, float posY, float dirX, float dirY);
-    int GetDamage() { return damage; }
     bool GetIsActive() { return isActive; }
     sf::Sprite GetBulletSprite() { return bulletSprite; }
     void SetBulletSprite(bool isActive);
@@ -26,9 +25,8 @@ private:
     float initialBulletSpeed = 750.0f;
     float bulletSpeed = 650.0f;
     bool isActive = false;
-    int damage = 10;
-    float scaleX = 0.20f;
-    float scaleY = 0.20f;
+    float scaleBulletX = 0.20f;
+    float scaleBulletY = 0.20f;
     float posX = 0.0f;
     float posY = 0.0f;
     float bulletDirX = 0.0f;
@@ -37,12 +35,15 @@ private:
     int intRectPosX = 0;
     sf::IntRect textureRect;
     sf::Clock animationClock;
+    sf::CircleShape debugCircle;
 
     void SetTextureValues();
     void BulletMovement();
     void BulletTimer();
     void SetRotation();
     void SetPosition();
+    void UpdateFrameAnimation();
+    void BulletAnimation();
 
     // Random number generator components
     std::random_device rd;
@@ -53,5 +54,4 @@ private:
     float getRandomDeviation();
     float degToRad(float degrees);
     sf::Vector2f rotateVector(const sf::Vector2f& vec, float angleRadians);
-    void UpdateFameAnimation();
 };

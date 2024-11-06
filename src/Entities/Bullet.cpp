@@ -9,8 +9,7 @@ Bullet::Bullet()
 {
 	gen = std::mt19937(rd());
 	dis = std::uniform_real_distribution<float>(-MAX_SPREAD_ANGLE, MAX_SPREAD_ANGLE);
-	textureRect = sf::IntRect(0, 0, 160, 320);
-	this->bulletTexture = ResourceManager::getInstance().GetBulletTexture();
+	bulletTexture = ResourceManager::getInstance().GetBulletTexture();
 	timer = new sf::Clock;
 	SetTextureValues();
 }
@@ -26,11 +25,12 @@ Bullet::~Bullet()
 
 void Bullet::SetTextureValues()
 {
+	textureRect = sf::IntRect(0, 0, 160, 320);
 	if (bulletTexture != nullptr)
 	{
 		bulletSprite.setTexture(*bulletTexture);
 		bulletSprite.setTextureRect(textureRect);
-		bulletSprite.setScale(scaleX, scaleY);
+		bulletSprite.setScale(scaleBulletX, scaleBulletY);
 		sf::FloatRect bounds = bulletSprite.getLocalBounds();
 		bulletSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
 	}
@@ -89,16 +89,21 @@ sf::Vector2f Bullet::rotateVector(const sf::Vector2f& vec, float angleRadians)
 	);
 }
 
-void Bullet::UpdateFameAnimation()
+void Bullet::UpdateFrameAnimation()
 {
 	if (!isActive)
 		return;
 
-	textureRect = bulletSprite.getTextureRect();
-
-
 	if (!(animationClock.getElapsedTime().asMilliseconds() > 30))
 		return;
+
+	BulletAnimation();
+	animationClock.restart();
+}
+
+void Bullet::BulletAnimation()
+{
+	textureRect = bulletSprite.getTextureRect();
 
 	if (intRectPosX >= 640)
 		intRectPosX = 640;
@@ -107,13 +112,11 @@ void Bullet::UpdateFameAnimation()
 
 	textureRect = sf::IntRect(intRectPosX, 0, 160, 320);
 	bulletSprite.setTextureRect(textureRect);
-	animationClock.restart();
 }
 
-// Set rotation based on direction
+
 void Bullet::SetRotation()
 {
-	// Adjust based on sprite orientation
 	float angleInRadians = std::atan2(bulletDirY, bulletDirX);
 	float angleDegrees = angleInRadians * 180 / 3.14159265f;
 	bulletSprite.setRotation(angleDegrees + 90);
@@ -136,7 +139,7 @@ void Bullet::BulletTimer()
 {
 	if (timer->getElapsedTime().asSeconds() > BULLET_LIFETIME)
 	{
-		bulletSprite.setTextureRect(sf::IntRect (0, 0, 160, 320));
+		bulletSprite.setTextureRect(sf::IntRect(0, 0, 160, 320));
 		isActive = false;
 	}
 }
@@ -148,8 +151,8 @@ void Bullet::Update()
 	BulletMovement();
 	BulletTimer();
 	WrapAroundScreen(posX, posY, bulletDirX, bulletDirY, 5.0f, bulletSprite);
-	bulletSprite.setPosition(posX, posY);
-	UpdateFameAnimation();
+	UpdateFrameAnimation();
+
 }
 
 void Bullet::Draw(sf::RenderWindow& window)
@@ -157,6 +160,7 @@ void Bullet::Draw(sf::RenderWindow& window)
 	if (!isActive)
 		return;
 	window.draw(bulletSprite);
+	window.draw(debugCircle);
 }
 
 void Bullet::SetBulletSprite(bool isActive)

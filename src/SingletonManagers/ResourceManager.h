@@ -7,6 +7,7 @@ class ResourceManager
 public:
 	static ResourceManager& getInstance();
 	sf::Image* GetIconImage();
+
 	sf::Texture* GetSplashTexture();
 	sf::Texture* GetMenuBackgroundTexture();
 	sf::Texture* GetBackgroundTexture();
@@ -16,11 +17,16 @@ public:
 	sf::Texture* GetLargeAsteroidTexture();
 	sf::Texture* GetSmallAsteroidTexture();
 	sf::Texture* GetMusicSwitchTexture();
+	sf::Texture* GetImpactTexture();
+
 	sf::Texture* GetLifeUITexture();
 	sf::Texture* GetLifeLostUITexture();
+
 	sf::Font* GetOxaniumSemiBoldFont();
+
 	sf::SoundBuffer* GetShootSoundBuffer();
 	sf::SoundBuffer* GetEngineSoundBuffer();
+
 	sf::Music* GetMenuMusic();
 	sf::Music* GetGameplayMusic();
 	sf::Music* GetGameOverMusic();
@@ -43,6 +49,7 @@ private:
 	sf::Texture* largeAsteroidTexture = nullptr;
 	sf::Texture* smallAsteroidTexture = nullptr;
 	sf::Texture* musicSwitchTexture = nullptr;
+	sf::Texture* impactTexture = nullptr;
 	sf::Texture* lifeUITexture = nullptr;
 	sf::Texture* lifeLostUITexture = nullptr;
 
@@ -67,6 +74,7 @@ private:
 	const std::string pathTextureLarge = "res/assets/Enemies/MeteorLarge.png";
 	const std::string pathTextureSmall = "res/assets/Enemies/MeteorSmall.png";
 	const std::string pathTextureMusicSwitch = "res/assets/UI/MusicMuteSwitch.png";
+	const std::string pathTextureHitEffect = "res/assets/Effects/HitEffect.png";
 	const std::string pathTextureLifeUI = "res/assets/UI/LifeUI.png";
 	const std::string pathTextureLifeLostUI = "res/assets/UI/LifelostUI.png";
 
