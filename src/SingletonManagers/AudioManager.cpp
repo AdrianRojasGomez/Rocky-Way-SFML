@@ -10,7 +10,7 @@ AudioManager& AudioManager::getInstance()
 
 AudioManager::AudioManager()
 {
-	SetPlayerSounds();
+	SetGameSounds();
 	SetGameMusic();
 	SetDefaultVolumes();
 }
@@ -24,10 +24,10 @@ void AudioManager::SetGameMusic()
 	gameplayMusic->setLoop(true);
 	gameOverMusic->setLoop(true);
 	engineSound.setLoop(true);
-	
+
 }
 
-void AudioManager::SetPlayerSounds()
+void AudioManager::SetGameSounds()
 {
 	shootSoundBuffer = ResourceManager::getInstance().GetShootSoundBuffer();
 	shootSound.setBuffer(*shootSoundBuffer);
@@ -35,6 +35,8 @@ void AudioManager::SetPlayerSounds()
 	engineSound.setBuffer(*engineSoundBuffer);
 	asteroidDestroyedBuffer = ResourceManager::getInstance().GetAsteroidDestroyedBuffer();
 	asteroidDestroyedSound.setBuffer(*asteroidDestroyedBuffer);
+	playerDestroyedBuffer = ResourceManager::getInstance().GetPlayerDestroyedBuffer();
+	playerDestroyedSound.setBuffer(*playerDestroyedBuffer);
 }
 
 void AudioManager::SetDefaultVolumes()
@@ -53,7 +55,7 @@ void AudioManager::PlayMenuMusic()
 		return;
 
 	isInMainMenu = true;
-	gameplayMusic->stop();
+	StopAllMusic();
 	menuMusic->play();
 }
 
@@ -63,12 +65,20 @@ void AudioManager::PlayGameplayMusic()
 		return;
 
 	isInMainMenu = false;
-	menuMusic->stop();
+	StopAllMusic();
 	gameplayMusic->play();
+}
+
+void AudioManager::StopAllMusic()
+{
+	gameplayMusic->stop();
+	menuMusic->stop();
+	gameOverMusic->stop();
 }
 
 void AudioManager::PlayGameOverMusic()
 {
+	StopAllMusic();
 	gameOverMusic->play();
 }
 
@@ -127,6 +137,11 @@ void AudioManager::StopEngineSound()
 void AudioManager::PlayAsteroidDestroyedSound()
 {
 	asteroidDestroyedSound.play();
+}
+
+void AudioManager::PlayPlayerDestroyedSound()
+{
+	playerDestroyedSound.play();
 }
 
 void AudioManager::PauseGameplayMusic()

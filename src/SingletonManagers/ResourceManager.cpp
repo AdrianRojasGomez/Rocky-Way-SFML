@@ -95,6 +95,12 @@ ResourceManager::~ResourceManager()
 		delete asteroidDestroyedSoundBuffer;
 		asteroidDestroyedSoundBuffer = nullptr;
 	}
+
+	if (playerDestroyedSoundBuffer != nullptr)
+	{
+		delete playerDestroyedSoundBuffer;
+		playerDestroyedSoundBuffer = nullptr;
+	}
 	
 	if (menuMusic != nullptr)
 	{
@@ -285,6 +291,16 @@ sf::SoundBuffer* ResourceManager::GetAsteroidDestroyedBuffer()
 	return asteroidDestroyedSoundBuffer;
 }
 
+sf::SoundBuffer* ResourceManager::GetPlayerDestroyedBuffer()
+{
+	if (playerDestroyedSoundBuffer == nullptr)
+	{
+		playerDestroyedSoundBuffer = new sf::SoundBuffer;
+		playerDestroyedSoundBuffer = LoadSoundBuffer(pathPlayerDestroyedBuffer);
+	}
+	return playerDestroyedSoundBuffer;
+}
+
 sf::Music* ResourceManager::GetMenuMusic()
 {
 	if (menuMusic == nullptr)
@@ -310,7 +326,7 @@ sf::Music* ResourceManager::GetGameOverMusic()
 	if (gameOverMusic == nullptr)
 	{
 		gameOverMusic = new sf::Music();
-		gameOverMusic = LoadMusic(pathMusicGameplay);
+		gameOverMusic = LoadMusic(pathMusicGameOver);
 	}
 	return gameOverMusic;
 }
@@ -416,6 +432,7 @@ void ResourceManager::LoadAllSoundBuffers()
 	LoadSoundBuffer(pathSoundShootBuffer);
 	LoadSoundBuffer(pathSoundEngineBuffer);
 	LoadSoundBuffer(pathAsteroidDestroyedBuffer);
+	LoadSoundBuffer(pathPlayerDestroyedBuffer);
 }
 
 void ResourceManager::LoadAllMusics()

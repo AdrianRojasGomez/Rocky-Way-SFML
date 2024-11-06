@@ -41,6 +41,8 @@ void Player::Input(sf::Event event)
 
 		if (event.key.code == sf::Keyboard::W || event.KeyPressed == sf::Keyboard::Up)
 		{
+			if (!isAlive)
+				return;
 			AudioManager::getInstance().PlayEngineSound();
 			std::cout << "On\n";
 		}
@@ -49,6 +51,7 @@ void Player::Input(sf::Event event)
 		{
 			//DEBUG ONLY
 			screenShake->StartShake(0.2f, 5.0f);
+			SetIsAlive(false);
 		}
 	}
 
@@ -65,8 +68,10 @@ void Player::Input(sf::Event event)
 
 void Player::Update()
 {
+	if (deathClock.getElapsedTime().asSeconds() < 1.7)
+		return;
 
-	if (!CheckHasHPLeft() && deathClock.getElapsedTime().asSeconds() > 1.5f)
+	if (!CheckHasHPLeft())
 	{
 		ScoreManager::getInstance().CompareHighScore();
 		ScoreManager::getInstance().ResetScore();
@@ -155,8 +160,8 @@ void Player::Movement()
 	posX = playerSprite.getPosition().x;
 	posY = playerSprite.getPosition().y;
 	sf::Vector2f originOffset = playerSprite.getOrigin() * hitzoneSizeMultiplier;
-	playerHitZone->left = posX  - originOffset.x / 2;
-	playerHitZone->top = posY  - originOffset.y / 2;
+	playerHitZone->left = posX - originOffset.x / 2;
+	playerHitZone->top = posY - originOffset.y / 2;
 
 }
 
@@ -207,11 +212,11 @@ bool Player::CheckHasHPLeft()
 
 void Player::TriggerScreenshake()
 {
-	if(HP>0)
+	if (HP > 0)
 		screenShake->StartShake(0.2f, 5.0f);
 	else
 		screenShake->StartShake(0.3f, 5.0f);
-	
+
 }
 
 void Player::ResetFromPause()
@@ -248,6 +253,7 @@ void Player::SetIsAlive(bool isAlive)
 	if (!isAlive)
 	{
 		HP--;
+		AudioManager::getInstance().PlayPlayerDestroyedSound();
 	}
 	ui->SetUIHP(HP);
 	respawnClock.restart();
@@ -255,6 +261,8 @@ void Player::SetIsAlive(bool isAlive)
 
 	if (HP <= 0)
 	{
+		AudioManager::getInstance().StopAllMusic();
+		AudioManager::getInstance().StopEngineSound();
 		deathClock.restart();
 	}
 }

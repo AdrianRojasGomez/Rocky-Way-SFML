@@ -111,16 +111,16 @@ void GameOver::UpdateSelectedButton()
 
 void GameOver::SelectButton()
 {
+	*gameState = GameState::Replay;
+
 	switch (selectedIndex)
 	{
 	case 0:
-		*gameState = GameState::Replay;
 		isMenu = false;
 		selectedIndex = 0;
 		canChange = false;
 		break;
 	case 1:
-		*gameState = GameState::Replay;
 		isMenu = true;
 		selectedIndex = 0;
 		canChange = false;

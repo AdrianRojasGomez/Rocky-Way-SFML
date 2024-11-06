@@ -8,6 +8,7 @@ public:
 	static AudioManager& getInstance();
 	void PlayMenuMusic();
 	void PlayGameplayMusic();
+	void StopAllMusic();
 	void PlayGameOverMusic();
 	void SetMusicVolume(int volume);
 	void MuteAll(bool isMuted);
@@ -15,10 +16,12 @@ public:
 	void PlayEngineSound();
 	void StopEngineSound();
 	void PlayAsteroidDestroyedSound();
+	void PlayPlayerDestroyedSound();
 	void PauseGameplayMusic();
 	void ResumeGameplayMusic();
 	sf::Music* GetMenuMusic() { return menuMusic; }
 	sf::Music* GetGameplayMusic() { return gameplayMusic; }
+	sf::Music* GetGameOverMusic() { return gameOverMusic; }
 private:
 	AudioManager();
 	AudioManager(const AudioManager&) = delete;
@@ -30,9 +33,11 @@ private:
 	sf::SoundBuffer* shootSoundBuffer = nullptr;
 	sf::SoundBuffer* engineSoundBuffer = nullptr;
 	sf::SoundBuffer* asteroidDestroyedBuffer = nullptr;
+	sf::SoundBuffer* playerDestroyedBuffer = nullptr;
 	sf::Sound shootSound;
 	sf::Sound engineSound;
 	sf::Sound asteroidDestroyedSound;
+	sf::Sound playerDestroyedSound;
 
 	const int defaultMusicVolume = 80;
 	const int maxShootSoundVolume = 25;
@@ -42,7 +47,7 @@ private:
 	bool engineSwitch = false;
 
 	void SetGameMusic();
-	void SetPlayerSounds();
+	void SetGameSounds();
 	void SetDefaultVolumes();
 
 };

@@ -152,7 +152,9 @@ void Game::Update()
 		break;
 	case GameState::MainMenu:
 		if (AudioManager::getInstance().GetMenuMusic()->getStatus() == sf::SoundSource::Stopped)
+		{
 			AudioManager::getInstance().PlayMenuMusic();
+		}
 		menu->Update();
 		break;
 	case GameState::Gameplay:
@@ -169,7 +171,10 @@ void Game::Update()
 		gameplay->Update();
 		break;
 	case GameState::GameOver:
-		gameOver->Update();
+		if (AudioManager::getInstance().GetGameOverMusic()->getStatus() != sf::SoundSource::Playing)
+		{
+			AudioManager::getInstance().PlayGameOverMusic();
+		}		gameOver->Update();
 		break;
 	case GameState::HighScores:
 		highScore->Update();
@@ -178,7 +183,6 @@ void Game::Update()
 		options->Update();
 		break;
 	case GameState::Replay:
-		AudioManager::getInstance().PlayGameOverMusic();
 		isMenu = gameOver->GetIsMenu();
 		gameplay->ResetGameplay(isMenu);
 		break;
