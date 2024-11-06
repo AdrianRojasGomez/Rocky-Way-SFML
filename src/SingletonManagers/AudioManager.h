@@ -19,6 +19,9 @@ public:
 	void PlayPlayerDestroyedSound();
 	void PauseGameplayMusic();
 	void ResumeGameplayMusic();
+	void PlayEnterUISound();
+	void PlayMoveUISound();
+
 	sf::Music* GetMenuMusic() { return menuMusic; }
 	sf::Music* GetGameplayMusic() { return gameplayMusic; }
 	sf::Music* GetGameOverMusic() { return gameOverMusic; }
@@ -34,12 +37,16 @@ private:
 	sf::SoundBuffer* engineSoundBuffer = nullptr;
 	sf::SoundBuffer* asteroidDestroyedBuffer = nullptr;
 	sf::SoundBuffer* playerDestroyedBuffer = nullptr;
+	sf::SoundBuffer* enterBuffer = nullptr;
+	sf::SoundBuffer* uiMoveBuffer = nullptr;
 	sf::Sound shootSound;
 	sf::Sound engineSound;
 	sf::Sound asteroidDestroyedSound;
 	sf::Sound playerDestroyedSound;
+	sf::Sound enterSound;
+	sf::Sound moveUISound;
 
-	const int defaultMusicVolume = 80;
+	const int defaultMusicVolume = 60;
 	const int maxShootSoundVolume = 25;
 	const int maxEngineSoundVolume = 50;
 	const int maxAsteroidDestroyedSoundVolume = 20;
