@@ -81,10 +81,11 @@ void Menu::CreateTitle()
 {
 	gameTitle.setFont(*menuFont);
 	gameTitle.setString(TITLE);
-	gameTitle.setCharacterSize(130);
+	gameTitle.setCharacterSize(150);
 	gameTitle.setFillColor(sf::Color::White);
 	gameTitle.setStyle(sf::Text::Bold);
-	gameTitle.setOutlineThickness(3.0f);
+	gameTitle.setOutlineThickness(0.5f);
+	gameTitle.setOutlineColor(sf::Color::Black);
 	CenterTextOrigin(gameTitle);
 	gameTitle.setPosition(ScreenResolution::SCREEN_WIDTH_720P / 2, 150);
 }

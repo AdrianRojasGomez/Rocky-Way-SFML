@@ -483,7 +483,7 @@ void ResourceManager::LoadAllSoundBuffers()
 	LoadSoundBuffer(pathSoundEngineBuffer);
 	LoadSoundBuffer(pathAsteroidDestroyedBuffer);
 	LoadSoundBuffer(pathPlayerDestroyedBuffer);
-	LoadSoundBuffer(pathTextureEnterUI);
+	LoadSoundBuffer(pathSoundEnterUI);
 	LoadSoundBuffer(pathSoundMoveUI);
 }
 

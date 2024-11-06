@@ -77,7 +77,7 @@ private:
 	sf::Music* gameOverMusic = nullptr;
 
 	//Icon
-	const std::string pathImageIcon = "res/assets/System/iconBlack2.png";
+	const std::string pathImageIcon = "res/assets/System/icon.png";
 
 	//Gameplay
 	const std::string pathTextureSplash = "res/assets/Background/Splash.png";
