@@ -87,6 +87,12 @@
     <ClCompile Include="src\SingletonManagers\ScoreManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\Entities\Impact.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\ScreenShakeUtility.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Program\Game.h">
@@ -164,10 +170,38 @@
     <ClInclude Include="src\SingletonManagers\ResourceManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="src\Entities\Impact.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utilities\ScreenShakeUtility.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\data\Highscores.dat">
       <Filter>Archivos de recursos</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CMM_AdrianRojas.rc">
+      <Filter>Archivos de recursos</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\assets\System\Icon.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="res\assets\Promo\Icon.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="res\assets\System\icon_.ico">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="res\assets\System\Component 1.ico">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
   </ItemGroup>
 </Project>
