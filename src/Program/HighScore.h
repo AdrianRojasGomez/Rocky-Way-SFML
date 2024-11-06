@@ -16,7 +16,7 @@ public:
 private:
 	static constexpr int RANKING_AMOUNT = 6;
 	static constexpr int LABEL_AMOUNT = 3;
-	const std::string TITLE = "HIGHSCORES";
+	const std::string TITLE = "LEADERBOARD";
 	const std::string BUTTON_LABEL = "Main Menu";
 	const std::string RANKING_NUMBER[RANKING_AMOUNT] = { "1.","2.","3.","4.","5.","6." };
 	const std::string RANKING_LABELS[RANKING_AMOUNT] = { "ID","SCORE","WAVE"};

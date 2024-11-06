@@ -16,7 +16,7 @@ public:
 private:
 	static constexpr int OPTIONS_AMOUNT = 4;
 	const std::string TITLE = "Rocky Way";
-	const std::string MENU_BUTTONS_LABELS[OPTIONS_AMOUNT] = { "PLAY", "Highscore", "Settings", "Quit" };
+	const std::string MENU_BUTTONS_LABELS[OPTIONS_AMOUNT] = { "PLAY", "Leaderboard", "Settings", "Quit" };
 	const int playButtonSize = 60;
 	const int otherButtonsSize = 35;
 	GameState* gameState;
