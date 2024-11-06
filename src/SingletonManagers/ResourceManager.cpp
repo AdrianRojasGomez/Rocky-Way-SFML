@@ -66,6 +66,12 @@ ResourceManager::~ResourceManager()
 		smallAsteroidTexture = nullptr;
 	}
 
+	if (enterUITexture != nullptr)
+	{
+		delete enterUITexture;
+		enterUITexture = nullptr;
+	}
+
 	if (musicSwitchTexture != nullptr)
 	{
 		delete musicSwitchTexture;
@@ -251,6 +257,17 @@ sf::Texture* ResourceManager::GetLifeLostUITexture()
 	return lifeLostUITexture;
 }
 
+sf::Texture* ResourceManager::GetEnterUITexture()
+{
+	if (enterUITexture == nullptr)
+	{
+		enterUITexture = new sf::Texture;
+		enterUITexture = LoadTexture(pathTextureEnterUI);
+	}
+
+	return enterUITexture;
+}
+
 sf::Font* ResourceManager::GetOxaniumSemiBoldFont()
 {
 	if (oxaniumSemiBoldFont == nullptr)
@@ -425,6 +442,7 @@ void ResourceManager::LoadAllTextures()
 	LoadTexture(pathTextureHitEffect);
 	LoadTexture(pathTextureLifeUI);
 	LoadTexture(pathTextureLifeLostUI);
+	LoadTexture(pathTextureEnterUI);
 }
 
 void ResourceManager::LoadAllSoundBuffers()
