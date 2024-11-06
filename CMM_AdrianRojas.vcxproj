@@ -47,6 +47,7 @@
     <ClCompile Include="src\Utilities\WrappingScreenUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="src\Entities\Impact.h" />
     <ClInclude Include="src\Program\GameOver.h" />
     <ClInclude Include="src\Program\GameState.h" />
@@ -77,6 +78,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\data\Highscores.dat" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CMM_AdrianRojas.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\assets\Promo\Icon.png" />
+    <Image Include="res\assets\System\Component 1.ico" />
+    <Image Include="res\assets\System\Icon.png" />
+    <Image Include="res\assets\System\icon_.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
