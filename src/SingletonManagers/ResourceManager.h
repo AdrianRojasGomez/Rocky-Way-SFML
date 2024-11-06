@@ -21,6 +21,8 @@ public:
 
 	sf::Texture* GetLifeUITexture();
 	sf::Texture* GetLifeLostUITexture();
+	sf::Texture* GetEnterUITexture();
+
 
 	sf::Font* GetOxaniumSemiBoldFont();
 
@@ -52,8 +54,10 @@ private:
 	sf::Texture* smallAsteroidTexture = nullptr;
 	sf::Texture* musicSwitchTexture = nullptr;
 	sf::Texture* impactTexture = nullptr;
+
 	sf::Texture* lifeUITexture = nullptr;
 	sf::Texture* lifeLostUITexture = nullptr;
+	sf::Texture* enterUITexture = nullptr;
 
 	sf::Font* oxaniumSemiBoldFont = nullptr;
 
@@ -66,9 +70,10 @@ private:
 	sf::Music* gameplayMusic = nullptr;
 	sf::Music* gameOverMusic = nullptr;
 
-
+	//Icon
 	const std::string pathImageIcon = "res/assets/System/iconBlack2.png";
 
+	//Gameplay
 	const std::string pathTextureSplash = "res/assets/Background/Splash.png";
 	const std::string pathTextureMenuBG = "res/assets/Background/Background00.png";
 	const std::string pathTexturePauseBG = "res/assets/Background/PauseBackground.png";
@@ -79,16 +84,22 @@ private:
 	const std::string pathTextureSmall = "res/assets/Enemies/MeteorSmall.png";
 	const std::string pathTextureMusicSwitch = "res/assets/UI/MusicMuteSwitch.png";
 	const std::string pathTextureHitEffect = "res/assets/Effects/HitEffect.png";
+
+	//UI
 	const std::string pathTextureLifeUI = "res/assets/UI/LifeUI.png";
 	const std::string pathTextureLifeLostUI = "res/assets/UI/LifelostUI.png";
+	const std::string pathTextureEnterUI = "res/assets/Background/Enter.png";
 
+	//Fonts
 	const std::string pathFontOxaniumSemiBold = "res/assets/Fonts/Oxanium-SemiBold.ttf";
 
+	//Sounds
 	const std::string pathSoundShootBuffer = "res/assets/Audio/SFX/PulseShot.wav";
 	const std::string pathSoundEngineBuffer = "res/assets/Audio/SFX/spaceEngineLow_001.ogg";
 	const std::string pathAsteroidDestroyedBuffer = "res/assets/Audio/SFX/bong_001.ogg";
 	const std::string pathPlayerDestroyedBuffer = "res/assets/Audio/SFX/explosionCrunch_004.ogg";
-	
+
+	//Musics
 	const std::string pathMusicMenu = "res/assets/Audio/Music/MenuElectronicChilledCut60.wav";
 	const std::string pathMusicGameplay = "res/assets/Audio/Music/GameplayElectronicRoutinecut60.wav";
 	const std::string pathMusicGameOver = "res/assets/Audio/Music/GameOverElectronicDefeatcut60.wav";

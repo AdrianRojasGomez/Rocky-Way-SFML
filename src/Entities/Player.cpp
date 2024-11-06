@@ -50,8 +50,8 @@ void Player::Input(sf::Event event)
 		if (event.key.code == sf::Keyboard::R)
 		{
 			//DEBUG ONLY
-			screenShake->StartShake(0.2f, 5.0f);
-			SetIsAlive(false);
+			//screenShake->StartShake(0.2f, 5.0f);
+			//SetIsAlive(false);
 		}
 	}
 
