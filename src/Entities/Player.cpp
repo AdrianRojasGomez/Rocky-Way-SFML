@@ -39,11 +39,28 @@ void Player::Input(sf::Event event)
 		if (event.key.code == sf::Keyboard::P || event.key.code == sf::Keyboard::Escape)
 			*gameState = GameState::Pause;
 
+		if (event.key.code == sf::Keyboard::W || event.KeyPressed == sf::Keyboard::Up)
+		{
+			AudioManager::getInstance().PlayEngineSound();
+			std::cout << "On\n";
+		}
+
 		if (event.key.code == sf::Keyboard::R)
 		{
+			//DEBUG ONLY
 			screenShake->StartShake(0.2f, 5.0f);
 		}
 	}
+
+	if (event.type == sf::Event::KeyReleased)
+	{
+		if (event.key.code == sf::Keyboard::W || event.KeyPressed == sf::Keyboard::Up)
+		{
+			AudioManager::getInstance().StopEngineSound();
+			std::cout << "Off\n";
+		}
+	}
+
 }
 
 void Player::Update()
@@ -60,7 +77,6 @@ void Player::Update()
 		return;
 	}
 
-	TurnDownEngine();
 	Respawn();
 	RemoveInvulnerability();
 	Fire();
@@ -128,14 +144,8 @@ void Player::Movement()
 	speedY = directionY * MOVE_SPEED;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)))
-	{
 		playerSprite.move(speedX * Framerate::getDeltaTime(), directionY * MOVE_SPEED * Framerate::getDeltaTime());
-		if (engineClock.getElapsedTime().asSeconds() > 0.2f)
-		{
-			AudioManager::getInstance().PlayEngineSound();
-			engineClock.restart();
-		}
-	}
+
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)))
 		playerSprite.rotate(-ROTATION_SPEED * Framerate::getDeltaTime());
@@ -272,13 +282,6 @@ void Player::UpdateFrameAnimation()
 	textureRect = sf::IntRect(intRectPosX, 0, 128, 128);
 	playerSprite.setTextureRect(textureRect);
 	animationClock.restart();
-
-}
-
-void Player::TurnDownEngine()
-{
-	if (engineClock.getElapsedTime().asSeconds() > 0.1f)
-		AudioManager::getInstance().StopEngineSound();
 
 }
 

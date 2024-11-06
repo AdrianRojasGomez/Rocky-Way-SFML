@@ -82,7 +82,7 @@ void Asteroid::InitPosition()
 
 void Asteroid::ShutDownAsteroid()
 {
-	AudioManager::getInstance(); // Get destroyed sound
+	AudioManager::getInstance().PlayAsteroidDestroyedSound();
 	deadClock.restart();
 	isDying = true;
 }

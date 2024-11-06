@@ -26,6 +26,7 @@ public:
 
 	sf::SoundBuffer* GetShootSoundBuffer();
 	sf::SoundBuffer* GetEngineSoundBuffer();
+	sf::SoundBuffer* GetAsteroidDestroyedBuffer();
 
 	sf::Music* GetMenuMusic();
 	sf::Music* GetGameplayMusic();
@@ -57,6 +58,7 @@ private:
 
 	sf::SoundBuffer* shootSoundBuffer = nullptr;
 	sf::SoundBuffer* engineSoundBuffer = nullptr;
+	sf::SoundBuffer* asteroidDestroyedSoundBuffer = nullptr;
 
 	sf::Music* menuMusic = nullptr;
 	sf::Music* gameplayMusic = nullptr;
@@ -82,6 +84,7 @@ private:
 
 	const std::string pathSoundShootBuffer = "res/assets/Audio/SFX/PulseShot.wav";
 	const std::string pathSoundEngineBuffer = "res/assets/Audio/SFX/spaceEngineLow_001.ogg";
+	const std::string pathAsteroidDestroyedBuffer = "res/assets/Audio/SFX/bong_001.ogg";
 	
 	const std::string pathMusicMenu = "res/assets/Audio/Music/MenuElectronicChilledCut60.wav";
 	const std::string pathMusicGameplay = "res/assets/Audio/Music/GameplayElectronicRoutinecut60.wav";

@@ -78,6 +78,24 @@ ResourceManager::~ResourceManager()
 		oxaniumSemiBoldFont = nullptr;
 	}
 
+	if (shootSoundBuffer != nullptr)
+	{
+		delete shootSoundBuffer;
+		shootSoundBuffer = nullptr;
+	}
+	
+	if (engineSoundBuffer != nullptr)
+	{
+		delete engineSoundBuffer;
+		engineSoundBuffer = nullptr;
+	}
+	
+	if (asteroidDestroyedSoundBuffer != nullptr)
+	{
+		delete asteroidDestroyedSoundBuffer;
+		asteroidDestroyedSoundBuffer = nullptr;
+	}
+	
 	if (menuMusic != nullptr)
 	{
 		menuMusic->stop();
@@ -257,6 +275,16 @@ sf::SoundBuffer* ResourceManager::GetEngineSoundBuffer()
 	return engineSoundBuffer;
 }
 
+sf::SoundBuffer* ResourceManager::GetAsteroidDestroyedBuffer()
+{
+	if (asteroidDestroyedSoundBuffer == nullptr)
+	{
+		asteroidDestroyedSoundBuffer = new sf::SoundBuffer;
+		asteroidDestroyedSoundBuffer = LoadSoundBuffer(pathAsteroidDestroyedBuffer);
+	}
+	return asteroidDestroyedSoundBuffer;
+}
+
 sf::Music* ResourceManager::GetMenuMusic()
 {
 	if (menuMusic == nullptr)
@@ -387,6 +415,7 @@ void ResourceManager::LoadAllSoundBuffers()
 {
 	LoadSoundBuffer(pathSoundShootBuffer);
 	LoadSoundBuffer(pathSoundEngineBuffer);
+	LoadSoundBuffer(pathAsteroidDestroyedBuffer);
 }
 
 void ResourceManager::LoadAllMusics()
