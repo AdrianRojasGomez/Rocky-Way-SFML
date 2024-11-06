@@ -53,7 +53,8 @@ void AudioManager::SetDefaultVolumes()
 	//Sound
 	shootSound.setVolume(maxShootSoundVolume);
 	engineSound.setVolume(maxEngineSoundVolume);
-	asteroidDestroyedSound.setVolume(maxAsteroidDestroyedSoundVolume);
+	playerDestroyedSound.setVolume(maxPlayerDestroyedSoundVolume);
+	asteroidDestroyedSound.setVolume(100);
 	enterSound.setVolume(100);
 	moveUISound.setVolume(100);
 }
@@ -93,32 +94,38 @@ void AudioManager::PlayGameOverMusic()
 
 void AudioManager::SetMusicVolume(int volume)
 {
+
+	//MUSIC
 	if (volume > defaultMusicVolume)
 	{
 		menuMusic->setVolume(defaultMusicVolume);
 		gameplayMusic->setVolume(defaultMusicVolume);
-		shootSound.setVolume(defaultMusicVolume);
 	}
 	else
 	{
 		menuMusic->setVolume(volume);
 		gameplayMusic->setVolume(volume);
-		shootSound.setVolume(volume);
 	}
 
+	//SOUND
 	if (volume > maxShootSoundVolume)
 	{
 		shootSound.setVolume(maxShootSoundVolume);
 		engineSound.setVolume(maxEngineSoundVolume);
-		asteroidDestroyedSound.setVolume(maxAsteroidDestroyedSoundVolume);
+		playerDestroyedSound.setVolume(maxPlayerDestroyedSoundVolume);
+		asteroidDestroyedSound.setVolume(100);
+		enterSound.setVolume(100);
+		moveUISound.setVolume(100);
 	}
 	else
 	{
 		shootSound.setVolume(volume);
 		engineSound.setVolume(volume);
+		playerDestroyedSound.setVolume(volume);
 		asteroidDestroyedSound.setVolume(volume);
+		enterSound.setVolume(volume);
+		moveUISound.setVolume(volume);
 	}
-
 }
 
 void AudioManager::MuteAll(bool isMuted)

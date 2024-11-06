@@ -49,7 +49,7 @@ private:
 	const int defaultMusicVolume = 50;
 	const int maxShootSoundVolume = 20;
 	const int maxEngineSoundVolume = 50;
-	const int maxAsteroidDestroyedSoundVolume = 20;
+	const int maxPlayerDestroyedSoundVolume = 50;
 	bool isInMainMenu = false;
 	bool engineSwitch = false;
 
