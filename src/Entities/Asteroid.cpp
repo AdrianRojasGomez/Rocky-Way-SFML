@@ -3,6 +3,7 @@
 #include "../Utilities/Framerate.h"
 #include "../Utilities/ScreenResolution.h"
 #include "../Utilities/RandomUtility.h"
+#include "../SingletonManagers/AudioManager.h"
 
 Asteroid::Asteroid()
 {
@@ -79,11 +80,30 @@ void Asteroid::InitPosition()
 	asteroidHitZone->width *= hitzoneSizeMultiplier;
 }
 
+void Asteroid::ShutDownAsteroid()
+{
+	AudioManager::getInstance().PlayAsteroidDestroyedSound();
+	deadClock.restart();
+	isDying = true;
+}
+
+void Asteroid::ImpactFrame()
+{
+	if (!isDying)
+		return;
+
+	if (deadClock.getElapsedTime().asMilliseconds() > impactFrames)
+	{
+		SetIsActive(false);
+		isDying = false;
+	}
+}
+
 void Asteroid::InitDirection()
 {
 	sf::Vector2f vScreenCenter = ScreenResolution::GetScreenCenter720();
-	this->dirX = (vScreenCenter.x + RandomUtility::GetRandomInt(300, 100)) - posX;
-	this->dirY = (vScreenCenter.y + RandomUtility::GetRandomInt(300, 100)) - posY;
+	this->dirX = (vScreenCenter.x + RandomUtility::GetRandomInt(300, 150)) - posX;
+	this->dirY = (vScreenCenter.y + RandomUtility::GetRandomInt(300, 150)) - posY;
 	float magnitude = std::sqrt(dirX * dirX + dirY * dirY);
 	if (magnitude != 0)
 	{
@@ -110,7 +130,7 @@ void Asteroid::SetIsActive(bool isActive)
 
 	if (!isActive)
 	{
-		this->asteroidSprite.setPosition(-1000, 1000);
+		this->asteroidSprite.setPosition(-500, -500);
 		*asteroidHitZone = asteroidSprite.getGlobalBounds();
 		this->currentSpeed = 0.0f;
 	}
@@ -130,6 +150,9 @@ void Asteroid::SetNewDebrisPosition(sf::Vector2f pos)
 
 void Asteroid::Update()
 {
+	ImpactFrame();
+	if (isDying)
+		return;
 	Move();
 	WrapAroundScreen(posX, posY, dirX, dirY, wrapOffset, asteroidSprite);
 }

@@ -11,9 +11,9 @@ Player::Player(UI* ui, GameState* gameState, ScreenShake* screenShake)
 	this->gameState = gameState;
 	this->ui = ui;
 	this->screenShake = screenShake;
+	HP = MaxHP;
 	playerHitZone = new sf::FloatRect;
 	textureRect = sf::IntRect(0, 0, 128, 128);
-	HP = MaxHP;
 	cooldownClock.restart();
 	playerTexture = ResourceManager::getInstance().GetPlayerTexture();
 	SetTextureValues();
@@ -39,17 +39,39 @@ void Player::Input(sf::Event event)
 		if (event.key.code == sf::Keyboard::P || event.key.code == sf::Keyboard::Escape)
 			*gameState = GameState::Pause;
 
+		if (event.key.code == sf::Keyboard::W || event.KeyPressed == sf::Keyboard::Up)
+		{
+			if (!isAlive)
+				return;
+			AudioManager::getInstance().PlayEngineSound();
+			std::cout << "On\n";
+		}
+
 		if (event.key.code == sf::Keyboard::R)
 		{
+			//DEBUG ONLY
 			screenShake->StartShake(0.2f, 5.0f);
+			SetIsAlive(false);
 		}
 	}
+
+	if (event.type == sf::Event::KeyReleased)
+	{
+		if (event.key.code == sf::Keyboard::W || event.KeyPressed == sf::Keyboard::Up)
+		{
+			AudioManager::getInstance().StopEngineSound();
+			std::cout << "Off\n";
+		}
+	}
+
 }
 
 void Player::Update()
 {
+	if (deathClock.getElapsedTime().asSeconds() < 1.7)
+		return;
 
-	if (!CheckHasHPLeft() && deathClock.getElapsedTime().asSeconds() > 1.5f)
+	if (!CheckHasHPLeft())
 	{
 		ScoreManager::getInstance().CompareHighScore();
 		ScoreManager::getInstance().ResetScore();
@@ -60,12 +82,11 @@ void Player::Update()
 		return;
 	}
 
-	TurnDownEngine();
 	Respawn();
 	RemoveInvulnerability();
 	Fire();
 	Movement();
-	UpdateFrameanimation();
+	UpdateFrameAnimation();
 	WrapAroundScreen(posX, posY, directionX, directionY, 15.0f, playerSprite);
 	playerSprite.setPosition(posX, posY);
 	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
@@ -128,14 +149,8 @@ void Player::Movement()
 	speedY = directionY * MOVE_SPEED;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)))
-	{
 		playerSprite.move(speedX * Framerate::getDeltaTime(), directionY * MOVE_SPEED * Framerate::getDeltaTime());
-		if (engineClock.getElapsedTime().asSeconds() > 0.2f)
-		{
-			AudioManager::getInstance().PlayEngineSound();
-			engineClock.restart();
-		}
-	}
+
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)))
 		playerSprite.rotate(-ROTATION_SPEED * Framerate::getDeltaTime());
@@ -145,8 +160,8 @@ void Player::Movement()
 	posX = playerSprite.getPosition().x;
 	posY = playerSprite.getPosition().y;
 	sf::Vector2f originOffset = playerSprite.getOrigin() * hitzoneSizeMultiplier;
-	playerHitZone->left = posX  - originOffset.x / 2;
-	playerHitZone->top = posY  - originOffset.y / 2;
+	playerHitZone->left = posX - originOffset.x / 2;
+	playerHitZone->top = posY - originOffset.y / 2;
 
 }
 
@@ -197,11 +212,11 @@ bool Player::CheckHasHPLeft()
 
 void Player::TriggerScreenshake()
 {
-	if(HP>0)
+	if (HP > 0)
 		screenShake->StartShake(0.2f, 5.0f);
 	else
 		screenShake->StartShake(0.3f, 5.0f);
-	
+
 }
 
 void Player::ResetFromPause()
@@ -238,6 +253,7 @@ void Player::SetIsAlive(bool isAlive)
 	if (!isAlive)
 	{
 		HP--;
+		AudioManager::getInstance().PlayPlayerDestroyedSound();
 	}
 	ui->SetUIHP(HP);
 	respawnClock.restart();
@@ -245,11 +261,13 @@ void Player::SetIsAlive(bool isAlive)
 
 	if (HP <= 0)
 	{
+		AudioManager::getInstance().StopAllMusic();
+		AudioManager::getInstance().StopEngineSound();
 		deathClock.restart();
 	}
 }
 
-void Player::UpdateFrameanimation()
+void Player::UpdateFrameAnimation()
 {
 	if (!(animationClock.getElapsedTime().asMilliseconds() > 42))
 		return;
@@ -272,13 +290,6 @@ void Player::UpdateFrameanimation()
 	textureRect = sf::IntRect(intRectPosX, 0, 128, 128);
 	playerSprite.setTextureRect(textureRect);
 	animationClock.restart();
-
-}
-
-void Player::TurnDownEngine()
-{
-	if (engineClock.getElapsedTime().asSeconds() > 0.1f)
-		AudioManager::getInstance().StopEngineSound();
 
 }
 

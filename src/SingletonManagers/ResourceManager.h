@@ -7,6 +7,7 @@ class ResourceManager
 public:
 	static ResourceManager& getInstance();
 	sf::Image* GetIconImage();
+
 	sf::Texture* GetSplashTexture();
 	sf::Texture* GetMenuBackgroundTexture();
 	sf::Texture* GetBackgroundTexture();
@@ -16,11 +17,18 @@ public:
 	sf::Texture* GetLargeAsteroidTexture();
 	sf::Texture* GetSmallAsteroidTexture();
 	sf::Texture* GetMusicSwitchTexture();
+	sf::Texture* GetImpactTexture();
+
 	sf::Texture* GetLifeUITexture();
 	sf::Texture* GetLifeLostUITexture();
+
 	sf::Font* GetOxaniumSemiBoldFont();
+
 	sf::SoundBuffer* GetShootSoundBuffer();
 	sf::SoundBuffer* GetEngineSoundBuffer();
+	sf::SoundBuffer* GetAsteroidDestroyedBuffer();
+	sf::SoundBuffer* GetPlayerDestroyedBuffer();
+
 	sf::Music* GetMenuMusic();
 	sf::Music* GetGameplayMusic();
 	sf::Music* GetGameOverMusic();
@@ -43,6 +51,7 @@ private:
 	sf::Texture* largeAsteroidTexture = nullptr;
 	sf::Texture* smallAsteroidTexture = nullptr;
 	sf::Texture* musicSwitchTexture = nullptr;
+	sf::Texture* impactTexture = nullptr;
 	sf::Texture* lifeUITexture = nullptr;
 	sf::Texture* lifeLostUITexture = nullptr;
 
@@ -50,6 +59,8 @@ private:
 
 	sf::SoundBuffer* shootSoundBuffer = nullptr;
 	sf::SoundBuffer* engineSoundBuffer = nullptr;
+	sf::SoundBuffer* asteroidDestroyedSoundBuffer = nullptr;
+	sf::SoundBuffer* playerDestroyedSoundBuffer = nullptr;
 
 	sf::Music* menuMusic = nullptr;
 	sf::Music* gameplayMusic = nullptr;
@@ -67,6 +78,7 @@ private:
 	const std::string pathTextureLarge = "res/assets/Enemies/MeteorLarge.png";
 	const std::string pathTextureSmall = "res/assets/Enemies/MeteorSmall.png";
 	const std::string pathTextureMusicSwitch = "res/assets/UI/MusicMuteSwitch.png";
+	const std::string pathTextureHitEffect = "res/assets/Effects/HitEffect.png";
 	const std::string pathTextureLifeUI = "res/assets/UI/LifeUI.png";
 	const std::string pathTextureLifeLostUI = "res/assets/UI/LifelostUI.png";
 
@@ -74,6 +86,8 @@ private:
 
 	const std::string pathSoundShootBuffer = "res/assets/Audio/SFX/PulseShot.wav";
 	const std::string pathSoundEngineBuffer = "res/assets/Audio/SFX/spaceEngineLow_001.ogg";
+	const std::string pathAsteroidDestroyedBuffer = "res/assets/Audio/SFX/bong_001.ogg";
+	const std::string pathPlayerDestroyedBuffer = "res/assets/Audio/SFX/explosionCrunch_004.ogg";
 	
 	const std::string pathMusicMenu = "res/assets/Audio/Music/MenuElectronicChilledCut60.wav";
 	const std::string pathMusicGameplay = "res/assets/Audio/Music/GameplayElectronicRoutinecut60.wav";

@@ -44,7 +44,6 @@ private:
 	sf::IntRect textureRect;
 	sf::Clock animationClock;
 	sf::Clock deathClock;
-	sf::Clock engineClock;
 	int intRectPosX = 0;
 
 	const float COOLDOWN_RATE = 0.15f;
@@ -77,8 +76,6 @@ private:
 	void Movement();
 	void CreateBullets();
 	void Fire();
-	void UpdateFrameanimation();
-	void TurnDownEngine();
-
+	void UpdateFrameAnimation();
 
 };

@@ -78,6 +78,30 @@ ResourceManager::~ResourceManager()
 		oxaniumSemiBoldFont = nullptr;
 	}
 
+	if (shootSoundBuffer != nullptr)
+	{
+		delete shootSoundBuffer;
+		shootSoundBuffer = nullptr;
+	}
+	
+	if (engineSoundBuffer != nullptr)
+	{
+		delete engineSoundBuffer;
+		engineSoundBuffer = nullptr;
+	}
+	
+	if (asteroidDestroyedSoundBuffer != nullptr)
+	{
+		delete asteroidDestroyedSoundBuffer;
+		asteroidDestroyedSoundBuffer = nullptr;
+	}
+
+	if (playerDestroyedSoundBuffer != nullptr)
+	{
+		delete playerDestroyedSoundBuffer;
+		playerDestroyedSoundBuffer = nullptr;
+	}
+	
 	if (menuMusic != nullptr)
 	{
 		menuMusic->stop();
@@ -194,6 +218,17 @@ sf::Texture* ResourceManager::GetMusicSwitchTexture()
 	return musicSwitchTexture;
 }
 
+sf::Texture* ResourceManager::GetImpactTexture()
+{
+	if (impactTexture == nullptr)
+	{
+		impactTexture = new sf::Texture;
+		impactTexture = LoadTexture(pathTextureHitEffect);
+	}
+
+	return impactTexture;
+}
+
 sf::Texture* ResourceManager::GetLifeUITexture()
 {
 	if (lifeUITexture == nullptr)
@@ -246,6 +281,26 @@ sf::SoundBuffer* ResourceManager::GetEngineSoundBuffer()
 	return engineSoundBuffer;
 }
 
+sf::SoundBuffer* ResourceManager::GetAsteroidDestroyedBuffer()
+{
+	if (asteroidDestroyedSoundBuffer == nullptr)
+	{
+		asteroidDestroyedSoundBuffer = new sf::SoundBuffer;
+		asteroidDestroyedSoundBuffer = LoadSoundBuffer(pathAsteroidDestroyedBuffer);
+	}
+	return asteroidDestroyedSoundBuffer;
+}
+
+sf::SoundBuffer* ResourceManager::GetPlayerDestroyedBuffer()
+{
+	if (playerDestroyedSoundBuffer == nullptr)
+	{
+		playerDestroyedSoundBuffer = new sf::SoundBuffer;
+		playerDestroyedSoundBuffer = LoadSoundBuffer(pathPlayerDestroyedBuffer);
+	}
+	return playerDestroyedSoundBuffer;
+}
+
 sf::Music* ResourceManager::GetMenuMusic()
 {
 	if (menuMusic == nullptr)
@@ -271,7 +326,7 @@ sf::Music* ResourceManager::GetGameOverMusic()
 	if (gameOverMusic == nullptr)
 	{
 		gameOverMusic = new sf::Music();
-		gameOverMusic = LoadMusic(pathMusicGameplay);
+		gameOverMusic = LoadMusic(pathMusicGameOver);
 	}
 	return gameOverMusic;
 }
@@ -367,6 +422,7 @@ void ResourceManager::LoadAllTextures()
 	LoadTexture(pathTextureLarge);
 	LoadTexture(pathTextureSmall);
 	LoadTexture(pathTextureMusicSwitch);
+	LoadTexture(pathTextureHitEffect);
 	LoadTexture(pathTextureLifeUI);
 	LoadTexture(pathTextureLifeLostUI);
 }
@@ -375,6 +431,8 @@ void ResourceManager::LoadAllSoundBuffers()
 {
 	LoadSoundBuffer(pathSoundShootBuffer);
 	LoadSoundBuffer(pathSoundEngineBuffer);
+	LoadSoundBuffer(pathAsteroidDestroyedBuffer);
+	LoadSoundBuffer(pathPlayerDestroyedBuffer);
 }
 
 void ResourceManager::LoadAllMusics()
