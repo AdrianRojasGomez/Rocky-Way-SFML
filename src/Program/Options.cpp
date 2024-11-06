@@ -28,28 +28,42 @@ void Options::Input(sf::Event event)
 	{
 		if (isChangingVolume)
 		{
-			if (event.key.code == sf::Keyboard::Right)
+			if (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::D)
 				IncreaseVolume();
-			if (event.key.code == sf::Keyboard::Left)
+
+			if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::A)
 				DecreaseVolume();
+
 			if (event.key.code == sf::Keyboard::Enter)
 			{
+				AudioManager::getInstance().PlayEnterUISound();
 				isChangingVolume = false;
 			}
 			return;
 		}
 
 		if (event.key.code == sf::Keyboard::Enter)
+		{
+			AudioManager::getInstance().PlayEnterUISound();
 			SelectButton();
+
+			if (selectedIndex == 0)
+				volumeNumber = 100;
+		}
 
 		if (event.key.code == sf::Keyboard::Down)
 		{
+			AudioManager::getInstance().PlayMoveUISound();
 			selectedIndex++;
 			if (selectedIndex > 2)
 				selectedIndex = 0;
 		}
 		if (event.key.code == sf::Keyboard::Up)
+		{
+			AudioManager::getInstance().PlayMoveUISound();
 			selectedIndex--;
+		}
+
 		if (selectedIndex < 0)
 			selectedIndex = 2;
 	}
@@ -88,7 +102,7 @@ void Options::InitializeBackground()
 
 void Options::InitializeMusicSprites()
 {
-	if (musicSwitchTexture != nullptr )
+	if (musicSwitchTexture != nullptr)
 	{
 		musicSwitchSprite.setTexture(*musicSwitchTexture);
 		musicSwitchSprite.setTextureRect(musicSwitchIntRect);

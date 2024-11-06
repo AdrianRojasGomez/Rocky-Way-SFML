@@ -1,5 +1,6 @@
 #include <iostream>
 #include "GameOver.h"
+#include "../SingletonManagers/AudioManager.h"
 #include "../SingletonManagers/ResourceManager.h"
 #include "../Utilities/ScreenResolution.h"
 
@@ -22,13 +23,17 @@ void GameOver::Input(sf::Event event)
 	if (event.type == sf::Event::KeyPressed)
 	{
 		if (event.key.code == sf::Keyboard::Enter)
+		{
+			AudioManager::getInstance().PlayEnterUISound();
 			SelectButton();
+		}
 
 		if (event.key.code == sf::Keyboard::Up ||
 			event.key.code == sf::Keyboard::W ||
 			event.key.code == sf::Keyboard::Down ||
 			event.key.code == sf::Keyboard::S)
 		{
+			AudioManager::getInstance().PlayMoveUISound();
 			selectedIndex = 1 - selectedIndex;
 		}
 	}

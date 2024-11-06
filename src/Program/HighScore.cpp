@@ -165,7 +165,10 @@ void HighScore::Input(sf::Event event)
 	if (event.type == sf::Event::KeyPressed)
 	{
 		if (event.key.code == sf::Keyboard::Enter)
+		{
+			AudioManager::getInstance().PlayEnterUISound();
 			SelectButton();
+		}
 	}
 }
 
