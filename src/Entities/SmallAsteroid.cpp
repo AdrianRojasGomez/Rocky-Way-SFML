@@ -7,6 +7,7 @@ SmallAsteroid::SmallAsteroid()
 {
 	asteroidTexture = ResourceManager::getInstance().GetSmallAsteroidTexture();
 	hitzoneSizeMultiplier = 0.3f;
+	impactFrames = 20;
 	scale = RandomUtility::GetRandomFloat(maxScale, minScale);
 	wrapOffset = 3.0f;
 	initialMultiplierSpeed = RandomUtility::GetRandomFloat(minSpeed, maxspeed);

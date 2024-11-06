@@ -19,9 +19,10 @@ public:
 	~Asteroid();
 	virtual void Update();
 	virtual void Draw(sf::RenderWindow& window);
+	void ShutDownAsteroid();
 	virtual sf::Vector2f GetPosition() { return asteroidSprite.getPosition(); }
-	virtual bool GetIsActive() { return isActive; }
 	virtual void SetIsActive(bool isActive);
+	virtual bool GetIsActive() { return isActive; }
 	sf::FloatRect GetAsteroidHitBox() { return *asteroidHitZone; }
 	void SetNewDebrisPosition(sf::Vector2f pos);
 
@@ -32,7 +33,9 @@ protected:
 	sf::Texture* asteroidTexture;
 	sf::Sprite asteroidSprite;
 	sf::FloatRect* asteroidHitZone;
+	sf::Clock deadClock;
 
+	bool isDying = false;
 	bool isActive = false;
 	float initialMultiplierSpeed = 1.0f;
 	float currentSpeed = 1.0f;
@@ -45,6 +48,7 @@ protected:
 	float rotationSpeed = 10.0f;
 	float rotation;
 	float hitzoneSizeMultiplier = 1.0f;
+	int impactFrames = 50;
 
 	float wrapOffset = 10.0f;
 
@@ -54,5 +58,6 @@ protected:
 private:
 	void InitDirection();
 	void InitPosition();
+	void ImpactFrame();
 	sf::RectangleShape DebugHitzone();
 };
