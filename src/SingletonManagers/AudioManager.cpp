@@ -37,16 +37,25 @@ void AudioManager::SetGameSounds()
 	asteroidDestroyedSound.setBuffer(*asteroidDestroyedBuffer);
 	playerDestroyedBuffer = ResourceManager::getInstance().GetPlayerDestroyedBuffer();
 	playerDestroyedSound.setBuffer(*playerDestroyedBuffer);
+	enterBuffer = ResourceManager::getInstance().GetEnterUIBuffer();
+	enterSound.setBuffer(*enterBuffer);
+	uiMoveBuffer = ResourceManager::getInstance().GetMoveUIBuffer();
+	moveUISound.setBuffer(*uiMoveBuffer);
 }
 
 void AudioManager::SetDefaultVolumes()
 {
+	//Music
 	menuMusic->setVolume(defaultMusicVolume);
 	gameplayMusic->setVolume(defaultMusicVolume);
 	gameOverMusic->setVolume(defaultMusicVolume);
+
+	//Sound
 	shootSound.setVolume(maxShootSoundVolume);
 	engineSound.setVolume(maxEngineSoundVolume);
-
+	asteroidDestroyedSound.setVolume(maxAsteroidDestroyedSoundVolume);
+	enterSound.setVolume(100);
+	moveUISound.setVolume(100);
 }
 
 void AudioManager::PlayMenuMusic()
@@ -100,19 +109,22 @@ void AudioManager::MuteAll(bool isMuted)
 {
 	if (!isMuted)
 	{
+		//Sounds
 		shootSound.setVolume(0);
 		engineSound.setVolume(0);
+		asteroidDestroyedSound.setVolume(0);
+		playerDestroyedSound.setVolume(0);
+		enterSound.setVolume(0);
+		moveUISound.setVolume(0);
+
+		//Music
 		menuMusic->setVolume(0);
 		gameplayMusic->setVolume(0);
 		gameOverMusic->setVolume(0);
 	}
 	else
 	{
-		shootSound.setVolume(100);
-		engineSound.setVolume(100);
-		menuMusic->setVolume(100);
-		gameplayMusic->setVolume(100);
-		gameOverMusic->setVolume(100);
+		SetDefaultVolumes();
 	}
 }
 
@@ -153,4 +165,14 @@ void AudioManager::ResumeGameplayMusic()
 {
 	if (gameplayMusic->getStatus() == sf::SoundSource::Paused)
 		gameplayMusic->play();
+}
+
+void AudioManager::PlayEnterUISound()
+{
+	enterSound.play();
+}
+
+void AudioManager::PlayMoveUISound()
+{
+	moveUISound.play();
 }

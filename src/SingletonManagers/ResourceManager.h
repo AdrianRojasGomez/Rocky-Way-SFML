@@ -31,6 +31,9 @@ public:
 	sf::SoundBuffer* GetAsteroidDestroyedBuffer();
 	sf::SoundBuffer* GetPlayerDestroyedBuffer();
 
+	sf::SoundBuffer* GetEnterUIBuffer();
+	sf::SoundBuffer* GetMoveUIBuffer();
+
 	sf::Music* GetMenuMusic();
 	sf::Music* GetGameplayMusic();
 	sf::Music* GetGameOverMusic();
@@ -66,6 +69,9 @@ private:
 	sf::SoundBuffer* asteroidDestroyedSoundBuffer = nullptr;
 	sf::SoundBuffer* playerDestroyedSoundBuffer = nullptr;
 
+	sf::SoundBuffer* enterUISoundBuffer = nullptr;
+	sf::SoundBuffer* moveUISoundBuffer = nullptr;
+
 	sf::Music* menuMusic = nullptr;
 	sf::Music* gameplayMusic = nullptr;
 	sf::Music* gameOverMusic = nullptr;
@@ -89,6 +95,10 @@ private:
 	const std::string pathTextureLifeUI = "res/assets/UI/LifeUI.png";
 	const std::string pathTextureLifeLostUI = "res/assets/UI/LifelostUI.png";
 	const std::string pathTextureEnterUI = "res/assets/Background/Enter.png";
+
+	//UI Sounds
+	const std::string pathSoundEnterUI = "res/assets/Audio/UI/EnterSci-fi.wav";
+	const std::string pathSoundMoveUI = "res/assets/Audio/UI/NavigateHoverSoftC.wav";
 
 	//Fonts
 	const std::string pathFontOxaniumSemiBold = "res/assets/Fonts/Oxanium-SemiBold.ttf";

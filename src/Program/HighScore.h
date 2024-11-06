@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "GameState.h"
+#include "../SingletonManagers/AudioManager.h"
 #include "../SingletonManagers/ScoreManager.h"
 
 class HighScore

@@ -2,6 +2,7 @@
 #include "Menu.h"
 #include "Game.h"
 #include "../SingletonManagers/ResourceManager.h"
+#include "../SingletonManagers/AudioManager.h"
 #include "../Utilities/ScreenResolution.h"
 
 Menu::Menu(GameState* gameState)
@@ -23,9 +24,42 @@ void Menu::Input(sf::Event event)
 	if (event.type == sf::Event::KeyPressed)
 	{
 		if (event.key.code == sf::Keyboard::Enter)
+		{
+			AudioManager::getInstance().PlayEnterUISound();
 			SelectButton();
+		}
 
 		CheckForDirectionalInput(event);
+	}
+}
+
+void Menu::CheckForDirectionalInput(sf::Event event)
+{
+	if (event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::W)
+	{
+		selectedIndex = (selectedIndex + 3) % 4;
+		AudioManager::getInstance().PlayMoveUISound();
+	}
+	if (event.key.code == sf::Keyboard::Down || event.key.code == sf::Keyboard::S)
+	{
+		selectedIndex = (selectedIndex + 1) % 4;
+		AudioManager::getInstance().PlayMoveUISound();
+	}
+
+	if (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::D)
+	{
+		selectedIndex = (selectedIndex + 2) % 4;
+		AudioManager::getInstance().PlayMoveUISound();
+	}
+
+	if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::A)
+	{
+		AudioManager::getInstance().PlayMoveUISound();
+
+		if (selectedIndex % 2 == 0)
+			selectedIndex = 2 - selectedIndex;
+		else
+			selectedIndex = 4 - selectedIndex;
 	}
 }
 
@@ -125,30 +159,7 @@ void Menu::SelectButton()
 	}
 }
 
-void Menu::CheckForDirectionalInput(sf::Event event)
-{
-	if (event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::W)
-	{
-		selectedIndex = (selectedIndex + 3) % 4;
-	}
-	if (event.key.code == sf::Keyboard::Down || event.key.code == sf::Keyboard::S)
-	{
-		selectedIndex = (selectedIndex + 1) % 4;
-	}
 
-	if (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::D)
-	{
-		selectedIndex = (selectedIndex + 2) % 4;
-	}
-
-	if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::A)
-	{
-		if (selectedIndex % 2 == 0)
-			selectedIndex = 2 - selectedIndex;
-		else
-			selectedIndex = 4 - selectedIndex;
-	}
-}
 
 void Menu::Update()
 {

@@ -95,6 +95,18 @@ ResourceManager::~ResourceManager()
 		delete engineSoundBuffer;
 		engineSoundBuffer = nullptr;
 	}
+
+	if (enterUISoundBuffer != nullptr)
+	{
+		delete enterUISoundBuffer;
+		enterUISoundBuffer = nullptr;
+	}
+
+	if (moveUISoundBuffer != nullptr)
+	{
+		delete moveUISoundBuffer;
+		moveUISoundBuffer = nullptr;
+	}
 	
 	if (asteroidDestroyedSoundBuffer != nullptr)
 	{
@@ -318,6 +330,26 @@ sf::SoundBuffer* ResourceManager::GetPlayerDestroyedBuffer()
 	return playerDestroyedSoundBuffer;
 }
 
+sf::SoundBuffer* ResourceManager::GetEnterUIBuffer()
+{
+	if (enterUISoundBuffer == nullptr)
+	{
+		enterUISoundBuffer = new sf::SoundBuffer;
+		enterUISoundBuffer = LoadSoundBuffer(pathSoundEnterUI);
+	}
+	return enterUISoundBuffer;
+}
+
+sf::SoundBuffer* ResourceManager::GetMoveUIBuffer()
+{
+	if (moveUISoundBuffer == nullptr)
+	{
+		moveUISoundBuffer = new sf::SoundBuffer;
+		moveUISoundBuffer = LoadSoundBuffer(pathSoundMoveUI);
+	}
+	return moveUISoundBuffer;
+}
+
 sf::Music* ResourceManager::GetMenuMusic()
 {
 	if (menuMusic == nullptr)
@@ -451,6 +483,8 @@ void ResourceManager::LoadAllSoundBuffers()
 	LoadSoundBuffer(pathSoundEngineBuffer);
 	LoadSoundBuffer(pathAsteroidDestroyedBuffer);
 	LoadSoundBuffer(pathPlayerDestroyedBuffer);
+	LoadSoundBuffer(pathTextureEnterUI);
+	LoadSoundBuffer(pathSoundMoveUI);
 }
 
 void ResourceManager::LoadAllMusics()
