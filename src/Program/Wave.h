@@ -6,6 +6,7 @@
 #include "../Entities/Player.h"
 #include "../Entities/LargeAsteroid.h"
 #include "../Entities/SmallAsteroid.h"
+#include "../Entities/Collectable.h"
 
 class Wave
 {
@@ -25,6 +26,10 @@ private:
 	std::list<LargeAsteroid*>::iterator largeIterator;
 	std::list<SmallAsteroid*> smallAsteroids;
 	std::list<SmallAsteroid*>::iterator smallIterator;
+	std::list<Collectable*> collectables;
+	std::list<Collectable*>::iterator collectableIterator;
+
+	bool shouldSpawnCollectable = false;
 
 	const int GROWTH = 5;
 	const float RATIO = 0.1f;
@@ -42,6 +47,12 @@ private:
 
 	void CreateAsteroids();
 	void CreateWave();
+
+	void CreateCollectables();
+	void SetCollectables();
+
+
+
 	template <typename list, typename Iterator, typename Func>
 	void IterateAsteroids(list asteroidType, Iterator it, Func func);
 	template <typename list, typename Iterator, typename Func>

@@ -5,6 +5,7 @@
 Wave::Wave(UI* ui)
 {
 	this->ui = ui;
+	CreateCollectables();
 	CreateAsteroids();
 	CreateWave();
 }
@@ -29,7 +30,6 @@ void Wave::WaveReset()
 		asteroidToReset->SetIsActive(false);
 	}
 }
-
 
 void Wave::CreateAsteroids()
 {
@@ -87,6 +87,31 @@ void Wave::CreateWave()
 		index++;
 		SmallAsteroid* asteroidToActivate = *smallIterator;
 		asteroidToActivate->SetIsActive(true);
+	}
+}
+
+void Wave::CreateCollectables()
+{
+	for (int i = 0; i < (int)CollectableType::Unassigned; i++)
+	{
+		Collectable* currentCollectable = new Collectable(i);
+		collectables.push_back(currentCollectable);
+		std::cout << (int)currentCollectable->GetCollectableType() << std::endl;
+	}
+}
+
+void Wave::SetCollectables()
+{
+
+	std::list<int> posX;
+	std::list<int> posY;
+
+	for (collectableIterator = collectables.begin(); collectableIterator != collectables.end(); collectableIterator++)
+	{
+		Collectable* currentCollectable = *collectableIterator;
+		int x = currentCollectable->GetAPosX();
+		int y = currentCollectable->GetAPosY();
+
 	}
 }
 
@@ -162,7 +187,6 @@ void Wave::CheckInactiveAsteroids()
 		shouldCreateWave = true;
 }
 
-
 void Wave::Update()
 {
 
@@ -180,6 +204,7 @@ void Wave::Update()
 
 void Wave::Draw(sf::RenderWindow& window)
 {
+	//Draw Collectibles
 	DrawLargeAsteroids(window);
 	DrawSmallAsteroids(window);
 }
