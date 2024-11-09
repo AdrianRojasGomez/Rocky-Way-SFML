@@ -18,11 +18,15 @@ public:
 	int GetScore();
 	std::string GetName() { return name; }
 	std::vector<HighScoresValues>& const GetHighScoresList();
+
 	void SetWave(int waveCounter);
 	void AddScoreLarge();
 	void AddScoreSmall();
 	void ResetScore();
 	void CompareHighScore();
+	void EnableDobleScore();
+	void DisableMutiplier();
+
 	std::vector<HighScoresValues> highScoresList;
 
 
@@ -37,10 +41,12 @@ private:
 	std::string name = "Pilot 01";
 	int score = 0;
 	int maxWave = 0;
+	int multiplier = 1;
 
 	void LoadRankingFromFile();
 	void SortDescending();
 	void LimitListToSixRankings();
+
 };
 
 

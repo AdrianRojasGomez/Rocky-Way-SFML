@@ -69,19 +69,17 @@ std::vector<HighScoresValues>& ScoreManager::GetHighScoresList()
 
 void ScoreManager::SetWave(int waveCounter)
 {
-	this->maxWave = waveCounter;
+	maxWave = waveCounter;
 }
 
 void ScoreManager::AddScoreLarge()
 {
-	this->score += LARGE_ASTEROID_VALUE;
-	std::cout << "score: " << score << " points.\n";
+	score += LARGE_ASTEROID_VALUE * multiplier;
 }
 
 void ScoreManager::AddScoreSmall()
 {
-	this->score += SMALL_ASTEROID_VALUE;
-	std::cout << "score: " << score << " points.\n";
+	score += SMALL_ASTEROID_VALUE * multiplier;
 }
 
 void ScoreManager::ResetScore()
@@ -120,4 +118,15 @@ void ScoreManager::CompareHighScore()
 	}
 
 	HighScoreFileWrite.close();
+}
+
+void ScoreManager::EnableDobleScore()
+{
+	multiplier = 2;
+}
+
+void ScoreManager::DisableMutiplier()
+{
+	multiplier = 1;
+
 }

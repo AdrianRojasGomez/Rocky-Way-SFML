@@ -29,13 +29,15 @@ void Collectable::SetIsAlive(bool isAlive)
 
 int Collectable::GetARandomPosX()
 {
-	int selected = RandomUtility::GetRandomInt(ScreenResolution::SCREEN_WIDTH_720P - 50, 50);
+	int selected = RandomUtility::GetRandomInt(ScreenResolution::SCREEN_WIDTH_720P /1.5, 100);
+	std::cout << "int X:" << selected << "\n";
 	return selected;
 }
 
 int Collectable::GetARandomPosY()
 {
-	int selected = RandomUtility::GetRandomInt(ScreenResolution::SCREEN_HEIGHT_720P - 50, 50);
+	int selected = RandomUtility::GetRandomInt(ScreenResolution::SCREEN_HEIGHT_720P /1.5, 100);
+	std::cout << "int :" << selected << "\n";
 	return selected;
 }
 

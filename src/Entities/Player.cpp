@@ -81,6 +81,7 @@ void Player::Update()
 	}
 
 	HasShieldExpired();
+	HasDobleExpired();
 	Respawn();
 	RemoveInvulnerability();
 	Fire();
@@ -225,6 +226,7 @@ void Player::ResetFromPause()
 	SetInitialPosition();
 	HP = MaxHP;
 	ui->SetUIHP(HP);
+	hasShield = false;
 }
 
 void Player::EnableShield()
@@ -236,8 +238,14 @@ void Player::EnableShield()
 	shieldShape.setOutlineColor(sf::Color::Blue);
 	shieldShape.setOutlineThickness(3);
 	shieldShape.setFillColor(sf::Color::Transparent);
-
 	shieldShape.setPosition(playerSprite.getGlobalBounds().left, playerSprite.getGlobalBounds().top);
+}
+
+void Player::CallDoubleScore()
+{
+	hasDobleMultiplier = true;
+	ScoreManager::getInstance().EnableDobleScore();
+	dobleClock.restart();
 }
 
 void Player::Respawn()
@@ -311,7 +319,7 @@ void Player::UpdateFrameAnimation()
 
 void Player::HasShieldExpired()
 {
-	if (shieldClock.getElapsedTime().asSeconds() > shieldtime)
+	if (shieldClock.getElapsedTime().asSeconds() > bonusTime)
 	{
 		hasShield = false;
 		shieldShape.setRadius(0);
@@ -320,6 +328,15 @@ void Player::HasShieldExpired()
 	{
 		shieldShape.setPosition(playerSprite.getGlobalBounds().left, playerSprite.getGlobalBounds().top);
 
+	}
+}
+
+void Player::HasDobleExpired()
+{
+	if (hasDobleMultiplier && dobleClock.getElapsedTime().asSeconds() > bonusTime)
+	{
+		hasDobleMultiplier = false;
+		ScoreManager::getInstance().DisableMutiplier();
 	}
 }
 

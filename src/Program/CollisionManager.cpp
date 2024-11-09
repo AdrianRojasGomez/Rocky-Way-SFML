@@ -102,7 +102,7 @@ void CollisionManager::Update(Player& player,
 				player.EnableShield();
 				break;
 			case CollectableType::DoubleScore:
-				//player 2X Behavior
+				player.CallDoubleScore();
 				break;
 			case CollectableType::Unassigned:
 				//Error unassigned

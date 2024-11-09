@@ -136,9 +136,11 @@ void Wave::SetCollectables()
 			{
 				if (i != j)
 				{
-					if (coordinates[i] == coordinates[j])
-						coordinates[i] = sf::Vector2f(collectables[i]->GetARandomPosX(), collectables[i]->GetARandomPosY());
+					collectables[i]->SetPosition(coordinates[i]);
 
+					if (collectables[i]->GetCollectableHitbox().intersects(collectables[j]->GetCollectableHitbox()))
+						coordinates[i] = sf::Vector2f(collectables[i]->GetARandomPosX(), collectables[i]->GetARandomPosY());
+						
 					collectables[i]->SetPosition(coordinates[i]);
 					collectables[i]->SetIsAlive(true);
 
@@ -147,7 +149,6 @@ void Wave::SetCollectables()
 		}
 
 	}
-
 }
 
 template <typename list, typename Iterator, typename Func>

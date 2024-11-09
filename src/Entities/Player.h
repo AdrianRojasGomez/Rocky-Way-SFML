@@ -28,6 +28,7 @@ public:
 	void TriggerScreenshake();
 	void ResetFromPause();
 	void EnableShield();
+	void CallDoubleScore();
 
 private:
 
@@ -48,6 +49,7 @@ private:
 	sf::Clock cooldownClock;
 	sf::Clock respawnClock;
 	sf::Clock shieldClock;
+	sf::Clock dobleClock;
 
 	const float COOLDOWN_RATE = 0.15f;
 	const float SCALE = 0.5f;
@@ -66,12 +68,14 @@ private:
 	bool isFiring = false;
 	bool isReadyToRevive = false;
 	bool hasShield = false;
+	bool hasDobleMultiplier = false;
 
 	int MaxHP = 3;
 	int HP;
 	int intRectPosX = 0;
 
-	float shieldtime = 10.0f;
+	float bonusTime = 10.0f;
+
 	float playerOffsetWrap = 15.0f;
 	float posX = 0.0f;
 	float posY = 0.0f;
@@ -88,6 +92,7 @@ private:
 	void Fire();
 	void UpdateFrameAnimation();
 	void HasShieldExpired();
+	void HasDobleExpired();
 
 
 
