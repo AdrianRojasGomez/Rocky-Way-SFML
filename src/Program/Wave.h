@@ -61,6 +61,7 @@ private:
 	int CountInactiveAsteroids(list asteroidType, Iterator iterator);
 	void UpdateSmallAsteroids();
 	void UpdateLargeAsteroids();
+	void DrawCollectibles(sf::RenderWindow& window);
 	void DrawLargeAsteroids(sf::RenderWindow& window);
 	void DrawSmallAsteroids(sf::RenderWindow& window);
 	void CheckInactiveAsteroids();

@@ -24,11 +24,11 @@ public:
 	Collectable(int collectableType);
 	~Collectable();
 	void Update();
-	void Draw();
+	void Draw(sf::RenderWindow& window);
 	CollectableType GetCollectableType() const { return type; }
 	void SetIsAlive(bool isAlive);
-	int GetAPosX();
-	int GetAPosY();
+	int GetARandomPosX();
+	int GetARandomPosY();
 	void SetPosition(sf::Vector2f pos);
 
 private:
@@ -51,27 +51,15 @@ private:
 		(int)(ScreenResolution::SCREEN_HEIGHT_720P * 0.85f),
 	};
 
-
 	CollectableType type = CollectableType::Unassigned;
 	sf::Texture* shotgunTexture = nullptr;
 	sf::Texture* shieldTexture = nullptr;
 	sf::Texture* doubleScoreTexture;
 	sf::Sprite assignedCollectableType;
-
-
 	bool isAlive = false;
 
 	//For Building, remove when textures are made
-	sf::CircleShape collectable;
-	
-
+	sf::CircleShape collectableShape;
 
 	void AssignCollectableTypeVisual(int collectableType);
-
-
-
-
-
-
-
 };

@@ -6,6 +6,7 @@ Wave::Wave(UI* ui)
 {
 	this->ui = ui;
 	CreateCollectables();
+	SetCollectables();
 	CreateAsteroids();
 	CreateWave();
 }
@@ -103,22 +104,63 @@ void Wave::CreateCollectables()
 void Wave::SetCollectables()
 {
 
-	std::list<int> posX;
-	std::list<int> posY;
+	std::list<sf::Vector2f> coordinates;
+	std::list<sf::Vector2f>::iterator coordinatesIt;
+	bool firstTime = true;
 
 	for (collectableIterator = collectables.begin(); collectableIterator != collectables.end(); collectableIterator++)
 	{
 		Collectable* currentCollectable = *collectableIterator;
-		int x = currentCollectable->GetAPosX();
-		int y = currentCollectable->GetAPosY();
+		sf::Vector2f newPos(currentCollectable->GetARandomPosX(), currentCollectable->GetARandomPosY());
 
+		if (firstTime)
+		{
+			firstTime = false;
+			coordinates.push_back(newPos);
+		}
+		else
+		{
+			for (coordinatesIt = coordinates.begin(); coordinatesIt != coordinates.end(); coordinatesIt++)
+			{
+				if (newPos == *coordinatesIt)
+				{
+					while (newPos == *coordinatesIt)
+					{
+						sf::Vector2f newPos(currentCollectable->GetARandomPosX(), currentCollectable->GetARandomPosY());
+					}
+				}
+				std::cout << "try 01\n";
+
+			}
+			coordinates.push_back(newPos);
+		}
 	}
+
+	//DEBUG SHOW COORDINATES
+	//for (std::list<sf::Vector2f>::iterator coordinatesIt = coordinates.begin();
+	//	coordinatesIt != coordinates.end(); coordinatesIt++)
+	//{
+	//	std::cout << coordinatesIt->x << "coordinates X \n";
+	//	std::cout << coordinatesIt->y << "coordinates Y \n";
+	//}
+
+	collectableIterator = collectables.begin();
+	coordinatesIt = coordinates.begin();
+
+	while (collectableIterator != collectables.end())
+	{
+		Collectable* currentCollectable = *collectableIterator;
+		currentCollectable->SetPosition(*coordinatesIt);
+		collectableIterator++;
+		coordinatesIt++;
+	}
+
 }
 
-template <typename list ,typename Iterator, typename Func>
-void Wave::IterateAsteroids(list asteroidType ,Iterator iterator, Func func)
+template <typename list, typename Iterator, typename Func>
+void Wave::IterateAsteroids(list asteroidType, Iterator iterator, Func func)
 {
-	
+
 	for (iterator = asteroidType.begin(); iterator != asteroidType.end(); iterator++)
 	{
 		auto* asteroidToProcess = *iterator;
@@ -178,6 +220,15 @@ void Wave::DrawSmallAsteroids(sf::RenderWindow& window)
 	IterateAsteroids(smallAsteroids, smallIterator, &SmallAsteroid::Draw, window);
 }
 
+void Wave::DrawCollectibles(sf::RenderWindow& window)
+{
+	for (collectableIterator = collectables.begin(); collectableIterator != collectables.end(); collectableIterator++)
+	{
+		Collectable* currentCollectable = *collectableIterator;
+		currentCollectable->Draw(window);
+	}
+}
+
 void Wave::CheckInactiveAsteroids()
 {
 	asteroidsInPool = 0;
@@ -204,7 +255,7 @@ void Wave::Update()
 
 void Wave::Draw(sf::RenderWindow& window)
 {
-	//Draw Collectibles
+	DrawCollectibles(window);
 	DrawLargeAsteroids(window);
 	DrawSmallAsteroids(window);
 }

@@ -15,8 +15,9 @@ void Collectable::Update()
 {
 }
 
-void Collectable::Draw()
+void Collectable::Draw(sf::RenderWindow& window)
 {
+	window.draw(collectableShape);
 }
 
 void Collectable::SetIsAlive(bool isAlive)
@@ -24,13 +25,13 @@ void Collectable::SetIsAlive(bool isAlive)
 	this->isAlive = isAlive;
 }
 
-int Collectable::GetAPosX()
+int Collectable::GetARandomPosX()
 {
 	int selected = RandomUtility::GetRandomInt(4, 0);
 	return possiblePosX[selected];
 }
 
-int Collectable::GetAPosY()
+int Collectable::GetARandomPosY()
 {
 	int selected = RandomUtility::GetRandomInt(4, 0);
 	return possiblePosY[selected];
@@ -39,7 +40,7 @@ int Collectable::GetAPosY()
 void Collectable::SetPosition(sf::Vector2f pos)
 {
 	//Set sprite position here
-	collectable.setPosition(pos);
+	collectableShape.setPosition(pos);
 }
 
 void Collectable::AssignCollectableTypeVisual(int collectableType)
@@ -53,23 +54,23 @@ void Collectable::AssignCollectableTypeVisual(int collectableType)
 	case CollectableType::Shotgun:
 		//load shotgun resource pointer
 		//set sprite
-		collectable.setRadius(10);
-		collectable.setPointCount(4);
-		collectable.setFillColor(sf::Color::Red);
+		collectableShape.setRadius(20);
+		collectableShape.setPointCount(4);
+		collectableShape.setFillColor(sf::Color::Red);
 		break;
 	case CollectableType::Shield:
 		//load shotgun resource pointer
 		//set sprite
-		collectable.setRadius(10);
-		collectable.setPointCount(10);
-		collectable.setFillColor(sf::Color::Blue);
+		collectableShape.setRadius(20);
+		collectableShape.setPointCount(10);
+		collectableShape.setFillColor(sf::Color::Blue);
 		break;
 	case CollectableType::DoubleScore:
 		//load shotgun resource pointer
 		//set sprite
-		collectable.setRadius(10);
-		collectable.setPointCount(3);
-		collectable.setFillColor(sf::Color::Green);
+		collectableShape.setRadius(20);
+		collectableShape.setPointCount(3);
+		collectableShape.setFillColor(sf::Color::Green);
 		break;
 	default:
 		std::cout << "Error, DEFAULT value selected on CollectableType\n";
