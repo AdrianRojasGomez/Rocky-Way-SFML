@@ -9,6 +9,7 @@ Collectable::Collectable(int collectableType)
 
 Collectable::~Collectable()
 {
+
 }
 
 void Collectable::Update()
@@ -41,6 +42,7 @@ void Collectable::SetPosition(sf::Vector2f pos)
 {
 	//Set sprite position here
 	collectableShape.setPosition(pos);
+	collectableHitZone = collectableShape.getGlobalBounds();
 }
 
 void Collectable::AssignCollectableTypeVisual(int collectableType)

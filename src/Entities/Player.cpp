@@ -44,7 +44,6 @@ void Player::Input(sf::Event event)
 			if (!isAlive)
 				return;
 			AudioManager::getInstance().PlayEngineSound();
-			std::cout << "On\n";
 		}
 
 		if (event.key.code == sf::Keyboard::R)
@@ -60,7 +59,6 @@ void Player::Input(sf::Event event)
 		if (event.key.code == sf::Keyboard::W || event.KeyPressed == sf::Keyboard::Up)
 		{
 			AudioManager::getInstance().StopEngineSound();
-			std::cout << "Off\n";
 		}
 	}
 

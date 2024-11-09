@@ -7,8 +7,8 @@ Wave::Wave(UI* ui)
 	this->ui = ui;
 	CreateCollectables();
 	SetCollectables();
-	CreateAsteroids();
-	CreateWave();
+	//CreateAsteroids();
+	//CreateWave();
 }
 
 Wave::~Wave()
@@ -129,11 +129,10 @@ void Wave::SetCollectables()
 						sf::Vector2f newPos(currentCollectable->GetARandomPosX(), currentCollectable->GetARandomPosY());
 					}
 				}
-				std::cout << "try 01\n";
-
 			}
 			coordinates.push_back(newPos);
 		}
+		currentCollectable->SetIsAlive(true);
 	}
 
 	//DEBUG SHOW COORDINATES
@@ -225,6 +224,13 @@ void Wave::DrawCollectibles(sf::RenderWindow& window)
 	for (collectableIterator = collectables.begin(); collectableIterator != collectables.end(); collectableIterator++)
 	{
 		Collectable* currentCollectable = *collectableIterator;
+		if (!currentCollectable->GetIsAlive())
+			return;
+	}
+
+	for (collectableIterator = collectables.begin(); collectableIterator != collectables.end(); collectableIterator++)
+	{
+		Collectable* currentCollectable = *collectableIterator;
 		currentCollectable->Draw(window);
 	}
 }
@@ -255,6 +261,7 @@ void Wave::Update()
 
 void Wave::Draw(sf::RenderWindow& window)
 {
+
 	DrawCollectibles(window);
 	DrawLargeAsteroids(window);
 	DrawSmallAsteroids(window);

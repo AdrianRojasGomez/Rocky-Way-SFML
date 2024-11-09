@@ -17,6 +17,7 @@ public:
 	void Draw(sf::RenderWindow& window);
 	std::list<LargeAsteroid*>& GetLargeAsteroids() { return largeAsteroids; }
 	std::list<SmallAsteroid*>& GetSmallAsteroids() { return smallAsteroids; }
+	std::list<Collectable*>& GetCollectables() { return collectables; }
 	void WaveReset();
 
 private:

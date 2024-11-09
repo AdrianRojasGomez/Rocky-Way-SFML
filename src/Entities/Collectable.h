@@ -14,22 +14,19 @@ enum class CollectableType
 class Collectable
 {
 
-
-
-
-
-
-
 public:
 	Collectable(int collectableType);
 	~Collectable();
 	void Update();
 	void Draw(sf::RenderWindow& window);
+	sf::FloatRect GetCollectableHitbox() { return collectableHitZone; }
 	CollectableType GetCollectableType() const { return type; }
+	bool GetIsAlive() { return isAlive; }
 	void SetIsAlive(bool isAlive);
 	int GetARandomPosX();
 	int GetARandomPosY();
 	void SetPosition(sf::Vector2f pos);
+
 
 private:
 	static constexpr int SPAWN_PLACES = 5;
@@ -60,6 +57,8 @@ private:
 
 	//For Building, remove when textures are made
 	sf::CircleShape collectableShape;
+	sf::FloatRect collectableHitZone;
 
 	void AssignCollectableTypeVisual(int collectableType);
+
 };
