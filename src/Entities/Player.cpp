@@ -48,8 +48,6 @@ void Player::Input(sf::Event event)
 
 		if (event.key.code == sf::Keyboard::R)
 		{
-			hasShotgun = !hasShotgun;
-			std::cout << "Has shotgun?" << hasShotgun;
 
 			//DEBUG ONLY
 			//screenShake->StartShake(0.2f, 5.0f);
@@ -194,7 +192,7 @@ void Player::Fire()
 
 			if (hasShotgun)
 			{
-				float angles[] = { -30.0f, 0.0f, 30.0f };
+				float angles[] = { -spreadShotgun, 0.0f, spreadShotgun };
 
 				for (int i = 0; i < 3; ++i)
 				{
@@ -269,14 +267,14 @@ void Player::ResetFromPause()
 
 void Player::EnableShield()
 {
-	shieldClock.restart();
-	hasShield = true;
 
+	hasShield = true;
 	shieldShape.setRadius(20);
 	shieldShape.setOutlineColor(sf::Color::Blue);
 	shieldShape.setOutlineThickness(3);
 	shieldShape.setFillColor(sf::Color::Transparent);
 	shieldShape.setPosition(playerSprite.getGlobalBounds().left, playerSprite.getGlobalBounds().top);
+	shieldClock.restart();
 }
 
 void Player::CallDoubleScore()
@@ -289,6 +287,7 @@ void Player::CallDoubleScore()
 void Player::EnableShotgun()
 {
 	hasShotgun = true;
+	shotgunClock.restart();
 }
 
 void Player::Respawn()
@@ -385,7 +384,7 @@ void Player::HasDobleExpired()
 
 void Player::HasShotgunExpired()
 {
-	if (hasShotgun && dobleClock.getElapsedTime().asSeconds() > bonusTime)
+	if (hasShotgun && shotgunClock.getElapsedTime().asSeconds() > bonusTime)
 	{
 		hasShotgun = false;
 	}

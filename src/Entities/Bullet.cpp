@@ -105,8 +105,8 @@ void Bullet::BulletAnimation()
 {
 	textureRect = bulletSprite.getTextureRect();
 
-	if (intRectPosX >= 640)
-		intRectPosX = 640;
+	if (intRectPosX >= 320)
+		intRectPosX = 320;
 	else
 		intRectPosX += 160;
 

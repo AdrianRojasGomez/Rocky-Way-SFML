@@ -51,6 +51,7 @@ private:
 	sf::Clock respawnClock;
 	sf::Clock shieldClock;
 	sf::Clock dobleClock;
+	sf::Clock shotgunClock;
 
 	const float COOLDOWN_RATE = 0.15f;
 	const float SCALE = 0.5f;
@@ -77,6 +78,7 @@ private:
 	int intRectPosX = 0;
 
 	float bonusTime = 10.0f;
+	float spreadShotgun = 30.0f;
 
 	float playerOffsetWrap = 15.0f;
 	float posX = 0.0f;
