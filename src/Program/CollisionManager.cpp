@@ -140,8 +140,6 @@ bool CollisionManager::PlayerVsSmallAsteroidCollision(Player& player, SmallAster
 
 bool CollisionManager::PlayerVsCollectable(Player& player, Collectable& collectable)
 {
-	std::cout << "collectable" << collectable.GetCollectableHitbox().left << " " << collectable.GetCollectableHitbox().top << "\n";
-	std::cout << "player" << player.GetPlayerHitbox().left << " " << player.GetPlayerHitbox().top << "\n";
 	return player.GetPlayerHitbox().intersects(collectable.GetCollectableHitbox());
 }
 

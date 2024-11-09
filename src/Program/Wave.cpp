@@ -6,9 +6,8 @@ Wave::Wave(UI* ui)
 {
 	this->ui = ui;
 	CreateCollectables();
-	SetCollectables();
-	//CreateAsteroids();
-	//CreateWave();
+	CreateAsteroids();
+	CreateWave();
 }
 
 Wave::~Wave()
@@ -52,6 +51,7 @@ void Wave::CreateWave()
 	waveCounter++;
 	ScoreManager::getInstance().SetWave(waveCounter);
 	ui->SetUIWave(waveCounter);
+	
 
 	if (waveCounter <= 1)
 	{
@@ -65,6 +65,7 @@ void Wave::CreateWave()
 			largePerWave += (int)(floor(GROWTH * i * i * RATIO));
 			smallPerWave += (int)(floor((int)(GROWTH * 0.2f)) * i * i * RATIO);
 		}
+		SetCollectables();
 	}
 
 	int index = 0;
@@ -97,7 +98,6 @@ void Wave::CreateCollectables()
 	{
 		Collectable* currentCollectable = new Collectable(i);
 		collectables.push_back(currentCollectable);
-		std::cout << (int)currentCollectable->GetCollectableType() << std::endl;
 	}
 }
 
@@ -134,14 +134,6 @@ void Wave::SetCollectables()
 		}
 		currentCollectable->SetIsAlive(true);
 	}
-
-	//DEBUG SHOW COORDINATES
-	//for (std::list<sf::Vector2f>::iterator coordinatesIt = coordinates.begin();
-	//	coordinatesIt != coordinates.end(); coordinatesIt++)
-	//{
-	//	std::cout << coordinatesIt->x << "coordinates X \n";
-	//	std::cout << coordinatesIt->y << "coordinates Y \n";
-	//}
 
 	collectableIterator = collectables.begin();
 	coordinatesIt = coordinates.begin();
