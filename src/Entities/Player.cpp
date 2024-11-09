@@ -48,6 +48,9 @@ void Player::Input(sf::Event event)
 
 		if (event.key.code == sf::Keyboard::R)
 		{
+			hasShotgun = !hasShotgun;
+			std::cout << "Has shotgun?" << hasShotgun;
+
 			//DEBUG ONLY
 			//screenShake->StartShake(0.2f, 5.0f);
 			//SetIsAlive(false);
@@ -82,6 +85,7 @@ void Player::Update()
 
 	HasShieldExpired();
 	HasDobleExpired();
+	HasShotgunExpired();
 	Respawn();
 	RemoveInvulnerability();
 	Fire();
@@ -187,19 +191,53 @@ void Player::Fire()
 		{
 			AudioManager::getInstance().PlayShootSound();
 			screenShake->StartShake(0.1f, 1.25f);
-			for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
+
+			if (hasShotgun)
 			{
-				if ((*iterator)->GetIsActive() == false)
+				float angles[] = { -30.0f, 0.0f, 30.0f };
+
+				for (int i = 0; i < 3; ++i)
 				{
-					(*iterator)->Fire(posX, posY, directionX, directionY);
-					isFiring = true;
-					cooldownClock.restart();
-					break;
+					float angle = angles[i];
+					sf::Vector2f rotatedDirection = RotateVector(sf::Vector2f(directionX, directionY), angle);
+
+					for (iterator = bullets.begin(); iterator != bullets.end(); ++iterator)
+					{
+						if (!(*iterator)->GetIsActive())
+						{
+							(*iterator)->Fire(posX, posY, rotatedDirection.x, rotatedDirection.y);
+							isFiring = true;
+							cooldownClock.restart();
+							break;
+						}
+					}
+				}
+			}
+			else
+			{
+				sf::Vector2f rotatedDirection(directionX, directionY);
+				for (iterator = bullets.begin(); iterator != bullets.end(); ++iterator)
+				{
+					if (!(*iterator)->GetIsActive())
+					{
+						(*iterator)->Fire(posX, posY, rotatedDirection.x, rotatedDirection.y);
+						isFiring = true;
+						cooldownClock.restart();
+						break;
+					}
 				}
 			}
 		}
-
 	}
+}
+
+sf::Vector2f Player::RotateVector(sf::Vector2f vectorDirection, float degrees)
+{
+	float angleRadians = degrees * NUM_PI / 180;
+	float cosA = std::cos(angleRadians);
+	float sinA = std::sin(angleRadians);
+
+	return sf::Vector2f(vectorDirection.x * cosA - vectorDirection.y * sinA, vectorDirection.x * sinA + vectorDirection.y * cosA);
 }
 
 bool Player::CheckHasHPLeft()
@@ -248,6 +286,11 @@ void Player::CallDoubleScore()
 	dobleClock.restart();
 }
 
+void Player::EnableShotgun()
+{
+	hasShotgun = true;
+}
+
 void Player::Respawn()
 {
 	if (!isAlive && respawnClock.getElapsedTime().asSeconds() > RESPAWN_TIME)
@@ -269,7 +312,7 @@ void Player::SetIsAlive(bool isAlive)
 {
 	if (isInvulnerable)
 		return;
-	
+
 	if (hasShield)
 		return;
 
@@ -337,6 +380,14 @@ void Player::HasDobleExpired()
 	{
 		hasDobleMultiplier = false;
 		ScoreManager::getInstance().DisableMutiplier();
+	}
+}
+
+void Player::HasShotgunExpired()
+{
+	if (hasShotgun && dobleClock.getElapsedTime().asSeconds() > bonusTime)
+	{
+		hasShotgun = false;
 	}
 }
 

@@ -29,6 +29,7 @@ public:
 	void ResetFromPause();
 	void EnableShield();
 	void CallDoubleScore();
+	void EnableShotgun();
 
 private:
 
@@ -68,6 +69,7 @@ private:
 	bool isFiring = false;
 	bool isReadyToRevive = false;
 	bool hasShield = false;
+	bool hasShotgun = false;
 	bool hasDobleMultiplier = false;
 
 	int MaxHP = 3;
@@ -93,6 +95,8 @@ private:
 	void UpdateFrameAnimation();
 	void HasShieldExpired();
 	void HasDobleExpired();
+	void HasShotgunExpired();
+	sf::Vector2f RotateVector(sf::Vector2f vectorDirection, float degrees);
 
 
 

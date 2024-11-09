@@ -96,7 +96,7 @@ void CollisionManager::Update(Player& player,
 			switch (currentType)
 			{
 			case CollectableType::Shotgun:
-				//player Shotgun Behavior
+				player.EnableShotgun();
 				break;
 			case CollectableType::Shield:
 				player.EnableShield();
