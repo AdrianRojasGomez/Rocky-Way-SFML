@@ -51,7 +51,8 @@ void Wave::CreateWave()
 	waveCounter++;
 	ScoreManager::getInstance().SetWave(waveCounter);
 	ui->SetUIWave(waveCounter);
-	
+	//DEBUG ON FIRST WAVE APPEAR COLLECTABLE
+	SetCollectables();
 
 	if (waveCounter <= 1)
 	{
@@ -65,7 +66,8 @@ void Wave::CreateWave()
 			largePerWave += (int)(floor(GROWTH * i * i * RATIO));
 			smallPerWave += (int)(floor((int)(GROWTH * 0.2f)) * i * i * RATIO);
 		}
-		SetCollectables();
+		//NORMAL TIME TO APPEAR COLLECTABLES
+		//SetCollectables();
 	}
 
 	int index = 0;
@@ -96,54 +98,54 @@ void Wave::CreateCollectables()
 {
 	for (int i = 0; i < (int)CollectableType::Unassigned; i++)
 	{
-		Collectable* currentCollectable = new Collectable(i);
-		collectables.push_back(currentCollectable);
+		Collectable* newCollectable = new Collectable(i);
+		collectables.push_back(newCollectable);
+		
+		//if (newCollectable != nullptr)
+		//{
+		//	delete newCollectable;
+		//	newCollectable = nullptr;
+		//}
 	}
 }
 
 void Wave::SetCollectables()
 {
+	///crash here
 
-	std::list<sf::Vector2f> coordinates;
-	std::list<sf::Vector2f>::iterator coordinatesIt;
-	bool firstTime = true;
-
-	for (collectableIterator = collectables.begin(); collectableIterator != collectables.end(); collectableIterator++)
+	//reset vector position
+	for (int i = 0; i < (int)CollectableType::Unassigned; i++)
 	{
-		Collectable* currentCollectable = *collectableIterator;
-		sf::Vector2f newPos(currentCollectable->GetARandomPosX(), currentCollectable->GetARandomPosY());
+		coordinates[i] = sf::Vector2f(0, 0);
+	}
 
-		if (firstTime)
+
+	//Set new positions
+	for (int i = 0; i < (int)CollectableType::Unassigned; i++)
+	{
+		coordinates[i] = sf::Vector2f(collectables[i]->GetARandomPosX(), collectables[i]->GetARandomPosY());
+
+		if (i == 0)
 		{
-			firstTime = false;
-			coordinates.push_back(newPos);
+			collectables[i]->SetPosition(coordinates[i]);
+			collectables[i]->SetIsAlive(true);
 		}
 		else
 		{
-			for (coordinatesIt = coordinates.begin(); coordinatesIt != coordinates.end(); coordinatesIt++)
+			for (int j = 0; j < (int)CollectableType::Unassigned; j++)
 			{
-				if (newPos == *coordinatesIt)
+				if (i != j)
 				{
-					while (newPos == *coordinatesIt)
-					{
-						sf::Vector2f newPos(currentCollectable->GetARandomPosX(), currentCollectable->GetARandomPosY());
-					}
+					if (coordinates[i] == coordinates[j])
+						coordinates[i] = sf::Vector2f(collectables[i]->GetARandomPosX(), collectables[i]->GetARandomPosY());
+
+					collectables[i]->SetPosition(coordinates[i]);
+					collectables[i]->SetIsAlive(true);
+
 				}
 			}
-			coordinates.push_back(newPos);
 		}
-		currentCollectable->SetIsAlive(true);
-	}
 
-	collectableIterator = collectables.begin();
-	coordinatesIt = coordinates.begin();
-
-	while (collectableIterator != collectables.end())
-	{
-		Collectable* currentCollectable = *collectableIterator;
-		currentCollectable->SetPosition(*coordinatesIt);
-		collectableIterator++;
-		coordinatesIt++;
 	}
 
 }
@@ -213,17 +215,15 @@ void Wave::DrawSmallAsteroids(sf::RenderWindow& window)
 
 void Wave::DrawCollectibles(sf::RenderWindow& window)
 {
-	for (collectableIterator = collectables.begin(); collectableIterator != collectables.end(); collectableIterator++)
+	for (int i = 0; i < (int)CollectableType::Unassigned; i++)
 	{
-		Collectable* currentCollectable = *collectableIterator;
-		if (!currentCollectable->GetIsAlive())
+		if (!collectables[i]->GetIsAlive())
 			return;
 	}
 
-	for (collectableIterator = collectables.begin(); collectableIterator != collectables.end(); collectableIterator++)
+	for (int i = 0; i < (int)CollectableType::Unassigned; i++)
 	{
-		Collectable* currentCollectable = *collectableIterator;
-		currentCollectable->Draw(window);
+		collectables[i]->Draw(window);
 	}
 }
 

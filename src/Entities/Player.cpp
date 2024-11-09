@@ -80,12 +80,13 @@ void Player::Update()
 		return;
 	}
 
+	HasShieldExpired();
 	Respawn();
 	RemoveInvulnerability();
 	Fire();
 	Movement();
 	UpdateFrameAnimation();
-	WrapAroundScreen(posX, posY, directionX, directionY, 15.0f, playerSprite);
+	WrapAroundScreen(posX, posY, directionX, directionY, playerOffsetWrap, playerSprite);
 	playerSprite.setPosition(posX, posY);
 	for (iterator = bullets.begin(); iterator != bullets.end(); iterator++)
 	{
@@ -111,6 +112,7 @@ void Player::Draw(sf::RenderWindow& window)
 			bulletToDraw->Draw(window);
 		}
 	}
+	window.draw(shieldShape);
 }
 
 void Player::SetTextureValues()
@@ -213,7 +215,7 @@ void Player::TriggerScreenshake()
 	if (HP > 0)
 		screenShake->StartShake(0.2f, 5.0f);
 	else
-		screenShake->StartShake(0.3f, 5.0f);
+		screenShake->StartShake(0.5f, 5.0f);
 
 }
 
@@ -223,6 +225,19 @@ void Player::ResetFromPause()
 	SetInitialPosition();
 	HP = MaxHP;
 	ui->SetUIHP(HP);
+}
+
+void Player::EnableShield()
+{
+	shieldClock.restart();
+	hasShield = true;
+
+	shieldShape.setRadius(20);
+	shieldShape.setOutlineColor(sf::Color::Blue);
+	shieldShape.setOutlineThickness(3);
+	shieldShape.setFillColor(sf::Color::Transparent);
+
+	shieldShape.setPosition(playerSprite.getGlobalBounds().left, playerSprite.getGlobalBounds().top);
 }
 
 void Player::Respawn()
@@ -245,6 +260,9 @@ void Player::RemoveInvulnerability()
 void Player::SetIsAlive(bool isAlive)
 {
 	if (isInvulnerable)
+		return;
+	
+	if (hasShield)
 		return;
 
 	this->isAlive = isAlive;
@@ -291,5 +309,17 @@ void Player::UpdateFrameAnimation()
 
 }
 
+void Player::HasShieldExpired()
+{
+	if (shieldClock.getElapsedTime().asSeconds() > shieldtime)
+	{
+		hasShield = false;
+		shieldShape.setRadius(0);
+	}
+	else
+	{
+		shieldShape.setPosition(playerSprite.getGlobalBounds().left, playerSprite.getGlobalBounds().top);
 
+	}
+}
 

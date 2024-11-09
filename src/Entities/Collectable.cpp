@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Collectable.h"
 #include "../Utilities/RandomUtility.h"
+#include "../Utilities/ScreenResolution.h"
 
 Collectable::Collectable(int collectableType)
 {
@@ -28,14 +29,14 @@ void Collectable::SetIsAlive(bool isAlive)
 
 int Collectable::GetARandomPosX()
 {
-	int selected = RandomUtility::GetRandomInt(4, 0);
-	return possiblePosX[selected];
+	int selected = RandomUtility::GetRandomInt(ScreenResolution::SCREEN_WIDTH_720P - 50, 50);
+	return selected;
 }
 
 int Collectable::GetARandomPosY()
 {
-	int selected = RandomUtility::GetRandomInt(4, 0);
-	return possiblePosY[selected];
+	int selected = RandomUtility::GetRandomInt(ScreenResolution::SCREEN_HEIGHT_720P - 50, 50);
+	return selected;
 }
 
 void Collectable::SetPosition(sf::Vector2f pos)

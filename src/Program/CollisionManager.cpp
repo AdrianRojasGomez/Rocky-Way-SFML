@@ -10,7 +10,7 @@ void CollisionManager::Update(Player& player,
 	std::list<Bullet*> bullets, 
 	std::list<LargeAsteroid*> largeAsteroids,
 	std::list<SmallAsteroid*> smallAsteroids,
-	std::list<Collectable*> collectables)
+	std::vector<Collectable*> collectables)
 {
 	for (std::list<LargeAsteroid*>::iterator it = largeAsteroids.begin(); it != largeAsteroids.end(); it++)
 	{
@@ -81,19 +81,17 @@ void CollisionManager::Update(Player& player,
 		}
 	}
 
-	for (std::list<Collectable*>::iterator collectableIterator = collectables.begin(); collectableIterator != collectables.end(); collectableIterator++)
+	for (int i = 0; i < (int)CollectableType::Unassigned; i++)
 	{
-
-		Collectable* currentCollectable = *collectableIterator;
-		if (currentCollectable != nullptr && !currentCollectable->GetIsAlive())
+		if (collectables[i] != nullptr && !collectables[i]->GetIsAlive())
 		{
 			continue;
 		}
 
-		if (PlayerVsCollectable(player, *currentCollectable))
+		if (PlayerVsCollectable(player, *collectables[i]))
 		{
 			std::cout << "collision player vs currentCollectable\n";
-			CollectableType currentType = currentCollectable->GetCollectableType();
+			CollectableType currentType = collectables[i]->GetCollectableType();
 
 			switch (currentType)
 			{
@@ -101,7 +99,7 @@ void CollisionManager::Update(Player& player,
 				//player Shotgun Behavior
 				break;
 			case CollectableType::Shield:
-				//player shield Behavior
+				player.EnableShield();
 				break;
 			case CollectableType::DoubleScore:
 				//player 2X Behavior
@@ -120,10 +118,9 @@ void CollisionManager::Update(Player& player,
 	if (canShutDownCollectables)
 	{
 		canShutDownCollectables = false;
-		for (std::list<Collectable*>::iterator collectableIterator = collectables.begin(); collectableIterator != collectables.end(); collectableIterator++)
+		for (int i = 0; i < (int)CollectableType::Unassigned; i++) 
 		{
-			Collectable* currentCollectable = *collectableIterator;
-			currentCollectable->SetIsAlive(false);
+			collectables[i]->SetIsAlive(false);
 		}
 	}
 }

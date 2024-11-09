@@ -16,7 +16,7 @@ public:
 		std::list<Bullet*> bullets,
 		std::list<LargeAsteroid*> largeAsteroids,
 		std::list<SmallAsteroid*> smallAsteroids,
-		std::list<Collectable*> collectables);
+		std::vector<Collectable*> collectables);
 	bool PlayerVsLargeAsteroidCollision(Player& player, LargeAsteroid& asteroid);
 	bool PlayerVsSmallAsteroidCollision(Player& player, SmallAsteroid& asteroid);
 	bool PlayerVsCollectable(Player&, Collectable& collectable);

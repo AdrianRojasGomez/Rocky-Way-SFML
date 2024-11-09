@@ -17,7 +17,7 @@ public:
 	void Draw(sf::RenderWindow& window);
 	std::list<LargeAsteroid*>& GetLargeAsteroids() { return largeAsteroids; }
 	std::list<SmallAsteroid*>& GetSmallAsteroids() { return smallAsteroids; }
-	std::list<Collectable*>& GetCollectables() { return collectables; }
+	std::vector<Collectable*>& GetCollectables() { return collectables; }
 	void WaveReset();
 
 private:
@@ -27,8 +27,11 @@ private:
 	std::list<LargeAsteroid*>::iterator largeIterator;
 	std::list<SmallAsteroid*> smallAsteroids;
 	std::list<SmallAsteroid*>::iterator smallIterator;
-	std::list<Collectable*> collectables;
+	std::vector<Collectable*> collectables;
 	std::list<Collectable*>::iterator collectableIterator;
+
+	sf::Vector2f coordinates[(int)CollectableType::Unassigned];
+
 
 	bool shouldSpawnCollectable = false;
 
