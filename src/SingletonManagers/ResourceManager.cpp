@@ -149,29 +149,10 @@ ResourceManager::~ResourceManager()
 		collectableShield = nullptr;
 	}
 
-
 	if (collectableX2 != nullptr)
 	{
 		delete collectableX2;
 		collectableX2 = nullptr;
-	}
-
-	if (shotgunOnUITexture != nullptr)
-	{
-		delete shotgunOnUITexture;
-		shotgunOnUITexture = nullptr;
-	}
-
-	if (shieldOnUITexture != nullptr)
-	{
-		delete shieldOnUITexture;
-		shieldOnUITexture = nullptr;
-	}
-
-	if (x2OnUITexture != nullptr)
-	{
-		delete x2OnUITexture;
-		x2OnUITexture = nullptr;
 	}
 
 	if (powerBulletTexture != nullptr)
@@ -391,39 +372,6 @@ sf::Texture* ResourceManager::GetEnterUITexture()
 	}
 
 	return enterUITexture;
-}
-
-sf::Texture* ResourceManager::GetShotgunUITexture()
-{
-	if (shotgunOnUITexture == nullptr)
-	{
-		shotgunOnUITexture = new sf::Texture;
-		shotgunOnUITexture = LoadTexture(pathTextureShotgunUI);
-	}
-
-	return shotgunOnUITexture;
-}
-
-sf::Texture* ResourceManager::GetShieldUITexture()
-{
-	if (shieldOnUITexture == nullptr)
-	{
-		shieldOnUITexture = new sf::Texture;
-		shieldOnUITexture = LoadTexture(pathTextureShieldUI);
-	}
-
-	return shieldOnUITexture;
-}
-
-sf::Texture* ResourceManager::Get2XUITexture()
-{
-	if (x2OnUITexture == nullptr)
-	{
-		x2OnUITexture = new sf::Texture;
-		x2OnUITexture = LoadTexture(pathTexture2XUI);
-	}
-
-	return x2OnUITexture;
 }
 
 sf::Font* ResourceManager::GetOxaniumSemiBoldFont()
@@ -657,9 +605,6 @@ void ResourceManager::LoadAllTextures()
 	LoadTexture(pathTextureLifeUI);
 	LoadTexture(pathTextureLifeLostUI);
 	LoadTexture(pathTextureEnterUI);
-	LoadTexture(pathTextureShotgunUI);
-	LoadTexture(pathTexture2XUI);
-	LoadTexture(pathTextureShieldUI);
 }
 
 void ResourceManager::LoadAllSoundBuffers()

@@ -84,11 +84,6 @@ private:
 	sf::Texture* lifeLostUITexture = nullptr;
 	sf::Texture* enterUITexture = nullptr;
 
-	sf::Texture* shieldOnUITexture = nullptr;
-	sf::Texture* shotgunOnUITexture = nullptr;
-	sf::Texture* x2OnUITexture = nullptr;
-
-
 	sf::Font* oxaniumSemiBoldFont = nullptr;
 
 	sf::SoundBuffer* shootSoundBuffer = nullptr;
@@ -135,10 +130,6 @@ private:
 	const std::string pathTextureLifeUI = "res/assets/UI/LifeUI.png";
 	const std::string pathTextureLifeLostUI = "res/assets/UI/LifelostUI.png";
 	const std::string pathTextureEnterUI = "res/assets/Background/Enter.png";
-
-	const std::string pathTextureShotgunUI = "res/assets/UI/PowerShotOn.png";
-	const std::string pathTextureShieldUI = "res/assets/UI/ShieldOn.png";
-	const std::string pathTexture2XUI = "res/assets/UI/2XOn.png";
 
 	//UI Sounds
 	const std::string pathSoundEnterUI = "res/assets/Audio/UI/EnterSci-fi.wav";
