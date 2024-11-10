@@ -50,6 +50,23 @@ void UI::SetUIWave(int wave)
 	waveNumber.setString(waveNumberString);
 }
 
+void UI::ChangeColorToDoble()
+{
+	sf::Color color(121, 49, 255, 255);
+	scoreShown.setFillColor(color);
+	scoreShown.setCharacterSize(30);
+	scoreShown.setOutlineThickness(2.0);
+	scoreShown.setOutlineColor(sf::Color::Black);
+}
+
+void UI::Defaultcolor()
+{
+	scoreShown.setFillColor(sf::Color::White);
+	scoreShown.setCharacterSize(26);
+	scoreShown.setOutlineThickness(0);
+
+}
+
 void UI::InitializeHealthAndWaveUI()
 {
 
@@ -101,12 +118,20 @@ void UI::InitializeUI()
 
 void UI::UpdateUIScore()
 {
-	scoreString = std::to_string(newScore);
+	if (!(UIAnimationClock.getElapsedTime().asMilliseconds() > 5))
+		return;
+
+	if (score < newScore)
+		score++;
+
+	scoreString = std::to_string(score);
 	while (scoreString.length() < 6)
 	{
 		scoreString = '0' + scoreString;
 	}
 	scoreShown.setString(scoreString);
+
+	UIAnimationClock.restart();
 }
 
 void UI::UpdateScore()
@@ -162,6 +187,8 @@ void UI::UpdateUIAnimation()
 			lifeUISprites[i].setTextureRect(lifeLostIntRect);
 		}
 	}
+
+
 }
 
 

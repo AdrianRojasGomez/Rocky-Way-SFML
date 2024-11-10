@@ -10,6 +10,8 @@ public:
 	void Draw(sf::RenderWindow& window);
 	void SetUIHP(int playerHP);
 	void SetUIWave(int wave);
+	void ChangeColorToDoble();
+	void Defaultcolor();
 
 
 private:
@@ -19,8 +21,9 @@ private:
 	
 	std::vector<sf::Sprite> lifeUISprites;
 	sf::Clock animationClock;
+	sf::Clock UIAnimationClock;
 	sf::Sprite lifeLostUISprite;
-	sf::Font* uiFont;
+	sf::Font* uiFont = nullptr;
 	sf::Text waveTitle;
 	sf::Text waveNumber;
 	sf::Text scoreTitle;

@@ -45,14 +45,22 @@ void Player::Input(sf::Event event)
 			if (!isAlive)
 				return;
 			AudioManager::getInstance().PlayEngineSound();
+
 		}
 
 		if (event.key.code == sf::Keyboard::R)
 		{
-
 			//DEBUG ONLY
 			//screenShake->StartShake(0.2f, 5.0f);
 			//SetIsAlive(false);
+		}
+
+		if (event.key.code == sf::Keyboard::Space)
+		{
+			if (moveSpeed > 250)
+			{
+				moveSpeed = 250;
+			}
 		}
 	}
 
@@ -61,6 +69,14 @@ void Player::Input(sf::Event event)
 		if (event.key.code == sf::Keyboard::W || event.KeyPressed == sf::Keyboard::Up)
 		{
 			AudioManager::getInstance().StopEngineSound();
+		}
+
+		if (event.key.code == sf::Keyboard::Space)
+		{
+			if (moveSpeed < 350)
+			{
+				moveSpeed = 350;
+			}
 		}
 	}
 
@@ -148,17 +164,22 @@ void Player::Movement()
 	rotation = playerSprite.getRotation() - FIXED_DEGREES;
 	directionX = std::cos(rotation * NUM_PI / 180.0f);
 	directionY = std::sin(rotation * NUM_PI / 180.0f);
-	speedX = directionX * MOVE_SPEED;
-	speedY = directionY * MOVE_SPEED;
+	speedX = directionX * moveSpeed;
+	speedY = directionY * moveSpeed;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)))
-		playerSprite.move(speedX * Framerate::getDeltaTime(), directionY * MOVE_SPEED * Framerate::getDeltaTime());
+		playerSprite.move(speedX * Framerate::getDeltaTime(), speedY * Framerate::getDeltaTime());
 
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)))
 		playerSprite.rotate(-ROTATION_SPEED * Framerate::getDeltaTime());
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)))
 		playerSprite.rotate(ROTATION_SPEED * Framerate::getDeltaTime());
+
+
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space)))
+		playerSprite.move(directionX * recoilSpeed * Framerate::getDeltaTime(), directionY * recoilSpeed * Framerate::getDeltaTime());
+
 
 	posX = playerSprite.getPosition().x;
 	posY = playerSprite.getPosition().y;
@@ -279,6 +300,7 @@ void Player::EnableShield()
 void Player::CallDoubleScore()
 {
 	AudioManager::getInstance().Play2XOnSound();
+	ui->ChangeColorToDoble();
 	hasDobleMultiplier = true;
 	ScoreManager::getInstance().EnableDobleScore();
 	dobleClock.restart();
@@ -375,6 +397,7 @@ void Player::HasDobleExpired()
 	{
 		hasDobleMultiplier = false;
 		ScoreManager::getInstance().DisableMutiplier();
+		ui->Defaultcolor();
 	}
 }
 
