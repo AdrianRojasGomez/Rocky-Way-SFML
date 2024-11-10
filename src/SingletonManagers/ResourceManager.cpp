@@ -591,17 +591,24 @@ void ResourceManager::LoadAllTextures()
 	menuBackgroundTexture = LoadTexture(pathTextureMenuBG);
 	pauseBackgroundTexture = LoadTexture(pathTexturePauseBG);
 	gameBackgroundTexture = LoadTexture(pathTextureBG);
+
 	playerTexture = LoadTexture(pathTexturePlayer);
 	playerShieldTexture = LoadTexture(pathTexturePlayerShield);
+
 	bulletTexture = LoadTexture(pathTextureBullet);
 	powerBulletTexture = LoadTexture(pathTexturePowerBullet);
+
 	largeAsteroidTexture = LoadTexture(pathTextureLarge);
 	smallAsteroidTexture = LoadTexture(pathTextureSmall);
+
 	musicSwitchTexture = LoadTexture(pathTextureMusicSwitch);
+
 	impactTexture = LoadTexture(pathTextureHitEffect);
+
 	collectableShotgun = LoadTexture(pathTextureShotgun);
-	collectableShield = LoadTexture(pathTexture2X);
-	collectableX2 = LoadTexture(pathTextureShield);
+	collectableX2 = LoadTexture(pathTexture2X);
+	collectableShield = LoadTexture(pathTextureShield);
+
 	lifeUITexture = LoadTexture(pathTextureLifeUI);
 	lifeLostUITexture = LoadTexture(pathTextureLifeLostUI);
 	enterUITexture = LoadTexture(pathTextureEnterUI);

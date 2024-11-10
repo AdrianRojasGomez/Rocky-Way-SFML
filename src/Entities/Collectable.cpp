@@ -73,9 +73,9 @@ void Collectable::UpdateBounce()
 	float lowerLimit = initPos.y + 15;
 
 	if (collectableSprite.getPosition().y >= lowerLimit)
-		direction = -1;  
+		direction = -1;
 	else if (collectableSprite.getPosition().y <= upperLimit)
-		direction = 1;   
+		direction = 1;
 
 	collectableSprite.move(sf::Vector2f(0, direction * speed * Framerate::getDeltaTime()));
 }
@@ -89,23 +89,25 @@ void Collectable::AssignSprite(sf::Texture* assignedTexture, float sizeX, float 
 
 void Collectable::AssignCollectableTypeVisual(int collectableType)
 {
+	float size = 0.5f;
 	type = (CollectableType)collectableType;
 	switch (type)
 	{
-	case CollectableType::Unassigned:
-		std::cout << "Error, UNASSIGNED value selected on CollectableType\n";
-		break;
 
 	case CollectableType::Shotgun:
-		AssignSprite(shotgunTexture, fileSize, fileSize, 0.5f);
+		AssignSprite(shotgunTexture, fileSize, fileSize, size);
 		break;
 
 	case CollectableType::Shield:
-		AssignSprite(shieldTexture, fileSize, fileSize, 0.5f);
+		AssignSprite(shieldTexture, fileSize, fileSize, size);
 		break;
 
 	case CollectableType::DoubleScore:
-		AssignSprite(dobleScoreTexture, fileSize, fileSize, 0.5f);
+		AssignSprite(dobleScoreTexture, fileSize, fileSize, size);
+		break;
+
+	case CollectableType::Unassigned:
+		std::cout << "Error, UNASSIGNED value selected on CollectableType\n";
 		break;
 
 	default:

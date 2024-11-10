@@ -90,7 +90,6 @@ void CollisionManager::Update(Player& player,
 
 		if (PlayerVsCollectable(player, *collectables[i]))
 		{
-			std::cout << "collision player vs currentCollectable\n";
 			CollectableType currentType = collectables[i]->GetCollectableType();
 
 			switch (currentType)
