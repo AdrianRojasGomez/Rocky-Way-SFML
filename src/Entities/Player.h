@@ -57,7 +57,6 @@ private:
 	const float COOLDOWN_RATE = 0.15f;
 	const float SCALE = 0.5f;
 	const float ROTATION_SPEED = 250.0f;
-	const float MOVE_SPEED = 250.0f;
 	const float NUM_PI = 3.14159265f;
 	const float hitzoneSizeMultiplier = 0.5f;
 
@@ -65,6 +64,9 @@ private:
 	const int FIXED_DEGREES = 90;
 	const int RESPAWN_TIME = 2;
 	const int INVULNERABLE_TIME = 3.5;
+
+	float moveSpeed = 350.0f;
+	float recoilSpeed = -10.0f;
 
 	bool isAlive = true;
 	bool isInvulnerable = false;
