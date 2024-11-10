@@ -40,6 +40,11 @@ public:
 	sf::SoundBuffer* GetAsteroidDestroyedBuffer();
 	sf::SoundBuffer* GetPlayerDestroyedBuffer();
 
+	sf::SoundBuffer* GetShieldBuffer();
+	sf::SoundBuffer* GetShotgunBuffer();
+	sf::SoundBuffer* Get2XBuffer();
+
+
 	sf::SoundBuffer* GetEnterUIBuffer();
 	sf::SoundBuffer* GetMoveUIBuffer();
 
@@ -79,8 +84,8 @@ private:
 	sf::Texture* lifeLostUITexture = nullptr;
 	sf::Texture* enterUITexture = nullptr;
 
-	sf::Texture* shotgunOnUITexture = nullptr;
 	sf::Texture* shieldOnUITexture = nullptr;
+	sf::Texture* shotgunOnUITexture = nullptr;
 	sf::Texture* x2OnUITexture = nullptr;
 
 
@@ -90,6 +95,10 @@ private:
 	sf::SoundBuffer* engineSoundBuffer = nullptr;
 	sf::SoundBuffer* asteroidDestroyedSoundBuffer = nullptr;
 	sf::SoundBuffer* playerDestroyedSoundBuffer = nullptr;
+
+	sf::SoundBuffer* shieldSoundBuffer = nullptr;
+	sf::SoundBuffer* shotgunShoundBuffer = nullptr;
+	sf::SoundBuffer* dobleScoreSoundBuffer = nullptr;
 
 	sf::SoundBuffer* enterUISoundBuffer = nullptr;
 	sf::SoundBuffer* moveUISoundBuffer = nullptr;
@@ -141,14 +150,20 @@ private:
 	//Sounds
 	const std::string pathSoundShootBuffer = "res/assets/Audio/SFX/PulseShot.wav";
 	const std::string pathSoundEngineBuffer = "res/assets/Audio/SFX/spaceEngineLow_001.ogg";
-	const std::string pathAsteroidDestroyedBuffer = "res/assets/Audio/SFX/bong_001.ogg";
-	const std::string pathPlayerDestroyedBuffer = "res/assets/Audio/SFX/explosionCrunch_004.ogg";
+	const std::string pathSoundAsteroidDestroyedBuffer = "res/assets/Audio/SFX/bong_001.ogg";
+	const std::string pathSoundPlayerDestroyedBuffer = "res/assets/Audio/SFX/explosionCrunch_004.ogg";
+
+	//Collectable Sounds
+	const std::string pathSoundShieldOn = "res/assets/Audio/SFX/forceField_002.ogg";
+	const std::string pathSoundShotgunOn = "res/assets/Audio/SFX/metalLatch.ogg";
+	const std::string pathSound2XOn = "res/assets/Audio/SFX/upgrade1.ogg";
+
 
 	//Musics
 	const std::string pathMusicMenu = "res/assets/Audio/Music/MenuElectronicChilledCut60.wav";
 	const std::string pathMusicGameplay = "res/assets/Audio/Music/GameplayElectronicRoutinecut60.wav";
 	const std::string pathMusicGameOver = "res/assets/Audio/Music/GameOverElectronicDefeatcut60.wav";
-	
+
 	sf::Image* LoadImage(std::string path);
 	sf::Texture* LoadTexture(std::string path);
 	sf::Font* LoadFont(std::string path);

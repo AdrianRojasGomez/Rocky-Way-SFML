@@ -270,6 +270,7 @@ void Player::ResetFromPause()
 
 void Player::EnableShield()
 {
+	AudioManager::getInstance().PlayShieldOnSound();
 	hasShield = true;
 	playerSprite.setTexture(*playerShieldTexture);
 	shieldClock.restart();
@@ -277,6 +278,7 @@ void Player::EnableShield()
 
 void Player::CallDoubleScore()
 {
+	AudioManager::getInstance().Play2XOnSound();
 	hasDobleMultiplier = true;
 	ScoreManager::getInstance().EnableDobleScore();
 	dobleClock.restart();
@@ -284,6 +286,7 @@ void Player::CallDoubleScore()
 
 void Player::EnableShotgun()
 {
+	AudioManager::getInstance().PlayShotgunOnSound();
 	hasShotgun = true;
 	shotgunClock.restart();
 }

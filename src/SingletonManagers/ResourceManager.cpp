@@ -9,8 +9,8 @@ ResourceManager& ResourceManager::getInstance()
 
 ResourceManager::ResourceManager()
 {
-	LoadImage(pathImageIcon);
-	LoadFont(pathFontOxaniumSemiBold);
+	iconImage = LoadImage(pathImageIcon);
+	oxaniumSemiBoldFont = LoadFont(pathFontOxaniumSemiBold);
 	LoadAllTextures();
 	LoadAllSoundBuffers();
 	LoadAllMusics();
@@ -120,6 +120,21 @@ ResourceManager::~ResourceManager()
 		playerDestroyedSoundBuffer = nullptr;
 	}
 
+	if (shieldSoundBuffer != nullptr)
+	{
+		delete shieldSoundBuffer;
+		shieldSoundBuffer = nullptr;
+	}
+	if (shotgunShoundBuffer != nullptr)
+	{
+		delete shotgunShoundBuffer;
+		shotgunShoundBuffer = nullptr;
+	}
+	if (dobleScoreSoundBuffer != nullptr)
+	{
+		delete dobleScoreSoundBuffer;
+		dobleScoreSoundBuffer = nullptr;
+	}
 
 	if (collectableShotgun != nullptr)
 	{
@@ -345,8 +360,6 @@ sf::Texture* ResourceManager::Get2XTexture()
 	return collectableX2;
 }
 
-
-
 sf::Texture* ResourceManager::GetLifeUITexture()
 {
 	if (lifeUITexture == nullptr)
@@ -448,7 +461,7 @@ sf::SoundBuffer* ResourceManager::GetAsteroidDestroyedBuffer()
 	if (asteroidDestroyedSoundBuffer == nullptr)
 	{
 		asteroidDestroyedSoundBuffer = new sf::SoundBuffer;
-		asteroidDestroyedSoundBuffer = LoadSoundBuffer(pathAsteroidDestroyedBuffer);
+		asteroidDestroyedSoundBuffer = LoadSoundBuffer(pathSoundAsteroidDestroyedBuffer);
 	}
 	return asteroidDestroyedSoundBuffer;
 }
@@ -458,9 +471,42 @@ sf::SoundBuffer* ResourceManager::GetPlayerDestroyedBuffer()
 	if (playerDestroyedSoundBuffer == nullptr)
 	{
 		playerDestroyedSoundBuffer = new sf::SoundBuffer;
-		playerDestroyedSoundBuffer = LoadSoundBuffer(pathPlayerDestroyedBuffer);
+		playerDestroyedSoundBuffer = LoadSoundBuffer(pathSoundPlayerDestroyedBuffer);
 	}
 	return playerDestroyedSoundBuffer;
+}
+
+sf::SoundBuffer* ResourceManager::GetShieldBuffer()
+{
+	//update
+	if (shieldSoundBuffer == nullptr)
+	{
+		shieldSoundBuffer = new sf::SoundBuffer;
+		shieldSoundBuffer = LoadSoundBuffer(pathSoundShieldOn);
+	}
+	return shieldSoundBuffer;
+}
+
+sf::SoundBuffer* ResourceManager::GetShotgunBuffer()
+{
+	//update
+	if (shotgunShoundBuffer == nullptr)
+	{
+		shotgunShoundBuffer = new sf::SoundBuffer;
+		shotgunShoundBuffer = LoadSoundBuffer(pathSoundShotgunOn);
+	}
+	return shotgunShoundBuffer;
+}
+
+sf::SoundBuffer* ResourceManager::Get2XBuffer()
+{
+	//update
+	if (dobleScoreSoundBuffer == nullptr)
+	{
+		dobleScoreSoundBuffer = new sf::SoundBuffer;
+		dobleScoreSoundBuffer = LoadSoundBuffer(pathSound2XOn);
+	}
+	return dobleScoreSoundBuffer;
 }
 
 sf::SoundBuffer* ResourceManager::GetEnterUIBuffer()
@@ -530,7 +576,6 @@ sf::Image* ResourceManager::LoadImage(std::string path)
 	return nullptr;
 }
 
-
 sf::Texture* ResourceManager::LoadTexture(std::string path)
 {
 	sf::Texture* texture = new sf::Texture();
@@ -564,7 +609,6 @@ sf::Font* ResourceManager::LoadFont(std::string path)
 	std::cout << "DEBUG: Error!!!!!!!! LOADING " << path << "  FONT" << std::endl;
 	return nullptr;
 }
-
 
 sf::SoundBuffer* ResourceManager::LoadSoundBuffer(std::string path)
 {
@@ -616,23 +660,24 @@ void ResourceManager::LoadAllTextures()
 	LoadTexture(pathTextureShotgunUI);
 	LoadTexture(pathTexture2XUI);
 	LoadTexture(pathTextureShieldUI);
-
-
 }
 
 void ResourceManager::LoadAllSoundBuffers()
 {
-	LoadSoundBuffer(pathSoundShootBuffer);
-	LoadSoundBuffer(pathSoundEngineBuffer);
-	LoadSoundBuffer(pathAsteroidDestroyedBuffer);
-	LoadSoundBuffer(pathPlayerDestroyedBuffer);
-	LoadSoundBuffer(pathSoundEnterUI);
-	LoadSoundBuffer(pathSoundMoveUI);
+	shootSoundBuffer = LoadSoundBuffer(pathSoundShootBuffer);
+	engineSoundBuffer = LoadSoundBuffer(pathSoundEngineBuffer);
+	asteroidDestroyedSoundBuffer = LoadSoundBuffer(pathSoundAsteroidDestroyedBuffer);
+	playerDestroyedSoundBuffer = LoadSoundBuffer(pathSoundPlayerDestroyedBuffer);
+	enterUISoundBuffer = LoadSoundBuffer(pathSoundEnterUI);
+	moveUISoundBuffer = LoadSoundBuffer(pathSoundMoveUI);
+	shieldSoundBuffer = LoadSoundBuffer(pathSoundShieldOn);
+	shotgunShoundBuffer = LoadSoundBuffer(pathSoundShotgunOn);
+	dobleScoreSoundBuffer = LoadSoundBuffer(pathSound2XOn);
 }
 
 void ResourceManager::LoadAllMusics()
 {
-	LoadMusic(pathMusicMenu);
-	LoadMusic(pathMusicGameplay);
-	LoadMusic(pathMusicGameOver);
+	menuMusic = LoadMusic(pathMusicMenu);
+	gameplayMusic = LoadMusic(pathMusicGameplay);
+	gameOverMusic = LoadMusic(pathMusicGameOver);
 }

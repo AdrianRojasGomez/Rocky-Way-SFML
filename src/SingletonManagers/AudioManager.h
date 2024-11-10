@@ -21,6 +21,9 @@ public:
 	void ResumeGameplayMusic();
 	void PlayEnterUISound();
 	void PlayMoveUISound();
+	void PlayShieldOnSound();
+	void PlayShotgunOnSound();
+	void Play2XOnSound();
 
 	sf::Music* GetMenuMusic() { return menuMusic; }
 	sf::Music* GetGameplayMusic() { return gameplayMusic; }
@@ -33,16 +36,28 @@ private:
 	sf::Music* menuMusic = nullptr;
 	sf::Music* gameplayMusic = nullptr;
 	sf::Music* gameOverMusic = nullptr;
+
 	sf::SoundBuffer* shootSoundBuffer = nullptr;
 	sf::SoundBuffer* engineSoundBuffer = nullptr;
 	sf::SoundBuffer* asteroidDestroyedBuffer = nullptr;
+
 	sf::SoundBuffer* playerDestroyedBuffer = nullptr;
 	sf::SoundBuffer* enterBuffer = nullptr;
 	sf::SoundBuffer* uiMoveBuffer = nullptr;
+
+	sf::SoundBuffer* playerShieldBuffer = nullptr;
+	sf::SoundBuffer* playerShotgunBuffer = nullptr;
+	sf::SoundBuffer* player2XBuffer = nullptr;
+
 	sf::Sound shootSound;
 	sf::Sound engineSound;
 	sf::Sound asteroidDestroyedSound;
 	sf::Sound playerDestroyedSound;
+
+	sf::Sound playerShieldSound;
+	sf::Sound playerShotgunSound;
+	sf::Sound player2XSound;
+
 	sf::Sound enterSound;
 	sf::Sound moveUISound;
 
