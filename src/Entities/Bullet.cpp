@@ -7,9 +7,10 @@
 
 Bullet::Bullet()
 {
+	bulletTexture = ResourceManager::getInstance().GetBulletTexture();
+	bulletRedTexture = ResourceManager::getInstance().GetPowerBulletTexture();
 	gen = std::mt19937(rd());
 	dis = std::uniform_real_distribution<float>(-MAX_SPREAD_ANGLE, MAX_SPREAD_ANGLE);
-	bulletTexture = ResourceManager::getInstance().GetBulletTexture();
 	timer = new sf::Clock;
 	SetTextureValues();
 }
@@ -41,22 +42,18 @@ void Bullet::SetTextureValues()
 void Bullet::Fire(float posX, float posY, float dirX, float dirY)
 {
 	intRectPosX = 0;
-	// Normalize the original direction vector
 	sf::Vector2f originalDir(dirX, dirY);
 	float length = std::sqrt(originalDir.x * originalDir.x + originalDir.y * originalDir.y);
 	if (length != 0)
 		originalDir /= length;
 	else
-		originalDir = sf::Vector2f(1.0f, 0.0f); // Default direction if zero vector
+		originalDir = sf::Vector2f(1.0f, 0.0f);
 
-	// Get a random deviation in degrees and convert to radians
 	float deviationDegrees = getRandomDeviation();
 	float deviationRadians = degToRad(deviationDegrees);
 
-	// Rotate the original direction by the deviation angle
 	sf::Vector2f deviatedDir = rotateVector(originalDir, deviationRadians);
 
-	// Set the bullet's direction
 	this->bulletDirX = deviatedDir.x;
 	this->bulletDirY = deviatedDir.y;
 
@@ -171,5 +168,25 @@ void Bullet::SetBulletSprite(bool isActive)
 	{
 		bulletSprite.setPosition(-100, -100);
 		bulletSpeed = 0.0f;
+	}
+}
+
+void Bullet::ChangeTexture(BulletType bulletType)
+{
+	if (this->bulletType == bulletType)
+		return;
+
+	switch (bulletType)
+	{
+	case BulletType::Normal:
+		this->bulletType = bulletType;
+		bulletSprite.setTexture(*bulletTexture);
+		break;
+	case BulletType::Red:
+		this->bulletType = bulletType;
+		bulletSprite.setTexture(*bulletRedTexture);
+		break;
+	default:
+		break;
 	}
 }

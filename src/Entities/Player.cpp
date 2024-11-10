@@ -179,6 +179,8 @@ void Player::CreateBullets()
 
 void Player::Fire()
 {
+	BulletType currentBulletType;
+
 	if (!isAlive)
 		return;
 
@@ -192,6 +194,7 @@ void Player::Fire()
 
 			if (hasShotgun)
 			{
+				currentBulletType = BulletType::Red;
 				float angles[] = { -spreadShotgun, 0.0f, spreadShotgun };
 
 				for (int i = 0; i < 3; ++i)
@@ -203,6 +206,7 @@ void Player::Fire()
 					{
 						if (!(*iterator)->GetIsActive())
 						{
+							(*iterator)->ChangeTexture(currentBulletType);
 							(*iterator)->Fire(posX, posY, rotatedDirection.x, rotatedDirection.y);
 							isFiring = true;
 							cooldownClock.restart();
@@ -213,11 +217,13 @@ void Player::Fire()
 			}
 			else
 			{
+				currentBulletType = BulletType::Normal;
 				sf::Vector2f rotatedDirection(directionX, directionY);
 				for (iterator = bullets.begin(); iterator != bullets.end(); ++iterator)
 				{
 					if (!(*iterator)->GetIsActive())
 					{
+						(*iterator)->ChangeTexture(currentBulletType);
 						(*iterator)->Fire(posX, posY, rotatedDirection.x, rotatedDirection.y);
 						isFiring = true;
 						cooldownClock.restart();

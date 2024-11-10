@@ -3,8 +3,15 @@
 #include <SFML/System.hpp>
 #include <random>
 
+enum class BulletType
+{
+    Normal = 1,
+    Red = 2
+};
+
 class Bullet
 {
+
 public:
     Bullet();
     ~Bullet();
@@ -14,11 +21,15 @@ public:
     bool GetIsActive() { return isActive; }
     sf::Sprite GetBulletSprite() { return bulletSprite; }
     void SetBulletSprite(bool isActive);
+    void ChangeTexture(BulletType bulletType);
 
 private:
     sf::Texture* bulletTexture;
+    sf::Texture* bulletRedTexture;
     sf::Sprite bulletSprite;
     sf::Clock* timer;
+
+    BulletType bulletType;
 
     const float BULLET_LIFETIME = 0.65f;
     const float MAX_SPREAD_ANGLE = 4.0f; 
