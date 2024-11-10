@@ -31,16 +31,30 @@ void AudioManager::SetGameSounds()
 {
 	shootSoundBuffer = ResourceManager::getInstance().GetShootSoundBuffer();
 	shootSound.setBuffer(*shootSoundBuffer);
+
 	engineSoundBuffer = ResourceManager::getInstance().GetEngineSoundBuffer();
 	engineSound.setBuffer(*engineSoundBuffer);
+
 	asteroidDestroyedBuffer = ResourceManager::getInstance().GetAsteroidDestroyedBuffer();
 	asteroidDestroyedSound.setBuffer(*asteroidDestroyedBuffer);
+
 	playerDestroyedBuffer = ResourceManager::getInstance().GetPlayerDestroyedBuffer();
 	playerDestroyedSound.setBuffer(*playerDestroyedBuffer);
+
 	enterBuffer = ResourceManager::getInstance().GetEnterUIBuffer();
 	enterSound.setBuffer(*enterBuffer);
+
 	uiMoveBuffer = ResourceManager::getInstance().GetMoveUIBuffer();
 	moveUISound.setBuffer(*uiMoveBuffer);
+
+	playerShieldBuffer = ResourceManager::getInstance().GetShieldBuffer();
+	playerShieldSound.setBuffer(*playerShieldBuffer);
+
+	playerShotgunBuffer = ResourceManager::getInstance().GetShotgunBuffer();
+	playerShotgunSound.setBuffer(*playerShotgunBuffer);
+
+	player2XBuffer = ResourceManager::getInstance().Get2XBuffer();
+	player2XSound.setBuffer(*player2XBuffer);
 }
 
 void AudioManager::SetDefaultVolumes()
@@ -198,4 +212,19 @@ void AudioManager::PlayEnterUISound()
 void AudioManager::PlayMoveUISound()
 {
 	moveUISound.play();
+}
+
+void AudioManager::PlayShieldOnSound()
+{
+	playerShieldSound.play();
+}
+
+void AudioManager::PlayShotgunOnSound()
+{
+	playerShotgunSound.play();
+}
+
+void AudioManager::Play2XOnSound()
+{
+	player2XSound.play();
 }

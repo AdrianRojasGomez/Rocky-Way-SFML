@@ -5,6 +5,7 @@
 Wave::Wave(UI* ui)
 {
 	this->ui = ui;
+	CreateCollectables();
 	CreateAsteroids();
 	CreateWave();
 }
@@ -30,7 +31,6 @@ void Wave::WaveReset()
 	}
 }
 
-
 void Wave::CreateAsteroids()
 {
 	for (int i = 0; i < LARGE_ASTEROID_POOL; i++)
@@ -51,6 +51,8 @@ void Wave::CreateWave()
 	waveCounter++;
 	ScoreManager::getInstance().SetWave(waveCounter);
 	ui->SetUIWave(waveCounter);
+	//DEBUG ON FIRST WAVE APPEAR COLLECTABLE
+	SetCollectables();
 
 	if (waveCounter <= 1)
 	{
@@ -64,6 +66,8 @@ void Wave::CreateWave()
 			largePerWave += (int)(floor(GROWTH * i * i * RATIO));
 			smallPerWave += (int)(floor((int)(GROWTH * 0.2f)) * i * i * RATIO);
 		}
+		//NORMAL TIME TO APPEAR COLLECTABLES
+		//SetCollectables();
 	}
 
 	int index = 0;
@@ -90,10 +94,58 @@ void Wave::CreateWave()
 	}
 }
 
-template <typename list ,typename Iterator, typename Func>
-void Wave::IterateAsteroids(list asteroidType ,Iterator iterator, Func func)
+void Wave::CreateCollectables()
 {
-	
+	for (int i = 0; i < (int)CollectableType::Unassigned; i++)
+	{
+		Collectable* newCollectable = new Collectable(i);
+		collectables.push_back(newCollectable);
+
+	}
+}
+
+void Wave::SetCollectables()
+{
+	for (int i = 0; i < (int)CollectableType::Unassigned; i++)
+	{
+		coordinates[i] = sf::Vector2f(0, 0);
+	}
+
+	for (int i = 0; i < (int)CollectableType::Unassigned; i++)
+	{
+		coordinates[i] = sf::Vector2f(collectables[i]->GetARandomPosX(), collectables[i]->GetARandomPosY());
+
+		if (i == 0)
+		{
+			collectables[i]->SetPosition(coordinates[i]);
+		}
+		else
+		{
+			for (int j = 0; j < (int)CollectableType::Unassigned; j++)
+			{
+				if (i != j)
+				{
+					collectables[i]->SetPosition(coordinates[i]);
+
+					if (collectables[i]->GetCollectableHitbox().intersects(collectables[j]->GetCollectableHitbox()))
+						coordinates[i] = sf::Vector2f(collectables[i]->GetARandomPosX(), collectables[i]->GetARandomPosY());
+
+					collectables[i]->SetPosition(coordinates[i]);
+				}
+			}
+		}
+	}
+
+	for (int i = 0; i < collectables.size(); i++)
+	{
+		collectables[i]->SetIsAlive(true);
+	}
+}
+
+template <typename list, typename Iterator, typename Func>
+void Wave::IterateAsteroids(list asteroidType, Iterator iterator, Func func)
+{
+
 	for (iterator = asteroidType.begin(); iterator != asteroidType.end(); iterator++)
 	{
 		auto* asteroidToProcess = *iterator;
@@ -153,6 +205,20 @@ void Wave::DrawSmallAsteroids(sf::RenderWindow& window)
 	IterateAsteroids(smallAsteroids, smallIterator, &SmallAsteroid::Draw, window);
 }
 
+void Wave::DrawCollectibles(sf::RenderWindow& window)
+{
+	for (int i = 0; i < (int)CollectableType::Unassigned; i++)
+	{
+		if (!collectables[i]->GetIsAlive())
+			return;
+	}
+
+	for (int i = 0; i < (int)CollectableType::Unassigned; i++)
+	{
+		collectables[i]->Draw(window);
+	}
+}
+
 void Wave::CheckInactiveAsteroids()
 {
 	asteroidsInPool = 0;
@@ -161,7 +227,6 @@ void Wave::CheckInactiveAsteroids()
 	if (asteroidsInPool <= 0)
 		shouldCreateWave = true;
 }
-
 
 void Wave::Update()
 {
@@ -176,10 +241,20 @@ void Wave::Update()
 	UpdateSmallAsteroids();
 	CheckInactiveAsteroids();
 
+	if (collectables.size() <= 0)
+		return;
+
+	for (int i = 0; i < collectables.size(); i++)
+	{
+		if (collectables[i]->GetIsAlive())
+			collectables[i]->Update();
+	}
 }
 
 void Wave::Draw(sf::RenderWindow& window)
 {
+
+	DrawCollectibles(window);
 	DrawLargeAsteroids(window);
 	DrawSmallAsteroids(window);
 }

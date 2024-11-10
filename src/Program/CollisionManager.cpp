@@ -6,7 +6,11 @@ CollisionManager::CollisionManager()
 {
 }
 
-void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::list<LargeAsteroid*> largeAsteroids, std::list<SmallAsteroid*> smallAsteroids)
+void CollisionManager::Update(Player& player,
+	std::list<Bullet*> bullets, 
+	std::list<LargeAsteroid*> largeAsteroids,
+	std::list<SmallAsteroid*> smallAsteroids,
+	std::vector<Collectable*> collectables)
 {
 	for (std::list<LargeAsteroid*>::iterator it = largeAsteroids.begin(); it != largeAsteroids.end(); it++)
 	{
@@ -76,6 +80,49 @@ void CollisionManager::Update(Player& player, std::list<Bullet*> bullets, std::l
 			}
 		}
 	}
+
+	for (int i = 0; i < (int)CollectableType::Unassigned; i++)
+	{
+		if (collectables[i] != nullptr && !collectables[i]->GetIsAlive())
+		{
+			continue;
+		}
+
+		if (PlayerVsCollectable(player, *collectables[i]))
+		{
+			std::cout << "collision player vs currentCollectable\n";
+			CollectableType currentType = collectables[i]->GetCollectableType();
+
+			switch (currentType)
+			{
+			case CollectableType::Shotgun:
+				player.EnableShotgun();
+				break;
+			case CollectableType::Shield:
+				player.EnableShield();
+				break;
+			case CollectableType::DoubleScore:
+				player.CallDoubleScore();
+				break;
+			case CollectableType::Unassigned:
+				//Error unassigned
+				break;
+			default:
+				break;
+
+			}
+			canShutDownCollectables = true;
+		}
+	}
+
+	if (canShutDownCollectables)
+	{
+		canShutDownCollectables = false;
+		for (int i = 0; i < (int)CollectableType::Unassigned; i++) 
+		{
+			collectables[i]->SetIsAlive(false);
+		}
+	}
 }
 
 bool CollisionManager::PlayerVsLargeAsteroidCollision(Player& player, LargeAsteroid& largeAsteroid)
@@ -86,6 +133,11 @@ bool CollisionManager::PlayerVsLargeAsteroidCollision(Player& player, LargeAster
 bool CollisionManager::PlayerVsSmallAsteroidCollision(Player& player, SmallAsteroid& smallAsteroid)
 {
 	return player.GetPlayerHitbox().intersects(smallAsteroid.GetAsteroidHitBox());
+}
+
+bool CollisionManager::PlayerVsCollectable(Player& player, Collectable& collectable)
+{
+	return player.GetPlayerHitbox().intersects(collectable.GetCollectableHitbox());
 }
 
 bool CollisionManager::BulletVsLargeAsteroidCollision(Bullet& bullet, LargeAsteroid& largeAsteroid)

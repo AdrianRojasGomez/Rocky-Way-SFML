@@ -80,7 +80,7 @@ void Gameplay::Update()
 	}
 
 	player->Update();
-	collisionManager->Update(*player, player->GetBullets(), wave->GetLargeAsteroids(), wave->GetSmallAsteroids());
+	collisionManager->Update(*player, player->GetBullets(), wave->GetLargeAsteroids(), wave->GetSmallAsteroids(), wave->GetCollectables());
 	wave->Update();
 	ui->Update();
 }
