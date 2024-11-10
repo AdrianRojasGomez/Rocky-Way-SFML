@@ -89,7 +89,7 @@ ResourceManager::~ResourceManager()
 		delete shootSoundBuffer;
 		shootSoundBuffer = nullptr;
 	}
-	
+
 	if (engineSoundBuffer != nullptr)
 	{
 		delete engineSoundBuffer;
@@ -107,7 +107,7 @@ ResourceManager::~ResourceManager()
 		delete moveUISoundBuffer;
 		moveUISoundBuffer = nullptr;
 	}
-	
+
 	if (asteroidDestroyedSoundBuffer != nullptr)
 	{
 		delete asteroidDestroyedSoundBuffer;
@@ -160,7 +160,7 @@ ResourceManager::~ResourceManager()
 		delete powerBulletTexture;
 		powerBulletTexture = nullptr;
 	}
-	
+
 	if (menuMusic != nullptr)
 	{
 		menuMusic->stop();
@@ -587,24 +587,24 @@ sf::Music* ResourceManager::LoadMusic(std::string path)
 
 void ResourceManager::LoadAllTextures()
 {
-	LoadTexture(pathTextureSplash);
-	LoadTexture(pathTextureMenuBG);
-	LoadTexture(pathTextureBG);
-	LoadTexture(pathTexturePauseBG);
-	LoadTexture(pathTexturePlayer);
-	LoadTexture(pathTexturePlayerShield);
-	LoadTexture(pathTextureBullet);
-	LoadTexture(pathTexturePowerBullet);
-	LoadTexture(pathTextureLarge);
-	LoadTexture(pathTextureSmall);
-	LoadTexture(pathTextureMusicSwitch);
-	LoadTexture(pathTextureHitEffect);
-	LoadTexture(pathTextureShotgun);
-	LoadTexture(pathTexture2X);
-	LoadTexture(pathTextureShield);
-	LoadTexture(pathTextureLifeUI);
-	LoadTexture(pathTextureLifeLostUI);
-	LoadTexture(pathTextureEnterUI);
+	splashBackgroundTexture = LoadTexture(pathTextureSplash);
+	menuBackgroundTexture = LoadTexture(pathTextureMenuBG);
+	pauseBackgroundTexture = LoadTexture(pathTexturePauseBG);
+	gameBackgroundTexture = LoadTexture(pathTextureBG);
+	playerTexture = LoadTexture(pathTexturePlayer);
+	playerShieldTexture = LoadTexture(pathTexturePlayerShield);
+	bulletTexture = LoadTexture(pathTextureBullet);
+	powerBulletTexture = LoadTexture(pathTexturePowerBullet);
+	largeAsteroidTexture = LoadTexture(pathTextureLarge);
+	smallAsteroidTexture = LoadTexture(pathTextureSmall);
+	musicSwitchTexture = LoadTexture(pathTextureMusicSwitch);
+	impactTexture = LoadTexture(pathTextureHitEffect);
+	collectableShotgun = LoadTexture(pathTextureShotgun);
+	collectableShield = LoadTexture(pathTexture2X);
+	collectableX2 = LoadTexture(pathTextureShield);
+	lifeUITexture = LoadTexture(pathTextureLifeUI);
+	lifeLostUITexture = LoadTexture(pathTextureLifeLostUI);
+	enterUITexture = LoadTexture(pathTextureEnterUI);
 }
 
 void ResourceManager::LoadAllSoundBuffers()

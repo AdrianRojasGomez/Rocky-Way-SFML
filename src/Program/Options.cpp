@@ -46,9 +46,6 @@ void Options::Input(sf::Event event)
 		{
 			AudioManager::getInstance().PlayEnterUISound();
 			SelectButton();
-
-			if (selectedIndex == 0)
-				volumeNumber = 50;
 		}
 
 		if (event.key.code == sf::Keyboard::Down)
@@ -157,14 +154,19 @@ void Options::InitializeVolumeText()
 	posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.50f);
 	volumeText.setPosition(posX, posY);
 
-	std::string maxVolumeString = "/ " + volumeString;
-	maxVolumeText.setString(maxVolumeString);
-	ModifyTextProperties(maxVolumeText);
-	CenterTextOrigin(maxVolumeText);
-	posX = 0, posY = 0;
-	posX = (ScreenResolution::SCREEN_WIDTH_720P * 0.674f);
-	posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.505f);
-	maxVolumeText.setPosition(posX, posY);
+	if (!maxInitialized)
+	{
+		std::string maxVolumeString = "   / " + volumeString;
+		maxVolumeText.setString(maxVolumeString);
+		maxInitialized = true;
+	}
+		ModifyTextProperties(maxVolumeText);
+		CenterTextOrigin(maxVolumeText);
+		posX = 0, posY = 0;
+		posX = (ScreenResolution::SCREEN_WIDTH_720P * 0.684f);
+		posY = (ScreenResolution::SCREEN_HEIGHT_720P * 0.505f);
+		maxVolumeText.setPosition(posX, posY);
+	
 }
 
 void Options::UpdateSelectedButton()
@@ -209,7 +211,6 @@ void Options::UpdateVolumeNumber()
 	{
 		volumeString = std::to_string(volumeNumber);
 		volumeText.setString(volumeString);
-		std::cout << "volume string: " << volumeString << "\n.";
 	}
 }
 
@@ -227,6 +228,8 @@ void Options::SelectButton()
 
 		musicSwitchIntRect = sf::IntRect(intRectPosX, 0, 100, 100);
 		musicSwitchSprite.setTextureRect(musicSwitchIntRect);
+		volumeNumber = 100;
+
 		break;
 	case 1:
 		isChangingVolume = true;
@@ -241,11 +244,11 @@ void Options::SelectButton()
 
 void Options::IncreaseVolume()
 {
-	if (volumeNumber <= 50)
+	if (volumeNumber <= 100)
 		volumeNumber++;
 
-	if (volumeNumber > 50)
-		volumeNumber = 50;
+	if (volumeNumber > 100)
+		volumeNumber = 100;
 	AudioManager::getInstance().SetMusicVolume(volumeNumber);
 }
 

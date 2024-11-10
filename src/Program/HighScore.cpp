@@ -176,7 +176,6 @@ void HighScore::Update()
 {
 	if (!hasHighscoresUpdated)
 	{
-		std::cout << " hasHighscoresUpdated   " << hasHighscoresUpdated << "\n";
 		FetchHighScoreList();
 		InitializeLoadedItems();
 	}

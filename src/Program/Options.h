@@ -24,6 +24,7 @@ private:
 
 	int selectedIndex = 0;
 
+
 	const float SCALE_MUSIC_SPRITE = 0.7f;
 	static constexpr int OPTIONS_AMOUNT = 3;
 	const std::string OPTION_TITLE = "SETTINGS";
@@ -32,10 +33,10 @@ private:
 	sf::Text optionButtons[OPTIONS_AMOUNT];
 	sf::Text volumeText;
 	sf::Text maxVolumeText;
+	bool maxInitialized = false;
 	bool isMuted = false;
 	bool isChangingVolume = false;
-	//const int maxVolumeNumber = 50;
-	int volumeNumber = 50;
+	int volumeNumber = 100;
 	std::string volumeString = std::to_string(volumeNumber);
 	sf::IntRect musicSwitchIntRect;
 	int intRectPosX = 0;

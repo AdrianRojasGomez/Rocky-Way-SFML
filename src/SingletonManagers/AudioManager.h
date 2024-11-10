@@ -61,12 +61,15 @@ private:
 	sf::Sound enterSound;
 	sf::Sound moveUISound;
 
-	const int defaultMusicVolume = 25;
-	const int maxShootSoundVolume = 20;
-	const int maxEngineSoundVolume = 50;
-	const int maxPlayerDestroyedSoundVolume = 50;
+	const int defaultMusicVolume = 30;
+	const int maxShootSoundVolume = 13;
+	const int maxEngineSoundVolume = 25;
+	const int maxPlayerDestroyedSoundVolume = 30;
+	const int maxDefaultSoundVolume = 35;
 	bool isInMainMenu = false;
 	bool engineSwitch = false;
+	static constexpr int TOTAL_MUSICS = 3;
+	int musics[TOTAL_MUSICS] = {};
 
 	void SetGameMusic();
 	void SetGameSounds();

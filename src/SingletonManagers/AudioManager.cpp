@@ -109,36 +109,35 @@ void AudioManager::PlayGameOverMusic()
 void AudioManager::SetMusicVolume(int volume)
 {
 
+	int newVolume = volume * 0.5;
+
 	//MUSIC
-	if (volume > defaultMusicVolume)
+	if (newVolume > defaultMusicVolume)
 	{
 		menuMusic->setVolume(defaultMusicVolume);
 		gameplayMusic->setVolume(defaultMusicVolume);
 	}
 	else
 	{
-		menuMusic->setVolume(volume);
-		gameplayMusic->setVolume(volume);
+		menuMusic->setVolume(newVolume);
+		gameplayMusic->setVolume(newVolume);
 	}
 
 	//SOUND
-	if (volume > maxShootSoundVolume)
+	if (newVolume > maxShootSoundVolume)
 	{
 		shootSound.setVolume(maxShootSoundVolume);
 		engineSound.setVolume(maxEngineSoundVolume);
 		playerDestroyedSound.setVolume(maxPlayerDestroyedSoundVolume);
-		asteroidDestroyedSound.setVolume(100);
-		enterSound.setVolume(100);
-		moveUISound.setVolume(100);
 	}
 	else
 	{
-		shootSound.setVolume(volume);
-		engineSound.setVolume(volume);
-		playerDestroyedSound.setVolume(volume);
-		asteroidDestroyedSound.setVolume(volume);
-		enterSound.setVolume(volume);
-		moveUISound.setVolume(volume);
+		shootSound.setVolume(newVolume);
+		engineSound.setVolume(newVolume);
+		playerDestroyedSound.setVolume(newVolume);
+		asteroidDestroyedSound.setVolume(newVolume);
+		enterSound.setVolume(newVolume);
+		moveUISound.setVolume(newVolume);
 	}
 }
 
