@@ -16,6 +16,7 @@ Player::Player(UI* ui, GameState* gameState, ScreenShake* screenShake)
 	textureRect = sf::IntRect(0, 0, 128, 128);
 	cooldownClock.restart();
 	playerTexture = ResourceManager::getInstance().GetPlayerTexture();
+	playerShieldTexture = ResourceManager::getInstance().GetPlayerShieldTexture();
 	SetTextureValues();
 	SetInitialPosition();
 	CreateBullets();
@@ -115,7 +116,6 @@ void Player::Draw(sf::RenderWindow& window)
 			bulletToDraw->Draw(window);
 		}
 	}
-	window.draw(shieldShape);
 }
 
 void Player::SetTextureValues()
@@ -255,10 +255,8 @@ bool Player::CheckHasHPLeft()
 
 void Player::TriggerScreenshake()
 {
-	if (HP > 0)
-		screenShake->StartShake(0.2f, 5.0f);
-	else
-		screenShake->StartShake(0.5f, 5.0f);
+	(HP > 0) ? screenShake->StartShake(0.2f, 5.0f) : screenShake->StartShake(0.5f, 5.0f);
+
 
 }
 
@@ -268,18 +266,12 @@ void Player::ResetFromPause()
 	SetInitialPosition();
 	HP = MaxHP;
 	ui->SetUIHP(HP);
-	hasShield = false;
 }
 
 void Player::EnableShield()
 {
-
 	hasShield = true;
-	shieldShape.setRadius(20);
-	shieldShape.setOutlineColor(sf::Color::Blue);
-	shieldShape.setOutlineThickness(3);
-	shieldShape.setFillColor(sf::Color::Transparent);
-	shieldShape.setPosition(playerSprite.getGlobalBounds().left, playerSprite.getGlobalBounds().top);
+	playerSprite.setTexture(*playerShieldTexture);
 	shieldClock.restart();
 }
 
@@ -370,12 +362,7 @@ void Player::HasShieldExpired()
 	if (shieldClock.getElapsedTime().asSeconds() > bonusTime)
 	{
 		hasShield = false;
-		shieldShape.setRadius(0);
-	}
-	else
-	{
-		shieldShape.setPosition(playerSprite.getGlobalBounds().left, playerSprite.getGlobalBounds().top);
-
+		playerSprite.setTexture(*playerTexture);
 	}
 }
 

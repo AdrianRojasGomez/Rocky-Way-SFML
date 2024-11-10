@@ -37,6 +37,7 @@ private:
 	GameState* gameState;
 	UI* ui;
 	sf::Texture* playerTexture;
+	sf::Texture* playerShieldTexture;
 	sf::Sprite playerSprite;
 	sf::FloatRect* playerHitZone;
 
@@ -100,8 +101,4 @@ private:
 	void HasShotgunExpired();
 	sf::Vector2f RotateVector(sf::Vector2f vectorDirection, float degrees);
 
-
-
-	//debug shapes
-	sf::CircleShape shieldShape;
 };

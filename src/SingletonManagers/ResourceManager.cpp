@@ -240,6 +240,16 @@ sf::Texture* ResourceManager::GetPlayerTexture()
 	return playerTexture;
 }
 
+sf::Texture* ResourceManager::GetPlayerShieldTexture()
+{
+	if (playerShieldTexture == nullptr)
+	{
+		playerShieldTexture = new sf::Texture;
+		playerShieldTexture = LoadTexture(pathTexturePlayerShield);
+	}
+	return playerShieldTexture;
+}
+
 sf::Texture* ResourceManager::GetBulletTexture()
 {
 	if (bulletTexture == nullptr)
@@ -590,6 +600,7 @@ void ResourceManager::LoadAllTextures()
 	LoadTexture(pathTextureBG);
 	LoadTexture(pathTexturePauseBG);
 	LoadTexture(pathTexturePlayer);
+	LoadTexture(pathTexturePlayerShield);
 	LoadTexture(pathTextureBullet);
 	LoadTexture(pathTexturePowerBullet);
 	LoadTexture(pathTextureLarge);
@@ -599,7 +610,6 @@ void ResourceManager::LoadAllTextures()
 	LoadTexture(pathTextureShotgun);
 	LoadTexture(pathTexture2X);
 	LoadTexture(pathTextureShield);
-
 	LoadTexture(pathTextureLifeUI);
 	LoadTexture(pathTextureLifeLostUI);
 	LoadTexture(pathTextureEnterUI);
