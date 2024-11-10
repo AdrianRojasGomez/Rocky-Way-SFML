@@ -40,6 +40,9 @@ void UI::Draw(sf::RenderWindow& window)
 
 void UI::SetUIHP(int playerHP)
 {
+	if (HP > playerHP)
+		score = newScore;
+
 	HP = playerHP;
 	UpdateHP();
 }
@@ -121,6 +124,9 @@ void UI::UpdateUIScore()
 	if (!(UIAnimationClock.getElapsedTime().asMilliseconds() > 5))
 		return;
 
+	if (newScore <= 0)
+		score = 0;
+
 	if (score < newScore)
 		score++;
 
@@ -130,6 +136,8 @@ void UI::UpdateUIScore()
 		scoreString = '0' + scoreString;
 	}
 	scoreShown.setString(scoreString);
+
+	
 
 	UIAnimationClock.restart();
 }

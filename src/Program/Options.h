@@ -24,7 +24,6 @@ private:
 
 	int selectedIndex = 0;
 
-
 	const float SCALE_MUSIC_SPRITE = 0.7f;
 	static constexpr int OPTIONS_AMOUNT = 3;
 	const std::string OPTION_TITLE = "SETTINGS";
