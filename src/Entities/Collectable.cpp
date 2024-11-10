@@ -1,11 +1,17 @@
 #include <iostream>
 #include "Collectable.h"
+#include "../SingletonManagers/ResourceManager.h"
+#include "../Utilities/Framerate.h"
 #include "../Utilities/RandomUtility.h"
 #include "../Utilities/ScreenResolution.h"
 
 Collectable::Collectable(int collectableType)
 {
+	shotgunTexture = ResourceManager::getInstance().GetShotgunTexture();
+	shieldTexture = ResourceManager::getInstance().GetShieldTexture();
+	dobleScoreTexture = ResourceManager::getInstance().Get2XTexture();
 	AssignCollectableTypeVisual(collectableType);
+	animationClock.restart();
 }
 
 Collectable::~Collectable()
@@ -15,11 +21,13 @@ Collectable::~Collectable()
 
 void Collectable::Update()
 {
+	UpdateAnimation();
+	UpdateBounce();
 }
 
 void Collectable::Draw(sf::RenderWindow& window)
 {
-	window.draw(collectableShape);
+	window.draw(collectableSprite);
 }
 
 void Collectable::SetIsAlive(bool isAlive)
@@ -29,23 +37,54 @@ void Collectable::SetIsAlive(bool isAlive)
 
 int Collectable::GetARandomPosX()
 {
-	int selected = RandomUtility::GetRandomInt(ScreenResolution::SCREEN_WIDTH_720P /1.5, 100);
-	std::cout << "int X:" << selected << "\n";
+	int selected = RandomUtility::GetRandomInt(ScreenResolution::SCREEN_WIDTH_720P / 1.5, 100);
 	return selected;
 }
 
 int Collectable::GetARandomPosY()
 {
-	int selected = RandomUtility::GetRandomInt(ScreenResolution::SCREEN_HEIGHT_720P /1.5, 100);
-	std::cout << "int :" << selected << "\n";
+	int selected = RandomUtility::GetRandomInt(ScreenResolution::SCREEN_HEIGHT_720P / 1.5, 100);
 	return selected;
 }
 
 void Collectable::SetPosition(sf::Vector2f pos)
 {
-	//Set sprite position here
-	collectableShape.setPosition(pos);
-	collectableHitZone = collectableShape.getGlobalBounds();
+	collectableSprite.setPosition(pos);
+	collectableHitZone = collectableSprite.getGlobalBounds();
+	initPos = pos;
+}
+
+void Collectable::UpdateAnimation()
+{
+	if (animationClock.getElapsedTime().asSeconds() > 0.1f)
+	{
+		intRectX = (intRectX == 0) ? fileSize : 0;
+
+		collectableSprite.setTextureRect(sf::IntRect(intRectX, 0, fileSize, fileSize));
+		animationClock.restart();
+	}
+}
+
+void Collectable::UpdateBounce()
+{
+	int speed = 50;
+	static int direction = 1;
+	float upperLimit = initPos.y;
+	float lowerLimit = initPos.y + 15;
+
+	if (collectableSprite.getPosition().y >= lowerLimit)
+		direction = -1;  
+	else if (collectableSprite.getPosition().y <= upperLimit)
+		direction = 1;   
+
+	collectableSprite.move(sf::Vector2f(0, direction * speed * Framerate::getDeltaTime()));
+}
+
+void Collectable::AssignSprite(sf::Texture* assignedTexture, float sizeX, float sizeY, float scale)
+{
+	collectableSprite.setTexture(*assignedTexture);
+	collectableSprite.setTextureRect(sf::IntRect(intRectX, 0, sizeX, sizeY));
+	collectableSprite.setScale(scale, scale);
 }
 
 void Collectable::AssignCollectableTypeVisual(int collectableType)
@@ -56,31 +95,24 @@ void Collectable::AssignCollectableTypeVisual(int collectableType)
 	case CollectableType::Unassigned:
 		std::cout << "Error, UNASSIGNED value selected on CollectableType\n";
 		break;
+
 	case CollectableType::Shotgun:
-		//load shotgun resource pointer
-		//set sprite
-		collectableShape.setRadius(20);
-		collectableShape.setPointCount(4);
-		collectableShape.setFillColor(sf::Color::Red);
+		AssignSprite(shotgunTexture, fileSize, fileSize, 0.5f);
 		break;
+
 	case CollectableType::Shield:
-		//load shotgun resource pointer
-		//set sprite
-		collectableShape.setRadius(20);
-		collectableShape.setPointCount(10);
-		collectableShape.setFillColor(sf::Color::Blue);
+		AssignSprite(shieldTexture, fileSize, fileSize, 0.5f);
 		break;
+
 	case CollectableType::DoubleScore:
-		//load shotgun resource pointer
-		//set sprite
-		collectableShape.setRadius(20);
-		collectableShape.setPointCount(3);
-		collectableShape.setFillColor(sf::Color::Green);
+		AssignSprite(dobleScoreTexture, fileSize, fileSize, 0.5f);
 		break;
+
 	default:
 		std::cout << "Error, DEFAULT value selected on CollectableType\n";
 		break;
 	}
 
 }
+
 

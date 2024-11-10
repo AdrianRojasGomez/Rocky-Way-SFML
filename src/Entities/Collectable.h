@@ -29,17 +29,22 @@ public:
 
 
 private:
+	const int fileSize = 128;
 	CollectableType type = CollectableType::Unassigned;
 	sf::Texture* shotgunTexture = nullptr;
 	sf::Texture* shieldTexture = nullptr;
-	sf::Texture* doubleScoreTexture;
-	sf::Sprite assignedCollectableType;
+	sf::Texture* dobleScoreTexture = nullptr;
+	sf::Sprite collectableSprite;
 	bool isAlive = false;
-
-	//For Building, remove when textures are made
-	sf::CircleShape collectableShape;
+	sf::Clock animationClock;
 	sf::FloatRect collectableHitZone;
+	int intRectX = 0;
+	sf::Vector2f initPos;
 
 	void AssignCollectableTypeVisual(int collectableType);
+	void AssignSprite(sf::Texture* assignedTexture,
+		float sizeX, float sizeY, float scale);
+	void UpdateAnimation();
+	void UpdateBounce();
 
 };

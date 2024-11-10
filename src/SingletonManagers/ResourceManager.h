@@ -14,14 +14,22 @@ public:
 	sf::Texture* GetPauseBackgroundTexture();
 	sf::Texture* GetPlayerTexture();
 	sf::Texture* GetBulletTexture();
+	sf::Texture* GetPowerBulletTexture();
 	sf::Texture* GetLargeAsteroidTexture();
 	sf::Texture* GetSmallAsteroidTexture();
 	sf::Texture* GetMusicSwitchTexture();
 	sf::Texture* GetImpactTexture();
+	sf::Texture* GetShotgunTexture();
+	sf::Texture* GetShieldTexture();
+	sf::Texture* Get2XTexture();
+
 
 	sf::Texture* GetLifeUITexture();
 	sf::Texture* GetLifeLostUITexture();
 	sf::Texture* GetEnterUITexture();
+	sf::Texture* GetShotgunUITexture();
+	sf::Texture* GetShieldUITexture();
+	sf::Texture* Get2XUITexture();
 
 
 	sf::Font* GetOxaniumSemiBoldFont();
@@ -53,14 +61,24 @@ private:
 	sf::Texture* gameBackgroundTexture = nullptr;
 	sf::Texture* playerTexture = nullptr;
 	sf::Texture* bulletTexture = nullptr;
+	sf::Texture* powerBulletTexture = nullptr;
 	sf::Texture* largeAsteroidTexture = nullptr;
 	sf::Texture* smallAsteroidTexture = nullptr;
 	sf::Texture* musicSwitchTexture = nullptr;
 	sf::Texture* impactTexture = nullptr;
 
+	sf::Texture* collectableShotgun = nullptr;
+	sf::Texture* collectableShield = nullptr;
+	sf::Texture* collectableX2 = nullptr;
+
 	sf::Texture* lifeUITexture = nullptr;
 	sf::Texture* lifeLostUITexture = nullptr;
 	sf::Texture* enterUITexture = nullptr;
+
+	sf::Texture* shotgunOnUITexture = nullptr;
+	sf::Texture* shieldOnUITexture = nullptr;
+	sf::Texture* x2OnUITexture = nullptr;
+
 
 	sf::Font* oxaniumSemiBoldFont = nullptr;
 
@@ -86,15 +104,25 @@ private:
 	const std::string pathTextureBG = "res/assets/Background/Background01.png";
 	const std::string pathTexturePlayer = "res/assets/Player/PlayerSheet.png";
 	const std::string pathTextureBullet = "res/assets/Player/BasicShot.png";
+	const std::string pathTexturePowerBullet = "res/assets/Player/PowerShot.png";
 	const std::string pathTextureLarge = "res/assets/Enemies/MeteorLarge.png";
 	const std::string pathTextureSmall = "res/assets/Enemies/MeteorSmall.png";
 	const std::string pathTextureMusicSwitch = "res/assets/UI/MusicMuteSwitch.png";
 	const std::string pathTextureHitEffect = "res/assets/Effects/HitEffect.png";
 
+	//Collectable
+	const std::string pathTextureShotgun = "res/assets/Collectables/RedPowerUpSheet.png";
+	const std::string pathTextureShield = "res/assets/Collectables/BluePowerUpSheet.png";
+	const std::string pathTexture2X = "res/assets/Collectables/PurplePowerUpSheet.png";
+
 	//UI
 	const std::string pathTextureLifeUI = "res/assets/UI/LifeUI.png";
 	const std::string pathTextureLifeLostUI = "res/assets/UI/LifelostUI.png";
 	const std::string pathTextureEnterUI = "res/assets/Background/Enter.png";
+
+	const std::string pathTextureShotgunUI = "res/assets/UI/PowerShotOn.png";
+	const std::string pathTextureShieldUI = "res/assets/UI/ShieldOn.png";
+	const std::string pathTexture2XUI = "res/assets/UI/2XOn.png";
 
 	//UI Sounds
 	const std::string pathSoundEnterUI = "res/assets/Audio/UI/EnterSci-fi.wav";

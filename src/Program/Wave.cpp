@@ -100,27 +100,17 @@ void Wave::CreateCollectables()
 	{
 		Collectable* newCollectable = new Collectable(i);
 		collectables.push_back(newCollectable);
-		
-		//if (newCollectable != nullptr)
-		//{
-		//	delete newCollectable;
-		//	newCollectable = nullptr;
-		//}
+
 	}
 }
 
 void Wave::SetCollectables()
 {
-	///crash here
-
-	//reset vector position
 	for (int i = 0; i < (int)CollectableType::Unassigned; i++)
 	{
 		coordinates[i] = sf::Vector2f(0, 0);
 	}
 
-
-	//Set new positions
 	for (int i = 0; i < (int)CollectableType::Unassigned; i++)
 	{
 		coordinates[i] = sf::Vector2f(collectables[i]->GetARandomPosX(), collectables[i]->GetARandomPosY());
@@ -128,7 +118,6 @@ void Wave::SetCollectables()
 		if (i == 0)
 		{
 			collectables[i]->SetPosition(coordinates[i]);
-			collectables[i]->SetIsAlive(true);
 		}
 		else
 		{
@@ -140,14 +129,16 @@ void Wave::SetCollectables()
 
 					if (collectables[i]->GetCollectableHitbox().intersects(collectables[j]->GetCollectableHitbox()))
 						coordinates[i] = sf::Vector2f(collectables[i]->GetARandomPosX(), collectables[i]->GetARandomPosY());
-						
-					collectables[i]->SetPosition(coordinates[i]);
-					collectables[i]->SetIsAlive(true);
 
+					collectables[i]->SetPosition(coordinates[i]);
 				}
 			}
 		}
+	}
 
+	for (int i = 0; i < collectables.size(); i++)
+	{
+		collectables[i]->SetIsAlive(true);
 	}
 }
 
@@ -250,6 +241,14 @@ void Wave::Update()
 	UpdateSmallAsteroids();
 	CheckInactiveAsteroids();
 
+	if (collectables.size() <= 0)
+		return;
+
+	for (int i = 0; i < collectables.size(); i++)
+	{
+		if (collectables[i]->GetIsAlive())
+			collectables[i]->Update();
+	}
 }
 
 void Wave::Draw(sf::RenderWindow& window)

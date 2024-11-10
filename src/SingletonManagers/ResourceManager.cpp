@@ -119,6 +119,51 @@ ResourceManager::~ResourceManager()
 		delete playerDestroyedSoundBuffer;
 		playerDestroyedSoundBuffer = nullptr;
 	}
+
+
+	if (collectableShotgun != nullptr)
+	{
+		delete collectableShotgun;
+		collectableShotgun = nullptr;
+	}
+
+
+	if (collectableShield != nullptr)
+	{
+		delete collectableShield;
+		collectableShield = nullptr;
+	}
+
+
+	if (collectableX2 != nullptr)
+	{
+		delete collectableX2;
+		collectableX2 = nullptr;
+	}
+
+	if (shotgunOnUITexture != nullptr)
+	{
+		delete shotgunOnUITexture;
+		shotgunOnUITexture = nullptr;
+	}
+
+	if (shieldOnUITexture != nullptr)
+	{
+		delete shieldOnUITexture;
+		shieldOnUITexture = nullptr;
+	}
+
+	if (x2OnUITexture != nullptr)
+	{
+		delete x2OnUITexture;
+		x2OnUITexture = nullptr;
+	}
+
+	if (powerBulletTexture != nullptr)
+	{
+		delete powerBulletTexture;
+		powerBulletTexture = nullptr;
+	}
 	
 	if (menuMusic != nullptr)
 	{
@@ -205,6 +250,16 @@ sf::Texture* ResourceManager::GetBulletTexture()
 	return bulletTexture;
 }
 
+sf::Texture* ResourceManager::GetPowerBulletTexture()
+{
+	if (powerBulletTexture == nullptr)
+	{
+		powerBulletTexture = new sf::Texture;
+		powerBulletTexture = LoadTexture(pathTexturePowerBullet);
+	}
+	return powerBulletTexture;
+}
+
 sf::Texture* ResourceManager::GetLargeAsteroidTexture()
 {
 	if (largeAsteroidTexture == nullptr)
@@ -247,6 +302,41 @@ sf::Texture* ResourceManager::GetImpactTexture()
 	return impactTexture;
 }
 
+sf::Texture* ResourceManager::GetShotgunTexture()
+{
+	if (collectableShotgun == nullptr)
+	{
+		collectableShotgun = new sf::Texture;
+		collectableShotgun = LoadTexture(pathTextureShotgun);
+	}
+
+	return collectableShotgun;
+}
+
+sf::Texture* ResourceManager::GetShieldTexture()
+{
+	if (collectableShield == nullptr)
+	{
+		collectableShield = new sf::Texture;
+		collectableShield = LoadTexture(pathTextureShield);
+	}
+
+	return collectableShield;
+}
+
+sf::Texture* ResourceManager::Get2XTexture()
+{
+	if (collectableX2 == nullptr)
+	{
+		collectableX2 = new sf::Texture;
+		collectableX2 = LoadTexture(pathTexture2X);
+	}
+
+	return collectableX2;
+}
+
+
+
 sf::Texture* ResourceManager::GetLifeUITexture()
 {
 	if (lifeUITexture == nullptr)
@@ -278,6 +368,39 @@ sf::Texture* ResourceManager::GetEnterUITexture()
 	}
 
 	return enterUITexture;
+}
+
+sf::Texture* ResourceManager::GetShotgunUITexture()
+{
+	if (shotgunOnUITexture == nullptr)
+	{
+		shotgunOnUITexture = new sf::Texture;
+		shotgunOnUITexture = LoadTexture(pathTextureShotgunUI);
+	}
+
+	return shotgunOnUITexture;
+}
+
+sf::Texture* ResourceManager::GetShieldUITexture()
+{
+	if (shieldOnUITexture == nullptr)
+	{
+		shieldOnUITexture = new sf::Texture;
+		shieldOnUITexture = LoadTexture(pathTextureShieldUI);
+	}
+
+	return shieldOnUITexture;
+}
+
+sf::Texture* ResourceManager::Get2XUITexture()
+{
+	if (x2OnUITexture == nullptr)
+	{
+		x2OnUITexture = new sf::Texture;
+		x2OnUITexture = LoadTexture(pathTexture2XUI);
+	}
+
+	return x2OnUITexture;
 }
 
 sf::Font* ResourceManager::GetOxaniumSemiBoldFont()
@@ -468,13 +591,23 @@ void ResourceManager::LoadAllTextures()
 	LoadTexture(pathTexturePauseBG);
 	LoadTexture(pathTexturePlayer);
 	LoadTexture(pathTextureBullet);
+	LoadTexture(pathTexturePowerBullet);
 	LoadTexture(pathTextureLarge);
 	LoadTexture(pathTextureSmall);
 	LoadTexture(pathTextureMusicSwitch);
 	LoadTexture(pathTextureHitEffect);
+	LoadTexture(pathTextureShotgun);
+	LoadTexture(pathTexture2X);
+	LoadTexture(pathTextureShield);
+
 	LoadTexture(pathTextureLifeUI);
 	LoadTexture(pathTextureLifeLostUI);
 	LoadTexture(pathTextureEnterUI);
+	LoadTexture(pathTextureShotgunUI);
+	LoadTexture(pathTexture2XUI);
+	LoadTexture(pathTextureShieldUI);
+
+
 }
 
 void ResourceManager::LoadAllSoundBuffers()

@@ -46,7 +46,7 @@ private:
 	sf::Sound enterSound;
 	sf::Sound moveUISound;
 
-	const int defaultMusicVolume = 50;
+	const int defaultMusicVolume = 25;
 	const int maxShootSoundVolume = 20;
 	const int maxEngineSoundVolume = 50;
 	const int maxPlayerDestroyedSoundVolume = 50;
