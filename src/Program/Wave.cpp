@@ -224,7 +224,7 @@ void Wave::CheckInactiveAsteroids()
 	asteroidsInPool = 0;
 	this->asteroidsInPool += CountInactiveAsteroids(largeAsteroids, largeIterator);
 	this->asteroidsInPool += CountInactiveAsteroids(smallAsteroids, smallIterator);
-	if (asteroidsInPool <= 0)
+	if (asteroidsInPool <= 1)
 		shouldCreateWave = true;
 }
 

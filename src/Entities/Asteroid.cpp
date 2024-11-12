@@ -85,6 +85,7 @@ void Asteroid::ShutDownAsteroid()
 	AudioManager::getInstance().PlayAsteroidDestroyedSound();
 	deadClock.restart();
 	isDying = true;
+	asteroidSprite.setColor(sf::Color(250,144,144,255));
 }
 
 void Asteroid::ImpactFrame()
@@ -96,6 +97,8 @@ void Asteroid::ImpactFrame()
 	{
 		SetIsActive(false);
 		isDying = false;
+		asteroidSprite.setColor(sf::Color::White);
+
 	}
 }
 

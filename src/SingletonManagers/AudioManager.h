@@ -24,6 +24,7 @@ public:
 	void PlayShieldOnSound();
 	void PlayShotgunOnSound();
 	void Play2XOnSound();
+	void PlayCollectableOffSound();
 
 	sf::Music* GetMenuMusic() { return menuMusic; }
 	sf::Music* GetGameplayMusic() { return gameplayMusic; }
@@ -48,6 +49,7 @@ private:
 	sf::SoundBuffer* playerShieldBuffer = nullptr;
 	sf::SoundBuffer* playerShotgunBuffer = nullptr;
 	sf::SoundBuffer* player2XBuffer = nullptr;
+	sf::SoundBuffer* playerCollectableOffBuffer = nullptr;
 
 	sf::Sound shootSound;
 	sf::Sound engineSound;
@@ -57,16 +59,20 @@ private:
 	sf::Sound playerShieldSound;
 	sf::Sound playerShotgunSound;
 	sf::Sound player2XSound;
+	sf::Sound playerCollectableOffSound;
 
 	sf::Sound enterSound;
 	sf::Sound moveUISound;
 
-	const int defaultMusicVolume = 25;
-	const int maxShootSoundVolume = 20;
-	const int maxEngineSoundVolume = 50;
-	const int maxPlayerDestroyedSoundVolume = 50;
+	const int defaultMusicVolume = 30;
+	const int maxShootSoundVolume = 13;
+	const int maxEngineSoundVolume = 25;
+	const int maxPlayerDestroyedSoundVolume = 30;
+	const int maxDefaultSoundVolume = 35;
 	bool isInMainMenu = false;
 	bool engineSwitch = false;
+	static constexpr int TOTAL_MUSICS = 3;
+	int musics[TOTAL_MUSICS] = {};
 
 	void SetGameMusic();
 	void SetGameSounds();

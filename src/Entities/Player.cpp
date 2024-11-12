@@ -30,7 +30,6 @@ Player::~Player()
 		delete playerHitZone;
 		playerHitZone = nullptr;
 	}
-
 }
 
 void Player::Input(sf::Event event)
@@ -46,13 +45,6 @@ void Player::Input(sf::Event event)
 				return;
 			AudioManager::getInstance().PlayEngineSound();
 
-		}
-
-		if (event.key.code == sf::Keyboard::R)
-		{
-			//DEBUG ONLY
-			//screenShake->StartShake(0.2f, 5.0f);
-			//SetIsAlive(false);
 		}
 
 		if (event.key.code == sf::Keyboard::Space)
@@ -79,7 +71,6 @@ void Player::Input(sf::Event event)
 			}
 		}
 	}
-
 }
 
 void Player::Update()
@@ -384,10 +375,12 @@ void Player::UpdateFrameAnimation()
 
 void Player::HasShieldExpired()
 {
-	if (shieldClock.getElapsedTime().asSeconds() > bonusTime)
+	if (hasShield && shieldClock.getElapsedTime().asSeconds() > bonusTime)
 	{
 		hasShield = false;
 		playerSprite.setTexture(*playerTexture);
+		AudioManager::getInstance().PlayCollectableOffSound();
+		screenShake->StartShake(0.2f, 2.5f);
 	}
 }
 
@@ -397,7 +390,11 @@ void Player::HasDobleExpired()
 	{
 		hasDobleMultiplier = false;
 		ScoreManager::getInstance().DisableMutiplier();
+		AudioManager::getInstance().PlayCollectableOffSound();
+		screenShake->StartShake(0.2f, 2.5f);
+
 		ui->Defaultcolor();
+
 	}
 }
 
@@ -405,6 +402,8 @@ void Player::HasShotgunExpired()
 {
 	if (hasShotgun && shotgunClock.getElapsedTime().asSeconds() > bonusTime)
 	{
+		AudioManager::getInstance().PlayCollectableOffSound();
+		screenShake->StartShake(0.2f, 2.5f);
 		hasShotgun = false;
 	}
 }

@@ -89,7 +89,7 @@ ResourceManager::~ResourceManager()
 		delete shootSoundBuffer;
 		shootSoundBuffer = nullptr;
 	}
-	
+
 	if (engineSoundBuffer != nullptr)
 	{
 		delete engineSoundBuffer;
@@ -107,7 +107,7 @@ ResourceManager::~ResourceManager()
 		delete moveUISoundBuffer;
 		moveUISoundBuffer = nullptr;
 	}
-	
+
 	if (asteroidDestroyedSoundBuffer != nullptr)
 	{
 		delete asteroidDestroyedSoundBuffer;
@@ -160,7 +160,13 @@ ResourceManager::~ResourceManager()
 		delete powerBulletTexture;
 		powerBulletTexture = nullptr;
 	}
-	
+
+	if (collectableOffSoundBuffer != nullptr)
+	{
+		delete collectableOffSoundBuffer;
+		collectableOffSoundBuffer = nullptr;
+	}
+
 	if (menuMusic != nullptr)
 	{
 		menuMusic->stop();
@@ -426,7 +432,6 @@ sf::SoundBuffer* ResourceManager::GetPlayerDestroyedBuffer()
 
 sf::SoundBuffer* ResourceManager::GetShieldBuffer()
 {
-	//update
 	if (shieldSoundBuffer == nullptr)
 	{
 		shieldSoundBuffer = new sf::SoundBuffer;
@@ -437,7 +442,6 @@ sf::SoundBuffer* ResourceManager::GetShieldBuffer()
 
 sf::SoundBuffer* ResourceManager::GetShotgunBuffer()
 {
-	//update
 	if (shotgunShoundBuffer == nullptr)
 	{
 		shotgunShoundBuffer = new sf::SoundBuffer;
@@ -448,13 +452,22 @@ sf::SoundBuffer* ResourceManager::GetShotgunBuffer()
 
 sf::SoundBuffer* ResourceManager::Get2XBuffer()
 {
-	//update
 	if (dobleScoreSoundBuffer == nullptr)
 	{
 		dobleScoreSoundBuffer = new sf::SoundBuffer;
 		dobleScoreSoundBuffer = LoadSoundBuffer(pathSound2XOn);
 	}
 	return dobleScoreSoundBuffer;
+}
+
+sf::SoundBuffer* ResourceManager::GetCollectableOffBuffer()
+{
+	if (collectableOffSoundBuffer == nullptr)
+	{
+		collectableOffSoundBuffer = new sf::SoundBuffer;
+		collectableOffSoundBuffer = LoadSoundBuffer(pathSoundCollectableOff);
+	}
+	return collectableOffSoundBuffer;
 }
 
 sf::SoundBuffer* ResourceManager::GetEnterUIBuffer()
@@ -587,24 +600,31 @@ sf::Music* ResourceManager::LoadMusic(std::string path)
 
 void ResourceManager::LoadAllTextures()
 {
-	LoadTexture(pathTextureSplash);
-	LoadTexture(pathTextureMenuBG);
-	LoadTexture(pathTextureBG);
-	LoadTexture(pathTexturePauseBG);
-	LoadTexture(pathTexturePlayer);
-	LoadTexture(pathTexturePlayerShield);
-	LoadTexture(pathTextureBullet);
-	LoadTexture(pathTexturePowerBullet);
-	LoadTexture(pathTextureLarge);
-	LoadTexture(pathTextureSmall);
-	LoadTexture(pathTextureMusicSwitch);
-	LoadTexture(pathTextureHitEffect);
-	LoadTexture(pathTextureShotgun);
-	LoadTexture(pathTexture2X);
-	LoadTexture(pathTextureShield);
-	LoadTexture(pathTextureLifeUI);
-	LoadTexture(pathTextureLifeLostUI);
-	LoadTexture(pathTextureEnterUI);
+	splashBackgroundTexture = LoadTexture(pathTextureSplash);
+	menuBackgroundTexture = LoadTexture(pathTextureMenuBG);
+	pauseBackgroundTexture = LoadTexture(pathTexturePauseBG);
+	gameBackgroundTexture = LoadTexture(pathTextureBG);
+
+	playerTexture = LoadTexture(pathTexturePlayer);
+	playerShieldTexture = LoadTexture(pathTexturePlayerShield);
+
+	bulletTexture = LoadTexture(pathTextureBullet);
+	powerBulletTexture = LoadTexture(pathTexturePowerBullet);
+
+	largeAsteroidTexture = LoadTexture(pathTextureLarge);
+	smallAsteroidTexture = LoadTexture(pathTextureSmall);
+
+	musicSwitchTexture = LoadTexture(pathTextureMusicSwitch);
+
+	impactTexture = LoadTexture(pathTextureHitEffect);
+
+	collectableShotgun = LoadTexture(pathTextureShotgun);
+	collectableX2 = LoadTexture(pathTexture2X);
+	collectableShield = LoadTexture(pathTextureShield);
+
+	lifeUITexture = LoadTexture(pathTextureLifeUI);
+	lifeLostUITexture = LoadTexture(pathTextureLifeLostUI);
+	enterUITexture = LoadTexture(pathTextureEnterUI);
 }
 
 void ResourceManager::LoadAllSoundBuffers()
@@ -618,6 +638,7 @@ void ResourceManager::LoadAllSoundBuffers()
 	shieldSoundBuffer = LoadSoundBuffer(pathSoundShieldOn);
 	shotgunShoundBuffer = LoadSoundBuffer(pathSoundShotgunOn);
 	dobleScoreSoundBuffer = LoadSoundBuffer(pathSound2XOn);
+	collectableOffSoundBuffer = LoadSoundBuffer(pathSoundCollectableOff);
 }
 
 void ResourceManager::LoadAllMusics()

@@ -24,14 +24,9 @@ public:
 	sf::Texture* GetShieldTexture();
 	sf::Texture* Get2XTexture();
 
-
 	sf::Texture* GetLifeUITexture();
 	sf::Texture* GetLifeLostUITexture();
 	sf::Texture* GetEnterUITexture();
-	sf::Texture* GetShotgunUITexture();
-	sf::Texture* GetShieldUITexture();
-	sf::Texture* Get2XUITexture();
-
 
 	sf::Font* GetOxaniumSemiBoldFont();
 
@@ -43,7 +38,7 @@ public:
 	sf::SoundBuffer* GetShieldBuffer();
 	sf::SoundBuffer* GetShotgunBuffer();
 	sf::SoundBuffer* Get2XBuffer();
-
+	sf::SoundBuffer* GetCollectableOffBuffer();
 
 	sf::SoundBuffer* GetEnterUIBuffer();
 	sf::SoundBuffer* GetMoveUIBuffer();
@@ -51,7 +46,6 @@ public:
 	sf::Music* GetMenuMusic();
 	sf::Music* GetGameplayMusic();
 	sf::Music* GetGameOverMusic();
-
 
 private:
 	ResourceManager();
@@ -94,6 +88,7 @@ private:
 	sf::SoundBuffer* shieldSoundBuffer = nullptr;
 	sf::SoundBuffer* shotgunShoundBuffer = nullptr;
 	sf::SoundBuffer* dobleScoreSoundBuffer = nullptr;
+	sf::SoundBuffer* collectableOffSoundBuffer = nullptr;
 
 	sf::SoundBuffer* enterUISoundBuffer = nullptr;
 	sf::SoundBuffer* moveUISoundBuffer = nullptr;
@@ -148,6 +143,7 @@ private:
 	const std::string pathSoundShieldOn = "res/assets/Audio/SFX/forceField_002.ogg";
 	const std::string pathSoundShotgunOn = "res/assets/Audio/SFX/metalLatch.ogg";
 	const std::string pathSound2XOn = "res/assets/Audio/SFX/upgrade1.ogg";
+	const std::string pathSoundCollectableOff = "res/assets/Audio/SFX/Decline.wav";
 
 
 	//Musics
