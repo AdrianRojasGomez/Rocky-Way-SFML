@@ -48,7 +48,7 @@ protected:
 	float rotationSpeed = 10.0f;
 	float rotation;
 	float hitzoneSizeMultiplier = 1.0f;
-	int impactFrames = 50;
+	int impactFrames = 60;
 
 	float wrapOffset = 10.0f;
 

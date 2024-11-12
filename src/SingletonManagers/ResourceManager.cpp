@@ -161,6 +161,12 @@ ResourceManager::~ResourceManager()
 		powerBulletTexture = nullptr;
 	}
 
+	if (collectableOffSoundBuffer != nullptr)
+	{
+		delete collectableOffSoundBuffer;
+		collectableOffSoundBuffer = nullptr;
+	}
+
 	if (menuMusic != nullptr)
 	{
 		menuMusic->stop();
@@ -426,7 +432,6 @@ sf::SoundBuffer* ResourceManager::GetPlayerDestroyedBuffer()
 
 sf::SoundBuffer* ResourceManager::GetShieldBuffer()
 {
-	//update
 	if (shieldSoundBuffer == nullptr)
 	{
 		shieldSoundBuffer = new sf::SoundBuffer;
@@ -437,7 +442,6 @@ sf::SoundBuffer* ResourceManager::GetShieldBuffer()
 
 sf::SoundBuffer* ResourceManager::GetShotgunBuffer()
 {
-	//update
 	if (shotgunShoundBuffer == nullptr)
 	{
 		shotgunShoundBuffer = new sf::SoundBuffer;
@@ -448,13 +452,22 @@ sf::SoundBuffer* ResourceManager::GetShotgunBuffer()
 
 sf::SoundBuffer* ResourceManager::Get2XBuffer()
 {
-	//update
 	if (dobleScoreSoundBuffer == nullptr)
 	{
 		dobleScoreSoundBuffer = new sf::SoundBuffer;
 		dobleScoreSoundBuffer = LoadSoundBuffer(pathSound2XOn);
 	}
 	return dobleScoreSoundBuffer;
+}
+
+sf::SoundBuffer* ResourceManager::GetCollectableOffBuffer()
+{
+	if (collectableOffSoundBuffer == nullptr)
+	{
+		collectableOffSoundBuffer = new sf::SoundBuffer;
+		collectableOffSoundBuffer = LoadSoundBuffer(pathSoundCollectableOff);
+	}
+	return collectableOffSoundBuffer;
 }
 
 sf::SoundBuffer* ResourceManager::GetEnterUIBuffer()
@@ -625,6 +638,7 @@ void ResourceManager::LoadAllSoundBuffers()
 	shieldSoundBuffer = LoadSoundBuffer(pathSoundShieldOn);
 	shotgunShoundBuffer = LoadSoundBuffer(pathSoundShotgunOn);
 	dobleScoreSoundBuffer = LoadSoundBuffer(pathSound2XOn);
+	collectableOffSoundBuffer = LoadSoundBuffer(pathSoundCollectableOff);
 }
 
 void ResourceManager::LoadAllMusics()

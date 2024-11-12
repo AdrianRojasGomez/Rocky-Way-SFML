@@ -55,6 +55,9 @@ void AudioManager::SetGameSounds()
 
 	player2XBuffer = ResourceManager::getInstance().Get2XBuffer();
 	player2XSound.setBuffer(*player2XBuffer);
+
+	playerCollectableOffBuffer = ResourceManager::getInstance().GetCollectableOffBuffer();
+	playerCollectableOffSound.setBuffer(*playerCollectableOffBuffer);
 }
 
 void AudioManager::SetDefaultVolumes()
@@ -226,4 +229,9 @@ void AudioManager::PlayShotgunOnSound()
 void AudioManager::Play2XOnSound()
 {
 	player2XSound.play();
+}
+
+void AudioManager::PlayCollectableOffSound()
+{
+	playerCollectableOffSound.play();
 }

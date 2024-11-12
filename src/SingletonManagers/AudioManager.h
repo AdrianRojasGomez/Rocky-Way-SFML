@@ -24,6 +24,7 @@ public:
 	void PlayShieldOnSound();
 	void PlayShotgunOnSound();
 	void Play2XOnSound();
+	void PlayCollectableOffSound();
 
 	sf::Music* GetMenuMusic() { return menuMusic; }
 	sf::Music* GetGameplayMusic() { return gameplayMusic; }
@@ -48,6 +49,7 @@ private:
 	sf::SoundBuffer* playerShieldBuffer = nullptr;
 	sf::SoundBuffer* playerShotgunBuffer = nullptr;
 	sf::SoundBuffer* player2XBuffer = nullptr;
+	sf::SoundBuffer* playerCollectableOffBuffer = nullptr;
 
 	sf::Sound shootSound;
 	sf::Sound engineSound;
@@ -57,6 +59,7 @@ private:
 	sf::Sound playerShieldSound;
 	sf::Sound playerShotgunSound;
 	sf::Sound player2XSound;
+	sf::Sound playerCollectableOffSound;
 
 	sf::Sound enterSound;
 	sf::Sound moveUISound;
