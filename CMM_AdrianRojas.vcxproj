@@ -196,7 +196,8 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY "$(ProjectDir)res\dll\*.dll" "$(TargetDir)"  /h /y </Command>
+      <Command>XCOPY "$(ProjectDir)res\dll\*.dll" "$(TargetDir)"  /h /y 
+XCOPY "$(ProjectDir)res" "$(TargetDir)res" /E /I /H /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -237,7 +238,8 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY "$(ProjectDir)res\dll\*.dll" "$(TargetDir)"  /h /y </Command>
+      <Command>XCOPY "$(ProjectDir)res\dll\*.dll" "$(TargetDir)"  /h /y 
+XCOPY "$(ProjectDir)res" "$(TargetDir)res" /E /I /H /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
