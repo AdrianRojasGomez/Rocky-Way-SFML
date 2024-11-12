@@ -1,16 +1,43 @@
-![Logo](res/assets/Promo/StripeNav.gif)
+<p align="center">
+  <a href="https://azokka.itch.io/rocky-way">
+    <img src="res/assets/Promo/Banner.png" alt="Rocky Way"/>
+  </a> 
+</p>
+
+
 
 # Rocky Way
-Asteroid recreated in SFML!
 
-## Itch.io Site
-https://azokka.itch.io/rocky-way
+Smash Asteroids, pick Power ups and try to survive as long as you can in this frenetic Asteroid homage.
 
-## Screenshots
-![App Screenshot](res/assets/Promo/Screenshot00.png)
+This is a game developed by a student from <a href="https://www.imagecampus.edu.ar/">Image Campus</a>
 
-This project was build in less than a month and the main objectives were: Learn where and how to use pointers in C++, and finishing something no matter how small it were.
+<p align="center">
+  <a href="https://www.imagecampus.edu.ar/">
+    <img src="res/assets/Promo/logo-image-campus.png" alt="Image Campus"/>
+  </a> 
+</p>
 
-If you are reading this, thanks a lot for being here! Hope to see you in future projects! 👑
 
-![Logo](res/assets/Promo/StripeNavBack.gif)
+## Credits
+
+- **Adrian Rojas**
+
+This game was also possible thanks to the support of these professors:
+
+- **Federico Olive**
+
+## Assets
+
+- *Simple Space* by Kenney https://kenney.nl/assets/simple-space
+- *Input Prompts* by Kenney https://kenney.nl/assets/input-prompts
+- *Sci-fi Music* by Ovani Sound  https://ovanisound.com/
+
+
+## Links
+
+Download it from itch.io: https://azokka.itch.io/rocky-way
+
+<p align="center">
+  <img src="res/assets/Promo/StripeNav.gif" alt="Logo" width="auto" height="auto">
+</p>
