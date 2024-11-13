@@ -32,12 +32,14 @@ This game was also possible thanks to the support of these professors:
 - *Simple Space* by Kenney https://kenney.nl/assets/simple-space
 - *Input Prompts* by Kenney https://kenney.nl/assets/input-prompts
 - *Sci-fi Music* by Ovani Sound  https://ovanisound.com/
-
+- *UI Sounds* by Ovani Sound  https://ovanisound.com/
 
 ## Links
 
 Download it from itch.io: https://azokka.itch.io/rocky-way
 
 <p align="center">
-  <img src="res/assets/Promo/StripeNav.gif" alt="Logo" width="auto" height="auto">
+  <a href="https://azokka.itch.io/rocky-way">
+    <img src="res/assets/Promo/StripeNav.gif" alt="Rocky Way"/>
+  </a> 
 </p>
