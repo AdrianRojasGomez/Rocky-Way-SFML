@@ -62,15 +62,19 @@ void AudioManager::SetGameSounds()
 
 void AudioManager::SetDefaultVolumes()
 {
-	//Music
+	//Musics
 	menuMusic->setVolume(defaultMusicVolume);
 	gameplayMusic->setVolume(defaultMusicVolume);
 	gameOverMusic->setVolume(defaultMusicVolume);
 
-	//Sound
+	//Sounds
 	shootSound.setVolume(maxShootSoundVolume);
 	engineSound.setVolume(maxEngineSoundVolume);
 	playerDestroyedSound.setVolume(maxPlayerDestroyedSoundVolume);
+	playerShieldSound.setVolume(100);
+	playerShotgunSound.setVolume(100);
+	player2XSound.setVolume(100);
+	playerCollectableOffSound.setVolume(100);
 	asteroidDestroyedSound.setVolume(100);
 	enterSound.setVolume(100);
 	moveUISound.setVolume(100);
@@ -153,6 +157,12 @@ void AudioManager::MuteAll(bool isMuted)
 		engineSound.setVolume(0);
 		asteroidDestroyedSound.setVolume(0);
 		playerDestroyedSound.setVolume(0);
+
+		playerShieldSound.setVolume(0);
+		playerShotgunSound.setVolume(0);
+		player2XSound.setVolume(0);
+		playerCollectableOffSound.setVolume(0);
+
 		enterSound.setVolume(0);
 		moveUISound.setVolume(0);
 

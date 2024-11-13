@@ -380,6 +380,17 @@ sf::Texture* ResourceManager::GetEnterUITexture()
 	return enterUITexture;
 }
 
+sf::Texture* ResourceManager::GetPowerUpTexture()
+{
+	if (powerUpUITexture == nullptr)
+	{
+		powerUpUITexture = new sf::Texture;
+		powerUpUITexture = LoadTexture(pathTexturePowerUpUI);
+	}
+
+	return powerUpUITexture;
+}
+
 sf::Font* ResourceManager::GetOxaniumSemiBoldFont()
 {
 	if (oxaniumSemiBoldFont == nullptr)
@@ -625,6 +636,7 @@ void ResourceManager::LoadAllTextures()
 	lifeUITexture = LoadTexture(pathTextureLifeUI);
 	lifeLostUITexture = LoadTexture(pathTextureLifeLostUI);
 	enterUITexture = LoadTexture(pathTextureEnterUI);
+	powerUpUITexture = LoadTexture(pathTexturePowerUpUI);
 }
 
 void ResourceManager::LoadAllSoundBuffers()

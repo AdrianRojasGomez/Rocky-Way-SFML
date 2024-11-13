@@ -8,8 +8,10 @@ SplashScreen::SplashScreen(GameState* gameState)
 	this->gameState = gameState;
 	splashTexture = ResourceManager::getInstance().GetSplashTexture();
 	enterTexture = ResourceManager::getInstance().GetEnterUITexture();
+	powerUpTexture = ResourceManager::getInstance().GetPowerUpTexture();
 	InitializeBackground();
 	InitializeEnter();
+	InitializePowerUp();
 }
 
 SplashScreen::~SplashScreen()
@@ -40,6 +42,7 @@ void SplashScreen::Draw(sf::RenderWindow& window)
 {
 	window.draw(splashSprite);
 	window.draw(enterSprite);
+	window.draw(powerUpSprite);
 }
 
 void SplashScreen::InitializeBackground()
@@ -67,7 +70,24 @@ void SplashScreen::InitializeEnter()
 		enterSprite.setScale(scale, scale);
 		sf::FloatRect bounds = enterSprite.getLocalBounds();
 		enterSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
-		enterSprite.setPosition(ScreenResolution::SCREEN_WIDTH_720P * 0.80, ScreenResolution::SCREEN_HEIGHT_720P * 0.59);
+		enterSprite.setPosition(ScreenResolution::SCREEN_WIDTH_720P * 0.80, ScreenResolution::SCREEN_HEIGHT_720P * 0.84);
+	}
+	else
+		std::cout << "DEBUG: Error!!!!!!!! LOADING ENTER TEXTURE" << std::endl;
+}
+
+void SplashScreen::InitializePowerUp()
+{
+	if (enterTexture != nullptr)
+	{
+		sf::IntRect rect(0, 0, 128, 128);
+		float scale = 1.0f;
+		powerUpSprite.setTexture(*powerUpTexture);
+		powerUpSprite.setTextureRect(rect);
+		powerUpSprite.setScale(scale, scale);
+		sf::FloatRect bounds = powerUpSprite.getLocalBounds();
+		powerUpSprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
+		powerUpSprite.setPosition(ScreenResolution::SCREEN_WIDTH_720P * 0.81, ScreenResolution::SCREEN_HEIGHT_720P * 0.58);
 	}
 	else
 		std::cout << "DEBUG: Error!!!!!!!! LOADING ENTER TEXTURE" << std::endl;
@@ -82,15 +102,25 @@ void SplashScreen::UpdateAnimation()
 {
 	if (animTime.getElapsedTime().asMilliseconds() > 200)
 	{
-		intRectX = enterSprite.getTextureRect().left;
+		intRectEnter = enterSprite.getTextureRect().left;
 
-		if (intRectX == 0)
-			intRectX = 96;
+		if (intRectEnter == 0)
+			intRectEnter = 96;
 		else
-		{
-			intRectX = 0;
-		}
-		enterSprite.setTextureRect(sf::IntRect(intRectX, 0, 96, 96));
+			intRectEnter = 0;
+
+		enterSprite.setTextureRect(sf::IntRect(intRectEnter, 0, 96, 96));
+
+		intRectPower = powerUpSprite.getTextureRect().left;
+
+		if (intRectPower >= 384)
+			intRectPower = 0;
+		else
+			intRectPower += 128;
+
+		powerUpSprite.setTextureRect(sf::IntRect(intRectPower, 0, 128, 128));
+
+
 		animTime.restart();
 	}
 }
