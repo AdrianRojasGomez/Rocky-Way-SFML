@@ -18,17 +18,21 @@ private:
 
 	sf::Texture* splashTexture;
 	sf::Texture* enterTexture;
+	sf::Texture* powerUpTexture;
 	sf::Sprite splashSprite;
 	sf::Sprite enterSprite;
+	sf::Sprite powerUpSprite;
 	sf::Clock splashTime;
 	sf::Clock animTime;
 	bool firstTime = true;
-	int intRectX = 0;
+	int intRectEnter = 0;
+	int intRectPower = 0;
 	float splashTimer = 7.0f;
 
 
 	void InitializeBackground();
 	void InitializeEnter();
+	void InitializePowerUp();
 	void SkipSplash();
 	void UpdateAnimation();
 	void CheckSplashTime();

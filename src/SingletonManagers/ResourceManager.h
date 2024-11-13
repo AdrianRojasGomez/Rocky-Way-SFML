@@ -27,6 +27,7 @@ public:
 	sf::Texture* GetLifeUITexture();
 	sf::Texture* GetLifeLostUITexture();
 	sf::Texture* GetEnterUITexture();
+	sf::Texture* GetPowerUpTexture();
 
 	sf::Font* GetOxaniumSemiBoldFont();
 
@@ -77,6 +78,7 @@ private:
 	sf::Texture* lifeUITexture = nullptr;
 	sf::Texture* lifeLostUITexture = nullptr;
 	sf::Texture* enterUITexture = nullptr;
+	sf::Texture* powerUpUITexture = nullptr;
 
 	sf::Font* oxaniumSemiBoldFont = nullptr;
 
@@ -125,6 +127,7 @@ private:
 	const std::string pathTextureLifeUI = "res/assets/UI/LifeUI.png";
 	const std::string pathTextureLifeLostUI = "res/assets/UI/LifelostUI.png";
 	const std::string pathTextureEnterUI = "res/assets/Background/Enter.png";
+	const std::string pathTexturePowerUpUI = "res/assets/Background/PowerUpUI.png";
 
 	//UI Sounds
 	const std::string pathSoundEnterUI = "res/assets/Audio/UI/EnterSci-fi.wav";
