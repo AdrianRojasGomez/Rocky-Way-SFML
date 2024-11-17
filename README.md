@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://azokka.itch.io/rocky-way">
-    <img src="res/assets/Promo/Banner.png" alt="Rocky Way"/>
+    <img src="CMM_AdrianRojas/res/assets/Promo/Banner.png" alt="Rocky Way"/>
   </a> 
 </p>
 
@@ -14,7 +14,7 @@ This is a game developed by a student from <a href="https://www.imagecampus.edu.
 
 <p align="center">
   <a href="https://www.imagecampus.edu.ar/">
-    <img src="res/assets/Promo/logo-image-campus.png" alt="Image Campus"/>
+    <img src="CMM_AdrianRojas/res/assets/Promo/logo-image-campus.png" alt="Image Campus"/>
   </a> 
 </p>
 
@@ -40,6 +40,6 @@ Download it from itch.io: https://azokka.itch.io/rocky-way
 
 <p align="center">
   <a href="https://azokka.itch.io/rocky-way">
-    <img src="res/assets/Promo/StripeNav.gif" alt="Rocky Way"/>
+    <img src="CMM_AdrianRojas/res/assets/Promo/StripeNav.gif" alt="Rocky Way"/>
   </a> 
 </p>
